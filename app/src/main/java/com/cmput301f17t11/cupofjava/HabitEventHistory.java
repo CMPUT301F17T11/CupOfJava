@@ -9,4 +9,28 @@ import java.util.ArrayList;
 public class HabitEventHistory {
     ArrayList<HabitEvent> habitEvents;
 
+    public HabitEventHistory(){}
+
+    public void addHabitEvent(HabitEvent event){
+        habitEvents.add(event);
+    }
+
+    public void deleteHabitEvent(HabitEvent habitEvent){
+        int index = this.habitEvents.indexOf(habitEvent);
+        this.habitEvents.remove(index);
+    }
+
+    public ArrayList<HabitEvent> getHabitEvents(){
+        return habitEvents;
+    }
+
+    //TODO: implement reverse chronological ordering of events
+    public ArrayList<HabitEvent> getListSortedByDate(){}
+
+    //TODO: implement filter by habit type
+    public ArrayList<HabitEvent> filterByType(Habit habit){}
+
+    //TODO: implement filter by keyword in comment
+    public ArrayList<HabitEvent> filterByComment(String string){}
+
 }

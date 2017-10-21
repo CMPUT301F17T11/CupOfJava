@@ -35,7 +35,7 @@ public class HabitList {
         return this.habits.indexOf(habit);
     }
 
-    public ArrayList<Habit> getHabitList(void){
+    public ArrayList<Habit> getHabitList(){
         return this.habits;
     }
 }
