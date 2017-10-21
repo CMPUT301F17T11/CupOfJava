@@ -25,12 +25,12 @@ public class HabitEventHistory {
     }
 
     //TODO: implement reverse chronological ordering of events
-    public ArrayList<HabitEvent> getListSortedByDate(){}
+    public ArrayList<HabitEvent> getListSortedByDate(){return habitEvents;}
 
     //TODO: implement filter by habit type
-    public ArrayList<HabitEvent> filterByType(Habit habit){}
+    public ArrayList<HabitEvent> filterByType(Habit habit){ return habitEvents;}
 
     //TODO: implement filter by keyword in comment
-    public ArrayList<HabitEvent> filterByComment(String string){}
+    public ArrayList<HabitEvent> filterByComment(String string){return habitEvents;}
 
 }
