@@ -40,7 +40,7 @@ public class HabitListTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testHasHabit(){
-        HabitList list = new HabitList("User 1");
+        HabitList list = new HabitList("User1");
         Habit habit = new Habit("test","for test", new Date());
         list.addHabit(habit);
         assertTrue(list.habitExists(habit));

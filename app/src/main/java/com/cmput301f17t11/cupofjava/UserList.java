@@ -17,13 +17,23 @@ public class UserList{
         this.users.add(user);
     }
 
+    public boolean hasUser(User user){
+        if (this.users.contains(user)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    User getUser(int index) { return users.get(index);}
+
     private void retrieveUserList(){} //TODO: implement userlist retrieval
 
     public int getUserIndex(User user){
         return this.users.indexOf(user);
     }
 
-    public void deleteUser(int index){
-        this.users.remove(index);
+    public void deleteUser(User user){
+        this.users.remove(user);
     }
 }
