@@ -25,6 +25,7 @@ public class UserList{
             return false;
         }
     }
+    //this method was added by eshna
     User getUser(int index) { return users.get(index);}
 
     private void retrieveUserList(){} //TODO: implement userlist retrieval

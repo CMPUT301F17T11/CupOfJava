@@ -26,6 +26,12 @@ public class HabitEvent {
 
     //TODO: constructor for optional photograph
 
+    // this method was added by eshna
+    public Habit getHabitObject()
+    {
+        return this.habitObject;
+    }
+
     public String getHabitTitle(){
         return this.habitObject.getHabitTitle();
     }

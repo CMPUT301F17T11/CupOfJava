@@ -19,6 +19,15 @@ public class HabitEventHistory {
         int index = this.habitEvents.indexOf(habitEvent);
         this.habitEvents.remove(index);
     }
+    public boolean hasHabitEvent(HabitEvent event){
+        if (this.habitEvents.contains(event)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    HabitEvent getHabitEvent(int index) { return habitEvents.get(index);}
 
     public ArrayList<HabitEvent> getHabitEvents(){
         return habitEvents;
