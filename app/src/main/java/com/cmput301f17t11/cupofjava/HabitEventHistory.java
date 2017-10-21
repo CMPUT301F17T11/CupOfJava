@@ -19,6 +19,7 @@ public class HabitEventHistory {
         int index = this.habitEvents.indexOf(habitEvent);
         this.habitEvents.remove(index);
     }
+    //this method was added by eshna
     public boolean hasHabitEvent(HabitEvent event){
         if (this.habitEvents.contains(event)){
             return true;
@@ -27,6 +28,7 @@ public class HabitEventHistory {
             return false;
         }
     }
+    //this method was added by eshna
     HabitEvent getHabitEvent(int index) { return habitEvents.get(index);}
 
     public ArrayList<HabitEvent> getHabitEvents(){

@@ -16,7 +16,7 @@ public class UserList{
     public void addUser(User user){
         this.users.add(user);
     }
-
+    //this method was added by eshna
     public boolean hasUser(User user){
         if (this.users.contains(user)){
             return true;
