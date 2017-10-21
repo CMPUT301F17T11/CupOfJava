@@ -5,4 +5,6 @@ package com.cmput301f17t11.cupofjava;
  */
 
 public class HabitEvent {
+    //TODO: optional photograph
+
 }

@@ -21,12 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".TodayActivity" />
         <activity android:name=".NewHabitActivity" />
-        <activity android:name=".NewHabitEventActivity"></activity>
+        <activity android:name=".NewHabitEventActivity" />
+        <activity android:name=".ViewHabitEventActivity" />
+        <activity android:name=".UserLoginActivity"></activity>
     </application>
 
 </manifest>
