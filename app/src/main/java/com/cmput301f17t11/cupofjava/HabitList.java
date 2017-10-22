@@ -26,12 +26,14 @@ public class HabitList {
             return false;
         }
     }
+    //this method was added by eshna
+    Habit getHabit(int index) { return habits.get(index);}
 
-    public void deleteHabit(int index){
-        this.habits.remove(index);
+    public void deleteHabit(Habit habit){
+        this.habits.remove(habit);
     }
 
-    public int getHabitIneex(Habit habit){
+    public int getHabitIndex(Habit habit){
         return this.habits.indexOf(habit);
     }
 

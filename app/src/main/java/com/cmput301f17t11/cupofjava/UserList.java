@@ -16,6 +16,17 @@ public class UserList{
     public void addUser(User user){
         this.users.add(user);
     }
+    //this method was added by eshna
+    public boolean hasUser(User user){
+        if (this.users.contains(user)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    //this method was added by eshna
+    User getUser(int index) { return users.get(index);}
 
     private void retrieveUserList(){} //TODO: implement userlist retrieval
 
@@ -23,7 +34,7 @@ public class UserList{
         return this.users.indexOf(user);
     }
 
-    public void deleteUser(int index){
-        this.users.remove(index);
+    public void deleteUser(User user){
+        this.users.remove(user);
     }
 }
