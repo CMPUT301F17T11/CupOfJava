@@ -31,11 +31,11 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_email"
                 android:gravity="center_horizontal"
+                android:hint="@string/prompt_username"
                 android:inputType="textEmailAddress"
                 android:maxLines="1" />
 
@@ -43,20 +43,18 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_password"
-                android:imeActionId="@+id/login"
                 android:gravity="center_horizontal"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
+                android:hint="@string/prompt_password"
                 android:inputType="textPassword"
                 android:maxLines="1" />
 
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/username_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:onClick="userSignIn"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
