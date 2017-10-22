@@ -19,7 +19,7 @@ public class Geolocation {
     public Geolocation(Context context){
         this.context = context;
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        //TODO: Require permission handling the first instance on a device
+        //TODO: Require permission handling the first instance on a device perhaps?
     }
 
     public Location getLocation(){
