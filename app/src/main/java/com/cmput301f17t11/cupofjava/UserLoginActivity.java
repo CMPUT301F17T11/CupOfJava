@@ -20,7 +20,7 @@ public class UserLoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username_editText = (EditText) findViewById(R.id.email);
+        username_editText = (EditText) findViewById(R.id.username);
         password_editText = (EditText) findViewById(R.id.password);
 
         signIn = (Button) findViewById(R.id.username_sign_in_button);
