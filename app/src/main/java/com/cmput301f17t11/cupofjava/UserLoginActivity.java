@@ -1,15 +1,13 @@
 package com.cmput301f17t11.cupofjava;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import static android.R.attr.name;
-
-public class UserLoginActivity extends AppCompatActivity{
+public class UserLoginActivity extends Activity {
 
     private EditText username_editText;
     private EditText password_editText;
