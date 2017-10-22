@@ -6,6 +6,8 @@ import android.location.LocationManager;
 
 /**
  * Created by nazim on 22/10/17.
+ *
+ * This class is to be completed for project part 5
  */
 
 public class Geolocation {
