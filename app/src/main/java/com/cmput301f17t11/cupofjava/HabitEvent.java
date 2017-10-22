@@ -11,6 +11,8 @@ public class HabitEvent {
     private Habit habitObject;
     private String comment; //TODO: ensure no more than 20 chars
     private Date habitEventDate;
+    private Geolocation location;
+    private boolean locationSet = false;
 
     public HabitEvent(Habit habit){
         this.habitObject = habit;
@@ -25,6 +27,8 @@ public class HabitEvent {
     //public  HabitEvent(Habit habit, String comment, )
 
     //TODO: constructor for optional photograph
+
+    //TODO: Constructor for optional location
 
     // this method was added by eshna
     public Habit getHabitObject()
@@ -54,5 +58,17 @@ public class HabitEvent {
 
     public String getComment(){
         return this.comment;
+    }
+
+    public boolean hasLocation(){
+        return locationSet;
+    }
+
+    public void setLocation(){
+
+    }
+
+    public Geolocation getLocation() {
+        return this.location;
     }
 }
