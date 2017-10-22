@@ -4,10 +4,6 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.Date;
 
-/**
- * Created by eshna on 2017-10-21.
- */
-
 public class HabitListTest extends ActivityInstrumentationTestCase2 {
     public HabitListTest(){
         super(com.cmput301f17t11.cupofjava.MainActivity.class);

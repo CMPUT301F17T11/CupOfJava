@@ -2,10 +2,6 @@ package com.cmput301f17t11.cupofjava;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-/**
- * Created by eshna on 2017-10-21.
- */
-
 public class UserListTest extends ActivityInstrumentationTestCase2 {
 
     public UserListTest(){

@@ -44,6 +44,6 @@ public class HabitList {
     public ArrayList<Habit> getTodaysHabitList(){
         ArrayList<Habit> todaysHabits;
         //TODO: Implement find habits by day
-        return todaysHabits;
+        return this.getTodaysHabitList();
     }
 }
