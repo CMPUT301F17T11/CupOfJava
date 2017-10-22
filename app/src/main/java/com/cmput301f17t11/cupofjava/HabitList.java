@@ -38,8 +38,8 @@ public class HabitList {
     }
 
     public ArrayList<Habit> getTodaysHabitList(){
-        ArrayList<Habit> todaysHabits;
+        ArrayList<Habit> todaysHabits = new ArrayList<>();
         //TODO: Implement find habits by day
-        return this.getTodaysHabitList();
+        return todaysHabits;
     }
 }

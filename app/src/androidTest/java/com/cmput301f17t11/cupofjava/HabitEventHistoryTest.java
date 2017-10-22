@@ -1,5 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
+import android.content.Context;
+import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.Date;
@@ -47,5 +49,20 @@ public class HabitEventHistoryTest extends ActivityInstrumentationTestCase2 {
 
         eventHistory.addHabitEvent(event);
         assertTrue(eventHistory.hasHabitEvent(event));
+    }
+
+    public void testHaslocation(){
+        Geolocation geo = new Geolocation(getActivity());
+        geo.setLocation(new Location("ServiceProvider"));
+
+
+        Habit habit = new Habit("adding habit", "for test",new Date());
+        HabitEvent event = new HabitEvent(habit, "comment1");
+        event.setLocation(geo);
+        HabitEventHistory eventHistory = new HabitEventHistory();
+        eventHistory.addHabitEvent(event);
+
+        assertTrue(eventHistory.getHabitEvent(0).hasLocation());
+
     }
 }

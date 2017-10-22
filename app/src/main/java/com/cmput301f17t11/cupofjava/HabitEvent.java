@@ -1,5 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
+import android.location.Location;
+
 import java.util.Date;
 
 public class HabitEvent {
@@ -32,6 +34,7 @@ public class HabitEvent {
         return this.habitObject;
     }
 
+
     public String getHabitTitle(){
         return this.habitObject.getHabitTitle();
     }
@@ -56,15 +59,20 @@ public class HabitEvent {
         return this.comment;
     }
 
-    public boolean hasLocation(){
-        return locationSet;
-    }
 
-    public void setLocation(){
+    public void setLocation(Geolocation loc){
+        this.location = loc;
 
     }
 
     public Geolocation getLocation() {
         return this.location;
+    }
+
+
+    public boolean hasLocation(){
+        if(this.location!=null)
+        {locationSet = true;}
+        return locationSet;
     }
 }

@@ -27,6 +27,7 @@ public class HabitEventHistory {
     //this method was added by eshna
     HabitEvent getHabitEvent(int index) { return habitEvents.get(index);}
 
+
     public ArrayList<HabitEvent> getHabitEvents(){
         return habitEvents;
     }

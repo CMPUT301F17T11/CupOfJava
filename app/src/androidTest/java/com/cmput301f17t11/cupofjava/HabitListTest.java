@@ -2,6 +2,7 @@ package com.cmput301f17t11.cupofjava;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class HabitListTest extends ActivityInstrumentationTestCase2 {
@@ -40,5 +41,17 @@ public class HabitListTest extends ActivityInstrumentationTestCase2 {
         Habit habit = new Habit("test","for test", new Date());
         list.addHabit(habit);
         assertTrue(list.habitExists(habit));
+    }
+
+    public void testTodaysHabitList(){
+        HabitList list = new HabitList("User1");
+        Habit habit = new Habit("test","for test", new Date());
+        list.addHabit(habit);
+
+        ArrayList<Habit> returnedHabitList = list.getTodaysHabitList();
+        for(int i = 0 ; i < returnedHabitList.size(); i++) {
+            assertEquals(returnedHabitList.get(i).getHabitStartDate(), habit.getHabitStartDate());
+
+        }
     }
 }
