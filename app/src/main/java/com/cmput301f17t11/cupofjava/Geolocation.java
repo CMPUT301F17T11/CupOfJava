@@ -5,7 +5,6 @@ import android.location.Location;
 import android.location.LocationManager;
 
 /**
- *
  * This class is to be completed for project part 5
  */
 
