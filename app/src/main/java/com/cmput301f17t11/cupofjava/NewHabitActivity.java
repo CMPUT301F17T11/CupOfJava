@@ -7,6 +7,7 @@ import android.os.Bundle;
 /**
  * This activity handles adding and configuring an existent habit.
  * User must add add a name and reason for the habit.
+ * User must choose the frequency & start date of the habit they are creating.
  */
 public class NewHabitActivity extends Activity {
 
