@@ -5,6 +5,11 @@ import android.location.Location;
 
 import java.util.Date;
 
+/**
+ * This class handles all properties of a Habit Event
+ * A habit event includes a date, a name.
+ * It can include option location and photo.
+ */
 public class HabitEvent {
     //TODO: optional photograph
     private Habit habitObject;
