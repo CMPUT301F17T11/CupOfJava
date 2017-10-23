@@ -2,20 +2,31 @@ package com.cmput301f17t11.cupofjava;
 
 import java.util.ArrayList;
 
+/**
+ * This class tracks names of users that the user
+ * follows, has requested to follow, and following
+ * the main user.
+ */
 public class User {
     private String username;
     private ArrayList<String> followingList;
     private ArrayList<String> followerList;
     private ArrayList<String> followRequestList;
 
-    public User(String name){
+    /**
+     * Constructor
+     * @param name
+     */
+    public User(String name) {
         setUsername(name);
     }
 
+    //Setter
     public void setUsername(String name){
         this.username = name;
     }
 
+    //Getter
     public String getUsername(){
         return this.username;
     }

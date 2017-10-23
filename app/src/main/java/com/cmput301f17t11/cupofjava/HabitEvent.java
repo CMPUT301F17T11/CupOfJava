@@ -1,5 +1,6 @@
 package com.cmput301f17t11.cupofjava;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 
 import java.util.Date;
@@ -11,12 +12,17 @@ public class HabitEvent {
     private Date habitEventDate;
     private Geolocation location;
     private boolean locationSet = false;
-
+    private Bitmap photo;
     public HabitEvent(Habit habit){
         this.habitObject = habit;
         this.habitEventDate = new Date();
     }
 
+    /**
+     * Constructor for HabitEvent
+     * @param habit
+     * @param comment
+     */
     public HabitEvent(Habit habit, String comment){
         this.habitObject = habit;
         this.comment = comment;
@@ -60,8 +66,8 @@ public class HabitEvent {
     }
 
 
-    public void setLocation(Geolocation loc){
-        this.location = loc;
+    public void setLocation(Geolocation location){
+        this.location = location;
 
     }
 
@@ -71,8 +77,20 @@ public class HabitEvent {
 
 
     public boolean hasLocation(){
-        if(this.location!=null)
-        {locationSet = true;}
+        if(this.location!=null) {
+            locationSet = true;
+        }
         return locationSet;
+    }
+
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
+    }
+
+    public Bitmap getPhoto(){
+        return this.photo;
+    }
+    public boolean hasPhoto(){
+        return true;
     }
 }
