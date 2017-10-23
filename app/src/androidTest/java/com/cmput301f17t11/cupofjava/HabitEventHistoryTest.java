@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class HabitEventHistoryTest extends ActivityInstrumentationTestCase2 {
@@ -64,5 +65,42 @@ public class HabitEventHistoryTest extends ActivityInstrumentationTestCase2 {
 
         assertTrue(eventHistory.getHabitEvent(0).hasLocation());
 
+    }
+
+    public void testListSortedByDate(){ //TODO implement this test method
+        Habit habit = new Habit("adding habit", "for test",new Date());
+        HabitEvent event = new HabitEvent(habit, "comment1");
+        HabitEvent event2 = new HabitEvent(habit);
+
+        HabitEventHistory eventHistory = new HabitEventHistory();
+
+        eventHistory.addHabitEvent(event);
+        eventHistory.addHabitEvent(event2);
+
+        ArrayList<HabitEvent> returnedEventList = eventHistory.getListSortedByDate();
+
+        /* do sorting of evenHistory out here*/
+
+        assertEquals(returnedEventList, eventHistory.habitEvents);
+
+
+
+    }
+
+    public void testFilterByComment(){  //TODO implement this test method
+        HabitEventHistory eventHistory = new HabitEventHistory();
+        ArrayList<HabitEvent> returnedEventList = eventHistory.filterByComment("comment1");
+
+        /*do filtering out here*/
+        assertEquals(returnedEventList, eventHistory.habitEvents);
+    }
+
+    public void testFilterBType(){ //TODO implement this test method
+        Habit habit = new Habit("adding habit", "for test",new Date());
+        HabitEventHistory eventHistory = new HabitEventHistory();
+        ArrayList<HabitEvent> returnedEventList = eventHistory.filterByType(habit);
+
+        /*do filtering out here*/
+        assertEquals(returnedEventList, eventHistory.habitEvents);
     }
 }
