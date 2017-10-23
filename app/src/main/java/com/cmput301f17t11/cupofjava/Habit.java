@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Created by nazim on 21/10/17.
+ * This class handles all properties related to a habit.
+ * A habit contains a title, reason, date, frequency.
+ * User can find out if habit is followed by another
+ * user or not.
  */
-
 public class Habit {
 
     private String habitTitle; //TODO: ensure habitTitle no more than 20 chars
@@ -16,6 +18,12 @@ public class Habit {
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                  //for each day folloed, +1 and missing days would result in -1
 
+    /**
+     * Constructor for Habit class.
+     * @param title
+     * @param reason
+     * @param date
+     */
     public Habit(String title, String reason, Date date){
         this.habitTitle = title;
         this.habitReason = reason;
