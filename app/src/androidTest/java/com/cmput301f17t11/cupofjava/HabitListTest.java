@@ -42,6 +42,19 @@ public class HabitListTest extends ActivityInstrumentationTestCase2 {
         list.addHabit(habit);
         assertTrue(list.habitExists(habit));
     }
+    public void testGetHabitList(){
+
+        HabitList list = new HabitList("User1");
+        Habit habit = new Habit("test", "for test", new Date());
+        Habit habit2 = new Habit("test2", "for test", new Date());
+        list.addHabit(habit);
+        list.addHabit(habit2);
+
+        ArrayList<Habit> returnedUserList = list.getHabitList();
+
+        assertEquals(returnedUserList, list.habits);
+
+    }
 
     public void testTodaysHabitList(){
         HabitList list = new HabitList("User1");
