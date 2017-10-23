@@ -2,9 +2,17 @@ package com.cmput301f17t11.cupofjava;
 
 import java.util.ArrayList;
 
+/**
+ * This class handles the list of habit events being displayed.
+ * It shows the habit events in reverse chronological order so
+ * the user can see the most recent at the top.
+ */
 public class HabitEventHistory {
     ArrayList<HabitEvent> habitEvents;
 
+    /**
+     * Constructor
+     */
     public HabitEventHistory(){}
 
     public void addHabitEvent(HabitEvent event){
