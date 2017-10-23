@@ -32,7 +32,7 @@ public class HabitEventHistory {
             return false;
         }
     }
-    //this method was added by eshna
+
     HabitEvent getHabitEvent(int index) { return habitEvents.get(index);}
 
 
