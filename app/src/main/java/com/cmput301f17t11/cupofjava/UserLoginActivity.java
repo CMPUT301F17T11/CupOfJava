@@ -7,12 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Activity handles required username and optional password entry.
+ * User can register if they have not done so yet.
+ */
 public class UserLoginActivity extends Activity {
 
     private EditText username_editText;
     private EditText password_editText;
     private Button signIn;
 
+    /**
+     * Launches the screen to enter username and optional password.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,15 +38,25 @@ public class UserLoginActivity extends Activity {
         });
     }
 
+    /**
+     * Stores username.
+     */
     public void addUsername(){
         String username = username_editText.getText().toString();
 
+        /**
+         * Handler if no username is entered.
+         */
         if (username.isEmpty()) {
             username_editText.setError("Enter username!");
             return;
         }
     }
 
+    /**
+     * Stores password if entered
+     * Optional for user.
+     */
     public void addPassword(){
         String password = password_editText.getText().toString();
 
