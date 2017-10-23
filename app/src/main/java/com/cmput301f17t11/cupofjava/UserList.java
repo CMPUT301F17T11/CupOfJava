@@ -6,7 +6,9 @@ import java.util.Comparator;
 import java.util.IllegalFormatCodePointException;
 
 
-
+/**
+ *
+ */
 public class UserList{
     ArrayList<User> users;
 

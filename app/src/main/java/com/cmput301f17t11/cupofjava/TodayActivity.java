@@ -10,7 +10,6 @@ import android.os.Bundle;
 public class TodayActivity extends Activity {
 
     /**
-     *
      * @param savedInstanceState
      */
     @Override

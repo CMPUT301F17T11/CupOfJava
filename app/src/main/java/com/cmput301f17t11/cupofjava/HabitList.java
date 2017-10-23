@@ -2,6 +2,12 @@ package com.cmput301f17t11.cupofjava;
 
 import java.util.ArrayList;
 
+/**
+ * This class handles the list of habits and the previews
+ * in the list.
+ * Also handles appending and deleting from the list.
+ * Displays habits in reverse chronological order.
+ */
 public class HabitList {
     String username;
     ArrayList<Habit> habits;

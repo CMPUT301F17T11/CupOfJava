@@ -12,8 +12,9 @@ import java.util.Calendar;
 /**
  * This activity allows user to add a new habit event, and
  * add habit that theyde like to track under this event.
- * User can incorporate date, location, photo. 
+ * User can incorporate date, location, photo.
  */
+
 public class NewHabitEventActivity extends AppCompatActivity {
 
     private Calendar date;
