@@ -1,6 +1,10 @@
 package com.cmput301f17t11.cupofjava;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 /**
  * This class handles the list of habit events being displayed.
@@ -40,11 +44,30 @@ public class HabitEventHistory {
         return habitEvents;
     }
 
-    //TODO: implement reverse chronological ordering of events
-    public ArrayList<HabitEvent> getListSortedByDate(){return habitEvents;}
+    //TODO: DONE (need to test)
+    public ArrayList<HabitEvent> getListSortedByDate(){
+        Collections.sort(habitEvents, new Comparator<HabitEvent>() {
+            public int compare(HabitEvent o1, HabitEvent o2) {
+                if (o1.getHabitEventDate() == null || o2.getHabitEventDate() == null) {
+                    return 0;
+                }
+                return o1.getHabitEventDate().compareTo(o2.getHabitEventDate());
+                }
+            });
+        return habitEvents;
+    }
 
-    //TODO: implement filter by habit type
-    public ArrayList<HabitEvent> filterByType(Habit habit){ return habitEvents;}
+    //TODO: implement filter by habit type (need to finish)
+    public ArrayList<HabitEvent> filterByType(Habit habit, String type){
+        ArrayList<HabitEvent> filteredHabitEvents = new ArrayList<HabitEvent>();
+        for (int i = 0; i < habitEvents.size(); i++) {
+            if (habit.getHabitType() == type) {
+                filteredHabitEvents.add(habitEvents[i].gethabit
+            }
+            return habitEvents;
+        }
+
+    }
 
     //TODO: implement filter by keyword in comment
     public ArrayList<HabitEvent> filterByComment(String string){return habitEvents;}

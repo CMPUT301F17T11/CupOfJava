@@ -14,9 +14,11 @@ public class Habit {
     private String habitTitle; //TODO: ensure habitTitle no more than 20 chars
     private String habitReason; //TODO: ensure habitReason no more than 30 chars
     private Date habitStartDate;
+    private String habitType;
     private ArrayList<Integer> repeatingDays; //0 = Sun, 1 = Mon... 6 = Sat
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                  //for each day folloed, +1 and missing days would result in -1
+
 
     /**
      * Constructor for Habit class.
@@ -54,6 +56,11 @@ public class Habit {
         this.habitStartDate = habitStartDate;
     }
 
+    public String getHabitType() { return habitType;}
+
+    public void setHabitType(String habitType) {
+        this.habitType = habitType;
+    }
     /**
      * A controller class will use these methods to keep track of how closely the habits are followed
      */
