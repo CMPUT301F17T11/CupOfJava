@@ -11,8 +11,8 @@ import java.util.Date;
  */
 public class Habit {
 
-    private String habitTitle; //TODO: ensure habitTitle no more than 20 chars
-    private String habitReason; //TODO: ensure habitReason no more than 30 chars
+    private String habitTitle;
+    private String habitReason;
     private Date habitStartDate;
     private ArrayList<Integer> repeatingDays; //0 = Sun, 1 = Mon... 6 = Sat
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
@@ -35,7 +35,12 @@ public class Habit {
     }
 
     public void setHabitTitle(String habitTitle) {
-        this.habitTitle = habitTitle;
+        if (habitTitle.length() > 20){
+            new Exception("Habit Title longer than 20 chars");
+        }
+        else {
+            this.habitTitle = habitTitle;
+        }
     }
 
     public String getHabitReason() {
@@ -43,7 +48,12 @@ public class Habit {
     }
 
     public void setHabitReason(String habitReason) {
-        this.habitReason = habitReason;
+        if (habitReason.length() > 30){
+            new Exception("Habit Reason longer than 30 chars");
+        }
+        else {
+            this.habitReason = habitReason;
+        }
     }
 
     public Date getHabitStartDate() {
