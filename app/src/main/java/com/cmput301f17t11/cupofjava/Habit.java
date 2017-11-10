@@ -15,7 +15,7 @@ public class Habit {
     private String habitReason;
     private Date habitStartDate;
     private String habitType;
-    private ArrayList<Integer> repeatingDays; //0 = Sun, 1 = Mon... 6 = Sat
+    private ArrayList<Integer> dayOfWeek; //0 = Sun, 1 = Mon... 6 = Sat
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                  //for each day folloed, +1 and missing days would result in -1
 
@@ -92,4 +92,6 @@ public class Habit {
     public int getHabitStatus(){
         return habitStatus;
     }
+
+
 }
