@@ -15,7 +15,7 @@ public class Habit {
     private String habitReason;
     private Date habitStartDate;
     private String habitType;
-    private ArrayList<Integer> dayOfWeek; //0 = Sun, 1 = Mon... 6 = Sat
+    private ArrayList<Integer> repeatingDays; //0 = Sun, 1 = Mon... 6 = Sat
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                  //for each day folloed, +1 and missing days would result in -1
 
@@ -95,5 +95,19 @@ public class Habit {
 
     public void deleteHabit() {
         // needs elastic search implemented
+    }
+
+    public void daysOfWeek() {
+        // Days of the week correspond to the integers in the following order:
+        // 0: Sunday
+        // 1: Monday
+        // 2: Tuesday
+        // 3: Wednesday
+        // 4: Thursday
+        // 5: Friday
+        // 6: Saturday
+        for (int i = 0; i < 7; i++) {
+            repeatingDays.set(i, i);
+        }
     }
 }

@@ -59,6 +59,5 @@ public class UserLoginActivity extends Activity {
      */
     public void addPassword(){
         String password = password_editText.getText().toString();
-
     }
 }
