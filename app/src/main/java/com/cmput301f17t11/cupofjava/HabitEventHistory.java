@@ -57,19 +57,26 @@ public class HabitEventHistory {
         return habitEvents;
     }
 
-    //TODO: implement filter by habit type (need to finish)
-    public ArrayList<HabitEvent> filterByType(Habit habit, String type){
+    //TODO: DONE (need to test)
+    public ArrayList<HabitEvent> filterByType(Habit habit){
         ArrayList<HabitEvent> filteredHabitEvents = new ArrayList<HabitEvent>();
         for (int i = 0; i < habitEvents.size(); i++) {
-            if (habit.getHabitType() == type) {
-                filteredHabitEvents.add(habitEvents[i].gethabit
+            if (habitEvents.get(i).getHabitObject().getHabitType() == habit.getHabitType()) {
+                filteredHabitEvents.add(habitEvents.get(i));
             }
-            return habitEvents;
         }
-
+        return filteredHabitEvents;
     }
 
-    //TODO: implement filter by keyword in comment
-    public ArrayList<HabitEvent> filterByComment(String string){return habitEvents;}
+    //TODO: DONE (need to test)
+    public ArrayList<HabitEvent> filterByComment(String comment){
+        ArrayList<HabitEvent> filteredHabitEvents = new ArrayList<HabitEvent>();
+        for (int i = 0; i < habitEvents.size(); i++) {
+            if (habitEvents.get(i).getComment() == comment) {
+                filteredHabitEvents.add(habitEvents.get(i));
+            }
+        }
+        return filteredHabitEvents;
+    }
 
 }
