@@ -26,7 +26,8 @@
         <activity android:name=".NewHabitActivity" />
         <activity android:name=".NewHabitEventActivity" />
         <activity android:name=".ViewHabitEventActivity" />
-        <activity android:name=".UserLoginActivity"></activity>
+        <activity android:name=".UserLoginActivity" />
+        <activity android:name=".SelfProfileViewActivity"></activity>
     </application>
 
 </manifest>

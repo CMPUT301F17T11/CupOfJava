@@ -5,4 +5,5 @@ package com.cmput301f17t11.cupofjava;
  */
 
 public class ElasticsearchController {
+    
 }
