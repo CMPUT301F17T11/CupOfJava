@@ -31,26 +31,28 @@ public class User {
         return this.username;
     }
 
-    //TODO
-    public void addFollower(String id){}
+    public void addFollower(String id){
+        followerList.add(id);
+    }
 
-    //TODO
-    public void addFollowing(String id){}
+    public void addFollowing(String id){
+        followingList.add(id);
+    }
 
-    //TODO
-    public void newFollowRequest(String id){}
+    public void newFollowRequest(String id){
+        followRequestList.add(id);
+    }
 
     //TODO
     public void acceptFollowRequest(String id){}
 
-    //TODO
+
     public boolean isFollowing(String id){
-        return true;
+        return followingList.contains(id);
     }
 
-    //TODO
     public boolean isFollower(String id){
-        return true;
+        return followerList.contains(id);
     }
 
     public ArrayList<String> getFollowRequestList(){
