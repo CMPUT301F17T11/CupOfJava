@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.cmput301f17t11.cupofjava"
         minSdkVersion 23
@@ -26,5 +26,6 @@ dependencies {
     })
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'io.searchbox:jest-droid:2.0.0'
     testCompile 'junit:junit:4.12'
 }
