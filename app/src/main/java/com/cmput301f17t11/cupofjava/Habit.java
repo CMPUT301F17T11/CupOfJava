@@ -97,6 +97,7 @@ public class Habit {
         // needs elastic search implemented
     }
 
+    //TODO
     public void daysOfWeek() {
         // Days of the week correspond to the integers in the following order:
         // 0: Sunday
