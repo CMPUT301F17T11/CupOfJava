@@ -61,7 +61,7 @@ public class HabitEventHistory {
     public ArrayList<HabitEvent> filterByType(Habit habit){
         ArrayList<HabitEvent> filteredHabitEvents = new ArrayList<HabitEvent>();
         for (int i = 0; i < habitEvents.size(); i++) {
-            if (habitEvents.get(i).getHabitObject().getHabitType() == habit.getHabitType()) {
+            if (habitEvents.get(i).getHabitObject().getHabitType().equals(habit.getHabitType())) {
                 filteredHabitEvents.add(habitEvents.get(i));
             }
         }
@@ -72,7 +72,7 @@ public class HabitEventHistory {
     public ArrayList<HabitEvent> filterByComment(String comment){
         ArrayList<HabitEvent> filteredHabitEvents = new ArrayList<HabitEvent>();
         for (int i = 0; i < habitEvents.size(); i++) {
-            if (habitEvents.get(i).getComment() == comment) {
+            if (habitEvents.get(i).getComment().equals(comment)) {
                 filteredHabitEvents.add(habitEvents.get(i));
             }
         }
