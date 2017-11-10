@@ -13,7 +13,7 @@ import java.util.Date;
 public class HabitEvent {
     //TODO: optional photograph
     private Habit habitObject;
-    private String comment; //TODO: ensure no more than 20 chars
+    private String comment; 
     private Date habitEventDate;
     private Geolocation location;
     private boolean locationSet = false;
@@ -63,7 +63,12 @@ public class HabitEvent {
     } //TODO: Perhaps custom date setter needed as well?
 
     public void setComment(String comment){
-        this.comment = comment;
+        if (comment.length() > 20){
+            new Exception("Comment longer than 20 chars");
+        }
+        else {
+            this.comment = comment;
+        }
     }
 
     public String getComment(){
