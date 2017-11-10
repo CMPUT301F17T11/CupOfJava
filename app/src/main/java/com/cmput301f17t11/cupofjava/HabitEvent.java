@@ -13,7 +13,7 @@ import java.util.Date;
 public class HabitEvent {
     //TODO: optional photograph
     private Habit habitObject;
-    private String comment; 
+    private String comment;
     private Date habitEventDate;
     private Geolocation location;
     private boolean locationSet = false;

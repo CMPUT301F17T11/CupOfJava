@@ -34,5 +34,4 @@ public class NewHabitActivity extends Activity {
         setContentView(R.layout.activity_add_new_habit);
 
     }
-
 }
