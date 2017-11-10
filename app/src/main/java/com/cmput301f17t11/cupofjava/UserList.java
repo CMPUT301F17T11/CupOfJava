@@ -36,9 +36,8 @@ public class UserList{
 
     User getUser(int index) { return users.get(index);}
 
-    public ArrayList<User> retrieveUserList(){
-     return users;
-    } //TODO: implement userlist retrieval
+    //TODO: implement userlist retrieval
+    public ArrayList<User> retrieveUserList() { return users;}
 
     public ArrayList<User> sortNamesAlphabetically(){
         Collections.sort(users, new Comparator<User>() {

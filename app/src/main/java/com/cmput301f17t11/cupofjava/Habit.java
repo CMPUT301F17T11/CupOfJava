@@ -93,5 +93,7 @@ public class Habit {
         return habitStatus;
     }
 
-
+    public void deleteHabit() {
+        // needs elastic search implemented
+    }
 }
