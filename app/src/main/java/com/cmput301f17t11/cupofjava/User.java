@@ -31,18 +31,24 @@ public class User {
         return this.username;
     }
 
+    //TODO
     public void addFollower(String id){}
 
+    //TODO
     public void addFollowing(String id){}
 
+    //TODO
     public void newFollowRequest(String id){}
 
+    //TODO
     public void acceptFollowRequest(String id){}
 
+    //TODO
     public boolean isFollowing(String id){
         return true;
     }
 
+    //TODO
     public boolean isFollower(String id){
         return true;
     }
