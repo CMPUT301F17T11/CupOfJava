@@ -3,6 +3,8 @@ package com.cmput301f17t11.cupofjava;
 import java.util.ArrayList;
 import java.util.Date;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * This class handles all properties related to a habit.
  * A habit contains a title, reason, date, frequency.
@@ -21,6 +23,15 @@ public class Habit {
     private ArrayList<HabitEvent> habitEvents;
     //TODO Setters and getters for habit events
 
+    @JestId
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+    public String setId(String id) {
+        return this.id = id;
+    }
 
     /**
      * Constructor for Habit class.

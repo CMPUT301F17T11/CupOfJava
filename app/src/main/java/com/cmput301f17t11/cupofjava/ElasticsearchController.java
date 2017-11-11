@@ -48,12 +48,12 @@ public class ElasticsearchController {
         }
 
         // TODO we need a function which gets tweets from elastic search
-        public static class GetTweetsTask extends AsyncTask<String, Void, ArrayList<NormalTweet>> {
+        public static class GetHabitsTask extends AsyncTask<String, Void, ArrayList<Habit>> {
             @Override
-            protected ArrayList<NormalTweet> doInBackground(String... search_parameters) {
+            protected ArrayList<Habit> doInBackground(String... search_parameters) {
                 verifySettings();
 
-                ArrayList<NormalTweet> tweets = new ArrayList<NormalTweet>();
+                ArrayList<Habit> tweets = new ArrayList<Habit>();
                 //String query = "" + search_parameters[0] +"";
                 String query = "{\n" +
                         "    \"query\" : {\n" +
@@ -71,7 +71,7 @@ public class ElasticsearchController {
                     SearchResult result = client.execute(search);
                     if(result.isSucceeded()){
 
-                        List<NormalTweet> foundTweets = result.getSourceAsObjectList(NormalTweet.class);
+                        List<Habit> foundTweets = result.getSourceAsObjectList(Habit.class);
                         tweets.addAll(foundTweets);
                     }
                     else{
