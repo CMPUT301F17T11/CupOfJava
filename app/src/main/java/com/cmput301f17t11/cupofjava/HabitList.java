@@ -9,12 +9,11 @@ import java.util.ArrayList;
  * Displays habits in reverse chronological order.
  */
 public class HabitList {
-    String username;
     ArrayList<Habit> habits;
 
-    public HabitList(String username){
-        this.username = username;
-    }
+    //public HabitList(String username){
+        //this.username = username;
+    //}
 
     public void addHabit(Habit habit){
         this.habits.add(habit);

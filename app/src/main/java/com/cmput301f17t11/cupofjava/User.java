@@ -10,8 +10,45 @@ import java.util.ArrayList;
 public class User {
     private String username;
     private ArrayList<String> followingList;
+
+
     private ArrayList<String> followerList;
     private ArrayList<String> followRequestList;
+    private HabitList myHabits;  //all the habits of the user
+
+    /**
+     * Setter method to set the list of users that the current user is following
+     * @param followingList
+     */
+    public void setFollowingList(ArrayList<String> followingList) {
+        this.followingList = followingList;
+    }
+
+    /**
+     * Setter method to set the list of users who are following the current user.
+     * @param followerList
+     */
+    public void setFollowerList(ArrayList<String> followerList) {
+        this.followerList = followerList;
+    }
+
+
+    /**
+     * getter method to get the list of all habits of the user
+     * @return myHabits
+     */
+    public HabitList getMyHabits() {
+        return myHabits;
+    }
+
+
+    /**
+     * setter method to set the list of all habits of the user
+     * @param myHabits
+     */
+    public void setMyHabits(HabitList myHabits) {
+        this.myHabits = myHabits;
+    }
 
     /**
      * Constructor
