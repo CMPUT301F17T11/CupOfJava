@@ -30,4 +30,4 @@
         <activity android:name=".SelfProfileViewActivity"></activity>
     </application>
 
-</manifest>t
+</manifest>
