@@ -35,7 +35,7 @@
             android:textSize="20sp" />
 
         <CheckBox
-            android:id="@+id/sunday_habit"
+            android:id="@+id/checkbox_sun"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -47,7 +47,7 @@
             android:textSize="16sp" />
 
         <CheckBox
-            android:id="@+id/monday_habit"
+            android:id="@+id/checkbox_mon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -59,7 +59,7 @@
             android:textSize="16sp" />
 
         <CheckBox
-            android:id="@+id/tuesday_habit"
+            android:id="@+id/checkbox_tue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -71,7 +71,7 @@
             android:textSize="16sp" />
 
         <CheckBox
-            android:id="@+id/wednesday_habit"
+            android:id="@+id/checkbox_wed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -83,7 +83,7 @@
             android:textSize="16sp" />
 
         <CheckBox
-            android:id="@+id/thursday_habit"
+            android:id="@+id/checkbox_thu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -95,7 +95,7 @@
             android:textSize="16sp" />
 
         <CheckBox
-            android:id="@+id/friday_habit"
+            android:id="@+id/checkbox_fri"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -107,7 +107,7 @@
             android:textSize="16sp" />
 
         <CheckBox
-            android:id="@+id/saturday_habit"
+            android:id="@+id/checkbox_sat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
