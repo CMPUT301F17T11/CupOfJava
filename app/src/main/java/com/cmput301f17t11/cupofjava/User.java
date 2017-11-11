@@ -2,6 +2,8 @@ package com.cmput301f17t11.cupofjava;
 
 import java.util.ArrayList;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * This class tracks names of users that the user
  * follows, has requested to follow, and following
@@ -15,10 +17,28 @@ public class User {
     private ArrayList<String> followerList;
     private ArrayList<String> followRequestList;
     private HabitList myHabits;  //all the habits of the user
+    @JestId
+    private String id;
+
 
     /**
+     * Constructor
+     * @param name gets the username for the user
+     */
+    public User(String name) {
+        setUsername(name);
+    }
+
+    /**
+     * setter method to set the username of the user
+     * @param name gets the username for the user
+     */
+    public void setUsername(String name){
+        this.username = name;
+    }
+    /**
      * Setter method to set the list of users that the current user is following
-     * @param followingList
+     * @param followingList list of all users being followed by the user
      */
     public void setFollowingList(ArrayList<String> followingList) {
         this.followingList = followingList;
@@ -31,6 +51,31 @@ public class User {
     public void setFollowerList(ArrayList<String> followerList) {
         this.followerList = followerList;
     }
+    /**
+     * setter method to set the list of all habits of the user
+     * @param myHabits
+     */
+    public void setMyHabits(HabitList myHabits)
+    {
+
+        this.myHabits = myHabits;
+    }
+
+    /**
+     *
+     * @param id
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getId() {
+        return id;
+    }
 
 
     /**
@@ -42,26 +87,8 @@ public class User {
     }
 
 
-    /**
-     * setter method to set the list of all habits of the user
-     * @param myHabits
-     */
-    public void setMyHabits(HabitList myHabits) {
-        this.myHabits = myHabits;
-    }
 
-    /**
-     * Constructor
-     * @param name
-     */
-    public User(String name) {
-        setUsername(name);
-    }
 
-    //Setter
-    public void setUsername(String name){
-        this.username = name;
-    }
 
     //Getter
     public String getUsername(){
