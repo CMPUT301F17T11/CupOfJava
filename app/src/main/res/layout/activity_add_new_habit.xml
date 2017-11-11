@@ -1,9 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.cmput301f17t11.cupofjava.NewHabitActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/habit_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        android:hint="Title"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/habit_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:hint="Reason"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/habit_start_date"
+        android:layout_width="match_parent"
+        android:fontFamily="sans-serif-medium"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:hint="Start Date"
+        android:textSize="20sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:paddingRight="32dp"
+        android:paddingLeft="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="SAVE"
+        android:textSize="20dp"
+        android:background="#607D8B"
+        android:id="@+id/habit_save_button"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
