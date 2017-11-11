@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CupOfJava.iml" filepath="$PROJECT_DIR$/CupOfJava.iml" />
-      <module fileurl="file://C:\Users\naz_t\StudioProjects2\CupOfJava\CupOfJava.iml" filepath="C:\Users\naz_t\StudioProjects2\CupOfJava\CupOfJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\naz_t\StudioProjects2\CupOfJava\app\app.iml" filepath="C:\Users\naz_t\StudioProjects2\CupOfJava\app\app.iml" />
     </modules>
   </component>
 </project>
