@@ -36,7 +36,7 @@ public class UserLoginActivity extends Activity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserLoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(UserLoginActivity.this, SelfProfileViewActivity.class);
                 startActivity(intent);
             }
         });

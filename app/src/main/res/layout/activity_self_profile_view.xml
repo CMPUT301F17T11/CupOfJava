@@ -57,6 +57,21 @@
         app:layout_constraintTop_toBottomOf="@+id/selfProfileHabitListView"
         app:layout_constraintVertical_bias="0.0" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/eventAdder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="76dp"
+        app:backgroundTint="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.915"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add"></android.support.design.widget.FloatingActionButton>
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
