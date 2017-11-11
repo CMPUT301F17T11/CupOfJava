@@ -23,7 +23,7 @@ public class SelfProfileViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_self_profile_view);
 
-        FloatingActionButton newActivity = (FloatingActionButton) findViewById(R.id.eventAdder);
+        FloatingActionButton newActivity = (FloatingActionButton) findViewById(R.id.selfProfileViewNewHabit);
         newActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,15 +41,19 @@ public class SelfProfileViewActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        // Check if counter Title and Reason are valid entires
+                        // Check if counter Title and Reason are valid entries
                         if ( !(editTitle.getText().toString().equals("")) && !(editReason.getText().toString().equals("")) ) {
-                            String Title = editTitle.getText().toString();
-                            String Reason = editReason.getText().toString();
+                            String title = editTitle.getText().toString();
+                            String reason = editReason.getText().toString();
                             Date currentDate = new Date();
 
 
-                            Habit myObject = new Habit(Title, Reason, currentDate);
-                            habitList.add(myObject);
+                            Habit newHabit = new Habit(title, reason, currentDate);
+
+
+
+
+                            habitList.add(newHabit);
                             dialog.dismiss();
                         }
 

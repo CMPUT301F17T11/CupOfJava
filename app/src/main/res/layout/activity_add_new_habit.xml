@@ -44,6 +44,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Sunday"
+            android:onClick="onCheckboxClicked"
             android:textSize="16sp" />
 
         <CheckBox
@@ -56,6 +57,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Monday"
+            android:onClick="onCheckboxClicked"
             android:textSize="16sp" />
 
         <CheckBox
@@ -68,6 +70,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Tuesday"
+            android:onClick="onCheckboxClicked"
             android:textSize="16sp" />
 
         <CheckBox
@@ -80,6 +83,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Wednesday"
+            android:onClick="onCheckboxClicked"
             android:textSize="16sp" />
 
         <CheckBox
@@ -92,6 +96,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Thursday"
+            android:onClick="onCheckboxClicked"
             android:textSize="16sp" />
 
         <CheckBox
@@ -104,6 +109,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Friday"
+            android:onClick="onCheckboxClicked"
             android:textSize="16sp" />
 
         <CheckBox
@@ -116,6 +122,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Saturday"
+            android:onClick="onCheckboxClicked"
             android:textSize="16sp" />
 
     </LinearLayout>

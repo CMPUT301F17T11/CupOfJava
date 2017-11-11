@@ -3,6 +3,7 @@ package com.cmput301f17t11.cupofjava;
 import android.app.Activity;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -35,5 +36,63 @@ public class NewHabitActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_habit);
+    }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkbox_sun:
+                if (checked){
+
+                }
+                else{
+                    break;
+                }
+            case R.id.checkbox_mon:
+                if (checked){
+
+                }
+                else{
+                    break;
+                }
+            case R.id.checkbox_tue:
+                if (checked){
+
+                }
+                else {
+                    break;
+                }
+            case R.id.checkbox_wed:
+                if (checked){
+
+                }
+                else{
+                    break;
+                }
+            case R.id.checkbox_thu:
+                if (checked){
+
+                }
+                else{
+                    break;
+                }
+            case R.id.checkbox_fri:
+                if (checked){
+
+                }
+                else{
+                    break;
+                }
+            case R.id.checkbox_sat:
+                if (checked){
+
+                }
+                else{
+                    break;
+                }
+        }
     }
 }

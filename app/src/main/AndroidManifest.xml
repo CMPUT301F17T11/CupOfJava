@@ -27,7 +27,7 @@
         <activity android:name=".NewHabitActivity" />
         <activity android:name=".NewHabitEventActivity" />
         <activity android:name=".ViewHabitEventActivity" />
-        <activity android:name=".SelfProfileViewActivity"></activity>
+        <activity android:name=".SelfProfileViewActivity" />
     </application>
 
 </manifest>
