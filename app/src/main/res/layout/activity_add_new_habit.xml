@@ -51,7 +51,7 @@
         android:fontFamily="sans-serif-medium"
         android:text="SAVE"
         android:textSize="20dp"
-        android:background="#607D8B"
+        android:background="#90A4AE"
         android:id="@+id/habit_save_button"
         android:layout_gravity="center_horizontal"/>
 
