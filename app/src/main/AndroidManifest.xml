@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TodayActivity" />
+        <activity android:name=".TodayActivity" android:label="@str"/>
         <activity android:name=".NewHabitActivity" />
         <activity android:name=".NewHabitEventActivity" />
         <activity android:name=".ViewHabitEventActivity" />
