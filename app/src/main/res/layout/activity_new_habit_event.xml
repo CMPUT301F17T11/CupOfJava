@@ -1,9 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cmput301f17t11.cupofjava.NewHabitEventActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/choose_habit_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="32dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:popupBackground="#"
+            android:spinnerMode="dropdown">
+        </android.support.v7.widget.AppCompatSpinner>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_horizontal"
+            android:hint="Comment" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/habit_event_image"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/Take_Photo"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center"
+            android:id="@+id/habit_event_location"
+            android:background="@drawable/Add_Location"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAVE"
+            android:background="#90A4AE"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:fontFamily="sans-serif-medium"/>
+    </LinearLayout>
+
+</ScrollView>
