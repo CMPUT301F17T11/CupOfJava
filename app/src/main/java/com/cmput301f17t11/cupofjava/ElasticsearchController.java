@@ -19,84 +19,85 @@ import io.searchbox.core.SearchResult;
  */
 
 public class ElasticsearchController {
-        private static JestDroidClient client; //manages communication with a server
+    private static JestDroidClient client; //manages communication with a server
+    //http://cmput301.softwareprocess.es:8080/cmput301f17t11_cupofjava
 
-        // TODO we need a function which adds habits to elastic search
-        public static class AddHabitsTask extends AsyncTask<Habit, Void, Void> {
+    // TODO we need a function which adds habits to elastic search
+    public static class AddUsersTask extends AsyncTask<User, Void, Void> {
 
-            @Override
-            protected Void doInBackground(Habit... habits) { //...means one or more
-                verifySettings();
+        @Override
+        protected Void doInBackground(User... users) { //...means one or more
+            verifySettings();
 
-                for (Habit habit : habits) {
-                    Index index = new Index.Builder(habits).index("testing").type("habit").build();
-
-                    try {
-                        // where is the client?
-                        DocumentResult execute = client.execute(index);
-                        if(execute.isSucceeded()){
-                            habit.setId(execute.getId());
-                        }
-                    }
-                    catch (Exception e) {
-                        Log.i("Error", "The application failed to build and send the tweets");
-                    }
-
-                }
-                return null;
-            }
-        }
-
-        // TODO we need a function which gets tweets from elastic search
-        public static class GetHabitsTask extends AsyncTask<String, Void, ArrayList<Habit>> {
-            @Override
-            protected ArrayList<Habit> doInBackground(String... search_parameters) {
-                verifySettings();
-
-                ArrayList<Habit> tweets = new ArrayList<Habit>();
-                //String query = "" + search_parameters[0] +"";
-                String query = "{\n" +
-                        "    \"query\" : {\n" +
-                        "        \"term\" : { \"message\" :\"" +search_parameters[0] +"\" }\n" +
-                        "    }\n" +
-                        "}";
-
-                // TODO Build the query
-                Search search = new Search.Builder(query).addIndex("testing").addType("tweet").build();
-
+            for (User user : users) {
+                Index index = new Index.Builder(user).index("cmput301f17t11_cupofjava").type("user").build();
 
                 try {
-                    // TODO get the results of the query
-
-                    SearchResult result = client.execute(search);
-                    if(result.isSucceeded()){
-
-                        List<Habit> foundTweets = result.getSourceAsObjectList(Habit.class);
-                        tweets.addAll(foundTweets);
-                    }
-                    else{
-                        Log.i("Error", "the search query failed to find any tweets that matched");
+                    // where is the client?
+                    DocumentResult execute = client.execute(index);
+                    if(execute.isSucceeded()){
+                        user.setId(execute.getId());
                     }
                 }
                 catch (Exception e) {
-                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                    Log.i("Error", "The application failed to build and send the users");
                 }
 
-                return tweets;
             }
-        }
-
-
-
-        //sets up the server stuff
-        public static void verifySettings() {
-            if (client == null) {
-                DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
-                DroidClientConfig config = builder.build();
-
-                JestClientFactory factory = new JestClientFactory();
-                factory.setDroidClientConfig(config);
-                client = (JestDroidClient) factory.getObject();
-            }
+            return null;
         }
     }
+
+    // TODO we need a function which gets tweets from elastic search
+    public static class GetUsersTask extends AsyncTask<String, Void, ArrayList<User>> {
+        @Override
+        protected ArrayList<User> doInBackground(String... search_parameters) {
+            verifySettings();
+
+            ArrayList<User> users = new ArrayList<User>();
+            //String query = "" + search_parameters[0] +"";
+            String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"username\" :\"" +search_parameters[0] +"\" }\n" +
+                    "    }\n" +
+                    "}";
+
+            // TODO Build the query
+            Search search = new Search.Builder(query).addIndex("cmput301f17t11").addType("user").build();
+
+
+            try {
+                // TODO get the results of the query
+
+                SearchResult result = client.execute(search);
+                if(result.isSucceeded()){
+
+                    List<User> foundUsers = result.getSourceAsObjectList(User.class);
+                    users.addAll(foundUsers);
+                }
+                else{
+                    Log.i("Error", "the search query failed to find any users that matched");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return users;
+        }
+    }
+
+
+
+    //sets up the server stuff
+    public static void verifySettings() {
+        if (client == null) {
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
+            DroidClientConfig config = builder.build();
+
+            JestClientFactory factory = new JestClientFactory();
+            factory.setDroidClientConfig(config);
+            client = (JestDroidClient) factory.getObject();
+        }
+    }
+}
