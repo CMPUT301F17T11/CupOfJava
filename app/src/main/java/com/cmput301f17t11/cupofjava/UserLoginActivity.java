@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+//TODO: Check if username exists
+//TODO: Register page
+
 /**
  * Activity handles required username and optional password entry.
  * User can register if they have not done so yet.
@@ -27,13 +30,14 @@ public class UserLoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         username_editText = (EditText) findViewById(R.id.username);
-        password_editText = (EditText) findViewById(R.id.password);
+        //password_editText = (EditText) findViewById(R.id.password);    * Not adding password functionality *
 
         signIn = (Button) findViewById(R.id.username_sign_in_button);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserLoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -56,8 +60,9 @@ public class UserLoginActivity extends Activity {
     /**
      * Stores password if entered
      * Optional for user.
-     */
+     *
     public void addPassword(){
         String password = password_editText.getText().toString();
     }
+     */
 }
