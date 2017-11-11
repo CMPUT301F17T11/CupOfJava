@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+
+import java.util.Date;
 
 /**
  * This activity handles adding and configuring an existent habit.
@@ -15,14 +18,14 @@ public class NewHabitActivity extends Activity {
 
     private EditText habitTitle;
     private EditText habitReason;
-    private Calendar Date;
-    private Button sunday;
-    private Button monday;
-    private Button tuesday;
-    private Button wednesday;
-    private Button thursday;
-    private Button friday;
-    private Button saturday;
+    private Date date;
+    private CheckBox sunCheckBox;
+    private CheckBox monCheckBox;
+    private CheckBox tueCheckBox;
+    private CheckBox wedCheckBox;
+    private CheckBox thuCheckBox;
+    private CheckBox friCheckBox;
+    private CheckBox satCheckBox;
 
     /**
      * Launches the screen to add/edit a habit.
