@@ -55,7 +55,7 @@ public class SelfProfileViewActivity extends Activity {
 
                         // Show error toast on invalid entry
                         else {
-                            Toast.makeText(getApplicationContext(), "Make sure Name and Count are not blank", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Make sure Title and Reason are not blank", Toast.LENGTH_SHORT).show();
                         }
 
                     }
