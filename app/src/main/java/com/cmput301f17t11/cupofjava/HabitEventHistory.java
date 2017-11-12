@@ -1,10 +1,8 @@
 package com.cmput301f17t11.cupofjava;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 
 /**
  * This class handles the list of habit events being displayed.
@@ -59,6 +57,7 @@ public class HabitEventHistory {
         return habitEvents;
     }
 
+    /*
     //TODO: DONE (need to test)
     public ArrayList<HabitEvent> filterByType(Habit habit){
         ArrayList<HabitEvent> filteredHabitEvents = new ArrayList<HabitEvent>();
@@ -69,6 +68,7 @@ public class HabitEventHistory {
         }
         return filteredHabitEvents;
     }
+    */
 
     //TODO: DONE (need to test)
     public ArrayList<HabitEvent> filterByComment(String comment){

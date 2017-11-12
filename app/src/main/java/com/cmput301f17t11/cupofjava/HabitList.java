@@ -9,6 +9,7 @@ import java.util.Calendar;
  * Also handles appending and deleting from the list.
  * Displays habits in reverse chronological order.
  */
+/*
 public class HabitList {
     ArrayList<Habit> habits;
 
@@ -71,9 +72,10 @@ public class HabitList {
 
         ArrayList<Habit> todaysHabits = new ArrayList<>();
         Habit currentHabit;
+
         for (int i = 0; i < habits.size(); i++){
             currentHabit = habits.get(i);
-            if (currentHabit.onDay(int currentDay){
+            if (currentHabit.onDay(currentDay)){
                 todaysHabits.add(currentHabit);
             }
         }
@@ -81,3 +83,4 @@ public class HabitList {
         return todaysHabits;
     }
 }
+*/
