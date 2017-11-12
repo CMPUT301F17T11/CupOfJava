@@ -1,7 +1,5 @@
 package com.cmput301f17t11.cupofjava;
 
-import android.graphics.Bitmap;
-import android.location.Location;
 
 import java.util.Date;
 
@@ -11,10 +9,9 @@ import java.util.Date;
  * It can include option location and photo.
  */
 public class HabitEvent {
-    //TODO: optional photograph
-    private Habit habitObject;
     private String comment;
     private Date habitEventDate;
+    /** TODO: prj5
     private Geolocation location;
     private boolean locationSet = false;
     private Bitmap photo;
@@ -23,32 +20,28 @@ public class HabitEvent {
         this.habitEventDate = new Date();
     }
 
+     */
+
     /**
      * Constructor for HabitEvent
-     * @param habit
      * @param comment
      */
-    public HabitEvent(Habit habit, String comment){
-        this.habitObject = habit;
+    public HabitEvent(String comment){
         this.comment = comment;
     }
-    //TODO: constructor for optional comment and optional photograph
-    //public  HabitEvent(Habit habit, String comment, )
 
-    //TODO: constructor for optional photograph
-
-    //TODO: Constructor for optional location
-
-    // this method was added by eshna
-    public Habit getHabitObject()
-    {
-        return this.habitObject;
-    }
+    /**
+     * Constructor for HabitEvent without comment
+     */
+    public HabitEvent(){}
 
 
-    public String getHabitTitle(){
-        return this.habitObject.getHabitTitle();
-    }
+    //TODO: prj5 constructor for optional comment and optional photograph
+
+    //TODO: prj5 constructor for optional photograph
+
+    //TODO: prj5 Constructor for optional location
+
 
     public String getHabitReason(){
         return this.getHabitReason();
@@ -60,7 +53,7 @@ public class HabitEvent {
 
     public void setHabitEventDateToCurrent(){
         this.habitEventDate = new Date();
-    } //TODO: Perhaps custom date setter needed as well?
+    }
 
     public void setComment(String comment){
         if (comment.length() > 20){
@@ -76,31 +69,4 @@ public class HabitEvent {
     }
 
 
-    public void setLocation(Geolocation location){
-        this.location = location;
-
-    }
-
-    public Geolocation getLocation() {
-        return this.location;
-    }
-
-
-    public boolean hasLocation(){
-        if(this.location!=null) {
-            locationSet = true;
-        }
-        return locationSet;
-    }
-
-    public void setPhoto(Bitmap photo) {
-        this.photo = photo;
-    }
-
-    public Bitmap getPhoto(){
-        return this.photo;
-    }
-    public boolean hasPhoto(){
-        return true;
-    }
 }

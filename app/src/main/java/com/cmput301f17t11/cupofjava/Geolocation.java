@@ -12,6 +12,8 @@ import android.location.LocationManager;
  * habit event.
  */
 
+//TODO prj5
+
 public class Geolocation {
     Context context;
     Location location;
