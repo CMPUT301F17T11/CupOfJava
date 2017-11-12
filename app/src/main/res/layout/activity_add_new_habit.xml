@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center_horizontal"
             android:hint="Title"
@@ -42,15 +42,19 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:background="@drawable/check_box_dimens"
             android:gravity="center_horizontal"
             android:text="Sunday"
             android:onClick="onCheckboxClicked"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <CheckBox
             android:id="@+id/checkbox_mon"
             android:layout_width="match_parent"
+            android:background="@drawable/check_box_dimens"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
@@ -58,20 +62,23 @@
             android:gravity="center_horizontal"
             android:text="Monday"
             android:onClick="onCheckboxClicked"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <CheckBox
             android:id="@+id/checkbox_tue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/check_box_dimens"
             android:layout_marginLeft="16dp"
+            android:textStyle="bold"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Tuesday"
             android:onClick="onCheckboxClicked"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
+
 
         <CheckBox
             android:id="@+id/checkbox_wed"
@@ -79,12 +86,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:background="@drawable/check_box_dimens"
             android:layout_marginTop="16dp"
+            android:textStyle="bold"
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Wednesday"
             android:onClick="onCheckboxClicked"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <CheckBox
             android:id="@+id/checkbox_thu"
@@ -93,11 +102,13 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/check_box_dimens"
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
+            android:textStyle="bold"
             android:text="Thursday"
             android:onClick="onCheckboxClicked"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <CheckBox
             android:id="@+id/checkbox_fri"
@@ -106,24 +117,36 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/check_box_dimens"
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Friday"
+            android:textStyle="bold"
             android:onClick="onCheckboxClicked"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <CheckBox
             android:id="@+id/checkbox_sat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
+            android:textStyle="bold"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/check_box_dimens"
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Saturday"
             android:onClick="onCheckboxClicked"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="#90A4AE"
+            android:text="SAVE"
+            android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
 </ScrollView>
