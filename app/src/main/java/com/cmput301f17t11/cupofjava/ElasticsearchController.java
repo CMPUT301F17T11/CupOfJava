@@ -36,7 +36,7 @@ public class ElasticsearchController {
                     // where is the client?
                     DocumentResult execute = client.execute(index);
                     if(execute.isSucceeded()){
-                        user.setId(execute.getId());
+                        //user.setId(execute.getId());
                     }
                 }
                 catch (Exception e) {
