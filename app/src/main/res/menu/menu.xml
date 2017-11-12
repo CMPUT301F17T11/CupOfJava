@@ -5,18 +5,18 @@
         android:id="@+id/action_favorites"
         android:enabled="true"
         android:icon="@mipmap/ic_launcher_round"
-        android:title="Page1"
+        android:title="Timeline"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_schedules"
         android:enabled="true"
         android:icon="@mipmap/ic_launcher"
-        android:title="Page2"
+        android:title="Today"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_music"
         android:enabled="true"
         android:icon="@mipmap/ic_launcher"
-        android:title="Page3"
+        android:title="All Habits"
         />
 </menu>
