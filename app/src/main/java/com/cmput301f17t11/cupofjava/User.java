@@ -1,8 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
-import java.util.ArrayList;
 
-import io.searchbox.annotations.JestId;
+//import io.searchbox.annotations.JestId;
 
 /**
  * This class tracks names of users that the user
@@ -11,88 +10,68 @@ import io.searchbox.annotations.JestId;
  */
 public class User {
     private String username;
+    /* TODO for prj5
     private ArrayList<String> followingList;
-
-
     private ArrayList<String> followerList;
     private ArrayList<String> followRequestList;
-    private HabitList myHabits;  //all the habits of the user
+    */
+
+    private HabitList habitList;  //all the habits of the user
+    /* TODO for prj5
     @JestId
     private String id;
-
+    */
 
     /**
      * Constructor
      * @param name gets the username for the user
      */
     public User(String name) {
-        setUsername(name);
-    }
-
-    /**
-     * setter method to set the username of the user
-     * @param name gets the username for the user
-     */
-    public void setUsername(String name){
         this.username = name;
     }
-    /**
+
+    public String getUsername(){
+        return this.username;
+    }
+
+    public HabitList getHabitList(){
+        return this.habitList;
+    }
+
+    /* TODO prj5
      * Setter method to set the list of users that the current user is following
      * @param followingList list of all users being followed by the user
-     */
+     *
     public void setFollowingList(ArrayList<String> followingList) {
         this.followingList = followingList;
     }
+    */
 
+    /* TODO prj5
     /**
      * Setter method to set the list of users who are following the current user.
      * @param followerList
-     */
     public void setFollowerList(ArrayList<String> followerList) {
         this.followerList = followerList;
     }
-    /**
-     * setter method to set the list of all habits of the user
-     * @param myHabits
-     */
-    public void setMyHabits(HabitList myHabits)
-    {
 
-        this.myHabits = myHabits;
-    }
-
+    */
     /**
      *
      * @param id
      */
+    /* TODO prj5
     public void setId(String id) {
         this.id = id;
     }
-
+    */
     /**
      *
      * @return
      */
+    /* TODO prj5
     public String getId() {
         return id;
-    }
-
-
-    /**
-     * getter method to get the list of all habits of the user
-     * @return myHabits
-     */
-    public HabitList getMyHabits() {
-        return myHabits;
-    }
-
-
-
-
-
-    //Getter
-    public String getUsername(){
-        return this.username;
     }
 
     public void addFollower(String id){
@@ -107,9 +86,7 @@ public class User {
         followRequestList.add(id);
     }
 
-    //TODO
     public void acceptFollowRequest(String id){}
-
 
     public boolean isFollowing(String id){
         return followingList.contains(id);
@@ -130,4 +107,5 @@ public class User {
     public ArrayList<String> getFollowerList(){
         return this.followerList;
     }
+    */
 }
