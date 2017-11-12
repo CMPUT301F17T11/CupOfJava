@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/action_favorites"
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/timeline"
         android:title="Timeline"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_schedules"
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/today"
         android:title="Today"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_music"
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/list_all"
         android:title="All Habits"
-        />
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/add_habit"
+        android:enabled="true"
+        android:icon="@drawable/add"
+        android:onClick="addNewHabit"
+        android:title="Add"
+        app:showAsAction="ifRoom" />
 </menu>
