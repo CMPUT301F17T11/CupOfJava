@@ -73,7 +73,7 @@ public class HabitList {
         Habit currentHabit;
         for (int i = 0; i < habits.size(); i++){
             currentHabit = habits.get(i);
-            if currentHabit.onDay(int currentDay){
+            if (currentHabit.onDay(int currentDay){
                 todaysHabits.add(currentHabit);
             }
         }
