@@ -25,9 +25,8 @@ public class SaveFileController {
     private String username;
     private String saveFile = "save_file.sav";
 
-    public SaveFileController(String user){
+    public SaveFileController(){
         this.allUsers = new ArrayList<User>();
-        this.username = user;
     }
 
     private void loadFromFile(Context context){
