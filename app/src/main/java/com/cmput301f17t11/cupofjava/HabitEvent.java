@@ -1,6 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,6 +11,7 @@ import java.util.Date;
  */
 public class HabitEvent {
     private Habit habit;
+    private String habitTitle;
     private String comment;
     private Date habitEventDate;
 
@@ -25,7 +27,7 @@ public class HabitEvent {
      */
 
     /**
-     * Constructor for HabitEvent
+     * Constructor for HabitEvent. Only used for unit testing.
      * @param comment
      */
     public HabitEvent(String comment){
@@ -37,13 +39,18 @@ public class HabitEvent {
         setHabit(habit);
         setComment(comment);
         this.habitEventDate = new Date();
+        this.habit = habit;
+        this.habitTitle = habit.getHabitTitle();
     }
 
     /**
      * Constructor for HabitEvent without comment
      */
-    public HabitEvent(){
+    public HabitEvent(Habit habit){
         this.habitEventDate = new Date();
+        this.habitTitle = habit.getHabitTitle();
+        this.comment = "";
+        this.habit = habit;
     }
 
 
@@ -79,8 +86,19 @@ public class HabitEvent {
         }
     }
 
+    public String getDateAsString(){
+        String dateString = new SimpleDateFormat("d MMM yyy")
+                .format(this.habitEventDate);
+        return dateString;
+    }
+
     public String getComment(){
         return this.comment;
     }
 
+    @Override
+    public String toString(){ //this gets called by array adapter
+        return ("What: " + this.habitTitle + "\n"
+                + "When: " + getDateAsString());
+    }
 }

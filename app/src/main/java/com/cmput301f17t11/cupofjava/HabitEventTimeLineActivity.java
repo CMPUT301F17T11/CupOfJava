@@ -7,10 +7,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class HabitEventTimeLineActivity extends Activity {
     private String userName;
     private int userIndex;
+    private ListView listView;
+    private String us
+    private
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
