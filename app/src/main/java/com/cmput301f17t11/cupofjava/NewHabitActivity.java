@@ -128,7 +128,7 @@ public class NewHabitActivity extends Activity {
             habitStartDate.set(java.util.Calendar.YEAR, year);
             habitStartDate.set(java.util.Calendar.MONTH, month);
             habitStartDate.set(java.util.Calendar.DAY_OF_MONTH, day);
-            habitStartDateEditText.setText(year + "-" + (month + 1) + "-" + day);
+            habitStartDateEditText.setText((year + "-" + (month + 1) + "-" + day));
         }
 
     };
