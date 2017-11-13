@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class SaveFileController {
     private ArrayList<User> allUsers;
     //private String username;
-    private String saveFile = "test_save_file3.sav";
+    private String saveFile = "test_save_file4.sav";
 
     public SaveFileController(){
         this.allUsers = new ArrayList<User>();
@@ -140,9 +140,13 @@ public class SaveFileController {
         loadFromFile(context);
         ArrayList<HabitEvent> habitEvents = new ArrayList<>();
         User user = this.allUsers.get(userIndex);
-        for (int i = 0; i < user.getHabitListAsArray().size(); i++){
-            for (int j = 0; j < user.getHabitListAsArray().get(i)
-                    .getHabitEventHistory().getHabitEvents().size(); i++){
+        ArrayList<Habit> habitList = user.getHabitListAsArray();
+        Habit currentHabit;
+        ArrayList<HabitEvent> currentHabitEvents;
+        for (int i = 0; i < habitList.size(); i++){
+            currentHabit = habitList.get(i);
+            currentHabitEvents = currentHabit.getHabitEventHistory().getHabitEvents();
+            for (int j = 0; j < currentHabitEvents.size() ; j++){
                 habitEvents.add(user.getHabitListAsArray().get(i)
                         .getHabitEventHistory().getHabitEvents().get(j));
             }

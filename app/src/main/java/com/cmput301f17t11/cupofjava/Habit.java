@@ -21,7 +21,7 @@ public class Habit {
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                  //for each day folloed, +1 and missing days would result in -1
                                 // todo prj5
-    private HabitEventHistory habitEvents;
+    private HabitEventHistory habitEvents = new HabitEventHistory();
     //TODO Setters and getters for habit events
 
     /* TODO prj5
@@ -44,7 +44,6 @@ public class Habit {
     public Habit(String title, String reason, Calendar date){
         this.habitTitle = title;
         this.habitReason = reason;
-        //TODO handle date
         this.habitDate = date;
         this.repeatingDays = new ArrayList<>();
     }
@@ -52,7 +51,6 @@ public class Habit {
     public Habit(String title, String reason, Calendar date, ArrayList<Integer> days){
         this.habitTitle = title;
         this.habitReason = reason;
-        //TODO handle date
         this.habitDate = date;
         this.repeatingDays = days;
     }
@@ -115,20 +113,17 @@ public class Habit {
         this.habitDate = habitDate;
     }
 
-    public void addHabitEvent(HabitEvent habitEvent){}
+    public void addHabitEvent(HabitEvent habitEvent){
+        this.habitEvents.addHabitEvent(habitEvent);
+    }
 
-    /*public String getFormattedDate(){
-        int year = 0000;
-        int month = 00;
-        int day = 00;
-        habitDate.set(java.util.Calendar.YEAR, year);
-        habitDate.set(java.util.Calendar.MONTH, month);
-        habitDate.set(java.util.Calendar.DAY_OF_MONTH, day);
+    public void deleteHabitEvent(HabitEvent habitEvent){
+        this.habitEvents.getHabitEvents().remove(habitEvent);
+    }
 
-        return (year + "-" + (month+1) +"-" + day);
-    }*/
-
-    public void deleteHabitEvent(HabitEvent habitEvent){}
+    public void deleteHabitEvent(int index){
+        this.habitEvents.getHabitEvents().remove(index);
+    }
 
 
     /*

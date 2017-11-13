@@ -8,7 +8,7 @@
     tools:context="com.cmput301f17t11.cupofjava.HabitEventTimeLineActivity">
 
     <TextView
-        android:id="@+id/SelfProfileHeadingTextView"
+        android:id="@+id/timelineHeadingTextView"
         android:layout_width="362dp"
         android:layout_height="65dp"
         android:layout_marginLeft="8dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ListView
-        android:id="@+id/selfProfileHabitListView"
+        android:id="@+id/timeLineListView"
         android:layout_width="365dp"
         android:layout_height="370dp"
         android:layout_marginLeft="8dp"

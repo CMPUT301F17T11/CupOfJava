@@ -50,6 +50,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.userName = intent.getStringExtra("userName");
         this.userIndex = intent.getIntExtra("userIndex", 0);
+        this.habitIndex = intent.getIntExtra("habitIndex", 0);
 
         habitEventCommentEditText = (EditText) findViewById(R.id.edit_comment);
 
