@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class SaveFileController {
     private ArrayList<User> allUsers;
     //private String username;
-    private String saveFile = "test_save_file2.sav";
+    private String saveFile = "test_save_file3.sav";
 
     public SaveFileController(){
         this.allUsers = new ArrayList<User>();
@@ -93,13 +93,6 @@ public class SaveFileController {
         return -1;
     }
 
-    public void addHabit(Context context, int userIndex, Habit habit){
-        loadFromFile(context);
-
-        this.allUsers.get(userIndex).getHabitList().addHabit(habit);
-        saveToFile(context);
-    }
-
     public HabitList getHabitList(Context context, int userIndex){
         loadFromFile(context);
         return this.allUsers.get(userIndex).getHabitList();
@@ -111,11 +104,23 @@ public class SaveFileController {
         return list;
     }
 
-    public void removeHabit(Context context, int userIndex, int habitIndex){
+    public void addHabit(Context context, int userIndex, Habit habit){
         loadFromFile(context);
-        this.allUsers.get(userIndex).getHabitList().deleteHabit(habitIndex);
+
+        this.allUsers.get(userIndex).getHabitList().addHabit(habit);
         saveToFile(context);
     }
+    public Habit getHabit(Context context, int userIndex, int habitIndex){
+        loadFromFile(context);
+        return this.allUsers.get(userIndex).getHabitListAsArray().get(habitIndex);
+    }
+
+    public void deleteHabit(Context context, int userIndex, int habitIndex){
+        loadFromFile(context);
+        this.allUsers.get(userIndex).getHabitListAsArray().remove(habitIndex);
+        saveToFile(context);
+    }
+
 
     public void addHabitEvent(Context context, int userIndex, int habitIndex, HabitEvent habitEvent){
         loadFromFile(context);

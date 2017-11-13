@@ -104,7 +104,7 @@ public class NewHabitActivity extends Activity {
             habitStartDateEditText.setText((year + "-" + (month + 1) + "-" + day));
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
 
     };
 

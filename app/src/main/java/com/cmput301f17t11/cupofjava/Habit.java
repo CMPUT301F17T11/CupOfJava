@@ -117,6 +117,17 @@ public class Habit {
 
     public void addHabitEvent(HabitEvent habitEvent){}
 
+    public String getFormattedDate(){
+        int year = 0000;
+        int month = 00;
+        int day = 00;
+        habitDate.set(java.util.Calendar.YEAR, year);
+        habitDate.set(java.util.Calendar.MONTH, month);
+        habitDate.set(java.util.Calendar.DAY_OF_MONTH, day);
+
+        return (year + "-" + (month+1) +"-" + day);
+    }
+
     public void deleteHabitEvent(HabitEvent habitEvent){}
 
 
