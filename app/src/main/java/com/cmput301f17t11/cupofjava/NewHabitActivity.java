@@ -2,6 +2,7 @@ package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class NewHabitActivity extends Activity {
     private String habitTitle;
     private String habitReason;
     private Habit newHabit = new Habit();
+    private SaveFileController saveFileController = new SaveFileController();
 
     /**
      * Launches the screen to add/edit a habit.
@@ -168,6 +170,5 @@ public class NewHabitActivity extends Activity {
         } else {
             newHabit.setHabitStartDate(habitStartDate);
         }
-
     }
 }
