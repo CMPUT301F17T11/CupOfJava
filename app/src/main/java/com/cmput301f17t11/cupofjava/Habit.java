@@ -1,6 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import io.searchbox.annotations.JestId;
@@ -15,7 +16,7 @@ public class Habit {
 
     private String habitTitle;
     private String habitReason;
-    private Date habitStartDate;
+    private Calendar habitStartDate;
     private ArrayList<Integer> repeatingDays; //0 = Sun, 1 = Mon... 6 = Sat
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                  //for each day folloed, +1 and missing days would result in -1
@@ -39,7 +40,7 @@ public class Habit {
      * @param reason
      * @param date
      */
-    public Habit(String title, String reason, Date date){
+    public Habit(String title, String reason, Calendar date){
         this.habitTitle = title;
         this.habitReason = reason;
         //TODO handle date
@@ -103,11 +104,11 @@ public class Habit {
     }
     */
 
-    public Date getHabitStartDate() {
+    public Calendar getHabitStartDate() {
         return habitStartDate;
     }
 
-    public void setHabitStartDate(Date habitStartDate) {
+    public void setHabitStartDate(Calendar habitStartDate) {
         this.habitStartDate = habitStartDate;
     }
 

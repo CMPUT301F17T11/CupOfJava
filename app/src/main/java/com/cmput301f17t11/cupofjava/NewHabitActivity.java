@@ -34,7 +34,6 @@ public class NewHabitActivity extends Activity {
     private CheckBox thuCheckBox;
     private CheckBox friCheckBox;
     private CheckBox satCheckBox;
-
     private Habit newHabit = new Habit();
 
     /**
@@ -82,43 +81,33 @@ public class NewHabitActivity extends Activity {
         // Check which checkbox was clicked
 
         switch(view.getId()) {
-            case R.id.checkbox_sun:
-                if (checked){
-                    String sunChecked = (String) sunCheckBox.getText();
-                }
-                else{break;}
-            case R.id.checkbox_mon:
-                if (checked){
-                    String monChecked = (String) monCheckBox.getText();
-                }
-                else{break;}
-            case R.id.checkbox_tue:
-                if (checked){
-                    String tueChecked = (String) tueCheckBox.getText();
-                }
-                else {break;}
-            case R.id.checkbox_wed:
-                if (checked){
-                    String wedChecked = (String) wedCheckBox.getText();
-                }
-                else{break;}
-            case R.id.checkbox_thu:
-                if (checked){
-                    String thuChecked = (String) thuCheckBox.getText();
-                }
-                else{break;}
-            case R.id.checkbox_fri:
-                if (checked){
-                    String friChecked = (String) friCheckBox.getText();
-                }
-                else{break;}
-            case R.id.checkbox_sat:
-                if (checked){
-                    String satChecked = (String) satCheckBox.getText();
-                }
-                else{break;}
+            case R.id.checkbox_sun: if (checked){ newHabit.addRepeatingDay(0);} else {break;}
+
+            case R.id.checkbox_mon: if (checked){ newHabit.addRepeatingDay(1);} else {break;}
+
+            case R.id.checkbox_tue: if (checked){ newHabit.addRepeatingDay(2);} else {break;}
+
+            case R.id.checkbox_wed: if (checked){ newHabit.addRepeatingDay(3);} else {break;}
+
+            case R.id.checkbox_thu: if (checked){ newHabit.addRepeatingDay(4);} else {break;}
+
+            case R.id.checkbox_fri: if (checked){ newHabit.addRepeatingDay(5);} else {break;}
+
+            case R.id.checkbox_sat: if (checked){ newHabit.addRepeatingDay(6);} else {break;}
         }
     }
+
+    /*public void addIndexForDay(int dayIndex) {
+        switch(dayIndex) {
+            case 0: newHabit.addRepeatingDay(dayIndex);
+            case 1: newHabit.addRepeatingDay(dayIndex);
+            case 2: newHabit.addRepeatingDay(dayIndex);
+            case 3: newHabit.addRepeatingDay(dayIndex);
+            case 4: newHabit.addRepeatingDay(dayIndex);
+            case 5: newHabit.addRepeatingDay(dayIndex);
+            case 6: newHabit.addRepeatingDay(dayIndex);
+        }
+    }*/
 
     DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
@@ -142,6 +131,7 @@ public class NewHabitActivity extends Activity {
     };
 
     public void saveNewHabit(View view) {
+
         Intent intent = new Intent(NewHabitActivity.this, TodayViewActivity.class);
         startActivity(intent);
     }
