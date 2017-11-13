@@ -3,7 +3,7 @@ package com.cmput301f17t11.cupofjava;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class HabitTimeLineActivity extends Activity {
+public class HabitEventTimeLineActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
