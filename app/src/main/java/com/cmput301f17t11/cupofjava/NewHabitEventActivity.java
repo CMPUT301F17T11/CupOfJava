@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -31,6 +32,12 @@ public class NewHabitEventActivity extends AppCompatActivity {
     private String userName;
     private Spinner spinner;
     private int userIndex;
+    private int habitIndex;
+
+    private Habit habit;
+    private String habitEventComment;
+
+    private EditText habitEventCommentEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,8 @@ public class NewHabitEventActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.userName = intent.getStringExtra("userName");
         this.userIndex = intent.getIntExtra("userIndex", 0);
+
+        habitEventCommentEditText = (EditText) findViewById(R.id.edit_comment);
 
         spinner =  (Spinner) findViewById(R.id.choose_habit_spinner);
         habitAdapter = new HabitAdapter(this, habitList);
@@ -61,5 +70,21 @@ public class NewHabitEventActivity extends AppCompatActivity {
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(NewHabitEventActivity.this,
                 R.layout.habit_list_item, habits);
         this.spinner.setAdapter(arrayAdapter);
+    }
+
+    public void saveNewHabitEvent(View view) {
+
+        Habit spinnerHabit = (Habit) spinner.getSelectedItem();
+        this.habit = spinnerHabit;
+        this.habitEventComment = habitEventCommentEditText.getText().toString();
+
+        HabitEvent newHabitEvent = new HabitEvent(habit, habitEventComment);
+
+        SaveFileController saveFileController = new SaveFileController();
+        saveFileController.addHabitEvent(getApplicationContext(), this.userIndex, this.habitIndex, newHabitEvent);
+        Intent intent = new Intent(NewHabitEventActivity.this, TodayViewActivity.class);
+        intent.putExtra("userName", userName);
+        intent.putExtra("userIndex", userIndex);
+        startActivity(intent);
     }
 }
