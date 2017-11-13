@@ -14,7 +14,9 @@ public class HabitList {
     ArrayList<Habit> habits;
 
 
-    public HabitList(){}
+    public HabitList(){
+        this.habits = new ArrayList<Habit>();
+    }
 
     public void addHabit(Habit habit){
         this.habits.add(habit);
@@ -29,13 +31,15 @@ public class HabitList {
         }
     }
 
-    public Habit getHabit(int index) { return habits.get(index);}
+    public Habit getHabit(int index) {
+        return habits.get(index);
+    }
 
     public void deleteHabit(int index){
         this.habits.remove(index);
     }
 
-    public ArrayList<Habit> getHabitList(){
+    public ArrayList<Habit> getHabitListAsArray(){
         return this.habits;
     }
 
@@ -69,6 +73,7 @@ public class HabitList {
                 break;
             case Calendar.SATURDAY:
                 currentDay = 6;
+                break;
             default:
                 currentDay = 0;
                 break;

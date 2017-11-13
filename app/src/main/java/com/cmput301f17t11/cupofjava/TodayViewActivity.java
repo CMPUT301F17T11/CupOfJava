@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 
 public class TodayViewActivity extends Activity {
+    private String userName;
+    private int userIndex;
 
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
 
@@ -19,6 +21,12 @@ public class TodayViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_view);
+
+        //obtain extra info from intent
+        Intent intent = getIntent();
+        this.userName = intent.getStringExtra("userName");
+        this.userIndex = intent.getIntExtra("userIndex", 0);
+
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
@@ -39,6 +47,8 @@ public class TodayViewActivity extends Activity {
                         break;
                     case R.id.action_all_habits:
                         Intent intent3 = new Intent(TodayViewActivity.this, AllHabitViewActivity.class);
+                        intent3.putExtra("userName", userName);
+                        intent3.putExtra("userIndex", userIndex);
                         startActivity(intent3);
                         break;
                     case R.id.add_habit:

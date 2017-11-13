@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class SaveFileController {
     private ArrayList<User> allUsers;
-    private String username;
+    //private String username;
     private String saveFile = "save_file.sav";
 
     public SaveFileController(){
@@ -35,8 +35,8 @@ public class SaveFileController {
             FileInputStream ifStream = context.openFileInput(saveFile);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(ifStream));
             Gson gson = new Gson();
-            Type counterArrayListType = new TypeToken<ArrayList<User>>(){}.getType();
-            this.allUsers = gson.fromJson(bufferedReader, counterArrayListType);
+            Type userArrayListType = new TypeToken<ArrayList<User>>(){}.getType();
+            this.allUsers = gson.fromJson(bufferedReader, userArrayListType);
             ifStream.close();
         }
         //create a new array list if a file does not already exist
@@ -104,7 +104,9 @@ public class SaveFileController {
     }
 
     public ArrayList<Habit> getHabitListAsArray(Context context, int userIndex){
-        return getHabitList(context, userIndex).getHabitList();
+        loadFromFile(context);
+        ArrayList<Habit> list = this.allUsers.get(userIndex).getHabitList().getHabitListAsArray();
+        return list;
     }
 
     public void removeHabit(Context context, int userIndex, int habitIndex){
