@@ -91,27 +91,27 @@ public class NewHabitActivity extends Activity {
                 else{break;}
             case R.id.checkbox_tue:
                 if (checked){
-                    String tueChecked =(String) tueCheckBox.getText();
+                    String tueChecked = (String) tueCheckBox.getText();
                 }
                 else {break;}
             case R.id.checkbox_wed:
                 if (checked){
-                    String wedChecked =(String) wedCheckBox.getText();
+                    String wedChecked = (String) wedCheckBox.getText();
                 }
                 else{break;}
             case R.id.checkbox_thu:
                 if (checked){
-                    String thuChecked =(String) thuCheckBox.getText();
+                    String thuChecked = (String) thuCheckBox.getText();
                 }
                 else{break;}
             case R.id.checkbox_fri:
                 if (checked){
-                    String friChecked =(String) friCheckBox.getText();
+                    String friChecked = (String) friCheckBox.getText();
                 }
                 else{break;}
             case R.id.checkbox_sat:
                 if (checked){
-                    String satChecked =(String) satCheckBox.getText();
+                    String satChecked = (String) satCheckBox.getText();
                 }
                 else{break;}
         }
