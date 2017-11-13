@@ -7,11 +7,19 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
 
 public class TodayViewActivity extends Activity {
+
+
+    // ListView to be populated
+    private ListView listView;
+
+    // Custom Habit Adapter
+    private HabitAdapter habitAdapter;
 
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
 
@@ -19,6 +27,9 @@ public class TodayViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_view);
+        listView = (ListView) findViewById(R.id.selfProfileHabitListView);
+        habitAdapter = new HabitAdapter(this, habitList);
+        listView.setAdapter(habitAdapter);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
