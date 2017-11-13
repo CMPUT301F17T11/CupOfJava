@@ -23,11 +23,13 @@ public class HabitEventHistory {
         habitEvents.add(event);
     }
 
-    public void deleteHabitEvent(HabitEvent habitEvent){
-        int index = this.habitEvents.indexOf(habitEvent);
+    public void deleteHabitEvent(int index){
         this.habitEvents.remove(index);
     }
 
+    public int getIndexOfEvent(HabitEvent event){
+        return this.habitEvents.indexOf(event);
+    }
 
     //this method was added by eshna
     public boolean hasHabitEvent(HabitEvent event){
@@ -39,8 +41,20 @@ public class HabitEventHistory {
         }
     }
 
-    HabitEvent getHabitEvent(int index) { return habitEvents.get(index);}
+    public HabitEvent getHabitEvent(int index) { return habitEvents.get(index);}
 
+    public ArrayList<HabitEvent> filterByComment(String text){
+        ArrayList<HabitEvent> filteredList = new ArrayList<>();
+        HabitEvent currentHabitEvent;
+        for (int i = 0; i < this.habitEvents.size(); i++){
+            currentHabitEvent = this.habitEvents.get(i);
+            if (currentHabitEvent.getComment().indexOf(text) != -1){
+                filteredList.add(currentHabitEvent);
+            }
+        }
+
+        return filteredList;
+    }
 
     public ArrayList<HabitEvent> getHabitEvents(){
         return habitEvents;
@@ -59,7 +73,7 @@ public class HabitEventHistory {
         return habitEvents;
     }
 
-    //TODO: DONE (need to test)
+    /*
     public ArrayList<HabitEvent> filterByType(Habit habit){
         ArrayList<HabitEvent> filteredHabitEvents = new ArrayList<HabitEvent>();
         for (int i = 0; i < habitEvents.size(); i++) {
@@ -68,9 +82,9 @@ public class HabitEventHistory {
             }
         }
         return filteredHabitEvents;
-    }
+    }*/
 
-    //TODO: DONE (need to test)
+    /*
     public ArrayList<HabitEvent> filterByComment(String comment){
         ArrayList<HabitEvent> filteredHabitEvents = new ArrayList<HabitEvent>();
         for (int i = 0; i < habitEvents.size(); i++) {
@@ -79,6 +93,6 @@ public class HabitEventHistory {
             }
         }
         return filteredHabitEvents;
-    }
+    }*/
 
 }

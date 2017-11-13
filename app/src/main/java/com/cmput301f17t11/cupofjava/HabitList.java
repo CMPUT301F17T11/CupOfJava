@@ -67,13 +67,16 @@ public class HabitList {
                 break;
             case Calendar.SATURDAY:
                 currentDay = 6;
+            default:
+                currentDay = 0;
+                break;
         }
 
         ArrayList<Habit> todaysHabits = new ArrayList<>();
         Habit currentHabit;
         for (int i = 0; i < habits.size(); i++){
             currentHabit = habits.get(i);
-            if (currentHabit.onDay(int currentDay){
+            if (currentHabit.onDay(currentDay)){
                 todaysHabits.add(currentHabit);
             }
         }

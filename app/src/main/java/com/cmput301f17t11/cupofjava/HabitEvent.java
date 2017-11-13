@@ -28,12 +28,15 @@ public class HabitEvent {
      */
     public HabitEvent(String comment){
         this.comment = comment;
+        this.habitEventDate = new Date();
     }
 
     /**
      * Constructor for HabitEvent without comment
      */
-    public HabitEvent(){}
+    public HabitEvent(){
+        this.habitEventDate = new Date();
+    }
 
 
     //TODO: prj5 constructor for optional comment and optional photograph
@@ -51,10 +54,6 @@ public class HabitEvent {
         return this.habitEventDate;
     }
 
-    public void setHabitEventDateToCurrent(){
-        this.habitEventDate = new Date();
-    }
-
     public void setComment(String comment){
         if (comment.length() > 20){
             new Exception("Comment longer than 20 chars");
@@ -67,6 +66,5 @@ public class HabitEvent {
     public String getComment(){
         return this.comment;
     }
-
 
 }
