@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * This activity handles adding and configuring an existent habit.
+ * This activity handles adding and configuring git an existent habit.
  * User must add add a name and reason for the habit.
  * User must choose the frequency & start date of the habit they are creating.
  */
@@ -100,7 +100,7 @@ public class NewHabitActivity extends Activity {
             habitStartDate.set(java.util.Calendar.YEAR, year);
             habitStartDate.set(java.util.Calendar.MONTH, month);
             habitStartDate.set(java.util.Calendar.DAY_OF_MONTH, day);
-            habitStartDateEditText.setText((year + "-" + (month + 1) + "-" + day));
+            habitStartDateEditText.setText(((month + 1) + " / " + day + " / " + year));
         }
 
     };
