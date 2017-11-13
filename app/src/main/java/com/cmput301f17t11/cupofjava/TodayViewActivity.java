@@ -2,14 +2,18 @@ package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -22,6 +26,31 @@ public class TodayViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_view);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+
+                    case R.id.action_favorites:
+                        Intent intent2 = new Intent(TodayViewActivity.this, HabitTimeLineActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.action_schedules:
+                        break;
+                    case R.id.action_music:
+                        Intent intent3 = new Intent(TodayViewActivity.this, AllHabitViewActivity.class);
+                        startActivity(intent3);
+                        break;
+                    case R.id.add_habit:
+                        Intent intent4 = new Intent(TodayViewActivity.this, NewHabitActivity.class);
+                        startActivity(intent4);
+                        break;
+
+                }
+                return false;
+            }
+        });
 
         FloatingActionButton newActivity = (FloatingActionButton) findViewById(R.id.selfProfileViewNewHabit);
         newActivity.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +103,6 @@ public class TodayViewActivity extends Activity {
         });
     }
 
-    //BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
 
 
 
