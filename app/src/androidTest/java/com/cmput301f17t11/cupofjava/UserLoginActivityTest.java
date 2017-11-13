@@ -36,13 +36,16 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
         solo.enterText((EditText)solo.getView(R.id.username), "Mary Poppins");
         solo.clickOnButton("Sign in | Register");
         solo.assertCurrentActivity("new activity", TodayViewActivity.class);
-        solo.assertCurrentActivity("new activity", TodayViewActivity.class);
+        //solo.assertCurrentActivity("new activity", TodayViewActivity.class);
+
+        //*Add habit button
         solo.clickOnView((solo.getView(R.id.add_habit)));
         solo.assertCurrentActivity("new activity", NewHabitActivity.class);
+        //NewHabit Activity
         solo.enterText((EditText) solo.getView(R.id.habit_title),"Disciplining Kids");
         assertTrue(solo.waitForText("Disciplining Kids"));
-        solo.enterText((EditText)solo.getView(R.id.habit_reason),"good Nanny");
-        assertTrue(solo.waitForText("good Nanny"));
+        solo.enterText((EditText)solo.getView(R.id.habit_reason),"Good Nanny");
+        assertTrue(solo.waitForText("Good Nanny"));
         solo.clickOnView((solo.getView(R.id.habit_start_date)));
         solo.setDatePicker(0,2017,10,13);
         solo.clickOnText("OK");
@@ -66,24 +69,54 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
     //testClickTodayHabitList
         TodayViewActivity activity = (TodayViewActivity) solo.getCurrentActivity();
 
-        solo.assertCurrentActivity("parent activity", TodayViewActivity.class);
+        //solo.assertCurrentActivity("parent activity", TodayViewActivity.class);
 
 
         final ListView habitList = activity.getListView();
-        //Habit myhabit = (Habit) habitList.getItemAtPosition(0);
-        //assertEquals("Test Tweet!", tweet.getMessage());
+        Habit habit = (Habit) habitList.getItemAtPosition(0);
+        assertEquals("Disciplining Kids", habit.getHabitTitle());
+        assertEquals("Good Nanny",habit.getHabitReason());
 
         solo.clickInList(0);
         solo.assertCurrentActivity("wrong activity", HabitDetailViewActivity.class);
-        //assertTrue(solo.waitForText("Test Tweet!", 1, 1000));
+        assertTrue(solo.waitForText("Disciplining Kids", 1, 1000));
+        assertTrue(solo.waitForText("Good Nanny", 1, 1000));
+        assertTrue(solo.waitForText("11 / 13 / 2017", 1, 1000));
         solo.goBack();
-        //solo.assertCurrentActivity("wrong Activity", LonelyTwitterActivity.class);
 
 
     //testALlHabitsButton(){
         solo.assertCurrentActivity("Parent Activity",TodayViewActivity.class);
         solo.clickOnView(solo.getView(R.id.action_all_habits));
         solo.assertCurrentActivity("child activity", AllHabitViewActivity.class);
+        //click on habit in All Habits View
+        solo.sleep(5000);
+        AllHabitViewActivity activity2 = (AllHabitViewActivity)solo.getCurrentActivity();
+
+
+
+        final ListView habitList2 = activity2.getListView();
+        Habit myhabit = (Habit) habitList.getItemAtPosition(0);
+        assertEquals("Disciplining Kids", myhabit.getHabitTitle());
+        assertEquals("Good Nanny",myhabit.getHabitReason());
+
+        solo.clickInList(0);
+        solo.assertCurrentActivity("wrong activity", HabitDetailViewActivity.class);
+        assertTrue(solo.waitForText("Disciplining Kids", 1, 1000));
+        assertTrue(solo.waitForText("Good Nanny", 1, 1000));
+        assertTrue(solo.waitForText("11 / 13 / 2017", 1, 1000));
+        solo.clickOnButton("Delete");
+        solo.clickOnText("DELETE");
+
+        solo.sleep(2000);
+        solo.assertCurrentActivity("parent activity", TodayViewActivity.class);
+        solo.clickOnView(solo.getView(R.id.action_timeline));
+        solo.assertCurrentActivity("child activity", HabitEventTimeLineActivity.class);
+
+        solo.sleep(2000);
+
+        solo.goBack();
+
 
     }
 
