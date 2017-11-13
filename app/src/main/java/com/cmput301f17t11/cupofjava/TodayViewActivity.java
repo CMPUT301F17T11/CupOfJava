@@ -30,6 +30,10 @@ public class TodayViewActivity extends Activity {
     private int userIndex;
     private TextView textView;
 
+    public ListView getListView(){
+        return listView;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
