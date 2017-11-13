@@ -28,6 +28,8 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         habitTitleTextView = (TextView) findViewById(R.id.title_text_view);
         habitReasonTextView = (TextView) findViewById(R.id.reason_text_view);
 
+
+
     }
 
     public void addNewHabitEventButton(View view) {

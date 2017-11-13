@@ -1,8 +1,8 @@
 package com.cmput301f17t11.cupofjava;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
+import android.icu.util.Calendar;
 
 import io.searchbox.annotations.JestId;
 
@@ -16,7 +16,7 @@ public class Habit {
 
     private String habitTitle;
     private String habitReason;
-    private Calendar habitStartDate;
+    private Calendar habitDate;
     private ArrayList<Integer> repeatingDays; //0 = Sun, 1 = Mon... 6 = Sat
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                  //for each day folloed, +1 and missing days would result in -1
@@ -44,7 +44,7 @@ public class Habit {
         this.habitTitle = title;
         this.habitReason = reason;
         //TODO handle date
-        this.habitStartDate = date;
+        this.habitDate = date;
     }
 
     public Habit(){}
@@ -54,12 +54,7 @@ public class Habit {
     }
 
     public void setHabitTitle(String habitTitle) {
-        if (habitTitle.length() > 20){
-            new Exception("Habit Title longer than 20 chars");
-        }
-        else {
             this.habitTitle = habitTitle;
-        }
     }
 
     public HabitEventHistory getHabitEventHistory(){
@@ -71,12 +66,8 @@ public class Habit {
     }
 
     public void setHabitReason(String habitReason) {
-        if (habitReason.length() > 30){
-            new Exception("Habit Reason longer than 30 chars");
-        }
-        else {
-            this.habitReason = habitReason;
-        }
+
+        this.habitReason = habitReason;
     }
 
     /**
@@ -105,11 +96,11 @@ public class Habit {
     */
 
     public Calendar getHabitStartDate() {
-        return habitStartDate;
+        return habitDate;
     }
 
-    public void setHabitStartDate(Calendar habitStartDate) {
-        this.habitStartDate = habitStartDate;
+    public void setHabitStartDate(Calendar habitDate) {
+        this.habitDate = habitDate;
     }
 
     public void addHabitEvent(HabitEvent habitEvent){}
