@@ -7,7 +7,9 @@ import java.util.IllegalFormatCodePointException;
 
 
 /**
+ *  Represents a container of User objects.
  *
+ *  As of yet, it is not being used, but may be used later for prj5
  */
 public class UserList{
     ArrayList<User> users;

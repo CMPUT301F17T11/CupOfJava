@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class SaveFileController {
     private ArrayList<User> allUsers;
     //private String username;
-    private String saveFile = "test_save_file.sav";
+    private String saveFile = "test_save_file2.sav";
 
     public SaveFileController(){
         this.allUsers = new ArrayList<User>();

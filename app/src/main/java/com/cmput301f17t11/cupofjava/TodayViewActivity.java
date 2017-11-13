@@ -41,6 +41,8 @@ public class TodayViewActivity extends Activity {
 
                     case R.id.action_timeline:
                         Intent intent2 = new Intent(TodayViewActivity.this, HabitEventTimeLineActivity.class);
+                        intent2.putExtra("userName", userName);
+                        intent2.putExtra("userIndex", userIndex);
                         startActivity(intent2);
                         break;
                     case R.id.action_today:
@@ -53,6 +55,8 @@ public class TodayViewActivity extends Activity {
                         break;
                     case R.id.add_habit:
                         Intent intent4 = new Intent(TodayViewActivity.this, NewHabitActivity.class);
+                        intent4.putExtra("userName", userName);
+                        intent4.putExtra("userIndex", userIndex);
                         startActivity(intent4);
                         break;
                 }
@@ -60,8 +64,4 @@ public class TodayViewActivity extends Activity {
             }
         });
     }
-
-
-
-
 }
