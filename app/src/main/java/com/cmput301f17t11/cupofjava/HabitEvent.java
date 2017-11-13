@@ -12,7 +12,7 @@ public class HabitEvent {
     private Habit habit;
     private String comment;
     private Date habitEventDate;
-    
+
     /** TODO: prj5
     private Geolocation location;
     private boolean locationSet = false;
