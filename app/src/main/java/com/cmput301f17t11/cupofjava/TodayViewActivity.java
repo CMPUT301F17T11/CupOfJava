@@ -27,7 +27,7 @@ public class TodayViewActivity extends Activity {
                 switch(item.getItemId()) {
 
                     case R.id.action_favorites:
-                        Intent intent2 = new Intent(TodayViewActivity.this, HabitTimeLineActivity.class);
+                        Intent intent2 = new Intent(TodayViewActivity.this, HabitEventTimeLineActivity.class);
                         startActivity(intent2);
                         break;
                     case R.id.action_schedules:
