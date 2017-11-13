@@ -55,6 +55,7 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         Intent intent2 = new Intent(HabitDetailViewActivity.this, NewHabitEventActivity.class);
         intent2.putExtra("userName", userName);
         intent2.putExtra("userIndex", userIndex);
+        intent2.putExtra("habitIndex", habitIndex);
         startActivity(intent2);
     }
 

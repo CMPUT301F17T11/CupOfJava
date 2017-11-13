@@ -30,7 +30,6 @@ public class HabitEventHistory {
         return this.habitEvents.indexOf(event);
     }
 
-    //this method was added by eshna
     public boolean hasHabitEvent(HabitEvent event) {
         if (this.habitEvents.contains(event)) {
             return true;

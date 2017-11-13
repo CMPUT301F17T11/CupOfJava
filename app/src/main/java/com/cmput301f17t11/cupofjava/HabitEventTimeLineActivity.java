@@ -7,18 +7,28 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class HabitEventTimeLineActivity extends Activity {
     private String userName;
     private int userIndex;
     private ListView listView;
-    private String us
-    private
+    private TextView textView;
+    //private HabitEventAdapter habitEventAdapter;
+    //private ArrayList<HabitEvent> eventArrayList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_time_line);
+        //habitEventAdapter = new HabitEventAdapter(this, eventArrayList);
+        //listView.setAdapter(habitEventAdapter);
 
         //obtain extra info from intent
         Intent intent = getIntent();
@@ -62,6 +72,47 @@ public class HabitEventTimeLineActivity extends Activity {
             }
         });
 
-        //fill contents
+        //set up the TextView and ListView
+        this.textView = (TextView) findViewById(R.id.timelineHeadingTextView);
+        this.listView = (ListView) findViewById(R.id.timeLineListView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent5 = new Intent(HabitEventTimeLineActivity.this,
+                        ViewHabitEventActivity.class);
+                intent5.putExtra("userName", userName);
+                intent5.putExtra("userIndex", userIndex);
+                intent5.putExtra("habitIndex", position);
+                startActivity(intent5);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        SaveFileController saveFileController = new SaveFileController();
+        ArrayList<HabitEvent> events = saveFileController
+                .getAllHabitEvents(getApplicationContext(), this.userIndex);
+
+        updateTextView(events.size());
+        updateListView(events);
+
+    }
+
+
+    private void updateTextView(int eventCount){
+        if (eventCount == 0){
+            this.textView.setText(("You did not do any habits yet!"));
+        }
+        else{
+            this.textView.setText(("Your habit event timeline:"));
+        }
+    }
+
+    private void updateListView(ArrayList<HabitEvent> events){
+        ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(HabitEventTimeLineActivity.this,
+                R.layout.habit_event_list_item, events);
+        this.listView.setAdapter(arrayAdapter);
     }
 }

@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class HabitEventAdapter extends ArrayAdapter<HabitEvent> {
 
-    public HabitEventAdapter(Activity context, ArrayList<HabitEvent> counters) {
-        super(context, 0, counters);
+    public HabitEventAdapter(Activity context, ArrayList<HabitEvent> habitEvents) {
+        super(context, 0, habitEvents);
     }
 
     @Override
