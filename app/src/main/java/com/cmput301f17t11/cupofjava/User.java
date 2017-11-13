@@ -3,6 +3,8 @@ package com.cmput301f17t11.cupofjava;
 
 //import io.searchbox.annotations.JestId;
 
+import java.util.ArrayList;
+
 /**
  * This class tracks names of users that the user
  * follows, has requested to follow, and following
@@ -10,13 +12,16 @@ package com.cmput301f17t11.cupofjava;
  */
 public class User {
     private String username;
+    private HabitList habitList;  //all the habits of the user
+
+
     /* TODO for prj5
     private ArrayList<String> followingList;
     private ArrayList<String> followerList;
     private ArrayList<String> followRequestList;
     */
 
-    private HabitList habitList;  //all the habits of the user
+
     /* TODO for prj5
     @JestId
     private String id;
@@ -28,6 +33,7 @@ public class User {
      */
     public User(String name) {
         this.username = name;
+        this.habitList = new HabitList();
     }
 
     public String getUsername(){
@@ -37,6 +43,10 @@ public class User {
 
     public HabitList getHabitList(){
         return this.habitList;
+    }
+
+    public ArrayList<Habit> getHabitListAsArray(){
+        return this.habitList.getHabitListAsArray();
     }
 
     /* TODO prj5

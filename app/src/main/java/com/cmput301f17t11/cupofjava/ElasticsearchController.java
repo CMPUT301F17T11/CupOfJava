@@ -18,6 +18,8 @@ import io.searchbox.core.SearchResult;
  * Created by nazim on 10/11/17.
  */
 
+//TODO prj5
+
 public class ElasticsearchController {
     private static JestDroidClient client; //manages communication with a server
     //http://cmput301.softwareprocess.es:8080/cmput301f17t11_cupofjava

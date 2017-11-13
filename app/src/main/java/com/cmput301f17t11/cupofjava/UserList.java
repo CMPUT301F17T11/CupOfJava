@@ -7,13 +7,15 @@ import java.util.IllegalFormatCodePointException;
 
 
 /**
+ *  Represents a container of User objects.
  *
+ *  As of yet, it is not being used, but may be used later for prj5
  */
 public class UserList{
     ArrayList<User> users;
 
     public UserList(){
-        retrieveUserList(); //retrieve from a place saved
+        this.users = new ArrayList<>();
     }
 
     public void addUser(User user) throws IllegalArgumentException{
@@ -24,7 +26,8 @@ public class UserList{
         }
         this.users.add(user);
     }
-    //this method was added by eshna
+
+
     public boolean hasUser(User user){
         if (this.users.contains(user)){
             return true;
@@ -34,23 +37,27 @@ public class UserList{
         }
     }
 
-    User getUser(int index) { return users.get(index);}
-
-    //TODO: implement userlist retrieval
-    public ArrayList<User> retrieveUserList() { return users;}
-
-    public ArrayList<User> sortNamesAlphabetically(){
-        Collections.sort(users, new Comparator<User>() {
-
-            public int compare(User u1, User u2) {
-                return u1.getUsername().compareToIgnoreCase(u2.getUsername());
+    public boolean hasUser(String username){
+        for (int i = 0; i < this.users.size(); i++){
+            if (this.users.get(i).getUsername().equals(username)){
+                return true;
             }
-        });
-
-     return users;
+        }
+        return false;
     }
 
-    public int getUserIndex(User user){
+    User getUser(int index) { return users.get(index);}
+
+    public int getUserIndexByName(String username){
+        for (int i = 0; i < this.users.size(); i++){
+            if (this.users.get(i).getUsername().equals(username)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int getUserIndexByObj(User user){
         return this.users.indexOf(user);
     }
 

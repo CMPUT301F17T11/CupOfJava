@@ -59,11 +59,11 @@ public class ViewHabitEventActivity extends Activity {
                         // Check if counter Title and Reason are valid entires
                         if (!(editComment.getText().toString().equals("")) ) {
                             String comment = editComment.getText().toString();
-                            Habit habit = new Habit("ok","ok",new Date()); //remove this; testing
+                            //Habit habit = new Habit("ok","ok",new Date()); //remove this; testing
 
 
-                            HabitEvent myObject = new HabitEvent(habit, comment);
-                            habitEvents.add(myObject);
+                            //HabitEvent myObject = new HabitEvent(habit, comment);
+                            //habitEvents.add(myObject);
                             dialog.dismiss();
                         }
 

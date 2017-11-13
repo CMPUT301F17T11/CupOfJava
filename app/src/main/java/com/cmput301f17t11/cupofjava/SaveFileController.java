@@ -1,6 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
 import android.content.Context;
+import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,8 +23,8 @@ import java.util.ArrayList;
 
 public class SaveFileController {
     private ArrayList<User> allUsers;
-    private String username;
-    private String saveFile = "save_file.sav";
+    //private String username;
+    private String saveFile = "test_save_file3.sav";
 
     public SaveFileController(){
         this.allUsers = new ArrayList<User>();
@@ -34,13 +35,14 @@ public class SaveFileController {
             FileInputStream ifStream = context.openFileInput(saveFile);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(ifStream));
             Gson gson = new Gson();
-            Type counterArrayListType = new TypeToken<ArrayList<User>>(){}.getType();
-            this.allUsers = gson.fromJson(bufferedReader, counterArrayListType);
+            Type userArrayListType = new TypeToken<ArrayList<User>>(){}.getType();
+            this.allUsers = gson.fromJson(bufferedReader, userArrayListType);
             ifStream.close();
         }
         //create a new array list if a file does not already exist
         catch (FileNotFoundException e){
             this.allUsers = new ArrayList<User>();
+            saveToFile(context);
         }
         catch (IOException e){
             throw new RuntimeException();
@@ -91,22 +93,34 @@ public class SaveFileController {
         return -1;
     }
 
-    public void addHabit(Context context, int userIndex, Habit habit){
-        loadFromFile(context);
-        this.allUsers.get(userIndex).getHabitList().addHabit(habit);
-        saveToFile(context);
-    }
-
     public HabitList getHabitList(Context context, int userIndex){
         loadFromFile(context);
         return this.allUsers.get(userIndex).getHabitList();
     }
 
-    public void removeHabit(Context context, int userIndex, int habitIndex){
+    public ArrayList<Habit> getHabitListAsArray(Context context, int userIndex){
         loadFromFile(context);
-        this.allUsers.get(userIndex).getHabitList().deleteHabit(habitIndex);
+        ArrayList<Habit> list = this.allUsers.get(userIndex).getHabitListAsArray();
+        return list;
+    }
+
+    public void addHabit(Context context, int userIndex, Habit habit){
+        loadFromFile(context);
+
+        this.allUsers.get(userIndex).getHabitList().addHabit(habit);
         saveToFile(context);
     }
+    public Habit getHabit(Context context, int userIndex, int habitIndex){
+        loadFromFile(context);
+        return this.allUsers.get(userIndex).getHabitListAsArray().get(habitIndex);
+    }
+
+    public void deleteHabit(Context context, int userIndex, int habitIndex){
+        loadFromFile(context);
+        this.allUsers.get(userIndex).getHabitListAsArray().remove(habitIndex);
+        saveToFile(context);
+    }
+
 
     public void addHabitEvent(Context context, int userIndex, int habitIndex, HabitEvent habitEvent){
         loadFromFile(context);
@@ -119,5 +133,20 @@ public class SaveFileController {
         this.allUsers.get(userIndex).getHabitList().getHabit(habitIndex)
                 .getHabitEventHistory().getHabitEvents().remove(habitEventIndex);
         saveToFile(context);
+    }
+
+    //for use in timeline view
+    public ArrayList<HabitEvent> getAllHabitEvents(Context context, int userIndex){
+        loadFromFile(context);
+        ArrayList<HabitEvent> habitEvents = new ArrayList<>();
+        User user = this.allUsers.get(userIndex);
+        for (int i = 0; i < user.getHabitListAsArray().size(); i++){
+            for (int j = 0; j < user.getHabitListAsArray().get(i)
+                    .getHabitEventHistory().getHabitEvents().size(); i++){
+                habitEvents.add(user.getHabitListAsArray().get(i)
+                        .getHabitEventHistory().getHabitEvents().get(j));
+            }
+        }
+        return habitEvents;
     }
 }

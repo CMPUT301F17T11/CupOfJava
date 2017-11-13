@@ -8,30 +8,33 @@
     tools:context="com.cmput301f17t11.cupofjava.AllHabitViewActivity">
 
     <TextView
-        android:id="@+id/SelfProfileHeadingTextView"
+        android:id="@+id/allHabitHeadingTextView"
         android:layout_width="362dp"
         android:layout_height="65dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:textAlignment="center"
         android:background="@drawable/check_box_dimens"
+        android:textAlignment="center"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ListView
-        android:id="@+id/selfProfileHabitListView"
-        android:layout_width="362dp"
-        android:layout_height="475dp"
+        android:id="@+id/allHabitListView"
+        android:layout_width="375dp"
+        android:layout_height="467dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+<<<<<<< HEAD
         android:layout_marginTop="4dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_today"
+=======
+        android:layout_marginTop="76dp"
+>>>>>>> 785aa2ff76b9ec0b3e0b1b2c092bd63aa5e04b53
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SelfProfileHeadingTextView"
-        app:layout_constraintVertical_bias="0.071" />
+        app:layout_constraintTop_toTopOf="@+id/allHabitHeadingTextView"/>
 
     <!--
     <android.support.design.widget.FloatingActionButton

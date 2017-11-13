@@ -2,6 +2,7 @@ package com.cmput301f17t11.cupofjava;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Calendar;
 
 import io.searchbox.annotations.JestId;
 
@@ -15,10 +16,11 @@ public class Habit {
 
     private String habitTitle;
     private String habitReason;
-    private Date habitStartDate;
+    private Calendar habitDate;
     private ArrayList<Integer> repeatingDays; //0 = Sun, 1 = Mon... 6 = Sat
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                  //for each day folloed, +1 and missing days would result in -1
+                                // todo prj5
     private HabitEventHistory habitEvents;
     //TODO Setters and getters for habit events
 
@@ -39,26 +41,32 @@ public class Habit {
      * @param reason
      * @param date
      */
-    public Habit(String title, String reason, Date date){
+    public Habit(String title, String reason, Calendar date){
         this.habitTitle = title;
         this.habitReason = reason;
         //TODO handle date
-        this.habitStartDate = date;
+        this.habitDate = date;
+        this.repeatingDays = new ArrayList<>();
+    }
+
+    public Habit(String title, String reason, Calendar date, ArrayList<Integer> days){
+        this.habitTitle = title;
+        this.habitReason = reason;
+        //TODO handle date
+        this.habitDate = date;
+        this.repeatingDays = days;
     }
 
     public Habit(){}
+
+
 
     public String getHabitTitle() {
         return habitTitle;
     }
 
     public void setHabitTitle(String habitTitle) {
-        if (habitTitle.length() > 20){
-            new Exception("Habit Title longer than 20 chars");
-        }
-        else {
             this.habitTitle = habitTitle;
-        }
     }
 
     public HabitEventHistory getHabitEventHistory(){
@@ -70,12 +78,8 @@ public class Habit {
     }
 
     public void setHabitReason(String habitReason) {
-        if (habitReason.length() > 30){
-            new Exception("Habit Reason longer than 30 chars");
-        }
-        else {
-            this.habitReason = habitReason;
-        }
+
+        this.habitReason = habitReason;
     }
 
     /**
@@ -103,15 +107,26 @@ public class Habit {
     }
     */
 
-    public Date getHabitStartDate() {
-        return habitStartDate;
+    public Calendar getHabitStartDate() {
+        return habitDate;
     }
 
-    public void setHabitStartDate(Date habitStartDate) {
-        this.habitStartDate = habitStartDate;
+    public void setHabitStartDate(Calendar habitDate) {
+        this.habitDate = habitDate;
     }
 
     public void addHabitEvent(HabitEvent habitEvent){}
+
+    public String getFormattedDate(){
+        int year = 0000;
+        int month = 00;
+        int day = 00;
+        habitDate.set(java.util.Calendar.YEAR, year);
+        habitDate.set(java.util.Calendar.MONTH, month);
+        habitDate.set(java.util.Calendar.DAY_OF_MONTH, day);
+
+        return (year + "-" + (month+1) +"-" + day);
+    }
 
     public void deleteHabitEvent(HabitEvent habitEvent){}
 
@@ -136,5 +151,11 @@ public class Habit {
 
     public int getHabitStatus(){
         return habitStatus;
+    }
+
+    @Override
+    public String toString(){ //this gets called by array adapter
+        return ("What: " + this.habitTitle + "\n"
+        + "Why: " + this.habitReason);
     }
 }
