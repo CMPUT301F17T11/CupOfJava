@@ -2,7 +2,7 @@ package com.cmput301f17t11.cupofjava;
 
 import java.util.ArrayList;
 import java.util.Date;
-import android.icu.util.Calendar;
+import java.util.Calendar;
 
 import io.searchbox.annotations.JestId;
 
@@ -20,6 +20,7 @@ public class Habit {
     private ArrayList<Integer> repeatingDays; //0 = Sun, 1 = Mon... 6 = Sat
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                  //for each day folloed, +1 and missing days would result in -1
+                                // todo prj5
     private HabitEventHistory habitEvents;
     //TODO Setters and getters for habit events
 
@@ -45,9 +46,20 @@ public class Habit {
         this.habitReason = reason;
         //TODO handle date
         this.habitDate = date;
+        this.repeatingDays = new ArrayList<>();
+    }
+
+    public Habit(String title, String reason, Calendar date, ArrayList<Integer> days){
+        this.habitTitle = title;
+        this.habitReason = reason;
+        //TODO handle date
+        this.habitDate = date;
+        this.repeatingDays = days;
     }
 
     public Habit(){}
+
+
 
     public String getHabitTitle() {
         return habitTitle;
@@ -105,6 +117,17 @@ public class Habit {
 
     public void addHabitEvent(HabitEvent habitEvent){}
 
+    public String getFormattedDate(){
+        int year = 0000;
+        int month = 00;
+        int day = 00;
+        habitDate.set(java.util.Calendar.YEAR, year);
+        habitDate.set(java.util.Calendar.MONTH, month);
+        habitDate.set(java.util.Calendar.DAY_OF_MONTH, day);
+
+        return (year + "-" + (month+1) +"-" + day);
+    }
+
     public void deleteHabitEvent(HabitEvent habitEvent){}
 
 
@@ -128,5 +151,11 @@ public class Habit {
 
     public int getHabitStatus(){
         return habitStatus;
+    }
+
+    @Override
+    public String toString(){ //this gets called by array adapter
+        return ("What: " + this.habitTitle + "\n"
+        + "Why: " + this.habitReason);
     }
 }

@@ -5,6 +5,9 @@ import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 public class HabitEventHistoryTest extends ActivityInstrumentationTestCase2 {
@@ -13,7 +16,10 @@ public class HabitEventHistoryTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddHabitEvent(){
-        Habit habit = new Habit("adding habit", "for test",new Date());
+        //Calendar cal = Calendar.getInstance();
+        //Date date = cal.getTime();
+
+        Habit habit = new Habit("adding habit", "for test", Calendar.getInstance());
         HabitEvent event = new HabitEvent(habit, "comment1");
         HabitEventHistory eventHistory = new HabitEventHistory();
 
@@ -22,85 +28,110 @@ public class HabitEventHistoryTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testDelete(){
-        Habit habit = new Habit("adding habit", "for test",new Date());
+        Habit habit = new Habit("adding habit", "for test",Calendar.getInstance());
         HabitEvent event = new HabitEvent(habit, "comment1");
         HabitEventHistory eventHistory = new HabitEventHistory();
 
         eventHistory.addHabitEvent(event);
-        eventHistory.deleteHabitEvent(event);
+        eventHistory.deleteHabitEvent(0);
         assertFalse(eventHistory.hasHabitEvent(event));
     }
 
-    public void testGetHabitEvent(){
-        Habit habit = new Habit("adding habit", "for test",new Date());
-        HabitEvent event = new HabitEvent(habit, "comment1");
+   public void testGetHabitEvent(){
+        //Habit habit = new Habit("adding habit", "for test",Calendar.getInstance());
+        HabitEvent event = new HabitEvent("comment1");
         HabitEventHistory eventHistory = new HabitEventHistory();
 
         eventHistory.addHabitEvent(event);
         HabitEvent returnedHabitEvent = eventHistory.getHabitEvent(0);
-        assertEquals(returnedHabitEvent.getHabitObject(), event.getHabitObject());
-        assertEquals(returnedHabitEvent.getComment(), event.getComment());
+        //assertEquals(returnedHabitEvent., event.getHabitObject());
+        assertEquals(returnedHabitEvent.getComment(),"comment1");
 
     }
 
-    public void testHasHabit(){
-        Habit habit = new Habit("adding habit", "for test",new Date());
-        HabitEvent event = new HabitEvent(habit, "comment1");
+    public void testHasHabitEvent(){
+        //Habit habit = new Habit("adding habit", "for test",new Date());
+        HabitEvent event = new HabitEvent("comment1");
         HabitEventHistory eventHistory = new HabitEventHistory();
 
         eventHistory.addHabitEvent(event);
         assertTrue(eventHistory.hasHabitEvent(event));
     }
 
-    public void testHaslocation(){
+    /*public void testHaslocation(){
         Geolocation geo = new Geolocation(getActivity());
         geo.setLocation(new Location("ServiceProvider"));
 
 
         Habit habit = new Habit("adding habit", "for test",new Date());
         HabitEvent event = new HabitEvent(habit, "comment1");
-        event.setLocation(geo);
+        //event.setLocation(geo);
         HabitEventHistory eventHistory = new HabitEventHistory();
         eventHistory.addHabitEvent(event);
 
         assertTrue(eventHistory.getHabitEvent(0).hasLocation());
 
-    }
+    }*/
 
     public void testListSortedByDate(){ //TODO implement this test method
-        Habit habit = new Habit("adding habit", "for test",new Date());
-        HabitEvent event = new HabitEvent(habit, "comment1");
-        HabitEvent event2 = new HabitEvent(habit);
+        //Habit habit = new Habit("adding habit", "for test",Calendar.getInstance());
+        HabitEvent event = new HabitEvent("comment1");
+        HabitEvent event2 = new HabitEvent("comment2");
 
         HabitEventHistory eventHistory = new HabitEventHistory();
 
         eventHistory.addHabitEvent(event);
         eventHistory.addHabitEvent(event2);
 
+        ArrayList<HabitEvent> habitEvents = new ArrayList<>();
+        habitEvents.add(event);
+        habitEvents.add(event2);
+
         ArrayList<HabitEvent> returnedEventList = eventHistory.getListSortedByDate();
 
-        /* do sorting of evenHistory out here*/
+        //do sorting of evenHistory out here
+        Collections.sort(habitEvents, new Comparator<HabitEvent>() {
+            public int compare(HabitEvent o1, HabitEvent o2) {
+                if (o1.getHabitEventDate() == null || o2.getHabitEventDate() == null) {
+                    return 0;
+                }
+                return o1.getHabitEventDate().compareTo(o2.getHabitEventDate());
+            }
+        });
 
-        assertEquals(returnedEventList, eventHistory.habitEvents);
+
+        assertEquals(returnedEventList, habitEvents);
 
 
 
     }
 
-    public void testFilterByComment(){  //TODO implement this test method
+    public void testFilterByComment(){
+
+        HabitEvent event = new HabitEvent("comment1");
+        HabitEvent event2 = new HabitEvent("comment2");
         HabitEventHistory eventHistory = new HabitEventHistory();
+        eventHistory.addHabitEvent(event);
+        eventHistory.addHabitEvent(event2);
         ArrayList<HabitEvent> returnedEventList = eventHistory.filterByComment("comment1");
 
-        /*do filtering out here*/
-        assertEquals(returnedEventList, eventHistory.habitEvents);
+
+        assertEquals(returnedEventList.get(0), event);
     }
 
     public void testFilterBType(){ //TODO implement this test method
-        Habit habit = new Habit("adding habit", "for test",new Date());
+        Habit habit = new Habit("adding habit", "for test",Calendar.getInstance());
+        Habit habit2 = new Habit("adding habit2", "for test2",Calendar.getInstance());
+        HabitEvent event = new HabitEvent(habit,"comment1");
+        HabitEvent event2 = new HabitEvent(habit2,"comment2");
         HabitEventHistory eventHistory = new HabitEventHistory();
+
+        eventHistory.addHabitEvent(event);
+        eventHistory.addHabitEvent(event2);
+
         ArrayList<HabitEvent> returnedEventList = eventHistory.filterByType(habit);
 
-        /*do filtering out here*/
-        assertEquals(returnedEventList, eventHistory.habitEvents);
+        //do filtering out here
+        assertEquals(returnedEventList.get(0), event);
     }
 }

@@ -45,6 +45,10 @@ public class User {
         return this.habitList;
     }
 
+    public ArrayList<Habit> getHabitListAsArray(){
+        return this.habitList.getHabitListAsArray();
+    }
+
     /* TODO prj5
      * Setter method to set the list of users that the current user is following
      * @param followingList list of all users being followed by the user
