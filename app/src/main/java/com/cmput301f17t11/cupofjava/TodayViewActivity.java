@@ -7,21 +7,16 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.Menu;
 import android.view.MenuItem;
-<<<<<<< HEAD
-import android.widget.ListView;
-=======
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
->>>>>>> 785aa2ff76b9ec0b3e0b1b2c092bd63aa5e04b53
 
 import java.util.ArrayList;
 
 
 public class TodayViewActivity extends Activity {
-<<<<<<< HEAD
 
 
     // ListView to be populated
@@ -31,22 +26,17 @@ public class TodayViewActivity extends Activity {
     private HabitAdapter habitAdapter;
 
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
-=======
     private String userName;
     private int userIndex;
-    private ListView listView;
     private TextView textView;
->>>>>>> 785aa2ff76b9ec0b3e0b1b2c092bd63aa5e04b53
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_view);
-<<<<<<< HEAD
         listView = (ListView) findViewById(R.id.selfProfileHabitListView);
         habitAdapter = new HabitAdapter(this, habitList);
         listView.setAdapter(habitAdapter);
-=======
 
         //obtain extra info from intent
         Intent intent = getIntent();
@@ -54,7 +44,6 @@ public class TodayViewActivity extends Activity {
         this.userIndex = intent.getIntExtra("userIndex", 0);
 
         //bottom navigation bar
->>>>>>> 785aa2ff76b9ec0b3e0b1b2c092bd63aa5e04b53
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
