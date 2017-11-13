@@ -109,6 +109,7 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
         solo.clickOnText("DELETE");
 
         solo.sleep(2000);
+        //test timeline button
         solo.assertCurrentActivity("parent activity", TodayViewActivity.class);
         solo.clickOnView(solo.getView(R.id.action_timeline));
         solo.assertCurrentActivity("child activity", HabitEventTimeLineActivity.class);

@@ -10,8 +10,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
-public class HabitEventHistoryTest extends ActivityInstrumentationTestCase2 {
-    public HabitEventHistoryTest(){
+public class HabitEventHistoryTests extends ActivityInstrumentationTestCase2 {
+    public HabitEventHistoryTests(){
         super(com.cmput301f17t11.cupofjava.MainActivity.class);
     }
 
@@ -37,7 +37,7 @@ public class HabitEventHistoryTest extends ActivityInstrumentationTestCase2 {
         assertFalse(eventHistory.hasHabitEvent(event));
     }
 
-   public void testGetHabitEvent(){
+    public void testGetHabitEvent(){
         //Habit habit = new Habit("adding habit", "for test",Calendar.getInstance());
         HabitEvent event = new HabitEvent("comment1");
         HabitEventHistory eventHistory = new HabitEventHistory();
