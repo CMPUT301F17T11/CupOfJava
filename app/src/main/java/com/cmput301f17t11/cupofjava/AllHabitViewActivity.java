@@ -21,6 +21,10 @@ public class AllHabitViewActivity extends Activity {
     private String userName;
     private int userIndex;
 
+    public ListView getListView(){
+        return listView;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
