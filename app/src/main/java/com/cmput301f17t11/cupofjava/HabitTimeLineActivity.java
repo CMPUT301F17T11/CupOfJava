@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 
-public class HabitEventTimeLineActivity extends Activity {
+public class HabitTimeLineActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

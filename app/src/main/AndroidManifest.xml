@@ -30,7 +30,7 @@
         <activity android:name=".TodayViewActivity"/>
         <activity android:name=".AllHabitViewActivity">
         </activity>
-        <activity android:name=".HabitEventTimeLineActivity">
+        <activity android:name=".HabitTimeLineActivity">
         </activity>
     </application>
 
