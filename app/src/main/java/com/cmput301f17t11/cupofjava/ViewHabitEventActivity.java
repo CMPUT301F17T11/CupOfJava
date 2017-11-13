@@ -38,9 +38,11 @@ public class ViewHabitEventActivity extends Activity {
     //private int habitIndex;
     private int habitEventIndex;
     private Habit habit;
+
     /**
      * Launches Interface displaying the habit events and their
      * basic details.
+     *
      * @param savedInstanceState
      */
     @Override
@@ -59,8 +61,17 @@ public class ViewHabitEventActivity extends Activity {
                 this.userIndex);
         HabitEvent habitEvent = allEvents.get(this.habitEventIndex);
         headingTextView = (TextView) findViewById(R.id.habitEventDetailHeadingTextView);
-        habitTitleTextView = (TextView)
+        habitTitleTextView = (TextView) findViewById(R.id.HabitEventTextView2);
+        habitDateBoxTextView = (TextView) findViewById(R.id.habitEventTextView3);
+        habitCommentTextView = (TextView) findViewById(R.id.habitEventTextView4);
+
+        headingTextView.setText(("Here are the details of this habit event. Soon, you will be able to do more here!"));
+        habitTitleTextView.setText(("Habit Type: " + habitEvent.getHabit().getHabitTitle()));
+        habitDateBoxTextView.setText(("Date:" + habitEvent.getDateAsString()));
+        habitCommentTextView.setText(("Comment: " + habitEvent.getComment()));
     }
+
+}
 
 
 
@@ -68,4 +79,3 @@ public class ViewHabitEventActivity extends Activity {
 
 
     //public void deleteEventButton(View view){}
-}
