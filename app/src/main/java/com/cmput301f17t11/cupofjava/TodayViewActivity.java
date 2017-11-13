@@ -57,7 +57,10 @@ public class TodayViewActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                View view = LayoutInflater.from(TodayViewActivity.this).inflate(R.layout.activity_add_new_habit, null);
+                Intent intent = new Intent(TodayViewActivity.this, NewHabitActivity.class);
+                startActivity(intent);
+
+                /*View view = LayoutInflater.from(TodayViewActivity.this).inflate(R.layout.activity_add_new_habit, null);
 
                 final EditText editTitle = (EditText) view.findViewById(R.id.habit_title);
                 final EditText editReason = (EditText) view.findViewById(R.id.habit_reason);
@@ -98,7 +101,7 @@ public class TodayViewActivity extends Activity {
 
                 AlertDialog alert = builder.create();
 
-                alert.show();
+                alert.show();*/
             }
         });
     }

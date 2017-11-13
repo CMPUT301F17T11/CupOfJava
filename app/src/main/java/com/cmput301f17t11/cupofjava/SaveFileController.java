@@ -117,8 +117,8 @@ public class SaveFileController {
 
     public void removeHabitEvent(Context context, int userIndex, int habitIndex, int habitEventIndex){
         loadFromFile(context);
-        //this.allUsers.get(userIndex).getHabitList().getHabit(habitIndex).getHabitEventHistory().get;
+        this.allUsers.get(userIndex).getHabitList().getHabit(habitIndex)
+                .getHabitEventHistory().getHabitEvents().remove(habitEventIndex);
+        saveToFile(context);
     }
-
-
 }
