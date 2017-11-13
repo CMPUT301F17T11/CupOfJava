@@ -51,7 +51,6 @@
             android:id="@+id/checkbox_sun"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorLink="#f44336"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
@@ -71,7 +70,6 @@
             android:textStyle="bold"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:textColorLink="#f44336"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
@@ -91,7 +89,6 @@
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:text="Tuesday"
-            android:textColorLink="#f44336"
             android:onClick="onCheckboxClicked"
             android:textSize="18sp" />
 
@@ -104,7 +101,6 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/check_box_dimens"
             android:layout_marginTop="16dp"
-            android:textColorLink="#f44336"
             android:textStyle="bold"
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
@@ -123,7 +119,6 @@
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal"
             android:textStyle="bold"
-            android:textColorLink="#f44336"
             android:text="Thursday"
             android:onClick="onCheckboxClicked"
             android:textSize="18sp" />
@@ -137,7 +132,6 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/check_box_dimens"
             android:fontFamily="sans-serif"
-            android:textColorLink="#f44336"
             android:gravity="center_horizontal"
             android:text="Friday"
             android:textStyle="bold"
@@ -147,7 +141,6 @@
         <CheckBox
             android:id="@+id/checkbox_sat"
             android:layout_width="match_parent"
-            android:textColorLink="#f44336"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:textStyle="bold"
