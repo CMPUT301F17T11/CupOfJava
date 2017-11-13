@@ -79,11 +79,8 @@ public class AllHabitViewActivity extends Activity {
         SaveFileController saveFileController = new SaveFileController();
         ArrayList<Habit> habitList = saveFileController
                 .getHabitListAsArray(getApplicationContext(), this.userIndex);
-
         updateTextView(habitList.size());
-
         updateListView(habitList);
-
     }
 
     private void updateTextView(int habitCount){
