@@ -17,15 +17,26 @@ import java.util.ArrayList;
 
 
 public class TodayViewActivity extends Activity {
+
+
+    // ListView to be populated
+    private ListView listView;
+
+    // Custom Habit Adapter
+    private HabitAdapter habitAdapter;
+
+    private ArrayList<Habit> habitList = new ArrayList<Habit>();
     private String userName;
     private int userIndex;
-    private ListView listView;
     private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_view);
+        listView = (ListView) findViewById(R.id.selfProfileHabitListView);
+        habitAdapter = new HabitAdapter(this, habitList);
+        listView.setAdapter(habitAdapter);
 
         //obtain extra info from intent
         Intent intent = getIntent();

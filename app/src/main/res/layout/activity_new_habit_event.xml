@@ -57,7 +57,8 @@
             android:layout_gravity="center"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
-            android:fontFamily="sans-serif-medium"/>
+            android:fontFamily="sans-serif-medium"
+            android:onClick="saveNewHabitEvent"/>
     </LinearLayout>
 
 </ScrollView>
