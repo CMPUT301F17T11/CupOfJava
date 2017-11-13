@@ -9,8 +9,10 @@ import java.util.Date;
  * It can include option location and photo.
  */
 public class HabitEvent {
+    private Habit habit;
     private String comment;
     private Date habitEventDate;
+    
     /** TODO: prj5
     private Geolocation location;
     private boolean locationSet = false;
@@ -29,6 +31,11 @@ public class HabitEvent {
     public HabitEvent(String comment){
         this.comment = comment;
         this.habitEventDate = new Date();
+    }
+
+    public HabitEvent(Habit habit, String comment) {
+        this.habit = habit;
+        this.comment = comment;
     }
 
     /**
