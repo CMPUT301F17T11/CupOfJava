@@ -31,17 +31,18 @@ public class HabitList {
 
     public Habit getHabit(int index) { return habits.get(index);}
 
-    public void deleteHabit(Habit habit){
-        this.habits.remove(habit);
-    }
-
-    public int getHabitIndex(Habit habit){
-        return this.habits.indexOf(habit);
+    public void deleteHabit(int index){
+        this.habits.remove(index);
     }
 
     public ArrayList<Habit> getHabitList(){
         return this.habits;
     }
+
+    //TODO
+    /*public int getIndexByName(String title){
+        for
+    }*/
 
     public ArrayList<Habit> getTodaysHabitList(){
         Calendar calendar = Calendar.getInstance();

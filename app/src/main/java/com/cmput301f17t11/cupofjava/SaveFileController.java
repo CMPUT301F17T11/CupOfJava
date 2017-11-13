@@ -71,5 +71,54 @@ public class SaveFileController {
         }
     }
 
+    public void addNewUser(Context context, User user){
+        loadFromFile(context);
+        this.allUsers.add(user);
+        saveToFile(context);
+    }
+
+    public void deleteAllUsers(Context context){
+        this.allUsers = new ArrayList<>();
+        saveToFile(context);
+    }
+
+    public int getUserIndex(Context context, String username){
+        loadFromFile(context);
+        for (int i = 0; i < this.allUsers.size(); i++){
+            if (this.allUsers.get(i).getUsername().equals(username)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void addHabit(Context context, int userIndex, Habit habit){
+        loadFromFile(context);
+        this.allUsers.get(userIndex).getHabitList().addHabit(habit);
+        saveToFile(context);
+    }
+
+    public HabitList getHabitList(Context context, int userIndex){
+        loadFromFile(context);
+        return this.allUsers.get(userIndex).getHabitList();
+    }
+
+    public void removeHabit(Context context, int userIndex, int habitIndex){
+        loadFromFile(context);
+        this.allUsers.get(userIndex).getHabitList().deleteHabit(habitIndex);
+        saveToFile(context);
+    }
+
+    public void addHabitEvent(Context context, int userIndex, int habitIndex, HabitEvent habitEvent){
+        loadFromFile(context);
+        this.allUsers.get(userIndex).getHabitList().getHabit(habitIndex).addHabitEvent(habitEvent);
+        saveToFile(context);
+    }
+
+    public void removeHabitEvent(Context context, int userIndex, int habitIndex, int habitEventIndex){
+        loadFromFile(context);
+        //this.allUsers.get(userIndex).getHabitList().getHabit(habitIndex).getHabitEventHistory().get;
+    }
+
 
 }

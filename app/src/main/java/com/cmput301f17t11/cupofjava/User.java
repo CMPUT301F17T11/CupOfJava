@@ -16,7 +16,7 @@ public class User {
     private ArrayList<String> followRequestList;
     */
 
-    //private HabitList habitList;  //all the habits of the user
+    private HabitList habitList;  //all the habits of the user
     /* TODO for prj5
     @JestId
     private String id;
@@ -34,11 +34,10 @@ public class User {
         return this.username;
     }
 
-    /*
+
     public HabitList getHabitList(){
         return this.habitList;
     }
-    */
 
     /* TODO prj5
      * Setter method to set the list of users that the current user is following

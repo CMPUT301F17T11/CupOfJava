@@ -59,6 +59,10 @@ public class Habit {
         }
     }
 
+    public HabitEventHistory getHabitEventHistory(){
+        return this.habitEvents;
+    }
+
     public String getHabitReason() {
         return habitReason;
     }
