@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_favorites"
+        android:id="@+id/action_timeline"
         android:enabled="true"
         android:icon="@drawable/timeline"
         android:title="Timeline"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_schedules"
+        android:id="@+id/action_today"
         android:enabled="true"
         android:icon="@drawable/today"
         android:title="Today"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_music"
+        android:id="@+id/action_all_habits"
         android:enabled="true"
         android:icon="@drawable/list_all"
         android:title="All Habits"

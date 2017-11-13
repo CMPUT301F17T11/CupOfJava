@@ -25,13 +25,13 @@ public class HabitEventTimeLineActivity extends Activity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
 
-                    case R.id.action_favorites:
+                    case R.id.action_timeline:
                         break;
-                    case R.id.action_schedules:
+                    case R.id.action_today:
                         Intent intent2 = new Intent(HabitEventTimeLineActivity.this, TodayViewActivity.class);
                         startActivity(intent2);
                         break;
-                    case R.id.action_music:
+                    case R.id.action_all_habits:
                         Intent intent3 = new Intent(HabitEventTimeLineActivity.this, AllHabitViewActivity.class);
                         startActivity(intent3);
                         break;

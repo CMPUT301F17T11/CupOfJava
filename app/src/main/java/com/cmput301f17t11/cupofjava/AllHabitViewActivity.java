@@ -26,15 +26,15 @@ public class AllHabitViewActivity extends Activity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
 
-                    case R.id.action_favorites:
+                    case R.id.action_timeline:
                         Intent intent2 = new Intent(AllHabitViewActivity.this, HabitEventTimeLineActivity.class);
                         startActivity(intent2);
                         break;
-                    case R.id.action_schedules:
+                    case R.id.action_today:
                         Intent intent3 = new Intent(AllHabitViewActivity.this, TodayViewActivity.class);
                         startActivity(intent3);
                         break;
-                    case R.id.action_music:
+                    case R.id.action_all_habits:
                         break;
                     case R.id.add_habit:
                         Intent intent4 = new Intent(AllHabitViewActivity.this, NewHabitActivity.class);
