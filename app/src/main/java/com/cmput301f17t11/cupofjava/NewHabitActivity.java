@@ -1,13 +1,16 @@
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -19,7 +22,9 @@ public class NewHabitActivity extends Activity {
 
     private EditText habitTitle;
     private EditText habitReason;
+    private EditText habitStartDateEditText;
     private Date date;
+    private Calendar habitStartDate;
     private CheckBox sunCheckBox;
     private CheckBox monCheckBox;
     private CheckBox tueCheckBox;
@@ -36,6 +41,33 @@ public class NewHabitActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_habit);
+
+        habitTitle = (EditText) findViewById(R.id.habit_title);
+        habitReason = (EditText) findViewById(R.id.habit_reason);
+        habitStartDateEditText = (EditText) findViewById(R.id.habit_start_date);
+
+        sunCheckBox = (CheckBox) findViewById(R.id.checkbox_sun);
+        monCheckBox = (CheckBox) findViewById(R.id.checkbox_mon);
+        tueCheckBox = (CheckBox) findViewById(R.id.checkbox_tue);
+        wedCheckBox = (CheckBox) findViewById(R.id.checkbox_wed);
+        thuCheckBox = (CheckBox) findViewById(R.id.checkbox_thu);
+        friCheckBox = (CheckBox) findViewById(R.id.checkbox_fri);
+        satCheckBox = (CheckBox) findViewById(R.id.checkbox_sat);
+
+        habitStartDateEditText.setFocusable(false);
+        //habitStartDateEditText.setOnClickListener(this);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
+
+        habitStartDateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                habitStartDate = Calendar.getInstance();
+                new DatePickerDialog(NewHabitActivity.this, onDateSetListener,
+                        habitStartDate.get(java.util.Calendar.YEAR),
+                        habitStartDate.get(java.util.Calendar.MONTH),
+                        habitStartDate.get(java.util.Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
 
     public void onCheckboxClicked(View view) {
@@ -48,51 +80,57 @@ public class NewHabitActivity extends Activity {
                 if (checked){
 
                 }
-                else{
-                    break;
-                }
+                else{break;}
             case R.id.checkbox_mon:
                 if (checked){
 
                 }
-                else{
-                    break;
-                }
+                else{break;}
             case R.id.checkbox_tue:
                 if (checked){
 
                 }
-                else {
-                    break;
-                }
+                else {break;}
             case R.id.checkbox_wed:
                 if (checked){
 
                 }
-                else{
-                    break;
-                }
+                else{break;}
             case R.id.checkbox_thu:
                 if (checked){
 
                 }
-                else{
-                    break;
-                }
+                else{break;}
             case R.id.checkbox_fri:
                 if (checked){
 
                 }
-                else{
-                    break;
-                }
+                else{break;}
             case R.id.checkbox_sat:
                 if (checked){
 
                 }
-                else{
-                    break;
-                }
+                else{break;}
         }
     }
+
+    DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+        /**
+         *
+         * @param view
+         * @param year
+         * @param month
+         * @param day
+         *
+         * Implements the date widget when user is selecting date.
+         */
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            habitStartDate.set(java.util.Calendar.YEAR, year);
+            habitStartDate.set(java.util.Calendar.MONTH, month);
+            habitStartDate.set(java.util.Calendar.DAY_OF_MONTH, day);
+            habitStartDateEditText.setText(year + "-" + (month + 1) + "-" + day);
+        }
+    };
 }

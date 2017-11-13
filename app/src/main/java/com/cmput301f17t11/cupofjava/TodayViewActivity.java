@@ -2,6 +2,7 @@ package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -28,7 +29,10 @@ public class TodayViewActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                View view = LayoutInflater.from(TodayViewActivity.this).inflate(R.layout.activity_add_new_habit, null);
+                Intent intent = new Intent(TodayViewActivity.this, NewHabitActivity.class);
+                startActivity(intent);
+
+                /*View view = LayoutInflater.from(TodayViewActivity.this).inflate(R.layout.activity_add_new_habit, null);
 
                 final EditText editTitle = (EditText) view.findViewById(R.id.habit_title);
                 final EditText editReason = (EditText) view.findViewById(R.id.habit_reason);
@@ -69,7 +73,7 @@ public class TodayViewActivity extends Activity {
 
                 AlertDialog alert = builder.create();
 
-                alert.show();
+                alert.show();*/
             }
         });
     }
