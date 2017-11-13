@@ -50,7 +50,6 @@ public class HabitEventHistory {
                 filteredList.add(currentHabitEvent);
             }
         }
-
         return filteredList;
     }
 
