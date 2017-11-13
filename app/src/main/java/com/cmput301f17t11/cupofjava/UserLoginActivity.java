@@ -19,7 +19,6 @@ public class UserLoginActivity extends Activity {
 
     private EditText username_editText;
     private Button signIn;
-    final Context context = getApplicationContext();
 
     /**
      * Launches the screen to enter username and optional password.
@@ -29,6 +28,8 @@ public class UserLoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        final Context context = getApplicationContext();
 
         username_editText = (EditText) findViewById(R.id.username);
 
