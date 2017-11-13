@@ -2,9 +2,9 @@ package com.cmput301f17t11.cupofjava;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -53,6 +53,8 @@ public class HabitDetailViewActivity extends AppCompatActivity {
     public void addNewHabitEventButton(View view) {
         //todo: new habit event
         Intent intent2 = new Intent(HabitDetailViewActivity.this, NewHabitEventActivity.class);
+        intent2.putExtra("userName", userName);
+        intent2.putExtra("userIndex", userIndex);
         startActivity(intent2);
     }
 

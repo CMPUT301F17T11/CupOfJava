@@ -34,8 +34,9 @@ public class HabitEvent {
     }
 
     public HabitEvent(Habit habit, String comment) {
-        this.habit = habit;
-        this.comment = comment;
+        setHabit(habit);
+        setComment(comment);
+        this.habitEventDate = new Date();
     }
 
     /**
@@ -59,6 +60,14 @@ public class HabitEvent {
 
     public Date getHabitEventDate(){
         return this.habitEventDate;
+    }
+
+    public void setHabit(Habit habit) {
+        this.habit = habit;
+    }
+
+    public Habit getHabit() {
+        return habit;
     }
 
     public void setComment(String comment){
