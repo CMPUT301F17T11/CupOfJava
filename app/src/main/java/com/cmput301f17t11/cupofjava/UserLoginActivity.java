@@ -1,6 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class UserLoginActivity extends Activity {
 
     private EditText username_editText;
     private Button signIn;
+    final Context context = getApplicationContext();
 
     /**
      * Launches the screen to enter username and optional password.
@@ -34,24 +36,25 @@ public class UserLoginActivity extends Activity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserLoginActivity.this, TodayViewActivity.class);
-                startActivity(intent);
+                String input = username_editText.getText().toString();
+                if (input.isEmpty()){
+                    username_editText.setError("Field cannot be left empty");
+                }
+                else{
+                    SaveFileController saveFileController = new SaveFileController();
+                    int userIndex = saveFileController.getUserIndex(context, input);
+
+                    if (userIndex == -1){
+                        User newUser = new User(input);
+                        saveFileController.addNewUser(context, newUser);
+                    }
+
+                    Intent intent = new Intent(UserLoginActivity.this, TodayViewActivity.class);
+                    intent.putExtra("userName", input);
+                    intent.putExtra("userIndex", saveFileController.getUserIndex(context, input));
+                    startActivity(intent);
+                }
             }
         });
-    }
-
-    /**
-     * Stores username.
-     */
-    public void addUsername(){
-        String username = username_editText.getText().toString();
-
-        /**
-         * Handler if no username is entered.
-         */
-        if (username.isEmpty()) {
-            username_editText.setError("Enter username!");
-            return;
-        }
     }
 }
