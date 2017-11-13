@@ -103,8 +103,6 @@ public class NewHabitActivity extends Activity {
             habitStartDateEditText.setText((year + "-" + (month + 1) + "-" + day));
         }
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
-
     };
 
     public void onCheckboxClicked(View view) {
@@ -216,6 +214,8 @@ public class NewHabitActivity extends Activity {
         }
 
         Habit newHabit = new Habit(habitTitle, habitReason, habitStartDate, repeatingDays);
+
+        newHabit.setHabitStartDate(habitStartDate);
 
         SaveFileController saveFileController = new SaveFileController();
         saveFileController.addHabit(getApplicationContext(), this.userIndex, newHabit);

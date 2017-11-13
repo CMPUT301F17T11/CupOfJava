@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class HabitDetailViewActivity extends AppCompatActivity {
@@ -39,12 +40,14 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         habitReasonTextView = (TextView) findViewById(R.id.reason_text_view);
         habitDateTextView = (TextView) findViewById(R.id.date_added_text_view);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
+
         SaveFileController saveFileController = new SaveFileController();
         this.habit = saveFileController.getHabit(getApplicationContext(), userIndex, habitIndex);
 
         habitTitleTextView.setText(("What: "+ habit.getHabitTitle()));
         habitReasonTextView.setText(("Why: "+ habit.getHabitReason()));
-        habitDateTextView.setText(("Start date: " + habit.getFormattedDate()));
+        habitDateTextView.setText(("Start date: " + sdf.format(habit.getHabitStartDate().getTime())));
     }
 
     public void addNewHabitEventButton(View view) {
