@@ -134,4 +134,19 @@ public class SaveFileController {
                 .getHabitEventHistory().getHabitEvents().remove(habitEventIndex);
         saveToFile(context);
     }
+
+    //for use in timeline view
+    public ArrayList<HabitEvent> getAllHabitEvents(Context context, int userIndex){
+        loadFromFile(context);
+        ArrayList<HabitEvent> habitEvents = new ArrayList<>();
+        User user = this.allUsers.get(userIndex);
+        for (int i = 0; i < user.getHabitListAsArray().size(); i++){
+            for (int j = 0; j < user.getHabitListAsArray().get(i)
+                    .getHabitEventHistory().getHabitEvents().size(); i++){
+                habitEvents.add(user.getHabitListAsArray().get(i)
+                        .getHabitEventHistory().getHabitEvents().get(j));
+            }
+        }
+        return habitEvents;
+    }
 }

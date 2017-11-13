@@ -42,8 +42,8 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         SaveFileController saveFileController = new SaveFileController();
         this.habit = saveFileController.getHabit(getApplicationContext(), userIndex, habitIndex);
 
-        habitTitleTextView.setText(habit.getHabitTitle());
-        habitReasonTextView.setText(habit.getHabitReason());
+        habitTitleTextView.setText(("What: "+ habit.getHabitTitle()));
+        habitReasonTextView.setText(("Why: "+ habit.getHabitReason()));
         habitDateTextView.setText(("Start date: " + habit.getFormattedDate()));
     }
 
