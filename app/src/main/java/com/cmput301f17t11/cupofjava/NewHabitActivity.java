@@ -35,6 +35,8 @@ public class NewHabitActivity extends Activity {
     private CheckBox friCheckBox;
     private CheckBox satCheckBox;
 
+    private Habit newHabit = new Habit();
+
     /**
      * Launches the screen to add/edit a habit.
      * @param savedInstanceState
@@ -78,6 +80,7 @@ public class NewHabitActivity extends Activity {
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked
+
         switch(view.getId()) {
             case R.id.checkbox_sun:
                 if (checked){

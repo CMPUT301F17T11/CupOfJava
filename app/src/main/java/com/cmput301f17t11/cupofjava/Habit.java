@@ -46,6 +46,8 @@ public class Habit {
         this.habitStartDate = date;
     }
 
+    public Habit(){}
+
     public String getHabitTitle() {
         return habitTitle;
     }
@@ -89,6 +91,17 @@ public class Habit {
         }
         return false;
     }
+
+    public void addRepeatingDay(int day){
+        Integer i = new Integer(day);
+        this.repeatingDays.add(i);
+    }
+
+    /* TODO remove repeating days when the checkbox is unselected
+    public void removeRepeatingDay(int day){
+        for (int i)
+    }
+    */
 
     public Date getHabitStartDate() {
         return habitStartDate;
