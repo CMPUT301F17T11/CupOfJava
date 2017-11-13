@@ -45,7 +45,6 @@ public class TodayViewActivity extends Activity {
                         Intent intent4 = new Intent(TodayViewActivity.this, NewHabitActivity.class);
                         startActivity(intent4);
                         break;
-
                 }
                 return false;
             }
