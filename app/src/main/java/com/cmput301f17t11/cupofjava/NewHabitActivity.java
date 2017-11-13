@@ -21,8 +21,8 @@ import java.util.Date;
  */
 public class NewHabitActivity extends Activity {
 
-    private EditText habitTitle;
-    private EditText habitReason;
+    private EditText habitTitleEditText;
+    private EditText habitReasonEditText;
     private EditText habitStartDateEditText;
     private Button saveHabitButton;
     private Date date;
@@ -34,6 +34,9 @@ public class NewHabitActivity extends Activity {
     private CheckBox thuCheckBox;
     private CheckBox friCheckBox;
     private CheckBox satCheckBox;
+
+    private String habitTitle;
+    private String habitReason;
     private Habit newHabit = new Habit();
 
     /**
@@ -45,8 +48,8 @@ public class NewHabitActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_habit);
 
-        habitTitle = (EditText) findViewById(R.id.habit_title);
-        habitReason = (EditText) findViewById(R.id.habit_reason);
+        habitTitleEditText = (EditText) findViewById(R.id.habit_title);
+        habitReasonEditText = (EditText) findViewById(R.id.habit_reason);
         habitStartDateEditText = (EditText) findViewById(R.id.habit_start_date);
 
         sunCheckBox = (CheckBox) findViewById(R.id.checkbox_sun);
@@ -132,7 +135,39 @@ public class NewHabitActivity extends Activity {
 
     public void saveNewHabit(View view) {
 
+        addNewHabit();
+
         Intent intent = new Intent(NewHabitActivity.this, TodayViewActivity.class);
         startActivity(intent);
+    }
+
+    protected void addNewHabit() {
+
+        habitTitleEditText.getText().toString();
+        if (habitTitle.isEmpty()) {
+            habitTitleEditText.setError("Enter name");
+            return;
+        } else if (habitTitle.length() > 20) {
+            habitTitleEditText.setError("Too Long");
+        } else {
+            newHabit.setHabitTitle(habitTitle);
+        }
+
+        habitReasonEditText.getText().toString();
+        if (habitReason.isEmpty()) {
+            habitReasonEditText.setError("Enter name");
+            return;
+        } else if (habitReason.length() > 20) {
+            habitReasonEditText.setError("Too Long");
+        } else {
+            newHabit.setHabitReason(habitReason);
+        }
+
+        if (habitStartDateEditText.getText().toString().isEmpty()) {
+            habitStartDateEditText.setError("Enter Date");
+        } else {
+            newHabit.setHabitStartDate(habitStartDate);
+        }
+
     }
 }
