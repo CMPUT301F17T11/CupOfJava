@@ -22,15 +22,15 @@ public class HabitEventTimeLineActivity extends Activity {
                     case R.id.action_favorites:
                         break;
                     case R.id.action_schedules:
-                        Intent intent2 = new Intent(HabitTimeLineActivity.this, TodayViewActivity.class);
+                        Intent intent2 = new Intent(HabitEventTimeLineActivity.this, TodayViewActivity.class);
                         startActivity(intent2);
                         break;
                     case R.id.action_music:
-                        Intent intent3 = new Intent(HabitTimeLineActivity.this, AllHabitViewActivity.class);
+                        Intent intent3 = new Intent(HabitEventTimeLineActivity.this, AllHabitViewActivity.class);
                         startActivity(intent3);
                         break;
                     case R.id.add_habit:
-                        Intent intent4 = new Intent(HabitTimeLineActivity.this, NewHabitActivity.class);
+                        Intent intent4 = new Intent(HabitEventTimeLineActivity.this, NewHabitActivity.class);
                         startActivity(intent4);
                         break;
 
