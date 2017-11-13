@@ -2,6 +2,7 @@ package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class NewHabitActivity extends Activity {
     private EditText habitTitle;
     private EditText habitReason;
     private EditText habitStartDateEditText;
+    private Button saveHabitButton;
     private Date date;
     private Calendar habitStartDate;
     private CheckBox sunCheckBox;
@@ -54,8 +56,9 @@ public class NewHabitActivity extends Activity {
         friCheckBox = (CheckBox) findViewById(R.id.checkbox_fri);
         satCheckBox = (CheckBox) findViewById(R.id.checkbox_sat);
 
+        saveHabitButton = (Button) findViewById(R.id.habit_save_button);
+
         habitStartDateEditText.setFocusable(false);
-        //habitStartDateEditText.setOnClickListener(this);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
 
         habitStartDateEditText.setOnClickListener(new View.OnClickListener() {
@@ -132,5 +135,11 @@ public class NewHabitActivity extends Activity {
             habitStartDate.set(java.util.Calendar.DAY_OF_MONTH, day);
             habitStartDateEditText.setText(year + "-" + (month + 1) + "-" + day);
         }
+
     };
+
+    public void saveNewHabit(View view) {
+        Intent intent = new Intent(NewHabitActivity.this, TodayViewActivity.class);
+        startActivity(intent);
+    }
 }
