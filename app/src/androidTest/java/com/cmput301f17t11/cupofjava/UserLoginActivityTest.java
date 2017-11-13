@@ -73,11 +73,12 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
 
 
         final ListView habitList = activity.getListView();
-        Habit habit = (Habit) habitList.getItemAtPosition(0);
+
+        Habit habit = (Habit) habitList.getItemAtPosition(habitList.getCount()-1);
         assertEquals("Disciplining Kids", habit.getHabitTitle());
         assertEquals("Good Nanny",habit.getHabitReason());
 
-        solo.clickInList(0);
+        solo.clickInList(habitList.getCount()-1);
         solo.assertCurrentActivity("wrong activity", HabitDetailViewActivity.class);
         assertTrue(solo.waitForText("Disciplining Kids", 1, 1000));
         assertTrue(solo.waitForText("Good Nanny", 1, 1000));
@@ -96,11 +97,12 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
 
 
         final ListView habitList2 = activity2.getListView();
-        Habit myhabit = (Habit) habitList.getItemAtPosition(0);
+
+        Habit myhabit = (Habit) habitList.getItemAtPosition(habitList.getCount()-1);
         assertEquals("Disciplining Kids", myhabit.getHabitTitle());
         assertEquals("Good Nanny",myhabit.getHabitReason());
 
-        solo.clickInList(0);
+        solo.clickInList(habitList.getCount()-1);
         solo.assertCurrentActivity("wrong activity", HabitDetailViewActivity.class);
         assertTrue(solo.waitForText("Disciplining Kids", 1, 1000));
         assertTrue(solo.waitForText("Good Nanny", 1, 1000));
