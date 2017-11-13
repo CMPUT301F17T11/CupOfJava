@@ -1,21 +1,15 @@
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class TodayViewActivity extends Activity {
@@ -33,7 +27,7 @@ public class TodayViewActivity extends Activity {
                 switch(item.getItemId()) {
 
                     case R.id.action_favorites:
-                        Intent intent2 = new Intent(TodayViewActivity.this, HabitTimeLineActivity.class);
+                        Intent intent2 = new Intent(TodayViewActivity.this, HabitEventTimeLineActivity.class);
                         startActivity(intent2);
                         break;
                     case R.id.action_schedules:
