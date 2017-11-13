@@ -14,6 +14,8 @@ public class HabitEventTimeLineActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_time_line);
+
+        //handle the bottom navigation bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
@@ -44,5 +46,7 @@ public class HabitEventTimeLineActivity extends Activity {
                 return false;
             }
         });
+
+        //fill contents
     }
 }

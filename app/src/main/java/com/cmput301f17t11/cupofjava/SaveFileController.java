@@ -1,6 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
 import android.content.Context;
+import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -100,6 +101,10 @@ public class SaveFileController {
     public HabitList getHabitList(Context context, int userIndex){
         loadFromFile(context);
         return this.allUsers.get(userIndex).getHabitList();
+    }
+
+    public ArrayList<Habit> getHabitListAsArray(Context context, int userIndex){
+        return getHabitList(context, userIndex).getHabitList();
     }
 
     public void removeHabit(Context context, int userIndex, int habitIndex){
