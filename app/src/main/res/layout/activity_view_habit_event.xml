@@ -6,19 +6,77 @@
     android:layout_height="match_parent"
     tools:context="com.cmput301f17t11.cupofjava.ViewHabitEventActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/eventAdder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="76dp"
-        app:backgroundTint="@android:color/background_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.915"
+    <TextView
+        android:id="@+id/habitEventDetailHeadingTextView"
+        android:layout_width="362dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/check_box_dimens"
+        android:padding="4dp"
+        android:textAlignment="center"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"></android.support.design.widget.FloatingActionButton>
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/HabitEventTextView2"
+        android:layout_width="362dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/check_box_dimens"
+        android:padding="4dp"
+        android:textAlignment="center"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/habitEventDetailHeadingTextView"/>
+
+    <TextView
+        android:id="@+id/habitEventTextView3"
+        android:layout_width="362dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/check_box_dimens"
+        android:padding="4dp"
+        android:textAlignment="center"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HabitEventTextView2"/>
+
+    <TextView
+        android:id="@+id/habitEventTextView4"
+        android:layout_width="362dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/check_box_dimens"
+        android:padding="4dp"
+        android:textAlignment="center"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/habitEventTextView3"/>
+    <!--
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/delete_button"
+        android:fontFamily="sans-serif-medium"
+        android:onClick="deleteEventButton"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="Delete"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    -->
+
 
 </android.support.constraint.ConstraintLayout>
