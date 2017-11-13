@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class SaveFileController {
     private ArrayList<User> allUsers;
     //private String username;
-    private String saveFile = "save_file.sav";
+    private String saveFile = "test_save_file.sav";
 
     public SaveFileController(){
         this.allUsers = new ArrayList<User>();
@@ -42,6 +42,7 @@ public class SaveFileController {
         //create a new array list if a file does not already exist
         catch (FileNotFoundException e){
             this.allUsers = new ArrayList<User>();
+            saveToFile(context);
         }
         catch (IOException e){
             throw new RuntimeException();
@@ -94,6 +95,7 @@ public class SaveFileController {
 
     public void addHabit(Context context, int userIndex, Habit habit){
         loadFromFile(context);
+
         this.allUsers.get(userIndex).getHabitList().addHabit(habit);
         saveToFile(context);
     }
@@ -105,7 +107,7 @@ public class SaveFileController {
 
     public ArrayList<Habit> getHabitListAsArray(Context context, int userIndex){
         loadFromFile(context);
-        ArrayList<Habit> list = this.allUsers.get(userIndex).getHabitList().getHabitListAsArray();
+        ArrayList<Habit> list = this.allUsers.get(userIndex).getHabitListAsArray();
         return list;
     }
 

@@ -85,7 +85,7 @@ public class AllHabitViewActivity extends Activity {
 
     private void updateTextView(int habitCount){
         if (habitCount == 0){
-            this.textView.setText(("You do have not have any habits to follow. Perhaps it's time to start a new habit?"));
+            this.textView.setText(("You do have not have any habits to track. Perhaps it's time to start a new habit?"));
         }
         else{
             this.textView.setText(("Here are all of your habits:"));

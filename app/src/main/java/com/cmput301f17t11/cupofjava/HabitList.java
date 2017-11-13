@@ -11,8 +11,7 @@ import java.util.Calendar;
  */
 
 public class HabitList {
-    ArrayList<Habit> habits;
-
+    private ArrayList<Habit> habits;
 
     public HabitList(){
         this.habits = new ArrayList<Habit>();
