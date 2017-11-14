@@ -1,3 +1,13 @@
+/* HabitEventTimeLineActivity
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
+
+
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
@@ -15,6 +25,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Opens the activity which shows the timeline of habit events.
+ *
+ * @version 1.0
+ */
 public class HabitEventTimeLineActivity extends Activity {
     private String userName;
     private int userIndex;
@@ -23,6 +38,16 @@ public class HabitEventTimeLineActivity extends Activity {
     //private HabitEventAdapter habitEventAdapter;
     //private ArrayList<HabitEvent> eventArrayList = new ArrayList<>();
 
+    /**
+     * This method is called when HabitEventTimeLineActivity is instantiated.
+     * Implements bottom navigation menu to record which button is clicked on and
+     * navigates to the appropriate activity.
+     *
+     * @param savedInstanceState the current saved state of the activity
+     * @see TodayViewActivity
+     * @see HabitEventTimeLineActivity
+     * @see NewHabitActivity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +125,11 @@ public class HabitEventTimeLineActivity extends Activity {
 
     }
 
-
+    /**
+     * Updates text view.
+     *
+     * @param eventCount integer
+     */
     private void updateTextView(int eventCount){
         if (eventCount == 0){
             this.textView.setText(("You did not do any habits yet!"));
@@ -110,6 +139,11 @@ public class HabitEventTimeLineActivity extends Activity {
         }
     }
 
+    /**
+     * Updates list view.
+     *
+     * @param events Arraylist of type HabitEvent
+     */
     private void updateListView(ArrayList<HabitEvent> events){
         ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(HabitEventTimeLineActivity.this,
                 R.layout.habit_event_list_item, events);

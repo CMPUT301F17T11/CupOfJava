@@ -1,3 +1,11 @@
+/* AllHabitViewActivity
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
@@ -15,6 +23,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Opens the activity which displays all the habits the user has currently
+ * created and saved. Also implements navigation bar functionality.
+ *
+ * @version 1.0
+ */
 public class AllHabitViewActivity extends Activity {
     private ListView listView;
     private TextView textView;
@@ -25,6 +39,16 @@ public class AllHabitViewActivity extends Activity {
         return listView;
     }
 
+    /**
+     * This method is called when AllHabitViewActivity is instantiated.
+     * Implements bottom navigation menu to record which button is clicked on and
+     * navigates to the appropriate activity.
+     *
+     * @param savedInstanceState the current saved state of the activity
+     * @see TodayViewActivity
+     * @see HabitEventTimeLineActivity
+     * @see NewHabitActivity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +112,11 @@ public class AllHabitViewActivity extends Activity {
         });
     }
 
+    /**
+     * This method is called when the activity is to be continued.
+     *
+     * @see SaveFileController
+     */
     @Override
     protected void onResume(){
         super.onResume();
@@ -98,6 +127,11 @@ public class AllHabitViewActivity extends Activity {
         updateListView(habitList);
     }
 
+    /**
+     * Updates the text view according to the number of habits a user currently has.
+     *
+     * @param habitCount the number of habits in the text view
+     */
     private void updateTextView(int habitCount){
         if (habitCount == 0){
             this.textView.setText(("You do have not have any habits to track. Perhaps it's time to start a new habit?"));
@@ -107,6 +141,12 @@ public class AllHabitViewActivity extends Activity {
         }
     }
 
+    /**
+     * Updates the list view to display the list of habits.
+     *
+     * @param habits array list of habits to be displayed.
+     * @see Habit
+     */
     private void updateListView(ArrayList<Habit> habits){
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(AllHabitViewActivity.this,
                 R.layout.habit_list_item, habits);

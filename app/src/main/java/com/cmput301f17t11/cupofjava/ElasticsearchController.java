@@ -1,3 +1,12 @@
+/* ElasticSearchController
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
+
 package com.cmput301f17t11.cupofjava;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -14,17 +23,24 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
-/**
- * Created by nazim on 10/11/17.
- */
-
 //TODO prj5
 
+/**
+ * Implements Elastic Search.
+ *
+ * @version 1.0
+ */
 public class ElasticsearchController {
     private static JestDroidClient client; //manages communication with a server
     //http://cmput301.softwareprocess.es:8080/cmput301f17t11_cupofjava
 
     // TODO we need a function which adds habits to elastic search
+
+    /**
+     * Adds habits to elastic search.
+     *
+     * @version 1.0
+     */
     public static class AddUsersTask extends AsyncTask<User, Void, Void> {
 
         @Override
@@ -51,6 +67,12 @@ public class ElasticsearchController {
     }
 
     // TODO we need a function which gets tweets from elastic search
+
+    /**
+     * Gets habits from elastic search.
+     *
+     * @version 1.0
+     */
     public static class GetUsersTask extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... search_parameters) {
@@ -91,7 +113,9 @@ public class ElasticsearchController {
 
 
 
-    //sets up the server stuff
+    /**
+     * Sets up the server.
+     */
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");

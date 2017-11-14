@@ -1,8 +1,13 @@
-package com.cmput301f17t11.cupofjava;
-
-/**
- * Created by Sajjad on 2017-11-12.
+/* BottomNavigationViewHelper
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
+
+package com.cmput301f17t11.cupofjava;
 
 
 
@@ -12,6 +17,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
 import java.lang.reflect.Field;
 
+/**
+ * Displays the bottom navigation menu.
+ *
+ * @version 1.0
+ */
 public class BottomNavigationViewHelper {
     public static void disableShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);

@@ -1,3 +1,12 @@
+/* HabitEvent
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
+
 package com.cmput301f17t11.cupofjava;
 
 
@@ -5,9 +14,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This class handles all properties of a Habit Event
+ * Handles all properties of a Habit Event
  * A habit event includes a date, a name.
  * It can include option location and photo.
+ *
+ * @version 1.0
  */
 public class HabitEvent {
     private Habit habit;
@@ -16,25 +27,33 @@ public class HabitEvent {
     private Date habitEventDate;
 
     /** TODO: prj5
-    private Geolocation location;
-    private boolean locationSet = false;
-    private Bitmap photo;
-    public HabitEvent(Habit habit){
-        this.habitObject = habit;
-        this.habitEventDate = new Date();
-    }
+     private Geolocation location;
+     private boolean locationSet = false;
+     private Bitmap photo;
+     public HabitEvent(Habit habit){
+     this.habitObject = habit;
+     this.habitEventDate = new Date();
+     }
 
      */
 
     /**
-     * Constructor for HabitEvent. Only used for unit testing.
-     * @param comment
+     * Constructor for HabitEvent
+     *
+     * @param comment brief description of habit event
      */
     public HabitEvent(String comment){
         this.comment = comment;
         this.habitEventDate = new Date();
     }
 
+    /**
+     * Constructor for HabitEvent
+     *
+     * @param habit instance of Habit
+     * @param comment brief description of habit event
+     * @see Habit
+     */
     public HabitEvent(Habit habit, String comment) {
         setHabit(habit);
         setComment(comment);
@@ -60,19 +79,40 @@ public class HabitEvent {
 
     //TODO: prj5 Constructor for optional location
 
-
+    /**
+     * Gets habit reason
+     *
+     * @return habit reason
+     */
     public String getHabitReason(){
         return this.getHabitReason();
     }
 
+    /**
+     * Gets habit event date
+     *
+     * @return instance of Date
+     */
     public Date getHabitEventDate(){
         return this.habitEventDate;
     }
 
+    /**
+     * Sets habit
+     *
+     * @param habit instance of Habit
+     * @see Habit
+     */
     public void setHabit(Habit habit) {
         this.habit = habit;
     }
 
+    /**
+     * Gets habit
+     *
+     * @return instance of Habit
+     * @see Habit
+     */
     public Habit getHabit() {
         return habit;
     }

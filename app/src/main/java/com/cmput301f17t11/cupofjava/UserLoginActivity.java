@@ -1,3 +1,12 @@
+/* UserLoginActivity
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
+
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
@@ -14,6 +23,8 @@ import android.widget.EditText;
 /**
  * Activity handles required username and optional password entry.
  * User can register if they have not done so yet.
+ *
+ * @version 1.0
  */
 public class UserLoginActivity extends Activity {
 
@@ -22,7 +33,8 @@ public class UserLoginActivity extends Activity {
 
     /**
      * Launches the screen to enter username and optional password.
-     * @param savedInstanceState
+     *
+     * @param savedInstanceState saved state of the activity
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,3 +1,12 @@
+/* NewHabitEventActivity
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
+
 package com.cmput301f17t11.cupofjava;
 
 import android.content.Intent;
@@ -16,8 +25,10 @@ import java.util.Calendar;
 
 /**
  * This activity allows user to add a new habit event, and
- * add habit that theyde like to track under this event.
+ * add habit that they would like to track under this event.
  * User can incorporate date, location, photo.
+ *
+ * @version 1.0
  */
 
 public class NewHabitEventActivity extends AppCompatActivity {
@@ -39,6 +50,11 @@ public class NewHabitEventActivity extends AppCompatActivity {
 
     private EditText habitEventCommentEditText;
 
+    /**
+     * This method is called when NewHabitEventActivity is instantiated.
+     *
+     * @param savedInstanceState the current saved state of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +75,9 @@ public class NewHabitEventActivity extends AppCompatActivity {
         spinner.setAdapter(habitAdapter);
     }
 
+    /**
+     * This method is called when the activity is to be continued.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -73,6 +92,11 @@ public class NewHabitEventActivity extends AppCompatActivity {
         this.spinner.setAdapter(arrayAdapter);
     }
 
+    /**
+     * Saves the new habit event created by the user.
+     *
+     * @param view instance of View
+     */
     public void saveNewHabitEvent(View view) {
 
         Habit spinnerHabit = (Habit) spinner.getSelectedItem();

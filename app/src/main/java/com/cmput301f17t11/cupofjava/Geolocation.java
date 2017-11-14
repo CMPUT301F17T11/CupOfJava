@@ -1,3 +1,12 @@
+/* Geolocation
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
+
 package com.cmput301f17t11.cupofjava;
 
 import android.content.Context;
@@ -5,15 +14,14 @@ import android.location.Location;
 import android.location.LocationManager;
 
 /**
- * This class is to be completed for project part 5
+ * TODO for ProjectPart 5
  *
- * This class handles all location based settings that
+ * Handles all location based settings that
  * allow the user to properly add a location to their
  * habit event.
+ *
+ * @version 1.0
  */
-
-//TODO prj5
-
 public class Geolocation {
     Context context;
     Location location;
@@ -22,7 +30,8 @@ public class Geolocation {
 
     /**
      * Constructor for Geolocation
-     * @param context
+     *
+     * @param context used to get location
      */
     public Geolocation(Context context){
         this.context = context;
@@ -31,14 +40,18 @@ public class Geolocation {
     }
 
     /**
-     * @return
+     * Gets the location.
+     *
+     * @return location
      */
     public Location getLocation(){
         return this.location;
     }
 
     /**
-     * @param location
+     * Sets the location.
+     *
+     * @param location instance of Location
      */
     public void setLocation(Location location){
         this.location = location;

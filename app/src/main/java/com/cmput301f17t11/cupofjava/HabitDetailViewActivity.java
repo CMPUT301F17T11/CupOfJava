@@ -1,3 +1,12 @@
+/* HabitDetailViewActivity
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
+
 package com.cmput301f17t11.cupofjava;
 
 import android.content.DialogInterface;
@@ -14,6 +23,12 @@ import com.google.gson.Gson;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * Opens activity which lets user view the details of a certain habit.
+ *
+ * @see Habit
+ * @version 1.0
+ */
 public class HabitDetailViewActivity extends AppCompatActivity {
 
     private TextView habitTitleTextView;
@@ -26,6 +41,12 @@ public class HabitDetailViewActivity extends AppCompatActivity {
     private int habitIndex;
     private Habit habit;
 
+    /**
+     * This method is called when HabitDetailViewActivity is instantiated.
+     *
+     * @param savedInstanceState the current saved state of the activity
+     * @see SaveFileController
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +71,13 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         habitDateTextView.setText(("Start date: " + sdf.format(habit.getHabitStartDate().getTime())));
     }
 
+    /**
+     * Opens the new habit event activity page so that the user
+     * can create new habit event.
+     *
+     * @param view instance of View
+     * @see NewHabitEventActivity
+     */
     public void addNewHabitEventButton(View view) {
         //todo: new habit event
         Intent intent2 = new Intent(HabitDetailViewActivity.this, NewHabitEventActivity.class);
@@ -59,6 +87,12 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         startActivity(intent2);
     }
 
+    /**
+     * Button implementation to delete current habit.
+     *
+     * @param view instance of View
+     * @see TodayViewActivity
+     */
     public void deleteCurrentHabitButton(View view) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(HabitDetailViewActivity.this);

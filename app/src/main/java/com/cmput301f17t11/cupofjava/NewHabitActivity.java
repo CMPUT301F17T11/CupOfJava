@@ -1,3 +1,12 @@
+/* NewHabitActivity
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
+
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
@@ -20,6 +29,8 @@ import java.util.Date;
  * This activity handles adding and configuring git an existent habit.
  * User must add add a name and reason for the habit.
  * User must choose the frequency & start date of the habit they are creating.
+ *
+ * @version 1.0
  */
 public class NewHabitActivity extends Activity {
 
@@ -49,7 +60,8 @@ public class NewHabitActivity extends Activity {
 
     /**
      * Launches the screen to add/edit a habit.
-     * @param savedInstanceState
+     *
+     * @param savedInstanceState the current saved state of the activity
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +117,12 @@ public class NewHabitActivity extends Activity {
 
     };
 
+    /**
+     * Detects when a checkbox is clicked and saves the values to the
+     * repeatingDays array list.
+     *
+     * @param view instance of View
+     */
     public void onCheckboxClicked(View view) {
         //TODO: prj5 what about when the user unchecks the checkbox?
         // Is the view now checked?
@@ -115,8 +133,8 @@ public class NewHabitActivity extends Activity {
         switch(view.getId()) {
             case R.id.checkbox_sun:
                 if (checked){
-                Integer sunday = 0;
-                this.repeatingDays.add(sunday);
+                    Integer sunday = 0;
+                    this.repeatingDays.add(sunday);
                 }
                 else {
                     break;
@@ -179,7 +197,11 @@ public class NewHabitActivity extends Activity {
         }
     }
 
-
+    /**
+     * Saves a new habit created by the user.
+     *
+     * @param view instance of View
+     */
     public void saveNewHabit(View view) {
 
         this.habitTitle = habitTitleEditText.getText().toString();

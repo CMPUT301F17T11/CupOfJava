@@ -1,3 +1,12 @@
+/* TodayViewActivity
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
+
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
@@ -15,7 +24,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-
+/**
+ * Opens to a view of the list of habits that the user has to complete today.
+ *
+ * @version 1.0
+ */
 public class TodayViewActivity extends Activity {
 
 
@@ -34,6 +47,16 @@ public class TodayViewActivity extends Activity {
         return listView;
     }
 
+    /**
+     * This method is called when TodayViewActivity is instantiated.
+     * Implements bottom navigation menu to record which button is clicked on and
+     * navigates to the appropriate activity.
+     *
+     * @param savedInstanceState the current saved state of the activity
+     * @see AllHabitViewActivity
+     * @see HabitEventTimeLineActivity
+     * @see NewHabitActivity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +124,11 @@ public class TodayViewActivity extends Activity {
         });
     }
 
+    /**
+     * This method is called when the activity is to be continued.
+     *
+     * @see SaveFileController
+     */
     @Override
     protected void onResume(){
         super.onResume();
@@ -111,6 +139,12 @@ public class TodayViewActivity extends Activity {
         updateListView(habits);
     }
 
+    /**
+     * Updates the text view which shows the habitCount.
+     *
+     * @param habitCount integer value which shows how many habits the user has
+     *                   lined up for the day
+     */
     private void updateTextView(int habitCount){
         if (habitCount == 0){
             this.textView.setText(("You do have not not have anything for today."));
@@ -120,6 +154,12 @@ public class TodayViewActivity extends Activity {
         }
     }
 
+    /**
+     * Updates the list view which displays the habits.
+     *
+     * @param habits array list of type Habit
+     * @see Habit
+     */
     private void updateListView(ArrayList<Habit> habits){
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(TodayViewActivity.this,
                 R.layout.habit_list_item, habits);

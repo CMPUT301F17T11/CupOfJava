@@ -1,3 +1,12 @@
+/* ViewHabitEventActivity
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
+
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
@@ -23,9 +32,9 @@ import java.util.Date;
  *
  * User can top on the habit to swtich to any other habits associated with
  * the event.
+ *
+ * @version 1.0
  */
-
-
 //TODO: get the habit list in spinner dropdown
 public class ViewHabitEventActivity extends Activity {
 
@@ -40,10 +49,9 @@ public class ViewHabitEventActivity extends Activity {
     private Habit habit;
 
     /**
-     * Launches Interface displaying the habit events and their
-     * basic details.
+     * Launches Interface displaying the habit events and their basic details.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState saved state of the activity
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
