@@ -41,29 +41,31 @@ public class ElasticsearchController {
      *
      * @version 1.0
      */
-    public static class AddUsersTask extends AsyncTask<User, Void, Void> {
 
+    public static class AddUserTask extends AsyncTask<User, Void, Void> {
         @Override
-        protected Void doInBackground(User... users) { //...means one or more
+        protected Void doInBackground(User... users) {
             verifySettings();
 
             for (User user : users) {
                 Index index = new Index.Builder(user).index("cmput301f17t11_cupofjava").type("user").build();
 
                 try {
-                    // where is the client?
-                    DocumentResult execute = client.execute(index);
-                    if(execute.isSucceeded()){
-                        //user.setId(execute.getId());
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        user.setId(result.getId());
+                    } else {
+                        Log.i("Error", "Elasticsearch was not able to add the user");
                     }
                 }
                 catch (Exception e) {
-                    Log.i("Error", "The application failed to build and send the users");
+                    Log.i("Error", "The application failed to build");
                 }
 
             }
             return null;
         }
+
     }
 
     // TODO we need a function which gets tweets from elastic search
@@ -73,43 +75,147 @@ public class ElasticsearchController {
      *
      * @version 1.0
      */
-    public static class GetUsersTask extends AsyncTask<String, Void, ArrayList<User>> {
+    public static class GetUserTask extends AsyncTask<String, Void, User> {
+        private User thisUser;
+
         @Override
-        protected ArrayList<User> doInBackground(String... search_parameters) {
+        protected User doInBackground(String... search_parameters) {
             verifySettings();
 
-            ArrayList<User> users = new ArrayList<User>();
-            //String query = "" + search_parameters[0] +"";
+            // TODO Build the query
+
+            //String query = "{\"query\":{\"match\":{\"username\":"+search_parameters[0]+"}}}";
             String query = "{\n" +
                     "    \"query\" : {\n" +
-                    "        \"term\" : { \"username\" :\"" +search_parameters[0] +"\" }\n" +
+                    "       \"constant_score\" : {\n" +
+                    "           \"filter\" : {\n" +
+                    "               \"term\" : {\"username\": \"" + search_parameters[0] + "\"}\n" +
+                    "             }\n" +
+                    "         }\n" +
                     "    }\n" +
                     "}";
 
+            Search search = new Search.Builder(query).addIndex("cmput301f17t11_cupofjava").addType("user").build();
+
+            try {
+                // TODO get the results of the query
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    thisUser = result.getFirstHit(User.class).source;
+                } else {
+                    Log.i("Error", "The search query failed to find any Users that matched");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return thisUser;
+        }
+    }
+
+    public static class UpdateUserTask extends AsyncTask<User, Void, Void> {
+        @Override
+        protected Void doInBackground(User... users) {
+            verifySettings();
+
+            for (User user : users) {
+
+                Index index = new Index.Builder(user).index("cmput301f17t11_cupofjava").type("user").id(user.getId()).build();
+
+                try {
+                    DocumentResult result = client.execute(index);
+                } catch (Exception e) {
+                    Log.i("Error", "The application failed to build");
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
+        @Override
+        protected Void doInBackground(Habit... habits) {
+            verifySettings();
+
+            for (Habit habit : habits) {
+                Index index = new Index.Builder(habit).index("cmput301f17t11_cupofjava").type("habit").build();
+
+                try {
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        habit.setId(result.getId());
+
+                    } else {
+                        Log.i("Error", "Elasticsearch was not able to add the habit");
+                    }
+                } catch (Exception e) {
+                    Log.i("Error", "The application failed to build");
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class GetHabitsTask extends AsyncTask<String, Void, ArrayList<Habit>> {
+        @Override
+        protected ArrayList<Habit> doInBackground(String... search_parameters) {
+            verifySettings();
+            ArrayList<Habit> habits = new ArrayList<Habit>();
+
             // TODO Build the query
-            Search search = new Search.Builder(query).addIndex("cmput301f17t11").addType("user").build();
+
+            String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "       \"constant_score\" : {\n" +
+                    "           \"filter\" : {\n" +
+                    "               \"term\" : {\"username\": \"" + search_parameters[0] + "\"}\n" +
+                    "             }\n" +
+                    "         }\n" +
+                    "    }\n" +
+                    "}";
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301f17t11_cupofjava")
+                    .addType("habit")
+                    .build();
 
 
             try {
                 // TODO get the results of the query
-
                 SearchResult result = client.execute(search);
-                if(result.isSucceeded()){
-
-                    List<User> foundUsers = result.getSourceAsObjectList(User.class);
-                    users.addAll(foundUsers);
+                if (result.isSucceeded()) {
+                    List<Habit> foundhabits = result.getSourceAsObjectList(Habit.class);
+                    habits.addAll(foundhabits);
+                } else {
+                    Log.i("Error", "The search query failed to find any habits that matched");
                 }
-                else{
-                    Log.i("Error", "the search query failed to find any users that matched");
-                }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
 
-            return users;
+            return habits;
         }
     }
+
+    public static class UpdateHabitTask extends AsyncTask<Habit, Void, Void> {
+        @Override
+        protected Void doInBackground(Habit... habits) {
+            verifySettings();
+            for (Habit habit : habits) {
+                Index index = new Index.Builder(habit).index("cmput301f17t11_cupofjava").type("habit").id(habit.getId()).build();
+
+                try {
+                    DocumentResult result = client.execute(index);
+                } catch (Exception e) {
+                    Log.i("Error", "The application failed to build");
+                }
+
+            }
+            return null;
+        }
+    }
+
 
 
 

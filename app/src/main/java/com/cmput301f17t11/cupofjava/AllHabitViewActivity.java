@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +34,7 @@ public class AllHabitViewActivity extends Activity {
     private ListView listView;
     private TextView textView;
     private String userName;
+    private ArrayList<Habit> habits;
     private int userIndex;
 
     public ListView getListView(){
@@ -57,7 +59,7 @@ public class AllHabitViewActivity extends Activity {
         //obtain extra info from intent
         final Intent intent = getIntent();
         this.userName = intent.getStringExtra("userName");
-        this.userIndex = intent.getIntExtra("userIndex", 0);
+        //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         //handle bottom navigation bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
@@ -72,13 +74,13 @@ public class AllHabitViewActivity extends Activity {
                     case R.id.action_timeline:
                         Intent intent2 = new Intent(AllHabitViewActivity.this, HabitEventTimeLineActivity.class);
                         intent2.putExtra("userName", userName);
-                        intent2.putExtra("userIndex", userIndex);
+                        //intent2.putExtra("userIndex", userIndex);
                         startActivity(intent2);
                         break;
                     case R.id.action_today:
                         Intent intent3 = new Intent(AllHabitViewActivity.this, TodayViewActivity.class);
                         intent3.putExtra("userName", userName);
-                        intent3.putExtra("userIndex", userIndex);
+                        //intent3.putExtra("userIndex", userIndex);
                         startActivity(intent3);
                         break;
                     case R.id.action_all_habits:
@@ -86,7 +88,7 @@ public class AllHabitViewActivity extends Activity {
                     case R.id.add_habit:
                         Intent intent4 = new Intent(AllHabitViewActivity.this, NewHabitActivity.class);
                         intent4.putExtra("userName", userName);
-                        intent4.putExtra("userIndex", userIndex);
+                        //intent4.putExtra("userIndex", userIndex);
                         startActivity(intent4);
                         break;
                 }
@@ -104,9 +106,12 @@ public class AllHabitViewActivity extends Activity {
                 saveFileController.getHabit(getApplicationContext(), userIndex, position);*/
 
                 Intent intent5 = new Intent(AllHabitViewActivity.this, HabitDetailViewActivity.class);
-                intent5.putExtra("userName", userName);
-                intent5.putExtra("userIndex", userIndex);
-                intent5.putExtra("habitIndex", position);
+                Bundle bundle = new Bundle();
+                bundle.putString("userName", userName);
+                bundle.putSerializable("habitClicked", habits); //sending all habits list
+                bundle.putInt("habitIndex", position);
+                //intent5.putExtra("userIndex", userIndex);
+                intent5.putExtras(bundle);
                 startActivity(intent5);
             }
         });
@@ -120,11 +125,24 @@ public class AllHabitViewActivity extends Activity {
     @Override
     protected void onResume(){
         super.onResume();
-        SaveFileController saveFileController = new SaveFileController();
+        ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
+        getHabitsTask.execute(userName);
+        try {
+            habits = getHabitsTask.get();
+
+            updateTextView(habits.size());
+            updateListView(habits);
+            Log.i("habits", habits.toString());
+
+
+        } catch (Exception e) {
+            Log.i("Error", "Failed to get the tweets from the async object");
+        }
+        /*SaveFileController saveFileController = new SaveFileController();
         ArrayList<Habit> habitList = saveFileController
-                .getHabitListAsArray(getApplicationContext(), this.userIndex);
-        updateTextView(habitList.size());
-        updateListView(habitList);
+                .getHabitListAsArray(getApplicationContext(), this.userIndex);*/
+        //updateTextView(habitList.size());
+        //updateListView(habitList);
     }
 
     /**

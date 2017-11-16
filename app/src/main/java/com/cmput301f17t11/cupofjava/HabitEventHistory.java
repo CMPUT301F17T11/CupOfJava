@@ -9,6 +9,7 @@
 
 package com.cmput301f17t11.cupofjava;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,7 +21,7 @@ import java.util.Comparator;
  *
  * @version 1.0
  */
-public class HabitEventHistory {
+public class HabitEventHistory implements Serializable {
     ArrayList<HabitEvent> habitEvents = new ArrayList<>();
 
     /**

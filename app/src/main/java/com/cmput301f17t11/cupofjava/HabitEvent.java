@@ -10,6 +10,7 @@
 package com.cmput301f17t11.cupofjava;
 
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -20,7 +21,7 @@ import java.util.Date;
  *
  * @version 1.0
  */
-public class HabitEvent {
+public class HabitEvent implements Serializable {
     private Habit habit;
     private String habitTitle;
     private String comment;
