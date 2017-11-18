@@ -14,6 +14,8 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Handles all properties of a Habit Event
  * A habit event includes a date, a name.
@@ -22,10 +24,18 @@ import java.util.Date;
  * @version 1.0
  */
 public class HabitEvent implements Serializable {
+
+
+    private String userName;
     private Habit habit;
     private String habitTitle;
     private String comment;
     private Date habitEventDate;
+
+
+    @JestId
+    String id; //for elasticsearch
+
 
     /** TODO: prj5
      private Geolocation location;
@@ -79,6 +89,22 @@ public class HabitEvent implements Serializable {
     //TODO: prj5 constructor for optional photograph
 
     //TODO: prj5 Constructor for optional location
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     /**
      * Gets habit reason

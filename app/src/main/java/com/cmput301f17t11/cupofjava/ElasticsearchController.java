@@ -18,6 +18,7 @@ import com.searchly.jestdroid.JestDroidClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -215,6 +216,52 @@ public class ElasticsearchController {
             return null;
         }
     }
+
+    public static class DeleteHabitsTask extends AsyncTask<Habit, Void, Void> {
+        @Override
+        protected Void doInBackground(Habit... habits) {
+            verifySettings();
+
+            // TODO Build the query
+
+
+            for (Habit habit : habits) {
+                Delete delete = new Delete.Builder(habit.getId()).index("cmput301f17t11_cupofjava").type("habit").build();
+
+                try {
+                    DocumentResult result = client.execute(delete);
+                } catch (Exception e) {
+                    Log.i("Error", "The application failed to build");
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class AddEventTask extends AsyncTask<HabitEvent, Void, Void> {
+        @Override
+        protected Void doInBackground(HabitEvent... events) {
+            verifySettings();
+            for (HabitEvent habitEvent : events) {
+                Index index = new Index.Builder(habitEvent).index("cmput301f17t11_cupofjava").type("event").build();
+
+                try {
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        habitEvent.setId(result.getId());
+                    } else {
+                        Log.i("Error", "Elasticsearch was not able to add the user");
+                    }
+                } catch (Exception e) {
+                    Log.i("Error", "The application failed to build");
+                }
+
+            }
+            return null;
+        }
+    }
+
 
 
 
