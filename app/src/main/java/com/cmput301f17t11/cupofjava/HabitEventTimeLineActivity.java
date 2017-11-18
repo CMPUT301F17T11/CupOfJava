@@ -36,6 +36,7 @@ public class HabitEventTimeLineActivity extends Activity {
     private int userIndex;
     private ListView listView;
     private TextView textView;
+    ArrayList<HabitEvent> events = new ArrayList<>();
     //private HabitEventAdapter habitEventAdapter;
     //private ArrayList<HabitEvent> eventArrayList = new ArrayList<>();
 
@@ -106,9 +107,15 @@ public class HabitEventTimeLineActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent5 = new Intent(HabitEventTimeLineActivity.this,
                         ViewHabitEventActivity.class);
-                intent5.putExtra("userName", userName);
+                Bundle bundle = new Bundle();
+                bundle.putString("userName", userName);
+                bundle.putSerializable("eventClicked", events); //sending habitEventlist
+                bundle.putInt("eventIndex", position);
+
+                intent5.putExtras(bundle);
+                //intent5.putExtra("userName", userName);
                 //intent5.putExtra("userIndex", userIndex);
-                intent5.putExtra("habitEventIndex", position);
+                //intent5.putExtra("habitEventIndex", position);
                 startActivity(intent5);
             }
         });
@@ -123,7 +130,7 @@ public class HabitEventTimeLineActivity extends Activity {
         ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
         getEventsTask.execute(userName);
         try {
-            ArrayList<HabitEvent> events = getEventsTask.get();
+            events = getEventsTask.get();
 
             updateTextView(events.size());
             updateListView(events);

@@ -62,9 +62,9 @@ public class UserLoginActivity extends Activity {
                             User newUser = new User(input);
                             ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask();
                             addUserTask.execute(newUser);
-                            Log.i("start", "is null");
+                            Log.i("username", "is null");
                         } else {
-                            Log.i("start", "not null");
+                            Log.i("username", "not null");
                         }
                         Intent intent = new Intent(UserLoginActivity.this, TodayViewActivity.class);
                         intent.putExtra("userName", input);

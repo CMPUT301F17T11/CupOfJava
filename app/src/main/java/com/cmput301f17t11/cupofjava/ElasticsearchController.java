@@ -292,13 +292,77 @@ public class ElasticsearchController {
                     List<HabitEvent> foundEvents = result.getSourceAsObjectList(HabitEvent.class);
                     events.addAll(foundEvents);
                 } else {
-                    Log.i("Error", "The search query failed to find any tweets that matched");
+                    Log.i("Error", "The search query failed to find any HabitEvents that matched");
                 }
             } catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
 
             return events;
+        }
+    }
+
+    public static class DeleteEventTask extends AsyncTask<HabitEvent, Void, Void> {
+        @Override
+        protected Void doInBackground(HabitEvent... events) {
+            verifySettings();
+
+            // TODO Build the query
+
+
+            for (HabitEvent habitEvent : events) {
+                Delete delete = new Delete.Builder(habitEvent.getId()).index("cmput301f17t11_cupofjava").type("event").build();
+
+                try {
+                    DocumentResult result = client.execute(delete);
+                } catch (Exception e) {
+                    Log.i("Error", "The Delete Event Task application failed to build");
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class DeleteEventsTask extends AsyncTask<ArrayList<HabitEvent>, Void, Void> {
+        @Override
+        protected Void doInBackground(ArrayList<HabitEvent>... allEvents) {
+            verifySettings();
+
+            // TODO Build the query
+
+
+            for (ArrayList<HabitEvent> events : allEvents) {
+                for (int i = 0; i < events.size(); i++) {
+                    Delete delete = new Delete.Builder(events.get(i).getId()).index("cmput301f17t11_cupofjava").type("event").build();
+
+                    try {
+                        DocumentResult result = client.execute(delete);
+                    } catch (Exception e) {
+                        Log.i("Error", "The Delete Events task application failed to build");
+                    }
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class UpdateEventTask extends AsyncTask<HabitEvent, Void, Void> {
+        @Override
+        protected Void doInBackground(HabitEvent... events) {
+            verifySettings();
+            for (HabitEvent habitEvent : events) {
+                Index index = new Index.Builder(habitEvent).index("cmput301f17t11_cupofjava").type("event").id(habitEvent.getId()).build();
+
+                try {
+                    DocumentResult result = client.execute(index);
+                } catch (Exception e) {
+                    Log.i("Error", "The Update Event application failed to build");
+                }
+
+            }
+            return null;
         }
     }
 

@@ -114,12 +114,13 @@ public class HabitDetailViewActivity extends AppCompatActivity {
                         ElasticsearchController.DeleteHabitsTask deleteHabitsTask = new ElasticsearchController.DeleteHabitsTask();
                         deleteHabitsTask.execute(habit);
                         //TODO need to delete habit events associated with the habit as well
+                        finish();
                         //SaveFileController saveFileController = new SaveFileController();
                         //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
-                        Intent intent3 = new Intent(HabitDetailViewActivity.this, TodayViewActivity.class);
-                        intent3.putExtra("userName", userName);
+                        //Intent intent3 = new Intent(HabitDetailViewActivity.this, TodayViewActivity.class);
+                        //intent3.putExtra("userName", userName);
                         //intent3.putExtra("userIndex", userIndex);
-                        startActivity(intent3);
+                        //startActivity(intent3);
                     }
                 })
                 .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
