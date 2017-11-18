@@ -52,7 +52,7 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_detail_view);
 
-        final Intent intent = getIntent();
+        //final Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             this.userName = bundle.getString("userName");
@@ -87,9 +87,14 @@ public class HabitDetailViewActivity extends AppCompatActivity {
     public void addNewHabitEventButton(View view) {
         //todo: new habit event
         Intent intent2 = new Intent(HabitDetailViewActivity.this, NewHabitEventActivity.class);
-        intent2.putExtra("userName", userName);
+        Bundle bundle = new Bundle();
+        bundle.putString("userName", userName);
+        bundle.putSerializable("habitList", habitList);
+        bundle.putInt("habitIndex", habitIndex);
+        //intent2.putExtra("userName", userName);
         //intent2.putExtra("userIndex", userIndex);
-        intent2.putExtra("habitIndex", habitIndex);
+        //intent2.putExtra("habitIndex", habitIndex);
+        intent2.putExtras(bundle);
         startActivity(intent2);
     }
 
@@ -106,11 +111,14 @@ public class HabitDetailViewActivity extends AppCompatActivity {
                 .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SaveFileController saveFileController = new SaveFileController();
-                        saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
+                        ElasticsearchController.DeleteHabitsTask deleteHabitsTask = new ElasticsearchController.DeleteHabitsTask();
+                        deleteHabitsTask.execute(habit);
+                        //TODO need to delete habit events associated with the habit as well
+                        //SaveFileController saveFileController = new SaveFileController();
+                        //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
                         Intent intent3 = new Intent(HabitDetailViewActivity.this, TodayViewActivity.class);
                         intent3.putExtra("userName", userName);
-                        intent3.putExtra("userIndex", userIndex);
+                        //intent3.putExtra("userIndex", userIndex);
                         startActivity(intent3);
                     }
                 })
