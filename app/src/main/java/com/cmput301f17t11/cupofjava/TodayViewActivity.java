@@ -154,7 +154,7 @@ public class TodayViewActivity extends Activity {
 
 
         } catch (Exception e) {
-            Log.i("Error", "Failed to get the tweets from the async object");
+            Log.i("Error", "Failed to get the Habits from the async object");
         }
 
         //SaveFileController saveFileController = new SaveFileController();

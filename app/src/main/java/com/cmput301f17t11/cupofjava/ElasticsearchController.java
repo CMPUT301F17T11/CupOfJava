@@ -262,6 +262,47 @@ public class ElasticsearchController {
         }
     }
 
+    public static class GetEventsTask extends AsyncTask<String, Void, ArrayList<HabitEvent>> {
+        @Override
+        protected ArrayList<HabitEvent> doInBackground(String... search_parameters) {
+            verifySettings();
+            ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
+
+
+            String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "       \"constant_score\" : {\n" +
+                    "           \"filter\" : {\n" +
+                    "               \"term\" : {\"username\": \"" + search_parameters[0] + "\"}\n" +
+                    "             }\n" +
+                    "         }\n" +
+                    "    }\n" +
+                    "}";
+
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301f17t11_cupofjava")
+                    .addType("event")
+                    .build();
+
+
+            try {
+                // get results of the query
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<HabitEvent> foundEvents = result.getSourceAsObjectList(HabitEvent.class);
+                    events.addAll(foundEvents);
+                } else {
+                    Log.i("Error", "The search query failed to find any tweets that matched");
+                }
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return events;
+        }
+    }
+
+
 
 
 
