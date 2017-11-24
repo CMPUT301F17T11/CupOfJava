@@ -77,7 +77,7 @@ public class ElasticsearchController {
      * @version 1.0
      */
     public static class GetUserTask extends AsyncTask<String, Void, User> {
-        private User thisUser;
+        private User thisUser = null;
 
         @Override
         protected User doInBackground(String... search_parameters) {
@@ -86,6 +86,7 @@ public class ElasticsearchController {
             // TODO Build the query
 
             //String query = "{\"query\":{\"match\":{\"username\":"+search_parameters[0]+"}}}";
+
             String query = "{\n" +
                     "    \"query\" : {\n" +
                     "       \"constant_score\" : {\n" +
@@ -96,18 +97,20 @@ public class ElasticsearchController {
                     "    }\n" +
                     "}";
 
+
             Search search = new Search.Builder(query).addIndex("cmput301f17t11_cupofjava").addType("user").build();
 
             try {
                 // TODO get the results of the query
                 SearchResult result = client.execute(search);
-                if (result.isSucceeded()) {
+                if (result.isSucceeded() && result.getFirstHit(User.class).source != null) {
+                    //Log.i("Error", "Result.succeed is true");
                     thisUser = result.getFirstHit(User.class).source;
                 } else {
                     Log.i("Error", "The search query failed to find any Users that matched");
                 }
             } catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                Log.i("Error", e.toString() + "Something went wrong when we tried to communicate with the elasticsearch server! ");
             }
 
             return thisUser;
