@@ -9,6 +9,7 @@
 
 package com.cmput301f17t11.cupofjava;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
@@ -22,19 +23,29 @@ import io.searchbox.annotations.JestId;
  *
  * @version 1.0
  */
-public class Habit {
+public class Habit implements Serializable {
 
+
+    private String username;
     private String habitTitle;
     private String habitReason;
     private Calendar habitDate;
     private ArrayList<Integer> repeatingDays; //0 = Sun, 1 = Mon... 6 = Sat
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                 //for each day followed, +1 and missing days would result in -1
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
     // todo prj5
     private HabitEventHistory habitEvents = new HabitEventHistory();
     //TODO Setters and getters for habit events
 
-    /* TODO prj5
+
     @JestId
     private String id;
     public String getId() {
@@ -43,7 +54,7 @@ public class Habit {
     public String setId(String id) {
         return this.id = id;
     }
-    */
+
 
     /**
      * Constructor for Habit class.
@@ -235,4 +246,6 @@ public class Habit {
         return ("What: " + this.habitTitle + "\n"
                 + "Why: " + this.habitReason);
     }
+
+
 }

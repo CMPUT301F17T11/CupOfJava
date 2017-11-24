@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -31,14 +33,12 @@ import java.util.Calendar;
  */
 public class HabitDetailViewActivity extends AppCompatActivity {
 
-    private TextView habitTitleTextView;
-    private TextView habitReasonTextView;
-    private TextView habitDateTextView;
     private String habitDateCalendar;
     private ListView habitEventList;
     private String userName;
     private int userIndex;
     private int habitIndex;
+    private ArrayList<Habit> habitList = new ArrayList<>();
     private Habit habit;
 
     /**
@@ -52,23 +52,29 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_detail_view);
 
-        final Intent intent = getIntent();
-        this.userName = intent.getStringExtra("userName");
-        this.userIndex = intent.getIntExtra("userIndex", 0);
-        this.habitIndex = intent.getIntExtra("habitIndex", 0);
+        //final Intent intent = getIntent();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            this.userName = bundle.getString("userName");
 
-        habitTitleTextView = (TextView) findViewById(R.id.title_text_view);
-        habitReasonTextView = (TextView) findViewById(R.id.reason_text_view);
-        habitDateTextView = (TextView) findViewById(R.id.date_added_text_view);
+            this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitClicked");
+            //this.userIndex = intent.getIntExtra("userIndex", 0);
+            this.habitIndex = bundle.getInt("habitIndex");
+        }
+
+        TextView habitTitleTextView = (TextView) findViewById(R.id.title_text_view);
+        TextView habitReasonTextView = (TextView) findViewById(R.id.reason_text_view);
+        TextView habitDateTextView = (TextView) findViewById(R.id.date_added_text_view);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
 
-        SaveFileController saveFileController = new SaveFileController();
-        this.habit = saveFileController.getHabit(getApplicationContext(), userIndex, habitIndex);
+        //SaveFileController saveFileController = new SaveFileController();
+        this.habit = this.habitList.get(habitIndex);
 
         habitTitleTextView.setText(("What: "+ habit.getHabitTitle()));
         habitReasonTextView.setText(("Why: "+ habit.getHabitReason()));
         habitDateTextView.setText(("Start date: " + sdf.format(habit.getHabitStartDate().getTime())));
+
     }
 
     /**
@@ -81,9 +87,14 @@ public class HabitDetailViewActivity extends AppCompatActivity {
     public void addNewHabitEventButton(View view) {
         //todo: new habit event
         Intent intent2 = new Intent(HabitDetailViewActivity.this, NewHabitEventActivity.class);
-        intent2.putExtra("userName", userName);
-        intent2.putExtra("userIndex", userIndex);
-        intent2.putExtra("habitIndex", habitIndex);
+        Bundle bundle = new Bundle();
+        bundle.putString("userName", userName);
+        bundle.putSerializable("habitList", habitList);
+        bundle.putInt("habitIndex", habitIndex);
+        //intent2.putExtra("userName", userName);
+        //intent2.putExtra("userIndex", userIndex);
+        //intent2.putExtra("habitIndex", habitIndex);
+        intent2.putExtras(bundle);
         startActivity(intent2);
     }
 
@@ -100,12 +111,16 @@ public class HabitDetailViewActivity extends AppCompatActivity {
                 .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SaveFileController saveFileController = new SaveFileController();
-                        saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
-                        Intent intent3 = new Intent(HabitDetailViewActivity.this, TodayViewActivity.class);
-                        intent3.putExtra("userName", userName);
-                        intent3.putExtra("userIndex", userIndex);
-                        startActivity(intent3);
+                        ElasticsearchController.DeleteHabitsTask deleteHabitsTask = new ElasticsearchController.DeleteHabitsTask();
+                        deleteHabitsTask.execute(habit);
+                        //TODO need to delete habit events associated with the habit as well
+                        finish();
+                        //SaveFileController saveFileController = new SaveFileController();
+                        //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
+                        //Intent intent3 = new Intent(HabitDetailViewActivity.this, TodayViewActivity.class);
+                        //intent3.putExtra("userName", userName);
+                        //intent3.putExtra("userIndex", userIndex);
+                        //startActivity(intent3);
                     }
                 })
                 .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {

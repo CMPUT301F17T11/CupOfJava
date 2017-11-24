@@ -71,7 +71,7 @@ public class NewHabitActivity extends Activity {
         //obtain extra info from intent
         Intent intent = getIntent();
         this.userName = intent.getStringExtra("userName");
-        this.userIndex = intent.getIntExtra("userIndex", 0);
+        //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         this.repeatingDays = new ArrayList<>();
 
@@ -236,14 +236,20 @@ public class NewHabitActivity extends Activity {
         }
 
         Habit newHabit = new Habit(habitTitle, habitReason, habitStartDate, repeatingDays);
+        newHabit.setUsername(userName);
 
         newHabit.setHabitStartDate(habitStartDate);
 
-        SaveFileController saveFileController = new SaveFileController();
-        saveFileController.addHabit(getApplicationContext(), this.userIndex, newHabit);
+        ElasticsearchController.AddHabitTask addHabitTask = new ElasticsearchController.AddHabitTask();
+        addHabitTask.execute(newHabit);
+        ElasticsearchController.UpdateHabitTask updateHabitTask = new ElasticsearchController.UpdateHabitTask();
+        updateHabitTask.execute(newHabit);
+
+        //SaveFileController saveFileController = new SaveFileController();
+        //saveFileController.addHabit(getApplicationContext(), this.userIndex, newHabit);
         Intent intent = new Intent(NewHabitActivity.this, TodayViewActivity.class);
         intent.putExtra("userName", userName);
-        intent.putExtra("userIndex", userIndex);
+        //intent.putExtra("userIndex", userIndex);
         startActivity(intent);
     }
 

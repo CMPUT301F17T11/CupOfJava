@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,7 +54,30 @@ public class UserLoginActivity extends Activity {
                 if (input.isEmpty()){
                     username_editText.setError("Field cannot be left empty");
                 }
-                else{
+                ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask();
+                getUserTask.execute(input);
+                if (!input.isEmpty()) {
+                    try {
+                        if (getUserTask.get() == null) {
+                            User newUser = new User(input);
+                            ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask();
+                            addUserTask.execute(newUser);
+                            Log.i("username", "is null");
+                        } else {
+                            Log.i("username", "not null");
+                        }
+                        Intent intent = new Intent(UserLoginActivity.this, TodayViewActivity.class);
+                        intent.putExtra("userName", input);
+                        startActivity(intent);
+
+
+                    } catch (Exception e) {
+                        Log.i("error", e.toString());
+                        finish();
+                    }
+
+                }
+                /*else{
                     SaveFileController saveFileController = new SaveFileController();
                     int userIndex = saveFileController.getUserIndex(context, input);
 
@@ -66,7 +90,7 @@ public class UserLoginActivity extends Activity {
                     intent.putExtra("userName", input);
                     intent.putExtra("userIndex", saveFileController.getUserIndex(context, input));
                     startActivity(intent);
-                }
+                }*/
             }
         });
     }

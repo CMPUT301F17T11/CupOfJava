@@ -12,8 +12,10 @@ package com.cmput301f17t11.cupofjava;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Opens to a view of the list of habits that the user has to complete today.
@@ -35,12 +38,10 @@ public class TodayViewActivity extends Activity {
     // ListView to be populated
     private ListView listView;
 
-    // Custom Habit Adapter
-    private HabitAdapter habitAdapter;
-
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
-    private String userName;
-    private int userIndex;
+    private ArrayList<Habit> habits;
+    private String userName = "";
+    //private int userIndex;
     private TextView textView;
 
     public ListView getListView(){
@@ -62,13 +63,13 @@ public class TodayViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_view);
         listView = (ListView) findViewById(R.id.selfProfileHabitListView);
-        habitAdapter = new HabitAdapter(this, habitList);
+        HabitAdapter habitAdapter = new HabitAdapter(this, habitList);
         listView.setAdapter(habitAdapter);
 
         //obtain extra info from intent
         Intent intent = getIntent();
         this.userName = intent.getStringExtra("userName");
-        this.userIndex = intent.getIntExtra("userIndex", 0);
+        //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         //bottom navigation bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
@@ -86,7 +87,7 @@ public class TodayViewActivity extends Activity {
                     case R.id.action_timeline:
                         Intent intent2 = new Intent(TodayViewActivity.this, HabitEventTimeLineActivity.class);
                         intent2.putExtra("userName", userName);
-                        intent2.putExtra("userIndex", userIndex);
+                        //intent2.putExtra("userIndex", userIndex);
                         startActivity(intent2);
                         break;
                     case R.id.action_today:
@@ -94,13 +95,13 @@ public class TodayViewActivity extends Activity {
                     case R.id.action_all_habits:
                         Intent intent3 = new Intent(TodayViewActivity.this, AllHabitViewActivity.class);
                         intent3.putExtra("userName", userName);
-                        intent3.putExtra("userIndex", userIndex);
+                        //intent3.putExtra("userIndex", userIndex);
                         startActivity(intent3);
                         break;
                     case R.id.add_habit:
                         Intent intent4 = new Intent(TodayViewActivity.this, NewHabitActivity.class);
                         intent4.putExtra("userName", userName);
-                        intent4.putExtra("userIndex", userIndex);
+                        //intent4.putExtra("userIndex", userIndex);
                         startActivity(intent4);
                         break;
                 }
@@ -110,15 +111,20 @@ public class TodayViewActivity extends Activity {
 
         //set up the TextView and ListView
         this.textView = (TextView) findViewById(R.id.SelfProfileHeadingTextView);
-        this.listView = (ListView) findViewById(R.id.selfProfileHabitListView);
+        //this.listView = (ListView) findViewById(R.id.selfProfileHabitListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent5 = new Intent(TodayViewActivity.this,
                         HabitDetailViewActivity.class);
-                intent5.putExtra("userName", userName);
-                intent5.putExtra("userIndex", userIndex);
-                intent5.putExtra("habitIndex", position);
+                Bundle bundle = new Bundle();
+                bundle.putString("userName", userName);
+                bundle.putSerializable("habitClicked", habits); //sending today's habitlist
+                bundle.putInt("habitIndex", position);
+
+                //intent5.putExtra("userIndex", userIndex);
+                intent5.putExtras(bundle);
+
                 startActivity(intent5);
             }
         });
@@ -132,11 +138,33 @@ public class TodayViewActivity extends Activity {
     @Override
     protected void onResume(){
         super.onResume();
-        SaveFileController saveFileController = new SaveFileController();
-        ArrayList<Habit> habits = saveFileController
-                .getHabitList(getApplicationContext(), userIndex).getTodaysHabitList();
-        updateTextView(habits.size());
-        updateListView(habits);
+
+
+        ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
+
+        //String query = "{\"query\":{\"term\":{\"username\":"+userName+"}}}";
+
+        getHabitsTask.execute(userName);
+        try {
+            habits = getTodaysHabitList(getHabitsTask.get());
+
+            updateTextView(habits.size());
+            updateListView(habits);
+            Log.i("today habits", habits.toString());
+
+
+        } catch (Exception e) {
+            Log.i("Error", "Failed to get the Habits from the async object");
+        }
+
+        //SaveFileController saveFileController = new SaveFileController();
+        //ArrayList<Habit> habits = saveFileController
+        //.getHabitList(getApplicationContext(), userIndex).getTodaysHabitList();
+        // updateTextView(habits.size());
+        //updateListView(habits);
+
+
+
     }
 
     /**
@@ -147,7 +175,7 @@ public class TodayViewActivity extends Activity {
      */
     private void updateTextView(int habitCount){
         if (habitCount == 0){
-            this.textView.setText(("You do have not not have anything for today."));
+            this.textView.setText(("You do have not not have anything for today." + this.userName));
         }
         else{
             this.textView.setText(("Here are the habits you should carry out today:"));
@@ -164,5 +192,49 @@ public class TodayViewActivity extends Activity {
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(TodayViewActivity.this,
                 R.layout.habit_list_item, habits);
         this.listView.setAdapter(arrayAdapter);
+    }
+
+    public ArrayList<Habit> getTodaysHabitList(ArrayList<Habit> habits) {
+        Calendar calendar = Calendar.getInstance();
+        int dayOfTheWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        int currentDay;
+        switch (dayOfTheWeek) {
+            case Calendar.SUNDAY:
+                currentDay = 0;
+                break;
+            case Calendar.MONDAY:
+                currentDay = 1;
+                break;
+            case Calendar.TUESDAY:
+                currentDay = 2;
+                break;
+            case Calendar.WEDNESDAY:
+                currentDay = 3;
+                break;
+            case Calendar.THURSDAY:
+                currentDay = 4;
+                break;
+            case Calendar.FRIDAY:
+                currentDay = 5;
+                break;
+            case Calendar.SATURDAY:
+                currentDay = 6;
+                break;
+            default:
+                currentDay = 0;
+                break;
+        }
+
+        ArrayList<Habit> todaysHabits = new ArrayList<>();
+        Habit currentHabit;
+
+        for (int i = 0; i < habits.size(); i++) {
+            currentHabit = habits.get(i);
+            if (currentHabit.onDay(currentDay)) {
+                todaysHabits.add(currentHabit);
+            }
+        }
+
+        return todaysHabits;
     }
 }

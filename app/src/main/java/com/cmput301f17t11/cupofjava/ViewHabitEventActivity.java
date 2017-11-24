@@ -35,6 +35,7 @@ public class ViewHabitEventActivity extends Activity {
     private TextView habitDateBoxTextView;
     private TextView habitCommentTextView;
     private String userName;
+    private ArrayList<HabitEvent> allEvents = new ArrayList<>();
     private int userIndex;
     //private int habitIndex;
     private int habitEventIndex;
@@ -50,15 +51,23 @@ public class ViewHabitEventActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_habit_event);
 
-        final Intent intent = getIntent();
-        this.userName = intent.getStringExtra("userName");
-        this.userIndex = intent.getIntExtra("userIndex", 0);
-        this.habitEventIndex = intent.getIntExtra("habitEventIndex", 0);
+        //final Intent intent = getIntent();
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            this.userName = bundle.getString("userName");
+            this.allEvents = (ArrayList<HabitEvent>) bundle.getSerializable("eventClicked");
+            this.habitEventIndex = bundle.getInt("eventIndex");
+
+        }
+
+        //this.userName = intent.getStringExtra("userName");
+        //this.userIndex = intent.getIntExtra("userIndex", 0);
+        //this.habitEventIndex = intent.getIntExtra("habitEventIndex", 0);
 
 
-        SaveFileController saveFileController = new SaveFileController();
-        ArrayList<HabitEvent> allEvents = saveFileController.getAllHabitEvents(getApplicationContext(),
-                this.userIndex);
+        //SaveFileController saveFileController = new SaveFileController();
+        //ArrayList<HabitEvent> allEvents = saveFileController.getAllHabitEvents(getApplicationContext(),this.userIndex);
         HabitEvent habitEvent = allEvents.get(this.habitEventIndex);
         headingTextView = (TextView) findViewById(R.id.habitEventDetailHeadingTextView);
         habitTitleTextView = (TextView) findViewById(R.id.HabitEventTextView2);

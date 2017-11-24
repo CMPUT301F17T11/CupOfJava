@@ -1,9 +1,11 @@
 package com.cmput301f17t11.cupofjava;
 
 
-//import io.searchbox.annotations.JestId;
+
 
 import java.util.ArrayList;
+
+import io.searchbox.annotations.JestId;
 
 /**
  * This class tracks names of users that the user
@@ -13,6 +15,9 @@ import java.util.ArrayList;
 public class User {
     private String username;
     private HabitList habitList;  //all the habits of the user
+    @JestId
+    private String id; //used for elasticsearch
+
 
 
     /* TODO for prj5
@@ -22,10 +27,7 @@ public class User {
     */
 
 
-    /* TODO for prj5
-    @JestId
-    private String id;
-    */
+
 
     /**
      * Constructor
@@ -71,20 +73,19 @@ public class User {
      *
      * @param id
      */
-    /* TODO prj5
     public void setId(String id) {
         this.id = id;
     }
-    */
+
     /**
      *
-     * @return
+     * @return id for elastic search
      */
-    /* TODO prj5
+
     public String getId() {
         return id;
     }
-
+/*
     public void addFollower(String id){
         followerList.add(id);
     }
