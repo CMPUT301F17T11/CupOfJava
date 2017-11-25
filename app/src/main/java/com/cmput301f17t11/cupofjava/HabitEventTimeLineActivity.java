@@ -88,11 +88,17 @@ public class HabitEventTimeLineActivity extends Activity {
                         //intent3.putExtra("userIndex", userIndex);
                         startActivity(intent3);
                         break;
-                    case R.id.add_habit:
+                    case R.id.add_habit_or_habit_event:
                         Intent intent4 = new Intent(HabitEventTimeLineActivity.this, NewHabitActivity.class);
                         intent4.putExtra("userName", userName);
                         //intent4.putExtra("userIndex", userIndex);
                         startActivity(intent4);
+                        break;
+                    case R.id.action_friends:
+                        Intent intent5 = new Intent(HabitEventTimeLineActivity.this, FriendsActivity.class);
+                        intent5.putExtra("userName", userName);
+                        //intent4.putExtra("userIndex", userIndex);
+                        startActivity(intent5);
                         break;
                 }
                 return false;

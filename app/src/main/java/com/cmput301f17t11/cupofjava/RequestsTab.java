@@ -3,7 +3,7 @@ package com.cmput301f17t11.cupofjava;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,6 @@ import android.view.ViewGroup;
  * to handle interaction events.
  * Use the {@link RequestsTab#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class RequestsTab extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -29,6 +28,10 @@ public class RequestsTab extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    public RequestsTab() {
+        // Required empty public constructor
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -46,9 +49,6 @@ public class RequestsTab extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-    public RequestsTab() {
-        // Required empty public constructor
     }
 
     @Override

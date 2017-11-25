@@ -39,7 +39,7 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
         //solo.assertCurrentActivity("new activity", TodayViewActivity.class);
 
         //*Add habit button
-        solo.clickOnView((solo.getView(R.id.add_habit)));
+        solo.clickOnView((solo.getView(R.id.add_habit_or_habit_event)));
         solo.assertCurrentActivity("new activity", NewHabitActivity.class);
         //NewHabit Activity
         solo.enterText((EditText) solo.getView(R.id.habit_title),"Disciplining Kids");
