@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cmput301f17t11.cupofjava.TodayViewActivity">
 
-    <TextView
-        android:id="@+id/SelfProfileHeadingTextView"
-        android:layout_width="362dp"
-        android:layout_height="65dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:padding="4dp"
-        android:textAlignment="center"
-        android:background="@drawable/check_box_dimens"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/selfProfileHabitListView"
-        android:layout_width="365dp"
-        android:layout_height="370dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"/>
+        <TextView
+            android:id="@+id/SelfProfileHeadingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/check_box_dimens"
+            android:padding="4dp"
+            android:textAlignment="center" />
 
+        <ListView
+            android:id="@+id/selfProfileHabitListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation_today"
@@ -34,9 +39,6 @@
         app:itemBackground="@color/black"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu"/>
+        app:menu="@menu/menu" />
 
 </RelativeLayout>
