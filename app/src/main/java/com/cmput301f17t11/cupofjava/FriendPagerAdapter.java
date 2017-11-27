@@ -4,10 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.cmput301f17t11.cupofjava.FollowersTab;
-import com.cmput301f17t11.cupofjava.FollowingTab;
-import com.cmput301f17t11.cupofjava.RequestsTab;
-
 /**
  * Created by Moe on 2017-11-25.
  */
