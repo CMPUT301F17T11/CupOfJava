@@ -38,7 +38,7 @@
                 android:layout_marginTop="16dp"
                 android:hint="@string/prompt_username"
                 android:textSize="20sp"
-                android:textColor="#000000"
+                android:textColor="@color/fontDark"
                 android:inputType="textEmailAddress"
                 android:maxLines="1" />
 
@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textColor="#000000"
+                android:textColor="@color/white"
                 android:text="@string/action_sign_in"
                 android:textSize="20sp"
                 android:textStyle="bold" />
