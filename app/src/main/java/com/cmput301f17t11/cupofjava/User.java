@@ -18,16 +18,9 @@ public class User {
     @JestId
     private String id; //used for elasticsearch
 
-
-
-    /* TODO for prj5
     private ArrayList<String> followingList;
     private ArrayList<String> followerList;
     private ArrayList<String> followRequestList;
-    */
-
-
-
 
     /**
      * Constructor
@@ -51,24 +44,24 @@ public class User {
         return this.habitList.getHabitListAsArray();
     }
 
-    /* TODO prj5
+    /**
      * Setter method to set the list of users that the current user is following
      * @param followingList list of all users being followed by the user
      *
+     */
     public void setFollowingList(ArrayList<String> followingList) {
         this.followingList = followingList;
     }
-    */
 
-    /* TODO prj5
     /**
      * Setter method to set the list of users who are following the current user.
      * @param followerList
+     *
+     */
     public void setFollowerList(ArrayList<String> followerList) {
         this.followerList = followerList;
     }
 
-    */
     /**
      *
      * @param id
@@ -85,7 +78,7 @@ public class User {
     public String getId() {
         return id;
     }
-/*
+
     public void addFollower(String id){
         followerList.add(id);
     }
@@ -119,5 +112,4 @@ public class User {
     public ArrayList<String> getFollowerList(){
         return this.followerList;
     }
-    */
 }

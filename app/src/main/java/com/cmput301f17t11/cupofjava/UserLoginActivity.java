@@ -10,16 +10,12 @@
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-//TODO: Check if username exists
-//TODO: Register page
 
 /**
  * Activity handles required username and optional password entry.
@@ -42,7 +38,7 @@ public class UserLoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final Context context = getApplicationContext();
+        //final Context context = getApplicationContext();
 
         username_editText = (EditText) findViewById(R.id.username);
 
