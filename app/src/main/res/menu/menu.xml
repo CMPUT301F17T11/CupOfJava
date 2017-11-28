@@ -6,25 +6,30 @@
         android:id="@+id/action_timeline"
         android:enabled="true"
         android:icon="@drawable/timeline"
-        app:showAsAction="collapseActionView" />
+        android:title=""
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_today"
         android:enabled="true"
         android:icon="@drawable/today"
-        app:showAsAction="collapseActionView" />
+        android:title=""
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/add_habit_or_habit_event"
         android:enabled="true"
         android:icon="@drawable/add"
-        app:showAsAction="collapseActionView" />
+        android:title=""
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_friends"
         android:enabled="true"
         android:icon="@drawable/friends"
-        app:showAsAction="collapseActionView"/>
+        android:title=""
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_all_habits"
         android:enabled="true"
         android:icon="@drawable/list_all"
-        app:showAsAction="collapseActionView" />
+        android:title=""
+        app:showAsAction="ifRoom" />
 </menu>
