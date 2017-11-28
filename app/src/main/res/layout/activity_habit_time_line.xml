@@ -45,10 +45,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#000000"
-            app:itemBackground="@drawable/bkg"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
+            android:background="@color/white"
+            app:itemIconTint="@drawable/nav_color_select"
+            app:itemTextColor="@drawable/nav_color_select"
             app:menu="@menu/menu" />
 
     </RelativeLayout>
