@@ -242,8 +242,6 @@ public class NewHabitActivity extends Activity {
 
         ElasticsearchController.AddHabitTask addHabitTask = new ElasticsearchController.AddHabitTask();
         addHabitTask.execute(newHabit);
-        ElasticsearchController.UpdateHabitTask updateHabitTask = new ElasticsearchController.UpdateHabitTask();
-        updateHabitTask.execute(newHabit);
 
         //SaveFileController saveFileController = new SaveFileController();
         //saveFileController.addHabit(getApplicationContext(), this.userIndex, newHabit);
