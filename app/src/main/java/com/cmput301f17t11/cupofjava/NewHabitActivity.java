@@ -250,5 +250,4 @@ public class NewHabitActivity extends Activity {
         //intent.putExtra("userIndex", userIndex);
         startActivity(intent);
     }
-
 }

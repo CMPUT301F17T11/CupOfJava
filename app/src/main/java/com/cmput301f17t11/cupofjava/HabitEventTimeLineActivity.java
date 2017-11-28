@@ -200,5 +200,6 @@ public class HabitEventTimeLineActivity extends Activity {
         ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(HabitEventTimeLineActivity.this,
                 R.layout.habit_event_list_item, events);
         this.listView.setAdapter(arrayAdapter);
+        this.listView.notify();
     }
 }
