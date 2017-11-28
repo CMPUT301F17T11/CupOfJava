@@ -246,6 +246,4 @@ public class Habit implements Serializable {
         return ("What: " + this.habitTitle + "\n"
                 + "Why: " + this.habitReason);
     }
-
-
 }

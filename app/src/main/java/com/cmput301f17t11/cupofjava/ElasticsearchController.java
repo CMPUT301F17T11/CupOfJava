@@ -35,8 +35,6 @@ public class ElasticsearchController {
     private static JestDroidClient client; //manages communication with a server
     //http://cmput301.softwareprocess.es:8080/cmput301f17t11_cupofjava
 
-    // TODO we need a function which adds habits to elastic search
-
     /**
      * Adds habits to elastic search.
      *
@@ -69,8 +67,6 @@ public class ElasticsearchController {
 
     }
 
-    // TODO we need a function which gets tweets from elastic search
-
     /**
      * Gets habits from elastic search.
      *
@@ -84,8 +80,6 @@ public class ElasticsearchController {
             verifySettings();
 
             // TODO Build the query
-
-            //String query = "{\"query\":{\"match\":{\"username\":"+search_parameters[0]+"}}}";
 
             String query = "{\n" +
                     "    \"query\" : {\n" +
@@ -101,7 +95,6 @@ public class ElasticsearchController {
             Search search = new Search.Builder(query).addIndex("cmput301f17t11_cupofjava").addType("user").build();
 
             try {
-                // TODO get the results of the query
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded() && result.getFirstHit(User.class).source != null) {
                     //Log.i("Error", "Result.succeed is true");
@@ -168,8 +161,6 @@ public class ElasticsearchController {
             verifySettings();
             ArrayList<Habit> habits = new ArrayList<Habit>();
 
-            // TODO Build the query
-
             String query = "{\n" +
                     "    \"query\" : {\n" +
                     "       \"constant_score\" : {\n" +
@@ -186,7 +177,6 @@ public class ElasticsearchController {
 
 
             try {
-                // TODO get the results of the query
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
                     List<Habit> foundhabits = result.getSourceAsObjectList(Habit.class);
@@ -224,9 +214,6 @@ public class ElasticsearchController {
         @Override
         protected Void doInBackground(Habit... habits) {
             verifySettings();
-
-            // TODO Build the query
-
 
             for (Habit habit : habits) {
                 Delete delete = new Delete.Builder(habit.getId()).index("cmput301f17t11_cupofjava").type("habit").build();
@@ -310,9 +297,6 @@ public class ElasticsearchController {
         protected Void doInBackground(HabitEvent... events) {
             verifySettings();
 
-            // TODO Build the query
-
-
             for (HabitEvent habitEvent : events) {
                 Delete delete = new Delete.Builder(habitEvent.getId()).index("cmput301f17t11_cupofjava").type("event").build();
 
@@ -331,9 +315,6 @@ public class ElasticsearchController {
         @Override
         protected Void doInBackground(ArrayList<HabitEvent>... allEvents) {
             verifySettings();
-
-            // TODO Build the query
-
 
             for (ArrayList<HabitEvent> events : allEvents) {
                 for (int i = 0; i < events.size(); i++) {
@@ -368,11 +349,6 @@ public class ElasticsearchController {
             return null;
         }
     }
-
-
-
-
-
 
     /**
      * Sets up the server.
