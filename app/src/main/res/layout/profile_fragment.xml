@@ -9,15 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-         <ImageView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:id="@+id/profile_pic"
-             android:layout_marginLeft="16dp"
-             android:layout_marginTop="16dp"
-             android:layout_marginRight="48dp"
-             android:layout_marginBottom="8dp"
-             android:background="@drawable/take_photo"/>
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/take_photo_v" />
 
         <TextView
             android:layout_width="wrap_content"
