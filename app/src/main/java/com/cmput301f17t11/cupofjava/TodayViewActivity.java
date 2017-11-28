@@ -101,16 +101,25 @@ public class TodayViewActivity extends Fragment {
                         //intent2.putExtra("userIndex", userIndex);
                         return true;
                     case R.id.action_today:
-                        break;
+                        Bundle bundle3 = new Bundle();
+                        bundle3.putString("userName", userName);
+                        TodayViewActivity fragment3 = new TodayViewActivity();
+                        fragment3.setArguments(bundle3);
+                        FragmentManager fragmentManager3 = getFragmentManager();
+                        FragmentTransaction fragmentTransaction3 = fragmentManager3.beginTransaction();
+                        fragmentTransaction3.replace(R.id.frame, fragment3).addToBackStack(null);
+                        fragmentTransaction3.commit();
+                        //intent2.putExtra("userIndex", userIndex);
+                        return true;
                     case R.id.action_all_habits:
-                        Bundle bundle2 = new Bundle();
-                        bundle2.putString("userName", userName);
-                        AllHabitViewActivity fragment2 = new AllHabitViewActivity();
-                        fragment2.setArguments(bundle2);
-                        FragmentManager fragmentManager2 = getFragmentManager();
-                        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-                        fragmentTransaction2.replace(R.id.frame, fragment2).addToBackStack(null);
-                        fragmentTransaction2.commit();
+                        Bundle bundle4 = new Bundle();
+                        bundle4.putString("userName", userName);
+                        AllHabitViewActivity fragment4 = new AllHabitViewActivity();
+                        fragment4.setArguments(bundle4);
+                        FragmentManager fragmentManager4 = getFragmentManager();
+                        FragmentTransaction fragmentTransaction4 = fragmentManager4.beginTransaction();
+                        fragmentTransaction4.replace(R.id.frame, fragment4).addToBackStack(null);
+                        fragmentTransaction4.commit();
                         //intent2.putExtra("userIndex", userIndex);
                         return true;
                     case R.id.add_habit_or_habit_event:

@@ -12,8 +12,6 @@ package com.cmput301f17t11.cupofjava;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-//import android.icu.util.Calendar;
-import java.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,9 +19,11 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+
+//import android.icu.util.Calendar;
 
 /**
  * This activity handles adding and configuring git an existent habit.
@@ -245,7 +245,7 @@ public class NewHabitActivity extends Activity {
 
         //SaveFileController saveFileController = new SaveFileController();
         //saveFileController.addHabit(getApplicationContext(), this.userIndex, newHabit);
-        Intent intent = new Intent(NewHabitActivity.this, TodayViewActivity.class);
+        Intent intent = new Intent(NewHabitActivity.this, MainActivity.class);
         intent.putExtra("userName", userName);
         //intent.putExtra("userIndex", userIndex);
         startActivity(intent);

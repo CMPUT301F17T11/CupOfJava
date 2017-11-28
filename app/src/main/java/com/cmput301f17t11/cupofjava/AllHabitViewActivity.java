@@ -95,7 +95,16 @@ public class AllHabitViewActivity extends Fragment {
                         //intent2.putExtra("userIndex", userIndex);
                         return true;
                     case R.id.action_today:
-                        break;
+                        Bundle bundle3 = new Bundle();
+                        bundle3.putString("userName", userName);
+                        TodayViewActivity fragment3 = new TodayViewActivity();
+                        fragment3.setArguments(bundle3);
+                        FragmentManager fragmentManager3 = getFragmentManager();
+                        FragmentTransaction fragmentTransaction3 = fragmentManager3.beginTransaction();
+                        fragmentTransaction3.replace(R.id.frame, fragment3).addToBackStack(null);
+                        fragmentTransaction3.commit();
+                        //intent2.putExtra("userIndex", userIndex);
+                        return true;
                     case R.id.action_all_habits:
                         Bundle bundle2 = new Bundle();
                         bundle2.putString("userName", userName);

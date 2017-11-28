@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cmput301f17t11.cupofjava.TodayViewActivity">
-
-    <LinearLayout
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true" >
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:context="com.cmput301f17t11.cupofjava.TodayViewActivity">
 
-        <TextView
-            android:id="@+id/SelfProfileHeadingTextView"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/check_box_dimens"
-            android:padding="4dp"
-            android:textAlignment="center" />
-
-        <ListView
-            android:id="@+id/selfProfileHabitListView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp" />
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation_today"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        app:itemIconTint="@drawable/nav_color_select"
-        app:itemTextColor="@drawable/nav_color_select"
-        app:menu="@menu/menu" />
+            <TextView
+                android:id="@+id/SelfProfileHeadingTextView"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/check_box_dimens"
+                android:padding="4dp"
+                android:textAlignment="center" />
 
-</RelativeLayout>
+            <ListView
+                android:id="@+id/selfProfileHabitListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation_today"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            app:itemIconTint="@drawable/nav_color_select"
+            app:itemTextColor="@drawable/nav_color_select"
+            app:menu="@menu/menu" />
+
+    </RelativeLayout>
+</FrameLayout>

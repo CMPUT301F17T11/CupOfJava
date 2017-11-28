@@ -118,7 +118,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
         addEventTask.execute(newHabitEvent);
         //SaveFileController saveFileController = new SaveFileController();
         //saveFileController.addHabitEvent(getApplicationContext(), this.userIndex, this.habitIndex, newHabitEvent);
-        Intent intent = new Intent(NewHabitEventActivity.this, TodayViewActivity.class);
+        Intent intent = new Intent(NewHabitEventActivity.this, MainActivity.class);
         intent.putExtra("userName", userName);
         //intent.putExtra("userIndex", userIndex);
         startActivity(intent);
