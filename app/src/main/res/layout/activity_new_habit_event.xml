@@ -41,12 +41,12 @@
             android:layout_gravity="center"/>
 
         <ImageView
+            android:id="@+id/habit_event_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:layout_gravity="center"
-            android:id="@+id/habit_event_location"
-            android:background="@drawable/add_location"/>
+            android:layout_marginTop="24dp"
+            android:background="@drawable/add_location_v" />
 
         <Button
             android:layout_width="wrap_content"
