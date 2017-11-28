@@ -10,7 +10,9 @@
 
 package com.cmput301f17t11.cupofjava;
 
-import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,9 +20,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -33,12 +37,17 @@ import java.util.ArrayList;
  *
  * @version 1.0
  */
-public class HabitEventTimeLineActivity extends Activity {
+public class HabitEventTimeLineActivity extends Fragment {
     private String userName;
     private int userIndex;
     private ListView listView;
     private TextView textView;
     ArrayList<HabitEvent> events = new ArrayList<>();
+
+    public HabitEventTimeLineActivity() {
+
+    }
+
     //private HabitEventAdapter habitEventAdapter;
     //private ArrayList<HabitEvent> eventArrayList = new ArrayList<>();
 
@@ -53,19 +62,19 @@ public class HabitEventTimeLineActivity extends Activity {
      * @see NewHabitActivity
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_habit_time_line);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_habit_time_line, container, false);
         //habitEventAdapter = new HabitEventAdapter(this, eventArrayList);
         //listView.setAdapter(habitEventAdapter);
 
         //obtain extra info from intent
-        Intent intent = getIntent();
+        Intent intent = getActivity().getIntent();
         this.userName = intent.getStringExtra("userName");
         //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         //handle the bottom navigation bar
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_navigation_today);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         Menu menu = bottomNavigationView.getMenu();
@@ -80,24 +89,33 @@ public class HabitEventTimeLineActivity extends Activity {
                     case R.id.action_timeline:
                         break;
                     case R.id.action_today:
-                        Intent intent2 = new Intent(HabitEventTimeLineActivity.this, TodayViewActivity.class);
-                        intent2.putExtra("userName", userName);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("userName", userName);
+                        TodayViewActivity fragment = new TodayViewActivity();
+                        fragment.setArguments(bundle);
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame, fragment).addToBackStack(null);
+                        fragmentTransaction.commit();
                         //intent2.putExtra("userIndex", userIndex);
-                        startActivity(intent2);
-                        break;
                     case R.id.action_all_habits:
-                        Intent intent3 = new Intent(HabitEventTimeLineActivity.this, AllHabitViewActivity.class);
-                        intent3.putExtra("userName", userName);
-                        //intent3.putExtra("userIndex", userIndex);
-                        startActivity(intent3);
-                        break;
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putString("userName", userName);
+                        AllHabitViewActivity fragment2 = new AllHabitViewActivity();
+                        fragment2.setArguments(bundle2);
+                        FragmentManager fragmentManager2 = getFragmentManager();
+                        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+                        fragmentTransaction2.replace(R.id.frame, fragment2).addToBackStack(null);
+                        fragmentTransaction2.commit();
+                        //intent2.putExtra("userIndex", userIndex);
+                        return true;
                     case R.id.add_habit_or_habit_event:
-                        AlertDialog.Builder builder = new AlertDialog.Builder(HabitEventTimeLineActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setTitle("Add New")
                                 .setNegativeButton("New Habit", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent4 = new Intent(HabitEventTimeLineActivity.this, NewHabitActivity.class);
+                                        Intent intent4 = new Intent(getActivity(), NewHabitActivity.class);
                                         intent4.putExtra("userName", userName);
                                         //intent4.putExtra("userIndex", userIndex);
                                         startActivity(intent4);
@@ -119,7 +137,7 @@ public class HabitEventTimeLineActivity extends Activity {
                         dialog.show();
                         break;
                     case R.id.action_friends:
-                        Intent intent5 = new Intent(HabitEventTimeLineActivity.this, FriendsActivity.class);
+                        Intent intent5 = new Intent(getActivity(), FriendsActivity.class);
                         intent5.putExtra("userName", userName);
                         //intent4.putExtra("userIndex", userIndex);
                         startActivity(intent5);
@@ -130,12 +148,12 @@ public class HabitEventTimeLineActivity extends Activity {
         });
 
         //set up the TextView and ListView
-        this.textView = (TextView) findViewById(R.id.timelineHeadingTextView);
-        this.listView = (ListView) findViewById(R.id.timeLineListView);
+        this.textView = (TextView) view.findViewById(R.id.timelineHeadingTextView);
+        this.listView = (ListView) view.findViewById(R.id.timeLineListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent5 = new Intent(HabitEventTimeLineActivity.this,
+                Intent intent5 = new Intent(getActivity(),
                         ViewHabitEventActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("userName", userName);
@@ -149,10 +167,11 @@ public class HabitEventTimeLineActivity extends Activity {
                 startActivity(intent5);
             }
         });
+        return view;
     }
 
     @Override
-    protected void onResume(){
+    public void onResume(){
         super.onResume();
         //SaveFileController saveFileController = new SaveFileController();
         //ArrayList<HabitEvent> events = saveFileController.getAllHabitEvents(getApplicationContext(), this.userIndex);
@@ -197,7 +216,7 @@ public class HabitEventTimeLineActivity extends Activity {
      * @param events Arraylist of type HabitEvent
      */
     private void updateListView(ArrayList<HabitEvent> events){
-        ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(HabitEventTimeLineActivity.this,
+        ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.habit_event_list_item, events);
         this.listView.setAdapter(arrayAdapter);
         this.listView.notify();

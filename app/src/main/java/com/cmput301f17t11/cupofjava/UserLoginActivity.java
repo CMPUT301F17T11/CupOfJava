@@ -62,7 +62,7 @@ public class UserLoginActivity extends Activity {
                         } else {
                             Log.i("username", "not null");
                         }
-                        Intent intent = new Intent(UserLoginActivity.this, TodayViewActivity.class);
+                        Intent intent = new Intent(UserLoginActivity.this, MainActivity.class);
                         intent.putExtra("userName", input);
                         startActivity(intent);
 

@@ -8,7 +8,9 @@
  */
 package com.cmput301f17t11.cupofjava;
 
-import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,10 +18,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -33,7 +36,7 @@ import java.util.ArrayList;
  *
  * @version 1.0
  */
-public class AllHabitViewActivity extends Activity {
+public class AllHabitViewActivity extends Fragment {
     private ListView listView;
     private TextView textView;
     private String userName;
@@ -42,6 +45,10 @@ public class AllHabitViewActivity extends Activity {
 
     public ListView getListView(){
         return listView;
+    }
+
+    public void AllHabitViewActivity() {
+
     }
 
     /**
@@ -55,17 +62,17 @@ public class AllHabitViewActivity extends Activity {
      * @see NewHabitActivity
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_habit_view);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_all_habit_view, container, false);
 
         //obtain extra info from intent
-        final Intent intent = getIntent();
+        final Intent intent = getActivity().getIntent();
         this.userName = intent.getStringExtra("userName");
         //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         //handle bottom navigation bar
-        final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
+        final BottomNavigationView bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_navigation_today);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(2);
@@ -75,28 +82,38 @@ public class AllHabitViewActivity extends Activity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()) {
+
                     case R.id.action_timeline:
-                        Intent intent2 = new Intent(AllHabitViewActivity.this, HabitEventTimeLineActivity.class);
-                        intent2.putExtra("userName", userName);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("userName", userName);
+                        HabitEventTimeLineActivity fragment = new HabitEventTimeLineActivity();
+                        fragment.setArguments(bundle);
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame, fragment).addToBackStack(null);
+                        fragmentTransaction.commit();
                         //intent2.putExtra("userIndex", userIndex);
-                        startActivity(intent2);
-                        break;
+                        return true;
                     case R.id.action_today:
-                        Intent intent3 = new Intent(AllHabitViewActivity.this, TodayViewActivity.class);
-                        intent3.putExtra("userName", userName);
-                        //intent3.putExtra("userIndex", userIndex);
-                        startActivity(intent3);
                         break;
                     case R.id.action_all_habits:
-                        break;
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putString("userName", userName);
+                        AllHabitViewActivity fragment2 = new AllHabitViewActivity();
+                        fragment2.setArguments(bundle2);
+                        FragmentManager fragmentManager2 = getFragmentManager();
+                        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+                        fragmentTransaction2.replace(R.id.frame, fragment2).addToBackStack(null);
+                        fragmentTransaction2.commit();
+                        //intent2.putExtra("userIndex", userIndex);
+                        return true;
                     case R.id.add_habit_or_habit_event:
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(AllHabitViewActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setTitle("Add New")
                                 .setNegativeButton("New Habit", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent4 = new Intent(AllHabitViewActivity.this, NewHabitActivity.class);
+                                        Intent intent4 = new Intent(getActivity(), NewHabitActivity.class);
                                         intent4.putExtra("userName", userName);
                                         //intent4.putExtra("userIndex", userIndex);
                                         startActivity(intent4);
@@ -105,40 +122,39 @@ public class AllHabitViewActivity extends Activity {
                                 .setPositiveButton("New Habit \n   Event", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        //Intent intent5 = new Intent(AllHabitViewActivity.this, NewHabitEventActivity.class);
-                                        //intent5.putExtra("userName", userName);
-                                        //intent5.putExtra("userIndex", userIndex);
+                                        Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
+                                        intent5.putExtra("userName", userName);
+                                        //.putExtra("userIndex", userIndex);
 
-                                        //startActivity(intent5);
+                                        startActivity(intent5);
                                     }
                                 });
 
 
                         AlertDialog dialog = builder.create();
                         dialog.show();
-
-                        break;
                     case R.id.action_friends:
-                        Intent intent6 = new Intent(AllHabitViewActivity.this, FriendsActivity.class);
-                        intent6.putExtra("userName", userName);
-                        //intent6.putExtra("userIndex", userIndex);
-                        startActivity(intent6);
+                        Intent intent5 = new Intent(getActivity(), FriendsActivity.class);
+                        intent5.putExtra("userName", userName);
+                        //intent4.putExtra("userIndex", userIndex);
+                        startActivity(intent5);
                         break;
                 }
                 return false;
             }
         });
 
+
         //set up TextView and ListView
-        this.textView = (TextView) findViewById(R.id.allHabitHeadingTextView);
-        this.listView = (ListView) findViewById(R.id.allHabitListView);
+        this.textView = (TextView) view.findViewById(R.id.allHabitHeadingTextView);
+        this.listView = (ListView) view.findViewById(R.id.allHabitListView);
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /*SaveFileController saveFileController = new SaveFileController();
                 saveFileController.getHabit(getApplicationContext(), userIndex, position);*/
 
-                Intent intent5 = new Intent(AllHabitViewActivity.this, HabitDetailViewActivity.class);
+                Intent intent5 = new Intent(getActivity(), HabitDetailViewActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("userName", userName);
                 bundle.putSerializable("habitClicked", habits); //sending all habits list
@@ -148,6 +164,7 @@ public class AllHabitViewActivity extends Activity {
                 startActivity(intent5);
             }
         });
+        return view;
     }
 
     /**
@@ -156,7 +173,7 @@ public class AllHabitViewActivity extends Activity {
      * @see SaveFileController
      */
     @Override
-    protected void onResume(){
+    public void onResume(){
         super.onResume();
         ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
         getHabitsTask.execute(userName);
@@ -199,7 +216,7 @@ public class AllHabitViewActivity extends Activity {
      * @see Habit
      */
     private void updateListView(ArrayList<Habit> habits){
-        ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(AllHabitViewActivity.this,
+        ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.habit_list_item, habits);
         this.listView.setAdapter(arrayAdapter);
         this.listView.notify();
