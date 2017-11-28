@@ -97,6 +97,7 @@ public class HabitEventTimeLineActivity extends Fragment {
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.frame, fragment).addToBackStack(null);
                         fragmentTransaction.commit();
+                        break;
                         //intent2.putExtra("userIndex", userIndex);
                     case R.id.action_all_habits:
                         Bundle bundle2 = new Bundle();
@@ -108,7 +109,7 @@ public class HabitEventTimeLineActivity extends Fragment {
                         fragmentTransaction2.replace(R.id.frame, fragment2).addToBackStack(null);
                         fragmentTransaction2.commit();
                         //intent2.putExtra("userIndex", userIndex);
-                        return true;
+                        break;
                     case R.id.add_habit_or_habit_event:
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setTitle("Add New")

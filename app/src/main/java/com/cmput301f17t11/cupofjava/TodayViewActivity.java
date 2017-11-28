@@ -99,18 +99,9 @@ public class TodayViewActivity extends Fragment {
                         fragmentTransaction.replace(R.id.frame, fragment).addToBackStack(null);
                         fragmentTransaction.commit();
                         //intent2.putExtra("userIndex", userIndex);
-                        return true;
+                        break;
                     case R.id.action_today:
-                        Bundle bundle3 = new Bundle();
-                        bundle3.putString("userName", userName);
-                        TodayViewActivity fragment3 = new TodayViewActivity();
-                        fragment3.setArguments(bundle3);
-                        FragmentManager fragmentManager3 = getFragmentManager();
-                        FragmentTransaction fragmentTransaction3 = fragmentManager3.beginTransaction();
-                        fragmentTransaction3.replace(R.id.frame, fragment3).addToBackStack(null);
-                        fragmentTransaction3.commit();
-                        //intent2.putExtra("userIndex", userIndex);
-                        return true;
+                        break;
                     case R.id.action_all_habits:
                         Bundle bundle4 = new Bundle();
                         bundle4.putString("userName", userName);
@@ -121,7 +112,7 @@ public class TodayViewActivity extends Fragment {
                         fragmentTransaction4.replace(R.id.frame, fragment4).addToBackStack(null);
                         fragmentTransaction4.commit();
                         //intent2.putExtra("userIndex", userIndex);
-                        return true;
+                        break;
                     case R.id.add_habit_or_habit_event:
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setTitle("Add New")
@@ -148,6 +139,7 @@ public class TodayViewActivity extends Fragment {
 
                         AlertDialog dialog = builder.create();
                         dialog.show();
+                        break;
                     case R.id.action_friends:
                         Intent intent5 = new Intent(getActivity(), FriendsActivity.class);
                         intent5.putExtra("userName", userName);

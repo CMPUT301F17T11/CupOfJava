@@ -84,16 +84,7 @@ public class AllHabitViewActivity extends Fragment {
                 switch(item.getItemId()) {
 
                     case R.id.action_timeline:
-                        Bundle bundle = new Bundle();
-                        bundle.putString("userName", userName);
-                        HabitEventTimeLineActivity fragment = new HabitEventTimeLineActivity();
-                        fragment.setArguments(bundle);
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.frame, fragment).addToBackStack(null);
-                        fragmentTransaction.commit();
-                        //intent2.putExtra("userIndex", userIndex);
-                        return true;
+                        break;
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
                         bundle3.putString("userName", userName);
@@ -104,7 +95,7 @@ public class AllHabitViewActivity extends Fragment {
                         fragmentTransaction3.replace(R.id.frame, fragment3).addToBackStack(null);
                         fragmentTransaction3.commit();
                         //intent2.putExtra("userIndex", userIndex);
-                        return true;
+                        break;
                     case R.id.action_all_habits:
                         Bundle bundle2 = new Bundle();
                         bundle2.putString("userName", userName);
@@ -115,7 +106,7 @@ public class AllHabitViewActivity extends Fragment {
                         fragmentTransaction2.replace(R.id.frame, fragment2).addToBackStack(null);
                         fragmentTransaction2.commit();
                         //intent2.putExtra("userIndex", userIndex);
-                        return true;
+                        break;
                     case R.id.add_habit_or_habit_event:
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setTitle("Add New")
@@ -142,6 +133,8 @@ public class AllHabitViewActivity extends Fragment {
 
                         AlertDialog dialog = builder.create();
                         dialog.show();
+                        break;
+
                     case R.id.action_friends:
                         Intent intent5 = new Intent(getActivity(), FriendsActivity.class);
                         intent5.putExtra("userName", userName);
