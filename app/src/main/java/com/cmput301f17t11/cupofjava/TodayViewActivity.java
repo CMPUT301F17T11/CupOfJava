@@ -156,6 +156,9 @@ public class TodayViewActivity extends Activity {
                 startActivity(intent5);
             }
         });
+
+
+
     }
 
     /**
@@ -220,6 +223,7 @@ public class TodayViewActivity extends Activity {
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(TodayViewActivity.this,
                 R.layout.habit_list_item, habits);
         this.listView.setAdapter(arrayAdapter);
+        this.listView.notify();
     }
 
     public ArrayList<Habit> getTodaysHabitList(ArrayList<Habit> habits) {

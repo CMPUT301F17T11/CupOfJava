@@ -202,5 +202,6 @@ public class AllHabitViewActivity extends Activity {
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(AllHabitViewActivity.this,
                 R.layout.habit_list_item, habits);
         this.listView.setAdapter(arrayAdapter);
+        this.listView.notify();
     }
 }
