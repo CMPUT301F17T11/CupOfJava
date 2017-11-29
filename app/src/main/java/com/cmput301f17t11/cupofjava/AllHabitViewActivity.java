@@ -84,6 +84,15 @@ public class AllHabitViewActivity extends Fragment {
                 switch(item.getItemId()) {
 
                     case R.id.action_timeline:
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putString("userName", userName);
+                        HomeFragment fragment2 = new HomeFragment();
+                        fragment2.setArguments(bundle2);
+                        FragmentManager fragmentManager2 = getFragmentManager();
+                        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+                        fragmentTransaction2.replace(R.id.frame, fragment2).addToBackStack(null);
+                        fragmentTransaction2.commit();
+                        //intent2.putExtra("userIndex", userIndex);
                         break;
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
@@ -97,15 +106,6 @@ public class AllHabitViewActivity extends Fragment {
                         //intent2.putExtra("userIndex", userIndex);
                         break;
                     case R.id.action_all_habits:
-                        Bundle bundle2 = new Bundle();
-                        bundle2.putString("userName", userName);
-                        AllHabitViewActivity fragment2 = new AllHabitViewActivity();
-                        fragment2.setArguments(bundle2);
-                        FragmentManager fragmentManager2 = getFragmentManager();
-                        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-                        fragmentTransaction2.replace(R.id.frame, fragment2).addToBackStack(null);
-                        fragmentTransaction2.commit();
-                        //intent2.putExtra("userIndex", userIndex);
                         break;
                     case R.id.add_habit_or_habit_event:
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
