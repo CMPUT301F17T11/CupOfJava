@@ -174,6 +174,7 @@ public class AllHabitViewActivity extends Fragment {
 
                 Intent intent5 = new Intent(getActivity(), HabitDetailViewActivity.class);
                 Bundle bundle = new Bundle();
+                bundle.putSerializable("user", user);
                 bundle.putString("userName", userName);
                 bundle.putSerializable("habitClicked", habits); //sending all habits list
                 bundle.putInt("habitIndex", position);
@@ -193,19 +194,9 @@ public class AllHabitViewActivity extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
-        getHabitsTask.execute(userName);
-        try {
-            habits = getHabitsTask.get();
-
-            updateTextView(habits.size());
-            updateListView(habits);
-            Log.i("habits", habits.toString());
-
-
-        } catch (Exception e) {
-            Log.i("Error", "Failed to get the tweets from the async object");
-        }
+        habits = user.getHabitListAsArray();
+        updateTextView(habits.size());
+        updateListView(habits);
         /*SaveFileController saveFileController = new SaveFileController();
         ArrayList<Habit> habitList = saveFileController
                 .getHabitListAsArray(getApplicationContext(), this.userIndex);*/
@@ -236,7 +227,10 @@ public class AllHabitViewActivity extends Fragment {
     private void updateListView(ArrayList<Habit> habits){
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.habit_list_item, habits);
-        this.listView.setAdapter(arrayAdapter);
-        this.listView.notify();
+        synchronized (listView){
+            this.listView.setAdapter(arrayAdapter);
+            this.listView.notify();
+        }
+
     }
 }

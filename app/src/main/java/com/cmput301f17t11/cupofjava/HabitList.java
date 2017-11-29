@@ -72,8 +72,8 @@ public class HabitList implements Serializable {
      *
      * @param index integer
      */
-    public void deleteHabit(int index){
-        this.habits.remove(index);
+    public void deleteHabit(Habit habit){
+        this.habits.remove(habit);
     }
 
     /**
