@@ -30,6 +30,9 @@ public class User implements Serializable {
         this.habitList = new HabitList();
     }
 
+    public void setHabitList(HabitList habitList) {
+        this.habitList = habitList;
+    }
     public String getUsername(){
         return this.username;
     }
