@@ -24,4 +24,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps_tabbed">Map</string>
+
+    <!-- Google Maps API Key -->
+    <string name="google_maps_key_1">AIzaSyBaT4jmVkpNLI8C0UesYVrK8AVKgl0XZW8</string>
 </resources>

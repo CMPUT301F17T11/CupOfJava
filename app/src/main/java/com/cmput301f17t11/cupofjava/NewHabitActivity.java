@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -56,6 +57,7 @@ public class NewHabitActivity extends Activity {
     private ArrayList<Integer> repeatingDays;
 
     private String userName;
+    private User user;
     private int userIndex;
 
     /**
@@ -70,8 +72,8 @@ public class NewHabitActivity extends Activity {
 
         //obtain extra info from intent
         Intent intent = getIntent();
-        this.userName = intent.getStringExtra("userName");
-        //this.userIndex = intent.getIntExtra("userIndex", 0);
+        this.user = (User)intent.getSerializableExtra("user");
+        this.userName = user.getUsername();
 
         this.repeatingDays = new ArrayList<>();
 
@@ -240,13 +242,39 @@ public class NewHabitActivity extends Activity {
 
         newHabit.setHabitStartDate(habitStartDate);
 
+
+        HabitList newHabitList = user.getHabitList();
+        newHabitList.addHabit(newHabit);
+        user.setHabitList(newHabitList);
+
+        ElasticsearchController.DeleteUsersTask deleteUsersTask = new ElasticsearchController.DeleteUsersTask();
+        deleteUsersTask.execute(user);
+
+        ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask();
+        getUserTask.execute(user.getUsername());
+        try {
+            User deletedUser = getUserTask.get();
+            if (deletedUser == null)
+            {
+                Log.i("GetUserTask ", "user does not exist ");
+
+            }
+            else {
+                Log.i("GetUserTask ", deletedUser.getUsername()+"user still exists ");
+
+            }
+        }catch (Exception e){
+
+        }
+        ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask();
+        addUserTask.execute(user);
         ElasticsearchController.AddHabitTask addHabitTask = new ElasticsearchController.AddHabitTask();
         addHabitTask.execute(newHabit);
 
         //SaveFileController saveFileController = new SaveFileController();
         //saveFileController.addHabit(getApplicationContext(), this.userIndex, newHabit);
         Intent intent = new Intent(NewHabitActivity.this, MainActivity.class);
-        intent.putExtra("userName", userName);
+        intent.putExtra("user", user);
         //intent.putExtra("userIndex", userIndex);
         startActivity(intent);
     }
