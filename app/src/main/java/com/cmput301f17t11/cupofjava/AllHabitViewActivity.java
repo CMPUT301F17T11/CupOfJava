@@ -138,7 +138,7 @@ public class AllHabitViewActivity extends Fragment {
                     case R.id.action_friends:
                         Bundle bundle4 = new Bundle();
                         bundle4.putString("userName", userName);
-                        FriendsActivity fragment4 = new FriendsActivity();
+                        SocialFragment fragment4 = new SocialFragment();
                         fragment4.setArguments(bundle4);
                         FragmentManager fragmentManager4 = getFragmentManager();
                         FragmentTransaction fragmentTransaction4 = fragmentManager4.beginTransaction();

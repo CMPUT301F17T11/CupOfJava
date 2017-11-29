@@ -1,12 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.support.v4.app.Fragment;
-import android.support.design.widget.TabItem;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v7.app.AppCompatActivity;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -15,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FriendsActivity extends Fragment implements FollowingTab.OnFragmentInteractionListener,
+public class SocialFragment extends Fragment implements FollowingTab.OnFragmentInteractionListener,
 FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionListener {
 
     //private TabItem followingTab;
@@ -25,10 +20,11 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_friends, container, false);
+        View view = inflater.inflate(R.layout.activity_social, container, false);
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tablayout);
 
+        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
         tabLayout.addTab(tabLayout.newTab().setText("Following"));
         tabLayout.addTab(tabLayout.newTab().setText("Followers"));
         tabLayout.addTab(tabLayout.newTab().setText("Requests"));
@@ -40,7 +36,7 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.friends_view_pager);
-        final FriendPagerAdapter adapter = new FriendPagerAdapter(getChildFragmentManager(),tabLayout.getTabCount());
+        final SocialPagerAdapter adapter = new SocialPagerAdapter(getChildFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 

@@ -1,6 +1,5 @@
 package com.cmput301f17t11.cupofjava;
 
-import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                     case R.id.action_friends:
                         Bundle bundle4 = new Bundle();
                         bundle4.putString("userName", userName);
-                        FriendsActivity fragment4 = new FriendsActivity();
+                        SocialFragment fragment4 = new SocialFragment();
                         fragment4.setArguments(bundle4);
                         FragmentManager fragmentManager4 = getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction4 = fragmentManager4.beginTransaction();

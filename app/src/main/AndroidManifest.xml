@@ -38,7 +38,7 @@
         <activity android:name=".HabitEventTimeLineActivity" />
         <activity android:name=".HabitDetailViewActivity" />
         <activity
-            android:name=".FriendsActivity"
+            android:name=".SocialFragment"
             android:label="@string/title_activity_friends"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--

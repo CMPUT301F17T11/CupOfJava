@@ -143,7 +143,7 @@ public class TodayViewActivity extends Fragment {
                     case R.id.action_friends:
                         Bundle bundle3 = new Bundle();
                         bundle3.putString("userName", userName);
-                        FriendsActivity fragment3 = new FriendsActivity();
+                        SocialFragment fragment3 = new SocialFragment();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getFragmentManager();
                         FragmentTransaction fragmentTransaction3 = fragmentManager3.beginTransaction();
