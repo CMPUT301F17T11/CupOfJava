@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
 
             }
         });
-//bottom navigation bar
+        //bottom navigation bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_navigation_today);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
@@ -126,11 +126,22 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                         dialog.show();
                         break;
                     case R.id.action_friends:
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putSerializable("user", user);
+                        //bundle4.putString("userName", userName);
+                        AllHabitViewActivity fragment1 = new AllHabitViewActivity();
+                        fragment1.setArguments(bundle1);
+                        FragmentManager fragmentManager1 = getFragmentManager();
+                        FragmentTransaction fragmentTransaction1 = fragmentManager1.beginTransaction();
+                        fragmentTransaction1.replace(R.id.frame, fragment1).addToBackStack(null);
+                        fragmentTransaction1.commit();
+                        //intent2.putExtra("userIndex", userIndex);
                         break;
                 }
                 return false;
             }
         });
+
         return view;
     }
     @Override
