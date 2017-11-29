@@ -109,6 +109,31 @@ public class ElasticsearchController {
             return thisUser;
         }
     }
+    public static class DeleteUsersTask extends AsyncTask<User, Void, Void> {
+        @Override
+        protected Void doInBackground(User... users) {
+            verifySettings();
+
+            for (User user : users) {
+                Delete delete = new Delete.Builder(user.getId()).index("cmput301f17t11_cupofjava").type("user").build();
+
+                try {
+                    DocumentResult result = client.execute(delete);
+                    if(result.isSucceeded()){
+                        Log.i("DeleteUserTask", "User was deleted successfully");
+                    }
+                    else{
+                        Log.i("DeleteUserTask", "User could not be  deleted successfully");
+
+                    }
+                } catch (Exception e) {
+                    Log.i("Error", "The application failed to build");
+                }
+
+            }
+            return null;
+        }
+    }
 
     public static class UpdateUserTask extends AsyncTask<User, Void, Void> {
         @Override
