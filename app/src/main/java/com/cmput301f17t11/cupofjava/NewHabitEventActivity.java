@@ -9,6 +9,7 @@
 
 package com.cmput301f17t11.cupofjava;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -17,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.sql.Time;
@@ -33,9 +35,12 @@ import java.util.Calendar;
 
 public class NewHabitEventActivity extends AppCompatActivity {
 
+    private static final int CAMERA_REQUEST = 1888;
+
     private Calendar date;
     private EditText comment;
-    private Bitmap photo;
+    private Bitmap habitEventPhotoBitmap;
+    private ImageView habitEventPhoto;
     private Time time;
     private Location location;
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
@@ -78,9 +83,26 @@ public class NewHabitEventActivity extends AppCompatActivity {
 
         habitEventCommentEditText = (EditText) findViewById(R.id.edit_comment);
 
+        this.habitEventPhoto = (ImageView) findViewById(R.id.habit_event_photo);
+
+        habitEventPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });
+
         spinner =  (Spinner) findViewById(R.id.choose_habit_spinner);
         habitAdapter = new HabitAdapter(this, habitList);
         spinner.setAdapter(habitAdapter);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            habitEventPhoto.setImageBitmap(photo);
+        }
     }
 
     /**
