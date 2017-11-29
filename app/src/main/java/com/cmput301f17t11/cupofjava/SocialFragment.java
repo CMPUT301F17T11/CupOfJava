@@ -34,8 +34,13 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //obtain extra info from intent
-        final Intent intent = getActivity().getIntent();
-        this.userName = intent.getStringExtra("userName");
+        //final Intent intent = getActivity().getIntent();
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+        this.user = (User) bundle.getSerializable("user");
+        this.userName = user.getUsername();
+        }
+        //this.userName = intent.getStringExtra("userName");
         //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         View view = inflater.inflate(R.layout.activity_social, container, false);
@@ -90,8 +95,9 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
 
                     case R.id.action_timeline:
                         Bundle bundle = new Bundle();
-                        bundle.putString("userName", userName);
-                        TodayViewActivity fragment = new TodayViewActivity();
+                        //bundle.putString("userName", userName);
+                        bundle.putSerializable("user", user);
+                        HomeFragment fragment = new HomeFragment();
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -100,7 +106,7 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
                         //intent2.putExtra("userIndex", userIndex);
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
-                        bundle3.putString("userName", userName);
+                        bundle3.putSerializable("user", user);
                         TodayViewActivity fragment3 = new TodayViewActivity();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getFragmentManager();
@@ -111,7 +117,8 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
                         break;
                     case R.id.action_all_habits:
                         Bundle bundle4 = new Bundle();
-                        bundle4.putString("userName", userName);
+                        bundle4.putSerializable("user", user);
+                        //bundle4.putString("userName", userName);
                         AllHabitViewActivity fragment4 = new AllHabitViewActivity();
                         fragment4.setArguments(bundle4);
                         FragmentManager fragmentManager4 = getFragmentManager();
@@ -127,7 +134,7 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent4 = new Intent(getActivity(), NewHabitActivity.class);
-                                        intent4.putExtra("userName", userName);
+                                        intent4.putExtra("user", user);
                                         //intent4.putExtra("userIndex", userIndex);
                                         startActivity(intent4);
                                     }
@@ -136,7 +143,7 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
-                                        intent5.putExtra("userName", userName);
+                                        intent5.putExtra("user", user);
                                         //.putExtra("userIndex", userIndex);
 
                                         startActivity(intent5);

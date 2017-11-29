@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
 
                     case R.id.action_timeline:
                         Bundle bundle = new Bundle();
-                        bundle.putString("userName", userName);
+                        bundle.putSerializable("user", user);
+                        //bundle.putString("userName", userName);
                         HomeFragment fragment = new HomeFragment();
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                         return true;
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
-                        bundle3.putString("userName", userName);
+                        bundle3.putSerializable("user", user);
                         TodayViewActivity fragment3 = new TodayViewActivity();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getSupportFragmentManager();
@@ -86,7 +87,8 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                         return true;
                     case R.id.action_all_habits:
                         Bundle bundle2 = new Bundle();
-                        bundle2.putString("userName", userName);
+                        bundle2.putSerializable("user", user);
+                        //bundle2.putString("userName", userName);
                         AllHabitViewActivity fragment2 = new AllHabitViewActivity();
                         fragment2.setArguments(bundle2);
                         FragmentManager fragmentManager2 = getSupportFragmentManager();
@@ -97,13 +99,14 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                         return true;
                     case R.id.add_habit_or_habit_event:
                         Intent intent4 = new Intent(MainActivity.this, NewHabitActivity.class);
-                        intent4.putExtra("userName", userName);
+                        intent4.putExtra("user", user);
                         //intent4.putExtra("userIndex", userIndex);
                         startActivity(intent4);
                         break;
                     case R.id.action_friends:
                         Bundle bundle4 = new Bundle();
-                        bundle4.putString("userName", userName);
+                        bundle4.putSerializable("user", user);
+                        //bundle4.putString("userName", userName);
                         SocialFragment fragment4 = new SocialFragment();
                         fragment4.setArguments(bundle4);
                         FragmentManager fragmentManager4 = getSupportFragmentManager();
