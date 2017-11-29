@@ -1,5 +1,5 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +10,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textSize="30sp"
-        android:text="FOLLOWERS" />
+        android:text="FOLLOWERS"
+        android:textSize="30sp" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation_today"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:itemIconTint="@drawable/nav_color_select"
+        app:itemTextColor="@drawable/nav_color_select"
+        app:menu="@menu/menu" />
 
 </RelativeLayout>

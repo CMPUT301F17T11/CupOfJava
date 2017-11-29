@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  * Created by Moe on 2017-11-25.
  */
 
-public class FriendPagerAdapter extends FragmentStatePagerAdapter {
+public class FriendPagerAdapter extends FragmentStatePagerAdapter{
 
     int numOfTabs;
 

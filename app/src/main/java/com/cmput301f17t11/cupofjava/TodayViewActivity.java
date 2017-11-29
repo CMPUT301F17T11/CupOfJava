@@ -9,9 +9,9 @@
 
 package com.cmput301f17t11.cupofjava;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -141,11 +141,15 @@ public class TodayViewActivity extends Fragment {
                         dialog.show();
                         break;
                     case R.id.action_friends:
-                        Intent intent5 = new Intent(getActivity(), FriendsActivity.class);
-                        intent5.putExtra("userName", userName);
-                        //intent4.putExtra("userIndex", userIndex);
-                        startActivity(intent5);
-                        break;
+                        Bundle bundle3 = new Bundle();
+                        bundle3.putString("userName", userName);
+                        FriendsActivity fragment3 = new FriendsActivity();
+                        fragment3.setArguments(bundle3);
+                        FragmentManager fragmentManager3 = getFragmentManager();
+                        FragmentTransaction fragmentTransaction3 = fragmentManager3.beginTransaction();
+                        fragmentTransaction3.replace(R.id.frame, fragment3).addToBackStack(null);
+                        fragmentTransaction3.commit();
+                        //intent2.putExtra("userIndex", userIndex);
                 }
                 return false;
             }
