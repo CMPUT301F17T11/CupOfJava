@@ -68,7 +68,7 @@ public class TodayViewActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_today_view, container, false);
-        listView = view.findViewById(R.id.selfProfileHabitListView);
+        listView = (ListView) view.findViewById(R.id.selfProfileHabitListView);
         HabitAdapter habitAdapter = new HabitAdapter(getActivity(), habitList);
         listView.setAdapter(habitAdapter);
 
