@@ -1,6 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -65,6 +66,7 @@ public class FollowersTab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_followers_tab, container, false);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -106,4 +108,6 @@ public class FollowersTab extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

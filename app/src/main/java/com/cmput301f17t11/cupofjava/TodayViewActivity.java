@@ -78,6 +78,7 @@ public class TodayViewActivity extends Fragment {
             this.user = (User) bundle.getSerializable("user");
             this.userName = user.getUsername();
         }
+
         //this.userName = bundle.getString("userName");
         Log.i("username in TodayView", userName);
         //this.userIndex = intent.getIntExtra("userIndex", 0);
@@ -99,7 +100,7 @@ public class TodayViewActivity extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("user", user);
                         //bundle.putString("userName", userName);
-                        HabitEventTimeLineActivity fragment = new HabitEventTimeLineActivity();
+                        HomeFragment fragment = new HomeFragment();
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

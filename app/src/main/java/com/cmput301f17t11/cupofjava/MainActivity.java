@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                     case R.id.action_timeline:
                         Bundle bundle = new Bundle();
                         bundle.putString("userName", userName);
-                        HabitEventTimeLineActivity fragment = new HabitEventTimeLineActivity();
+                        HomeFragment fragment = new HomeFragment();
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
