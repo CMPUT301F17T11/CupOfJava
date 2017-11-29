@@ -41,6 +41,7 @@ public class AllHabitViewActivity extends Fragment {
     private TextView textView;
     private String userName;
     private ArrayList<Habit> habits;
+    private User user;
     private int userIndex;
 
     public ListView getListView(){
@@ -68,7 +69,9 @@ public class AllHabitViewActivity extends Fragment {
 
         //obtain extra info from intent
         final Intent intent = getActivity().getIntent();
-        this.userName = intent.getStringExtra("userName");
+        //this.userName = intent.getStringExtra("userName");
+        Bundle bundle = getArguments();
+        this.user = (User) bundle.getSerializable("user");
         //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         //handle bottom navigation bar
@@ -85,7 +88,8 @@ public class AllHabitViewActivity extends Fragment {
 
                     case R.id.action_timeline:
                         Bundle bundle2 = new Bundle();
-                        bundle2.putString("userName", userName);
+                        bundle2.putSerializable("user", user);
+                        //bundle2.putString("userName", userName);
                         HomeFragment fragment2 = new HomeFragment();
                         fragment2.setArguments(bundle2);
                         FragmentManager fragmentManager2 = getFragmentManager();
@@ -96,7 +100,8 @@ public class AllHabitViewActivity extends Fragment {
                         break;
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
-                        bundle3.putString("userName", userName);
+                        bundle3.putSerializable("user", user);
+                        //bundle3.putString("userName", userName);
                         TodayViewActivity fragment3 = new TodayViewActivity();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getFragmentManager();
@@ -114,7 +119,7 @@ public class AllHabitViewActivity extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent4 = new Intent(getActivity(), NewHabitActivity.class);
-                                        intent4.putExtra("userName", userName);
+                                        intent4.putExtra("user", user);
                                         //intent4.putExtra("userIndex", userIndex);
                                         startActivity(intent4);
                                     }
@@ -123,7 +128,7 @@ public class AllHabitViewActivity extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
-                                        intent5.putExtra("userName", userName);
+                                        intent5.putExtra("user", user);
                                         //.putExtra("userIndex", userIndex);
 
                                         startActivity(intent5);
@@ -137,7 +142,8 @@ public class AllHabitViewActivity extends Fragment {
 
                     case R.id.action_friends:
                         Bundle bundle4 = new Bundle();
-                        bundle4.putString("userName", userName);
+                        bundle4.putSerializable("user", user);
+                        //bundle4.putString("userName", userName);
                         SocialFragment fragment4 = new SocialFragment();
                         fragment4.setArguments(bundle4);
                         FragmentManager fragmentManager4 = getFragmentManager();
