@@ -11,5 +11,7 @@
     <color name="colorAccentL">#19c978</color>
     <color name="fontLight">#9e9e9e</color>
     <color name="fontDark">#455a64</color>
+    <color name="offWhite">#e9ebef</color>
+
 
 </resources>
