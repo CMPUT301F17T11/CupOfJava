@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
- <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true" >
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_alignParentTop="true">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -16,25 +16,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/offWhite">
+            android:background="@color/offWhite"
+            android:orientation="vertical">
 
 
             <TextView
                 android:id="@+id/allHabitHeadingTextView"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:paddingTop="4dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginBottom="8dp"
                 android:background="@color/white"
+                android:gravity="center"
                 android:padding="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
                 android:textAlignment="center"
                 android:textAllCaps="true"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:gravity="center" />
+                android:textStyle="bold" />
 
             <ListView
                 android:id="@+id/allHabitListView"
@@ -43,9 +43,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/white"
-                android:divider="@color/offWhite"
-                android:dividerHeight="10.0sp" />
+                android:background="@color/white"/>
 
         </LinearLayout>
 
