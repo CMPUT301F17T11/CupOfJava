@@ -8,11 +8,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  * Created by Moe on 2017-11-25.
  */
 
-public class FriendPagerAdapter extends FragmentStatePagerAdapter {
+public class SocialPagerAdapter extends FragmentStatePagerAdapter{
 
     int numOfTabs;
 
-    public FriendPagerAdapter(FragmentManager fm, int numberOfTabs) {
+    public SocialPagerAdapter(FragmentManager fm, int numberOfTabs) {
 
         super(fm);
         this.numOfTabs = numberOfTabs;
@@ -23,14 +23,17 @@ public class FriendPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
+                ProfileTab profileTab = new ProfileTab();
+                return profileTab;
+            case 1:
                 FollowingTab followingTab = new FollowingTab();
                 return followingTab;
 
-            case 1:
+            case 2:
                 FollowersTab followersTab = new FollowersTab();
                 return followersTab;
 
-            case 2:
+            case 3:
                 RequestsTab requestsTab = new RequestsTab();
                 return requestsTab;
 

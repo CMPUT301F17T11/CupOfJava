@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"/>
         <activity android:name=".TodayViewActivity" />
         <activity android:name=".NewHabitActivity" />
         <activity android:name=".NewHabitEventActivity" />
@@ -38,7 +38,7 @@
         <activity android:name=".HabitEventTimeLineActivity" />
         <activity android:name=".HabitDetailViewActivity" />
         <activity
-            android:name=".FriendsActivity"
+            android:name=".SocialFragment"
             android:label="@string/title_activity_friends"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--

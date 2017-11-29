@@ -8,9 +8,9 @@
  */
 package com.cmput301f17t11.cupofjava;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -136,10 +136,15 @@ public class AllHabitViewActivity extends Fragment {
                         break;
 
                     case R.id.action_friends:
-                        Intent intent5 = new Intent(getActivity(), FriendsActivity.class);
-                        intent5.putExtra("userName", userName);
-                        //intent4.putExtra("userIndex", userIndex);
-                        startActivity(intent5);
+                        Bundle bundle4 = new Bundle();
+                        bundle4.putString("userName", userName);
+                        SocialFragment fragment4 = new SocialFragment();
+                        fragment4.setArguments(bundle4);
+                        FragmentManager fragmentManager4 = getFragmentManager();
+                        FragmentTransaction fragmentTransaction4 = fragmentManager4.beginTransaction();
+                        fragmentTransaction4.replace(R.id.frame, fragment4).addToBackStack(null);
+                        fragmentTransaction4.commit();
+                        //intent2.putExtra("userIndex", userIndex);
                         break;
                 }
                 return false;

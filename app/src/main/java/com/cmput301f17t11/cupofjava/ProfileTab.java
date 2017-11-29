@@ -17,7 +17,7 @@ import android.view.ViewGroup;
  * Use the {@link FollowingTab#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FollowingTab extends Fragment {
+public class ProfileTab extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +29,7 @@ public class FollowingTab extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public FollowingTab() {
+    public ProfileTab() {
         // Required empty public constructor
     }
 
@@ -64,7 +64,7 @@ public class FollowingTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_following_tab, container, false);
+        return inflater.inflate(R.layout.profile_fragment, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
