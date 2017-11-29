@@ -1,12 +1,16 @@
 package com.cmput301f17t11.cupofjava;
 
+import android.app.Dialog;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -98,6 +102,20 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback {
         });
 
         return rootView;
+    }
+
+    public boolean googleServicesAvailable() {
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        int isAvailable = api.isGooglePlayServicesAvailable(getActivity());
+        if(isAvailable == ConnectionResult.SUCCESS){
+            return true;
+        } else if (api.isUserResolvableError(isAvailable)){
+            Dialog dialog = api.getErrorDialog(getActivity(), isAvailable, 0);
+            dialog.show();
+        } else {
+            Toast.makeText(getActivity(), "Can't connect to play services", Toast.LENGTH_LONG).show();
+        }
+        return false;
     }
 
     @Override
