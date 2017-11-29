@@ -77,8 +77,10 @@ public class TodayViewActivity extends Fragment {
         if (bundle != null) {
             this.user = (User) bundle.getSerializable("user");
 
+
         }
         this.userName = user.getUsername();
+        this.habits = user.getHabitList().getTodaysHabitList();
 
         //this.userName = bundle.getString("userName");
         Log.i("username in TodayView", userName);
@@ -139,7 +141,10 @@ public class TodayViewActivity extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
-                                        intent5.putExtra("user", user);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("userName", userName);
+                                        bundle.putSerializable("habitList", habits);
+                                        intent5.putExtras(bundle);
                                         //.putExtra("userIndex", userIndex);
 
                                         startActivity(intent5);

@@ -72,6 +72,8 @@ public class AllHabitViewActivity extends Fragment {
         //this.userName = intent.getStringExtra("userName");
         Bundle bundle = getArguments();
         this.user = (User) bundle.getSerializable("user");
+        this.userName = user.getUsername();
+        this.habits = user.getHabitListAsArray();
         //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         //handle bottom navigation bar
@@ -128,7 +130,10 @@ public class AllHabitViewActivity extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
-                                        intent5.putExtra("user", user);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("userName", userName);
+                                        bundle.putSerializable("habitList", habits);
+                                        intent5.putExtras(bundle);
                                         //.putExtra("userIndex", userIndex);
 
                                         startActivity(intent5);

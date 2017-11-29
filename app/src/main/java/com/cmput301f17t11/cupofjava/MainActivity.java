@@ -1,21 +1,26 @@
 package com.cmput301f17t11.cupofjava;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnFragmentInteractionListener,
         FollowingTab.OnFragmentInteractionListener, FollowersTab.OnFragmentInteractionListener*/{
 
     private String userName;
     private User user;
+    private ArrayList<Habit> habits;
 
     /*@Override
     public void onFragmentInteraction(Uri uri){
@@ -40,6 +45,8 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
         this.user = (User) intent.getSerializableExtra("user");
         this.userName = user.getUsername();
         Log.i("Username is", userName);
+
+        this.habits = user.getHabitList().getTodaysHabitList();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", user);
@@ -98,10 +105,34 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                         //intent2.putExtra("userIndex", userIndex);
                         return true;
                     case R.id.add_habit_or_habit_event:
-                        Intent intent4 = new Intent(MainActivity.this, NewHabitActivity.class);
-                        intent4.putExtra("user", user);
-                        //intent4.putExtra("userIndex", userIndex);
-                        startActivity(intent4);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setTitle("Add New")
+                                .setNegativeButton("New Habit", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent4 = new Intent(MainActivity.this, NewHabitActivity.class);
+                                        intent4.putExtra("user", user);
+                                        //intent4.putExtra("userIndex", userIndex);
+                                        startActivity(intent4);
+                                    }
+                                })
+                                .setPositiveButton("New Habit \n   Event", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent5 = new Intent(MainActivity.this, NewHabitEventActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("userName", userName);
+                                        bundle.putSerializable("habitList", habits);
+                                        intent5.putExtras(bundle);
+                                        //.putExtra("userIndex", userIndex);
+
+                                        startActivity(intent5);
+                                    }
+                                });
+
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                         break;
                     case R.id.action_friends:
                         Bundle bundle4 = new Bundle();
