@@ -7,23 +7,37 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
     private String userName;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*Bundle receiveBundle = getIntent().getExtras();
+        if (receiveBundle != null) {
+            this.user = (User)receiveBundle.getSerializable("userObject");
+            this.userName = user.getUsername();
+            //this.userName = bundle.getString("userName");
 
+            //this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitClicked");
+            //this.userIndex = intent.getIntExtra("userIndex", 0);
+            //this.habitIndex = bundle.getInt("habitIndex");
+        }*/
         Intent intent = getIntent();
-        this.userName = intent.getStringExtra("userName");
+        this.user = (User) intent.getSerializableExtra("user");
+        this.userName = user.getUsername();
+        Log.i("Username is", userName);
 
         Bundle bundle = new Bundle();
-        bundle.putString("userName", userName);
+        bundle.putSerializable("user", user);
+        //bundle.putString("userName", userName);
         TodayViewActivity fragment = new TodayViewActivity();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getFragmentManager();

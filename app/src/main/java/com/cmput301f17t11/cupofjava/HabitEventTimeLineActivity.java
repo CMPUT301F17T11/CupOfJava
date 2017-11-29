@@ -40,6 +40,7 @@ import java.util.ArrayList;
 public class HabitEventTimeLineActivity extends Fragment {
     private String userName;
     private int userIndex;
+    private User user;
     private ListView listView;
     private TextView textView;
     ArrayList<HabitEvent> events = new ArrayList<>();
@@ -69,8 +70,13 @@ public class HabitEventTimeLineActivity extends Fragment {
         //listView.setAdapter(habitEventAdapter);
 
         //obtain extra info from intent
-        Intent intent = getActivity().getIntent();
-        this.userName = intent.getStringExtra("userName");
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            this.user = (User) bundle.getSerializable("user");
+            this.userName = user.getUsername();
+        }
+
+        //this.userName = intent.getStringExtra("userName");
         //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         //handle the bottom navigation bar

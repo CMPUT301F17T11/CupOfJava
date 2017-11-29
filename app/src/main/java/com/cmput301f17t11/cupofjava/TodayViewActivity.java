@@ -46,6 +46,7 @@ public class TodayViewActivity extends Fragment {
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
     private ArrayList<Habit> habits;
     private String userName = "";
+    private User user;
     //private int userIndex;
     private TextView textView;
 
@@ -72,8 +73,13 @@ public class TodayViewActivity extends Fragment {
         listView.setAdapter(habitAdapter);
 
         //obtain extra info from intent
-        Intent intent = getActivity().getIntent();
-        this.userName = intent.getStringExtra("userName");
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            this.user = (User) bundle.getSerializable("user");
+            this.userName = user.getUsername();
+        }
+        //this.userName = bundle.getString("userName");
+        Log.i("username in TodayView", userName);
         //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         //bottom navigation bar
@@ -91,7 +97,8 @@ public class TodayViewActivity extends Fragment {
 
                     case R.id.action_timeline:
                         Bundle bundle = new Bundle();
-                        bundle.putString("userName", userName);
+                        bundle.putSerializable("user", user);
+                        //bundle.putString("userName", userName);
                         HabitEventTimeLineActivity fragment = new HabitEventTimeLineActivity();
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getFragmentManager();

@@ -9,6 +9,7 @@
 
 package com.cmput301f17t11.cupofjava;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -21,7 +22,7 @@ import java.util.Calendar;
  * @see Habit
  */
 
-public class HabitList {
+public class HabitList implements Serializable {
     private ArrayList<Habit> habits;
 
     /**

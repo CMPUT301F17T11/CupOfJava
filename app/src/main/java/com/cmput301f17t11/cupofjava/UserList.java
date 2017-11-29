@@ -1,5 +1,6 @@
 package com.cmput301f17t11.cupofjava;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,7 +12,7 @@ import java.util.IllegalFormatCodePointException;
  *
  *  As of yet, it is not being used, but may be used later for prj5
  */
-public class UserList{
+public class UserList implements Serializable {
     ArrayList<User> users;
 
     public UserList(){

@@ -1,8 +1,7 @@
 package com.cmput301f17t11.cupofjava;
 
 
-
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import io.searchbox.annotations.JestId;
@@ -12,7 +11,7 @@ import io.searchbox.annotations.JestId;
  * follows, has requested to follow, and following
  * the main user.
  */
-public class User {
+public class User implements Serializable {
     private String username;
     private HabitList habitList;  //all the habits of the user
     @JestId

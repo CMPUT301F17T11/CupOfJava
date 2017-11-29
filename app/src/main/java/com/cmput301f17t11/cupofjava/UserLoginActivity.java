@@ -27,6 +27,8 @@ public class UserLoginActivity extends Activity {
 
     private EditText username_editText;
     private Button signIn;
+    private User newUser;
+    private User user;
 
     /**
      * Launches the screen to enter username and optional password.
@@ -54,21 +56,23 @@ public class UserLoginActivity extends Activity {
                 getUserTask.execute(input);
                 if (!input.isEmpty()) {
                     try {
-                        if (getUserTask.get() == null) {
-                            User newUser = new User(input);
+                        user = getUserTask.get();
+                        if (user == null) {
+                            newUser = new User(input);
                             ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask();
                             addUserTask.execute(newUser);
                             Log.i("username", "is null");
                         } else {
+                            newUser = user;
                             Log.i("username", "not null");
                         }
                         Intent intent = new Intent(UserLoginActivity.this, MainActivity.class);
-                        intent.putExtra("userName", input);
+                        intent.putExtra("user", newUser); //sending the user object to next activity
                         startActivity(intent);
 
 
                     } catch (Exception e) {
-                        Log.i("error", e.toString());
+                        Log.i("Login Error", e.toString());
                         finish();
                     }
 
