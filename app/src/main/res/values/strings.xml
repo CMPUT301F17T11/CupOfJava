@@ -26,7 +26,7 @@
     <string name="title_activity_maps_tabbed">Map</string>
 
     <!-- TodayView Activity -->
-    <string name="no_habits_today">You do not have any habits for today, </string>
+    <string name="no_habits_today">You do not have any habits for today,</string>
     <string name="habits_today">Here are the habits you need to perform today: </string>
 
 

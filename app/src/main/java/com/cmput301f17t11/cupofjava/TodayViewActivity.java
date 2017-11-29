@@ -237,7 +237,7 @@ public class TodayViewActivity extends Fragment {
      */
     private void updateTextView(int habitCount){
         if (habitCount == 0){
-            this.textView.setText((getResources().getString(R.string.no_habits_today) + this.userName));
+            this.textView.setText((getResources().getString(R.string.no_habits_today) + " " + this.userName));
         }
         else{
             this.textView.setText(getResources().getString(R.string.habits_today));
