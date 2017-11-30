@@ -145,6 +145,7 @@ public class TodayViewActivity extends Fragment {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
                                         Bundle bundle = new Bundle();
                                         bundle.putString("userName", userName);
+                                        bundle.putSerializable("user", user);
                                         bundle.putSerializable("habitList", habits);
                                         intent5.putExtras(bundle);
                                         //.putExtra("userIndex", userIndex);

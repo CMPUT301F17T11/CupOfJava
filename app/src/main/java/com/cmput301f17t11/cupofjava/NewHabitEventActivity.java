@@ -11,11 +11,9 @@ package com.cmput301f17t11.cupofjava;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
-import android.Manifest;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -52,6 +50,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
     private Spinner spinner;
     private int userIndex;
     private int habitIndex;
+    private User user;
 
     private Habit habit;
     private String habitEventComment;
@@ -74,6 +73,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
         //Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
+            this.user = (User) bundle.getSerializable("user");
             this.userName = bundle.getString("userName");
 
             this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitList");
@@ -161,6 +161,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
         //saveFileController.addHabitEvent(getApplicationContext(), this.userIndex, this.habitIndex, newHabitEvent);
         Intent intent = new Intent(NewHabitEventActivity.this, MainActivity.class);
         intent.putExtra("userName", userName);
+        intent.putExtra("user", user);
         //intent.putExtra("userIndex", userIndex);
         startActivity(intent);
     }

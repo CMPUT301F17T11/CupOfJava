@@ -19,11 +19,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Opens activity which lets user view the details of a certain habit.
@@ -92,6 +89,7 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("userName", userName);
         bundle.putSerializable("habitList", habitList);
+        bundle.putSerializable("user", user);
         bundle.putInt("habitIndex", habitIndex);
         //intent2.putExtra("userName", userName);
         //intent2.putExtra("userIndex", userIndex);

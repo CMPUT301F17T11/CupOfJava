@@ -151,6 +151,7 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
                                         Bundle bundle = new Bundle();
                                         bundle.putString("userName", userName);
                                         bundle.putSerializable("habitList", habitList);
+                                        bundle.putSerializable("user", user);
                                         intent5.putExtras(bundle);
 
                                         //.putExtra("userIndex", userIndex);

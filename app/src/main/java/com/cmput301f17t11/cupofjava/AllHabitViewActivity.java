@@ -8,16 +8,15 @@
  */
 package com.cmput301f17t11.cupofjava;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -136,6 +135,7 @@ public class AllHabitViewActivity extends Fragment {
                                         Bundle bundle = new Bundle();
                                         bundle.putString("userName", userName);
                                         bundle.putSerializable("habitList", habitList);
+                                        bundle.putSerializable("user", user);
                                         intent5.putExtras(bundle);
                                         //.putExtra("userIndex", userIndex);
 
