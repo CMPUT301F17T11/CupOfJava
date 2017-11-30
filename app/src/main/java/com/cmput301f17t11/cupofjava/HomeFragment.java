@@ -144,7 +144,7 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                         bundle1.putSerializable("user", user);
                         bundle1.putSerializable("habitList", habitList);
                         //bundle4.putString("userName", userName);
-                        AllHabitViewActivity fragment1 = new AllHabitViewActivity();
+                        SocialFragment fragment1 = new SocialFragment();
                         fragment1.setArguments(bundle1);
                         FragmentManager fragmentManager1 = getFragmentManager();
                         FragmentTransaction fragmentTransaction1 = fragmentManager1.beginTransaction();

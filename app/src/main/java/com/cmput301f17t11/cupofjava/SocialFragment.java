@@ -31,6 +31,9 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
     //private TabItem followersTab;
     //private TabItem requestsTab;
 
+    public void SocialFragment() {
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
