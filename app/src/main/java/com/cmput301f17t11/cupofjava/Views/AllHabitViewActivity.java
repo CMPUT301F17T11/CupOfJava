@@ -17,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Models.BottomNavigationViewHelper;
 import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.R;
@@ -78,11 +80,10 @@ public class AllHabitViewActivity extends Fragment {
         //this.userName = intent.getStringExtra("userName");
         Bundle bundle = getArguments();
         if (bundle != null) {
-            this.user = (User) bundle.getSerializable("user");
-            this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitList");
+            this.userName = bundle.getString("userName");
+            Log.i("AllHabitViewActivity: Username received: ", userName);
         }
-        this.userName = user.getUsername();
-        //this.userIndex = intent.getIntExtra("userIndex", 0);
+
 
         //handle bottom navigation bar
         final BottomNavigationView bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_navigation_today);
@@ -98,8 +99,7 @@ public class AllHabitViewActivity extends Fragment {
 
                     case R.id.action_timeline:
                         Bundle bundle2 = new Bundle();
-                        bundle2.putSerializable("user", user);
-                        //bundle2.putString("userName", userName);
+                        bundle2.putString("userName", userName);
                         HomeFragment fragment2 = new HomeFragment();
                         fragment2.setArguments(bundle2);
                         FragmentManager fragmentManager2 = getFragmentManager();
@@ -110,8 +110,7 @@ public class AllHabitViewActivity extends Fragment {
                         break;
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
-                        bundle3.putSerializable("user", user);
-                        //bundle3.putString("userName", userName);
+                        bundle3.putString("userName", userName);
                         TodayViewActivity fragment3 = new TodayViewActivity();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getFragmentManager();
@@ -129,8 +128,7 @@ public class AllHabitViewActivity extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent4 = new Intent(getActivity(), NewHabitActivity.class);
-                                        intent4.putExtra("user", user);
-                                        //intent4.putExtra("userIndex", userIndex);
+                                        intent4.putExtra("userName", userName);
                                         startActivity(intent4);
                                     }
                                 })
@@ -138,13 +136,7 @@ public class AllHabitViewActivity extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("userName", userName);
-                                        bundle.putSerializable("habitList", habitList);
-                                        bundle.putSerializable("user", user);
-                                        intent5.putExtras(bundle);
-                                        //.putExtra("userIndex", userIndex);
-
+                                        intent5.putExtra("userName", userName);
                                         startActivity(intent5);
                                     }
                                 });
@@ -156,8 +148,7 @@ public class AllHabitViewActivity extends Fragment {
 
                     case R.id.action_friends:
                         Bundle bundle4 = new Bundle();
-                        bundle4.putSerializable("user", user);
-                        //bundle4.putString("userName", userName);
+                        bundle4.putString("userName", userName);
                         SocialFragment fragment4 = new SocialFragment();
                         fragment4.setArguments(bundle4);
                         FragmentManager fragmentManager4 = getFragmentManager();
@@ -183,11 +174,9 @@ public class AllHabitViewActivity extends Fragment {
 
                 Intent intent5 = new Intent(getActivity(), HabitDetailViewActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("user", user);
                 bundle.putString("userName", userName);
                 bundle.putSerializable("habitClicked", habits); //sending all habits list
                 bundle.putInt("habitIndex", position);
-                //intent5.putExtra("userIndex", userIndex);
                 intent5.putExtras(bundle);
                 startActivity(intent5);
             }
@@ -203,9 +192,20 @@ public class AllHabitViewActivity extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        habits = user.getHabitListAsArray();
-        updateTextView(habits.size());
-        updateListView(habits);
+
+        //retrieving all habits of the user from elasticsearch
+        ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
+        getHabitsTask.execute(userName);
+        try {
+            habits = getHabitsTask.get();
+            updateTextView(habits.size());
+            updateListView(habits);
+            Log.i("AllHabitViewActivity: habit_list is : ", habits.toString());
+
+
+        } catch (Exception e) {
+            Log.i("Error Getting Habits ", e.toString());
+        }
         /*SaveFileController saveFileController = new SaveFileController();
         ArrayList<Habit> habitList = saveFileController
                 .getHabitListAsArray(getApplicationContext(), this.userIndex);*/

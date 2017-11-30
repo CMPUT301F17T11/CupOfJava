@@ -43,9 +43,7 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         Bundle bundle = getArguments();
-        this.user = (User)bundle.getSerializable("user");
-        this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitList");
-        this.userName = user.getUsername();
+        this.userName = bundle.getString("userName");
 
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tablayout2);
@@ -93,21 +91,17 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                         break;
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
-                        bundle3.putSerializable("user", user);
-                        bundle3.putSerializable("habitList", habitList);
+                        bundle3.putString("userName", userName);
                         TodayViewActivity fragment3 = new TodayViewActivity();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getFragmentManager();
                         FragmentTransaction fragmentTransaction3 = fragmentManager3.beginTransaction();
                         fragmentTransaction3.replace(R.id.frame, fragment3).addToBackStack(null);
                         fragmentTransaction3.commit();
-                        //intent2.putExtra("userIndex", userIndex);
                         break;
                     case R.id.action_all_habits:
                         Bundle bundle4 = new Bundle();
-                        bundle4.putSerializable("user", user);
-                        bundle4.putSerializable("habitList", habitList);
-                        //bundle4.putString("userName", userName);
+                        bundle4.putString("userName", userName);
                         AllHabitViewActivity fragment4 = new AllHabitViewActivity();
                         fragment4.setArguments(bundle4);
                         FragmentManager fragmentManager4 = getFragmentManager();
@@ -123,8 +117,7 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent4 = new Intent(getActivity(), NewHabitActivity.class);
-                                        intent4.putExtra("user", user);
-                                        //intent4.putExtra("userIndex", userIndex);
+                                        intent4.putExtra("userName", userName);
                                         startActivity(intent4);
                                     }
                                 })
@@ -132,13 +125,7 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("userName", userName);
-                                        bundle.putSerializable("user", user);
-                                        bundle.putSerializable("habitList", habitList);
-                                        intent5.putExtras(bundle);
-                                        //.putExtra("userIndex", userIndex);
-
+                                        intent5.putExtra("userName", userName);
                                         startActivity(intent5);
                                     }
                                 });
@@ -147,9 +134,7 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                         break;
                     case R.id.action_friends:
                         Bundle bundle1 = new Bundle();
-                        bundle1.putSerializable("user", user);
-                        bundle1.putSerializable("habitList", habitList);
-                        //bundle4.putString("userName", userName);
+                        bundle1.putString("userName", userName);
                         SocialFragment fragment1 = new SocialFragment();
                         fragment1.setArguments(bundle1);
                         FragmentManager fragmentManager1 = getFragmentManager();

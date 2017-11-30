@@ -18,6 +18,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -84,19 +85,8 @@ public class NewHabitEventActivity extends AppCompatActivity {
         ArrayAdapter<Habit> adapter = new ArrayAdapter<Habit>(this, R.layout.habit_list_item, habitList);
 
         //obtain extra info from intent
-        //Intent intent = getIntent();
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            this.user = (User) bundle.getSerializable("user");
-            this.userName = bundle.getString("userName");
-
-            this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitList");
-            //this.userIndex = intent.getIntExtra("userIndex", 0);
-            this.habitIndex = bundle.getInt("habitIndex");
-        }
-        //this.userName = intent.getStringExtra("userName");
-        //this.userIndex = intent.getIntExtra("userIndex", 0);
-        //this.habitIndex = intent.getIntExtra("habitIndex", 0);
+        Intent intent = getIntent();
+        this.userName = intent.getStringExtra("userName");
 
         habitEventCommentEditText = (EditText) findViewById(R.id.edit_comment);
 
@@ -165,9 +155,20 @@ public class NewHabitEventActivity extends AppCompatActivity {
         super.onResume();
         //SaveFileController saveFileController = new SaveFileController();
         //ArrayList<Habit> habits = saveFileController.getHabitList(getApplicationContext(), userIndex).getTodaysHabitList();
+        //retrieving all habits of the user from elasticsearch
 
-        ArrayList<Habit> todayHabits = getTodaysHabitList(habitList);
-        updateSpinner(todayHabits);
+        ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
+        getHabitsTask.execute(userName);
+        try {
+            ArrayList<Habit> todayHabits = getTodaysHabitList(getHabitsTask.get());
+            updateSpinner(todayHabits);
+            Log.i("NewHabitEventActivity: habit_list is : ", todayHabits.toString());
+
+
+        } catch (Exception e) {
+            Log.i("Error Getting Habits ", e.toString());
+        }
+
     }
     private void updateSpinner(ArrayList<Habit> habits){
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(NewHabitEventActivity.this,
@@ -188,13 +189,15 @@ public class NewHabitEventActivity extends AppCompatActivity {
 
         HabitEvent newHabitEvent = new HabitEvent(habit, habitEventComment);
         newHabitEvent.setUserName(this.userName);
+        newHabitEvent.setHabitId(habit.getId());
+        Log.i("HabitEvent habitID", newHabitEvent.getHabitId());
+
         ElasticsearchController.AddEventTask addEventTask = new ElasticsearchController.AddEventTask();
         addEventTask.execute(newHabitEvent);
         //SaveFileController saveFileController = new SaveFileController();
         //saveFileController.addHabitEvent(getApplicationContext(), this.userIndex, this.habitIndex, newHabitEvent);
         Intent intent = new Intent(NewHabitEventActivity.this, MainActivity.class);
         intent.putExtra("userName", userName);
-        intent.putExtra("user", user);
         //intent.putExtra("userIndex", userIndex);
         startActivity(intent);
     }

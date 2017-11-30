@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.Models.HabitList;
 import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.R;
@@ -118,41 +119,34 @@ public class HabitDetailViewActivity extends AppCompatActivity {
                 .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        HabitList retrieveHabitList = user.getHabitList();
-                        if(retrieveHabitList.habitExists(habit)){
-                            retrieveHabitList.deleteHabit(habit);
-                        }
-                        user.setHabitList(retrieveHabitList);  //setting the new updated habit list
-                        ElasticsearchController.DeleteUsersTask deleteUsersTask = new ElasticsearchController.DeleteUsersTask();
-                        deleteUsersTask.execute(user);
 
-                        ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask();
-                        getUserTask.execute(user.getUsername());
-                        try {
-                            User deletedUser = getUserTask.get();
-                            if (deletedUser == null)
-                            {
-                                Log.i("GetUserTask ", "user does not exist ");
-
-                            }
-                            else {
-                                Log.i("GetUserTask ", deletedUser.getUsername()+"user still exists ");
-
-                            }
-                        }catch (Exception e){
-
-                        }
-                        ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask();
-                        addUserTask.execute(user);
-                        //TODO wont be needing this
                         ElasticsearchController.DeleteHabitsTask deleteHabitsTask = new ElasticsearchController.DeleteHabitsTask();
                         deleteHabitsTask.execute(habit);
+
+                        ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
+                        getEventsTask.execute(habit.getHabitTitle());
+
+                        try {
+                            ArrayList<HabitEvent> myHabitEvents = getEventsTask.get();
+                            if (!myHabitEvents.isEmpty()) {
+                                Log.i("HabitDetailView: habitEvents of habit: ", "found some");
+                                ElasticsearchController.DeleteEventsTask deleteEventsTask = new ElasticsearchController.DeleteEventsTask();
+                                deleteEventsTask.execute(myHabitEvents);
+
+                            } else {
+                                Log.i("HabitDetailView: habitEvents of habit: ", "found none");
+
+                            }
+                        } catch (Exception e) {
+                            Log.i("HabitDetailView: ", e.toString());
+
+                        }
                         //TODO need to delete habit events associated with the habit as well
                         //finish();
                         //SaveFileController saveFileController = new SaveFileController();
                         //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
                         Intent intent3 = new Intent(HabitDetailViewActivity.this, MainActivity.class);
-                        intent3.putExtra("user", user);
+                        intent3.putExtra("userName", userName);
                         //intent3.putExtra("userIndex", userIndex);
                         startActivity(intent3);
                     }

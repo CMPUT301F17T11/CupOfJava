@@ -56,6 +56,8 @@ public class ElasticsearchController {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
                         user.setId(result.getId());
+                        Log.i("AddUserTask: ", "ElasticSearch added new user");
+
                     } else {
                         Log.i("Error", "Elasticsearch was not able to add the user");
                     }
@@ -170,6 +172,8 @@ public class ElasticsearchController {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
                         habit.setId(result.getId());
+                        Log.i("AddHabitsTask", "Added Habit successfully id is: " + habit.getId());
+
 
                     } else {
                         Log.i("Error", "Elasticsearch was not able to add the habit");
@@ -268,6 +272,8 @@ public class ElasticsearchController {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
                         habitEvent.setId(result.getId());
+                        Log.i("AddEventTask", "Elasticsearch added Event");
+
                     } else {
                         Log.i("Error", "Elasticsearch was not able to add the user");
                     }
@@ -286,16 +292,21 @@ public class ElasticsearchController {
             verifySettings();
             ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
 
-
+            Log.i("getEventsTask: Search parameters", search_parameters[0]);
             String query = "{\n" +
+                    "  \"query\": {\n" +
+                    "    \"term\" : { \"habitTitle\" : \"" + search_parameters[0] + "\" } \n" +
+                    "  }\n" +
+                    "}";
+            /*String query = "{\n" +
                     "    \"query\" : {\n" +
                     "       \"constant_score\" : {\n" +
                     "           \"filter\" : {\n" +
-                    "               \"term\" : {\"username\": \"" + search_parameters[0] + "\"}\n" +
+                    "               \"term\" : {\"habitId\": \"" + search_parameters[0] + "\"}\n" +
                     "             }\n" +
                     "         }\n" +
                     "    }\n" +
-                    "}";
+                    "}";*/
 
             Search search = new Search.Builder(query)
                     .addIndex("cmput301f17t11_cupofjava")
@@ -309,6 +320,8 @@ public class ElasticsearchController {
                 if (result.isSucceeded()) {
                     List<HabitEvent> foundEvents = result.getSourceAsObjectList(HabitEvent.class);
                     events.addAll(foundEvents);
+                    Log.i("Success", events.toString());
+
                 } else {
                     Log.i("Error", "The search query failed to find any HabitEvents that matched");
                 }
@@ -350,6 +363,9 @@ public class ElasticsearchController {
 
                     try {
                         DocumentResult result = client.execute(delete);
+                        if (result.isSucceeded()) {
+                            Log.i("Success", "Deleted events ");
+                        }
                     } catch (Exception e) {
                         Log.i("Error", "The Delete Events task application failed to build");
                     }

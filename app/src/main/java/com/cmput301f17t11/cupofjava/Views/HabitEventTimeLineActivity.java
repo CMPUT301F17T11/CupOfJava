@@ -109,12 +109,9 @@ public class HabitEventTimeLineActivity extends Fragment {
         //obtain extra info from intent
         Bundle bundle = getArguments();
         if (bundle != null) {
-            this.user = (User) bundle.getSerializable("user");
-            this.userName = user.getUsername();
+            this.userName = bundle.getString("userName");
         }
 
-        //this.userName = intent.getStringExtra("userName");
-        //this.userIndex = intent.getIntExtra("userIndex", 0);
 
 
         //set up the TextView and ListView
@@ -146,8 +143,8 @@ public class HabitEventTimeLineActivity extends Fragment {
         //SaveFileController saveFileController = new SaveFileController();
         //ArrayList<HabitEvent> events = saveFileController.getAllHabitEvents(getApplicationContext(), this.userIndex);
 
-        ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
-        getEventsTask.execute(userName);
+        /*ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
+        getEventsTask.execute();
         try {
             events = getEventsTask.get();
 
@@ -158,7 +155,7 @@ public class HabitEventTimeLineActivity extends Fragment {
 
         } catch (Exception e) {
             Log.i("Error", "Failed to get the Habit Events from the async object");
-        }
+        }*/
 
 
         //updateTextView(events.size());

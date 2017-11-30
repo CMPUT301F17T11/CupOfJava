@@ -47,15 +47,14 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
             //this.habitIndex = bundle.getInt("habitIndex");
         }*/
         Intent intent = getIntent();
-        this.user = (User) intent.getSerializableExtra("user");
-        this.userName = user.getUsername();
-        Log.i("Username is", userName);
+        this.userName = intent.getStringExtra("userName");
+        Log.i("MainActivity: username received:", userName);
 
-        this.habits = user.getHabitListAsArray();
+        //this.habits = user.getHabitListAsArray();
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("user", user);
-        //bundle.putString("userName", userName);
+        //bundle.putSerializable("user", user);
+        bundle.putString("userName", userName);
         TodayViewActivity fragment = new TodayViewActivity();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -77,9 +76,9 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
 
                     case R.id.action_timeline:
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("user", user);
-                        bundle.putSerializable("habitList", habits);
-                        //bundle.putString("userName", userName);
+                        //bundle.putSerializable("user", user);
+                        //bundle.putSerializable("habitList", habits);
+                        bundle.putString("userName", userName);
                         HomeFragment fragment = new HomeFragment();
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -90,8 +89,9 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                         return true;
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
-                        bundle3.putSerializable("user", user);
-                        bundle3.putSerializable("habitList", habits);
+                        //bundle3.putSerializable("user", user);
+                        //bundle3.putSerializable("habitList", habits);
+                        bundle3.putString("userName", userName);
                         TodayViewActivity fragment3 = new TodayViewActivity();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getSupportFragmentManager();
@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                         return true;
                     case R.id.action_all_habits:
                         Bundle bundle2 = new Bundle();
-                        bundle2.putSerializable("user", user);
-                        bundle2.putSerializable("habitList", habits);
-                        //bundle2.putString("userName", userName);
+                        //bundle2.putSerializable("user", user);
+                        //bundle2.putSerializable("habitList", habits);
+                        bundle2.putString("userName", userName);
                         AllHabitViewActivity fragment2 = new AllHabitViewActivity();
                         fragment2.setArguments(bundle2);
                         FragmentManager fragmentManager2 = getSupportFragmentManager();
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent4 = new Intent(MainActivity.this, NewHabitActivity.class);
-                                        intent4.putExtra("user", user);
+                                        intent4.putExtra("userName", userName);
                                         //intent4.putExtra("userIndex", userIndex);
                                         startActivity(intent4);
                                     }
@@ -128,10 +128,8 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(MainActivity.this, NewHabitEventActivity.class);
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("userName", userName);
-                                        bundle.putSerializable("habitList", habits);
-                                        intent5.putExtras(bundle);
+                                        intent5.putExtra("userName", userName);
+                                        //bundle.putSerializable("habitList", habits);
                                         //.putExtra("userIndex", userIndex);
 
                                         startActivity(intent5);
@@ -144,16 +142,16 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                         break;
                     case R.id.action_friends:
                         Bundle bundle4 = new Bundle();
-                        bundle4.putSerializable("user", user);
-                        bundle4.putSerializable("habitList", habits);
-                        //bundle4.putString("userName", userName);
+                        //bundle4.putSerializable("user", user);
+                        //bundle4.putSerializable("habitList", habits);
+                        bundle4.putString("userName", userName);
                         SocialFragment fragment4 = new SocialFragment();
                         fragment4.setArguments(bundle4);
                         FragmentManager fragmentManager4 = getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction4 = fragmentManager4.beginTransaction();
                         fragmentTransaction4.replace(R.id.frame, fragment4).addToBackStack(null);
                         fragmentTransaction4.commit();
-                        //intent2.putExtra("userIndex", userIndex);
+
                         break;
                 }
                 return false;
