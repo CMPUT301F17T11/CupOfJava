@@ -1,7 +1,9 @@
 package com.cmput301f17t11.cupofjava;
 
 import android.app.Dialog;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +13,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,6 +29,7 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback {
 
     MapView mMapView;
     private GoogleMap googleMap;
+    GoogleApiClient mGoogleApiClient;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -107,9 +113,9 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback {
     public boolean googleServicesAvailable() {
         GoogleApiAvailability api = GoogleApiAvailability.getInstance();
         int isAvailable = api.isGooglePlayServicesAvailable(getActivity());
-        if(isAvailable == ConnectionResult.SUCCESS){
+        if (isAvailable == ConnectionResult.SUCCESS) {
             return true;
-        } else if (api.isUserResolvableError(isAvailable)){
+        } else if (api.isUserResolvableError(isAvailable)) {
             Dialog dialog = api.getErrorDialog(getActivity(), isAvailable, 0);
             dialog.show();
         } else {
@@ -198,7 +204,23 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback {
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
-        this.googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        this.googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //goToLocation(-34, 151);
+        //this.googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        //this.googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+
+
+    }
+
+
+
+
+    private void goToLocation(double lat, double lng) {
+        LatLng ll = new LatLng(lat, lng);
+        CameraUpdate update = CameraUpdateFactory.newLatLng(ll);
+        this.googleMap.moveCamera(update);
     }
 }
+
+
