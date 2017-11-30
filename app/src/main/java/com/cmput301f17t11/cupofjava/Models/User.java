@@ -1,5 +1,8 @@
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Models;
 
+
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitList;
 
 import java.io.Serializable;
 import java.util.ArrayList;

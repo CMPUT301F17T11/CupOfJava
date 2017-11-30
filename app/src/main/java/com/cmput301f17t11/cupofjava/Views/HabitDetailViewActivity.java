@@ -7,7 +7,7 @@
  * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
 
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Views;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +18,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Models.HabitList;
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.R;
+import com.cmput301f17t11.cupofjava.Controllers.SaveFileController;
+import com.cmput301f17t11.cupofjava.Models.User;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

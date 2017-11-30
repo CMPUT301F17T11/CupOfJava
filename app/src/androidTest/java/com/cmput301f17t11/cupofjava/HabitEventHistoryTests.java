@@ -1,18 +1,20 @@
 package com.cmput301f17t11.cupofjava;
 
-import android.content.Context;
-import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
+
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitEvent;
+import com.cmput301f17t11.cupofjava.Models.HabitEventHistory;
+import com.cmput301f17t11.cupofjava.Views.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 
 public class HabitEventHistoryTests extends ActivityInstrumentationTestCase2 {
     public HabitEventHistoryTests(){
-        super(com.cmput301f17t11.cupofjava.MainActivity.class);
+        super(MainActivity.class);
     }
 
     public void testAddHabitEvent(){

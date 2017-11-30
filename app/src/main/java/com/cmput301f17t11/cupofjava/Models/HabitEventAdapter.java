@@ -1,4 +1,4 @@
-/* HabitAdapter
+/* HabitEventAdapter
  *
  * Version 1.0
  *
@@ -7,7 +7,7 @@
  * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
 
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Models;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -15,32 +15,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.cmput301f17t11.cupofjava.Models.HabitEvent;
+import com.cmput301f17t11.cupofjava.R;
+
 import java.util.ArrayList;
 
 /**
- * Adapter implemented for habits.
+ * Adapter for HabitEvent class.
  *
  * @version 1.0
  */
-public class HabitAdapter extends ArrayAdapter<Habit> {
+public class HabitEventAdapter extends ArrayAdapter<HabitEvent> {
 
     /**
-     * Constructor for HabitAdapter class.
+     * Constructor for HabitEventAdapter.
      *
      * @param context instance of Activity
-     * @param counters instance of ArrayList of type Habit
-     * @see Habit
+     * @param counters array list of type HabitEvent
+     * @see HabitEvent
      */
-    public HabitAdapter(Activity context, ArrayList<Habit> counters) {
+    public HabitEventAdapter(Activity context, ArrayList<HabitEvent> counters) {
         super(context, 0, counters);
     }
 
     /**
      * Checks if the existing view is being reused, otherwise inflates the view.
      *
-     * @param position takes integer position of view
-     * @param convertView instance of View
-     * @param parent instance of ViewGroup
+     * @param position integer position
+     * @param convertView instance of type View
+     * @param parent instance of type ViewGroup
      * @return listItemView
      */
     @Override
@@ -48,10 +51,10 @@ public class HabitAdapter extends ArrayAdapter<Habit> {
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.habit_list_item, parent, false);
+                    R.layout.habit_event_list_item, parent, false);
         }
 
-        final Habit currentHabit = getItem(position);
+        final HabitEvent currentHabitEvent = getItem(position);
 
         return listItemView;
 

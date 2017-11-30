@@ -7,10 +7,9 @@
  * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
 
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Views;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,6 +24,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitAdapter;
+import com.cmput301f17t11.cupofjava.Models.HabitEvent;
+import com.cmput301f17t11.cupofjava.R;
+import com.cmput301f17t11.cupofjava.Models.User;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

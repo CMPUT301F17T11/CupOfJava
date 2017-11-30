@@ -1,4 +1,4 @@
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Views;
 
 
 import android.content.DialogInterface;
@@ -18,6 +18,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.cmput301f17t11.cupofjava.Models.BottomNavigationViewHelper;
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.R;
+import com.cmput301f17t11.cupofjava.Models.SocialPagerAdapter;
+import com.cmput301f17t11.cupofjava.Models.User;
 
 import java.util.ArrayList;
 

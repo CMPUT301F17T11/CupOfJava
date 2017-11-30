@@ -7,12 +7,16 @@
  * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
 
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Views;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitEvent;
+import com.cmput301f17t11.cupofjava.R;
+
 import java.util.ArrayList;
 
 

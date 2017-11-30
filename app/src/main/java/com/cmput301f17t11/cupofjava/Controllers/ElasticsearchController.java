@@ -7,10 +7,13 @@
  * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
 
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Controllers;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitEvent;
+import com.cmput301f17t11.cupofjava.Models.User;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;

@@ -7,7 +7,9 @@
  * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
 
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Models;
+
+import com.cmput301f17t11.cupofjava.Models.Habit;
 
 import java.io.Serializable;
 import java.util.ArrayList;

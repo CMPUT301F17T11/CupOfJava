@@ -6,6 +6,13 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Views.AllHabitViewActivity;
+import com.cmput301f17t11.cupofjava.Views.HabitDetailViewActivity;
+import com.cmput301f17t11.cupofjava.Views.HabitEventTimeLineActivity;
+import com.cmput301f17t11.cupofjava.Views.NewHabitActivity;
+import com.cmput301f17t11.cupofjava.Views.TodayViewActivity;
+import com.cmput301f17t11.cupofjava.Views.UserLoginActivity;
 import com.robotium.solo.Solo;
 
 /**
@@ -16,7 +23,7 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
     private Solo solo;
 
     public UserLoginActivityTest() {
-        super(com.cmput301f17t11.cupofjava.UserLoginActivity.class);
+        super(UserLoginActivity.class);
     }
 
     /**

@@ -7,7 +7,7 @@
  * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
 
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Views;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -19,6 +19,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
+import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitList;
+import com.cmput301f17t11.cupofjava.R;
+import com.cmput301f17t11.cupofjava.Models.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,19 +45,7 @@ public class NewHabitActivity extends Activity {
     private EditText habitReasonEditText;
     private EditText habitStartDateEditText;
     private Button saveHabitButton;
-    private Date date;
     private Calendar habitStartDate;
-
-    /*
-    private CheckBox sunCheckBox;
-    private CheckBox monCheckBox;
-    private CheckBox tueCheckBox;
-    private CheckBox wedCheckBox;
-    private CheckBox thuCheckBox;
-    private CheckBox friCheckBox;
-    private CheckBox satCheckBox;
-    */
-
     private String habitTitle;
     private String habitReason;
     private ArrayList<Integer> repeatingDays;

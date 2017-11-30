@@ -7,11 +7,14 @@
  * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
 
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Controllers;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
 
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitEvent;
+import com.cmput301f17t11.cupofjava.Models.HabitList;
+import com.cmput301f17t11.cupofjava.Models.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

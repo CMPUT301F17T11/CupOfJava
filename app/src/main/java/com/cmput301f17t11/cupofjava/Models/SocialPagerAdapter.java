@@ -1,8 +1,13 @@
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Models;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.cmput301f17t11.cupofjava.Views.FollowersTab;
+import com.cmput301f17t11.cupofjava.Views.FollowingTab;
+import com.cmput301f17t11.cupofjava.Views.ProfileTab;
+import com.cmput301f17t11.cupofjava.Views.RequestsTab;
 
 /**
  * Created by Moe on 2017-11-25.

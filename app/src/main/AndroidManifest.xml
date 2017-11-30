@@ -32,23 +32,23 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserLoginActivity">
+        <activity android:name=".Views.UserLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".TodayViewActivity" />
-        <activity android:name=".NewHabitActivity" />
-        <activity android:name=".NewHabitEventActivity" />
-        <activity android:name=".ViewHabitEventActivity" />
-        <activity android:name=".AllHabitViewActivity" />
-        <activity android:name=".HabitEventTimeLineActivity" />
-        <activity android:name=".HabitDetailViewActivity" />
+        <activity android:name=".Views.MainActivity"/>
+        <activity android:name=".Views.TodayViewActivity" />
+        <activity android:name=".Views.NewHabitActivity" />
+        <activity android:name=".Views.NewHabitEventActivity" />
+        <activity android:name=".Views.ViewHabitEventActivity" />
+        <activity android:name=".Views.AllHabitViewActivity" />
+        <activity android:name=".Views.HabitEventTimeLineActivity" />
+        <activity android:name=".Views.HabitDetailViewActivity" />
         <activity
-            android:name=".SocialFragment"
+            android:name=".Views.SocialFragment"
             android:label="@string/title_activity_friends"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
@@ -65,7 +65,7 @@
             android:value="@string/google_maps_key_1" />
 
         <activity
-            android:name=".NearbyTab"
+            android:name=".Views.NearbyTab"
             android:label="@string/title_activity_maps_tabbed"></activity>
 
         <meta-data android:name="com.google.android.gms.version"

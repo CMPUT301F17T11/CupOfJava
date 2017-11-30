@@ -2,12 +2,16 @@ package com.cmput301f17t11.cupofjava;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitList;
+import com.cmput301f17t11.cupofjava.Views.UserLoginActivity;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class HabitListTest extends ActivityInstrumentationTestCase2 {
     public HabitListTest(){
-        super(com.cmput301f17t11.cupofjava.UserLoginActivity.class);
+        super(UserLoginActivity.class);
     }
 
     public void testAddHabit(){

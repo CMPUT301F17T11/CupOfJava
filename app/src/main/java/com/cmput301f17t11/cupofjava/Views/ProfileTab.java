@@ -1,12 +1,14 @@
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Views;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.cmput301f17t11.cupofjava.R;
+import com.cmput301f17t11.cupofjava.Views.FollowingTab;
 
 
 /**

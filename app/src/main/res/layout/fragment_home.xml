@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.cmput301f17t11.cupofjava.HomeFragment">
+    tools:context="com.cmput301f17t11.cupofjava.Views.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

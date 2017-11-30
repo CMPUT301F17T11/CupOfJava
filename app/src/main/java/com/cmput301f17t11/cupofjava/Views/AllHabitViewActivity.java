@@ -6,7 +6,7 @@
  *
  * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
-package com.cmput301f17t11.cupofjava;
+package com.cmput301f17t11.cupofjava.Views;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +26,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.cmput301f17t11.cupofjava.Models.BottomNavigationViewHelper;
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.R;
+import com.cmput301f17t11.cupofjava.Controllers.SaveFileController;
+import com.cmput301f17t11.cupofjava.Models.User;
 
 import java.util.ArrayList;
 

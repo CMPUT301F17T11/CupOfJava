@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cmput301f17t11.cupofjava.FollowersTab">
+    tools:context="com.cmput301f17t11.cupofjava.Views.FollowersTab">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
