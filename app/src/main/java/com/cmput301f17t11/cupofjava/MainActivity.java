@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
         this.userName = user.getUsername();
         Log.i("Username is", userName);
 
-        this.habits = user.getHabitList().getTodaysHabitList();
+        this.habits = user.getHabitListAsArray();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", user);
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                     case R.id.action_timeline:
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("user", user);
+                        bundle.putSerializable("habitList", habits);
                         //bundle.putString("userName", userName);
                         HomeFragment fragment = new HomeFragment();
                         fragment.setArguments(bundle);
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
                         bundle3.putSerializable("user", user);
+                        bundle3.putSerializable("habitList", habits);
                         TodayViewActivity fragment3 = new TodayViewActivity();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getSupportFragmentManager();
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                     case R.id.action_all_habits:
                         Bundle bundle2 = new Bundle();
                         bundle2.putSerializable("user", user);
+                        bundle2.putSerializable("habitList", habits);
                         //bundle2.putString("userName", userName);
                         AllHabitViewActivity fragment2 = new AllHabitViewActivity();
                         fragment2.setArguments(bundle2);
@@ -137,6 +140,7 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                     case R.id.action_friends:
                         Bundle bundle4 = new Bundle();
                         bundle4.putSerializable("user", user);
+                        bundle4.putSerializable("habitList", habits);
                         //bundle4.putString("userName", userName);
                         SocialFragment fragment4 = new SocialFragment();
                         fragment4.setArguments(bundle4);

@@ -41,6 +41,7 @@ public class AllHabitViewActivity extends Fragment {
     private TextView textView;
     private String userName;
     private ArrayList<Habit> habits;
+    private ArrayList<Habit> habitList;
     private User user;
     private int userIndex;
 
@@ -71,9 +72,11 @@ public class AllHabitViewActivity extends Fragment {
         final Intent intent = getActivity().getIntent();
         //this.userName = intent.getStringExtra("userName");
         Bundle bundle = getArguments();
-        this.user = (User) bundle.getSerializable("user");
+        if (bundle != null) {
+            this.user = (User) bundle.getSerializable("user");
+            this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitList");
+        }
         this.userName = user.getUsername();
-        this.habits = user.getHabitListAsArray();
         //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         //handle bottom navigation bar
@@ -132,7 +135,7 @@ public class AllHabitViewActivity extends Fragment {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
                                         Bundle bundle = new Bundle();
                                         bundle.putString("userName", userName);
-                                        bundle.putSerializable("habitList", habits);
+                                        bundle.putSerializable("habitList", habitList);
                                         intent5.putExtras(bundle);
                                         //.putExtra("userIndex", userIndex);
 

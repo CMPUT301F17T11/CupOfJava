@@ -3,29 +3,30 @@ package com.cmput301f17t11.cupofjava;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 public class SocialFragment extends Fragment implements FollowingTab.OnFragmentInteractionListener,
 FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionListener {
 
     private String userName = "";
     private User user;
-
+    private ArrayList<Habit> habitList;
     //private TabItem followingTab;
     //private TabItem followersTab;
     //private TabItem requestsTab;
@@ -37,8 +38,9 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
         //final Intent intent = getActivity().getIntent();
         Bundle bundle = getArguments();
         if(bundle!=null){
-        this.user = (User) bundle.getSerializable("user");
-        this.userName = user.getUsername();
+            this.user = (User) bundle.getSerializable("user");
+            this.userName = user.getUsername();
+            this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitList");
         }
         //this.userName = intent.getStringExtra("userName");
         //this.userIndex = intent.getIntExtra("userIndex", 0);
@@ -97,6 +99,7 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
                         Bundle bundle = new Bundle();
                         //bundle.putString("userName", userName);
                         bundle.putSerializable("user", user);
+                        bundle.putSerializable("habitList", habitList);
                         HomeFragment fragment = new HomeFragment();
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = getFragmentManager();
@@ -107,6 +110,7 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
                         bundle3.putSerializable("user", user);
+                        bundle3.putSerializable("habitList", habitList);
                         TodayViewActivity fragment3 = new TodayViewActivity();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getFragmentManager();
@@ -118,6 +122,7 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
                     case R.id.action_all_habits:
                         Bundle bundle4 = new Bundle();
                         bundle4.putSerializable("user", user);
+                        bundle4.putSerializable("habitList", habitList);
                         //bundle4.putString("userName", userName);
                         AllHabitViewActivity fragment4 = new AllHabitViewActivity();
                         fragment4.setArguments(bundle4);
@@ -143,7 +148,11 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
-                                        intent5.putExtra("user", user);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("userName", userName);
+                                        bundle.putSerializable("habitList", habitList);
+                                        intent5.putExtras(bundle);
+
                                         //.putExtra("userIndex", userIndex);
 
                                         startActivity(intent5);

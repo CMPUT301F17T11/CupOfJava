@@ -80,7 +80,7 @@ public class TodayViewActivity extends Fragment {
 
         }
         this.userName = user.getUsername();
-        this.habits = user.getHabitList().getTodaysHabitList();
+        this.habits = user.getHabitListAsArray();
 
         //this.userName = bundle.getString("userName");
         Log.i("username in TodayView", userName);
@@ -102,6 +102,7 @@ public class TodayViewActivity extends Fragment {
                     case R.id.action_timeline:
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("user", user);
+                        bundle.putSerializable("habitList", habits);
                         //bundle.putString("userName", userName);
                         HomeFragment fragment = new HomeFragment();
                         fragment.setArguments(bundle);
@@ -117,6 +118,7 @@ public class TodayViewActivity extends Fragment {
                         Bundle bundle4 = new Bundle();
                         //bundle4.putString("userName", userName);
                         bundle4.putSerializable("user", user);
+                        bundle4.putSerializable("habitList", habits);
                         AllHabitViewActivity fragment4 = new AllHabitViewActivity();
                         fragment4.setArguments(bundle4);
                         FragmentManager fragmentManager4 = getFragmentManager();
@@ -159,6 +161,7 @@ public class TodayViewActivity extends Fragment {
                         Bundle bundle3 = new Bundle();
                         //bundle3.putString("userName", userName);
                         bundle3.putSerializable("user", user);
+                        bundle3.putSerializable("habitList", habits);
                         SocialFragment fragment3 = new SocialFragment();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getFragmentManager();

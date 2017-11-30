@@ -2,12 +2,12 @@ package com.cmput301f17t11.cupofjava;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -18,13 +18,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 /**
  * Created by Moe on 2017-11-28.
  */
 
 public class HomeFragment extends Fragment implements NearbyTab.OnFragmentInteractionListener,
          HabitEventTimeLineActivity.OnFragmentInteractionListener{
+
     private User user;
+    private ArrayList<Habit> habitList;
+    private String userName;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +38,8 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         Bundle bundle = getArguments();
         this.user = (User)bundle.getSerializable("user");
+        this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitList");
+        this.userName = user.getUsername();
 
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tablayout2);
@@ -80,6 +88,7 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                     case R.id.action_today:
                         Bundle bundle3 = new Bundle();
                         bundle3.putSerializable("user", user);
+                        bundle3.putSerializable("habitList", habitList);
                         TodayViewActivity fragment3 = new TodayViewActivity();
                         fragment3.setArguments(bundle3);
                         FragmentManager fragmentManager3 = getFragmentManager();
@@ -91,6 +100,7 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                     case R.id.action_all_habits:
                         Bundle bundle4 = new Bundle();
                         bundle4.putSerializable("user", user);
+                        bundle4.putSerializable("habitList", habitList);
                         //bundle4.putString("userName", userName);
                         AllHabitViewActivity fragment4 = new AllHabitViewActivity();
                         fragment4.setArguments(bundle4);
@@ -116,7 +126,10 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
-                                        intent5.putExtra("user", user);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("userName", userName);
+                                        bundle.putSerializable("habitList", habitList);
+                                        intent5.putExtras(bundle);
                                         //.putExtra("userIndex", userIndex);
 
                                         startActivity(intent5);
@@ -128,6 +141,7 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                     case R.id.action_friends:
                         Bundle bundle1 = new Bundle();
                         bundle1.putSerializable("user", user);
+                        bundle1.putSerializable("habitList", habitList);
                         //bundle4.putString("userName", userName);
                         AllHabitViewActivity fragment1 = new AllHabitViewActivity();
                         fragment1.setArguments(bundle1);
