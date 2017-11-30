@@ -34,9 +34,10 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:id="@+id/habit_event_image"
+            android:id="@+id/habit_event_photo"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:onClick="addHabitEventPhoto"
             android:background="@drawable/take_photo"
             android:layout_gravity="center"/>
 

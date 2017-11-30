@@ -36,6 +36,7 @@ public class HabitDetailViewActivity extends AppCompatActivity {
     private String habitDateCalendar;
     private ListView habitEventList;
     private String userName;
+    private User user;
     private int userIndex;
     private int habitIndex;
     private ArrayList<Habit> habitList = new ArrayList<>();
@@ -55,6 +56,7 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         //final Intent intent = getIntent();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
+            this.user = (User)bundle.getSerializable("user");
             this.userName = bundle.getString("userName");
 
             this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitClicked");
@@ -111,16 +113,43 @@ public class HabitDetailViewActivity extends AppCompatActivity {
                 .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        HabitList retrieveHabitList = user.getHabitList();
+                        if(retrieveHabitList.habitExists(habit)){
+                            retrieveHabitList.deleteHabit(habit);
+                        }
+                        user.setHabitList(retrieveHabitList);  //setting the new updated habit list
+                        ElasticsearchController.DeleteUsersTask deleteUsersTask = new ElasticsearchController.DeleteUsersTask();
+                        deleteUsersTask.execute(user);
+
+                        ElasticsearchController.GetUserTask getUserTask = new ElasticsearchController.GetUserTask();
+                        getUserTask.execute(user.getUsername());
+                        try {
+                            User deletedUser = getUserTask.get();
+                            if (deletedUser == null)
+                            {
+                                Log.i("GetUserTask ", "user does not exist ");
+
+                            }
+                            else {
+                                Log.i("GetUserTask ", deletedUser.getUsername()+"user still exists ");
+
+                            }
+                        }catch (Exception e){
+
+                        }
+                        ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask();
+                        addUserTask.execute(user);
+                        //TODO wont be needing this
                         ElasticsearchController.DeleteHabitsTask deleteHabitsTask = new ElasticsearchController.DeleteHabitsTask();
                         deleteHabitsTask.execute(habit);
                         //TODO need to delete habit events associated with the habit as well
-                        finish();
+                        //finish();
                         //SaveFileController saveFileController = new SaveFileController();
                         //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
-                        //Intent intent3 = new Intent(HabitDetailViewActivity.this, TodayViewActivity.class);
-                        //intent3.putExtra("userName", userName);
+                        Intent intent3 = new Intent(HabitDetailViewActivity.this, MainActivity.class);
+                        intent3.putExtra("user", user);
                         //intent3.putExtra("userIndex", userIndex);
-                        //startActivity(intent3);
+                        startActivity(intent3);
                     }
                 })
                 .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {

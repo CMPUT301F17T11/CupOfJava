@@ -14,10 +14,6 @@ import io.searchbox.annotations.JestId;
 public class User implements Serializable {
     private String username;
 
-    public void setHabitList(HabitList habitList) {
-        this.habitList = habitList;
-    }
-
     private HabitList habitList;  //all the habits of the user
     @JestId
     private String id; //used for elasticsearch
@@ -35,6 +31,9 @@ public class User implements Serializable {
         this.habitList = new HabitList();
     }
 
+    public void setHabitList(HabitList habitList) {
+        this.habitList = habitList;
+    }
     public String getUsername(){
         return this.username;
     }
