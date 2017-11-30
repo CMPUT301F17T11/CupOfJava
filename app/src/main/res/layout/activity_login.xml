@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/save_button"
+                android:background="@color/colorAccentL"
                 android:text="@string/action_sign_in"
                 android:textColor="@color/white"
                 android:textSize="20sp"
