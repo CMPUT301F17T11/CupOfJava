@@ -3,27 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_timeline"
+        android:title="Timeline"
+        android:id="@+id/navigation_timeline"
         android:enabled="true"
         android:icon="@drawable/timeline_v"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_today"
+        android:title="Today"
+        android:id="@+id/navigation_today"
         android:enabled="true"
         android:icon="@drawable/today_v"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/add_habit_or_habit_event"
+        android:title="Add"
+        android:id="@+id/navigation_add"
         android:enabled="true"
         android:icon="@drawable/add_v"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_friends"
+        android:title="Social"
+        android:id="@+id/navigation_social"
         android:enabled="true"
         android:icon="@drawable/friends_v"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/action_all_habits"
+        android:title="AllHabit"
+        android:id="@+id/navigation_allhabit"
         android:enabled="true"
         android:icon="@drawable/list_all_v"
         app:showAsAction="ifRoom" />
