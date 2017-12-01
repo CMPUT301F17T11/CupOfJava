@@ -9,9 +9,6 @@
 
 package com.cmput301f17t11.cupofjava.Models;
 
-
-import com.cmput301f17t11.cupofjava.Models.Habit;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -24,11 +24,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
 import com.cmput301f17t11.cupofjava.Models.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Opens the activity which shows the timeline of habit events.
@@ -82,9 +84,7 @@ public class HabitEventTimeLineActivity extends Fragment {
         }
     }
 
-    public HabitEventTimeLineActivity() {
-
-    }
+    //public HabitEventTimeLineActivity() {}
 
     //private HabitEventAdapter habitEventAdapter;
     //private ArrayList<HabitEvent> eventArrayList = new ArrayList<>();
@@ -110,6 +110,7 @@ public class HabitEventTimeLineActivity extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             this.userName = bundle.getString("userName");
+            Log.i("AllHabitViewActivity: Username received: ", userName);
         }
 
 
@@ -158,8 +159,8 @@ public class HabitEventTimeLineActivity extends Fragment {
         }*/
 
 
-        //updateTextView(events.size());
-        //updateListView(events);
+        updateTextView(events.size());
+        updateListView(events);
 
     }
 
@@ -185,8 +186,10 @@ public class HabitEventTimeLineActivity extends Fragment {
     private void updateListView(ArrayList<HabitEvent> events){
         ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.habit_event_list_item, events);
-        this.listView.setAdapter(arrayAdapter);
-        this.listView.notify();
+        synchronized (listView){
+            this.listView.setAdapter(arrayAdapter);
+            this.listView.notify();
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

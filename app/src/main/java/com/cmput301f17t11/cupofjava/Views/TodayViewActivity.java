@@ -216,9 +216,6 @@ public class TodayViewActivity extends Fragment {
         //.getHabitList(getApplicationContext(), userIndex).getTodaysHabitList();
         // updateTextView(habits.size());
         //updateListView(habits);
-
-
-
     }
 
     /**
