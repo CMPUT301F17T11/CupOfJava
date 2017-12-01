@@ -40,6 +40,7 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback, GoogleApi
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String userName;
 
     private NearbyTab.OnFragmentInteractionListener mListener;
 
@@ -71,6 +72,7 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback, GoogleApi
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            this.userName = getArguments().getString("userName");
         }
     }
 

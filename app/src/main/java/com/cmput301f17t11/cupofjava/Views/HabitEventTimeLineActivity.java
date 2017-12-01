@@ -10,10 +10,10 @@
 
 package com.cmput301f17t11.cupofjava.Views;
 
-import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +26,10 @@ import android.widget.TextView;
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
-import com.cmput301f17t11.cupofjava.R;
 import com.cmput301f17t11.cupofjava.Models.User;
+import com.cmput301f17t11.cupofjava.R;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Opens the activity which shows the timeline of habit events.
@@ -81,6 +80,7 @@ public class HabitEventTimeLineActivity extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            this.userName = getArguments().getString("userName");
         }
     }
 
