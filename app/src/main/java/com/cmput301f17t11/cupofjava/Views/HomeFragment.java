@@ -9,6 +9,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -18,11 +19,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cmput301f17t11.cupofjava.Models.HomePagerAdapter;
 import com.cmput301f17t11.cupofjava.Models.BottomNavigationViewHelper;
 import com.cmput301f17t11.cupofjava.Models.Habit;
-import com.cmput301f17t11.cupofjava.R;
 import com.cmput301f17t11.cupofjava.Models.User;
+import com.cmput301f17t11.cupofjava.R;
 
 import java.util.ArrayList;
 
@@ -153,5 +153,42 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+    public class HomePagerAdapter extends FragmentStatePagerAdapter {
+
+        int numOfTabs;
+
+        public HomePagerAdapter(FragmentManager fm, int numberOfTabs) {
+
+            super(fm);
+            this.numOfTabs = numberOfTabs;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            switch (position) {
+                case 0:
+                    HabitEventTimeLineActivity habitEventTimeLineActivity = new HabitEventTimeLineActivity();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userName", userName);
+                    habitEventTimeLineActivity.setArguments(bundle);
+                    return habitEventTimeLineActivity;
+                case 1:
+                    NearbyTab nearbyTab = new NearbyTab();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putString("userName", userName);
+                    nearbyTab.setArguments(bundle2);
+                    return nearbyTab;
+
+                default: return null;
+            }
+
+        }
+
+        @Override
+        public int getCount(){
+            return numOfTabs;
+        }
     }
 }

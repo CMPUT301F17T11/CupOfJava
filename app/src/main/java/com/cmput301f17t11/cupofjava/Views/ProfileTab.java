@@ -6,9 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.cmput301f17t11.cupofjava.R;
-import com.cmput301f17t11.cupofjava.Views.FollowingTab;
 
 
 /**
@@ -28,6 +28,7 @@ public class ProfileTab extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String userName;
 
     private OnFragmentInteractionListener mListener;
 
@@ -59,6 +60,7 @@ public class ProfileTab extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            this.userName = getArguments().getString("userName");
         }
     }
 
@@ -66,7 +68,10 @@ public class ProfileTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.profile_fragment, container, false);
+        View view = inflater.inflate(R.layout.profile_fragment, container, false);
+        TextView userNameText = (TextView) view.findViewById(R.id.username);
+        userNameText.setText(userName);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -10,6 +10,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -21,9 +22,8 @@ import android.view.ViewGroup;
 
 import com.cmput301f17t11.cupofjava.Models.BottomNavigationViewHelper;
 import com.cmput301f17t11.cupofjava.Models.Habit;
-import com.cmput301f17t11.cupofjava.R;
-import com.cmput301f17t11.cupofjava.Models.SocialPagerAdapter;
 import com.cmput301f17t11.cupofjava.Models.User;
+import com.cmput301f17t11.cupofjava.R;
 
 import java.util.ArrayList;
 
@@ -174,6 +174,57 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+    public class SocialPagerAdapter extends FragmentStatePagerAdapter {
+
+        int numOfTabs;
+
+        public SocialPagerAdapter(FragmentManager fm, int numberOfTabs) {
+
+            super(fm);
+            this.numOfTabs = numberOfTabs;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            switch (position) {
+                case 0:
+                    ProfileTab profileTab = new ProfileTab();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userName", userName);
+                    profileTab.setArguments(bundle);
+                    return profileTab;
+                case 1:
+                    FollowingTab followingTab = new FollowingTab();
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putString("userName", userName);
+                    followingTab.setArguments(bundle2);
+                    return followingTab;
+
+                case 2:
+                    FollowersTab followersTab = new FollowersTab();
+                    Bundle bundle3 = new Bundle();
+                    bundle3.putString("userName", userName);
+                    followersTab.setArguments(bundle3);
+                    return followersTab;
+
+                case 3:
+                    RequestsTab requestsTab = new RequestsTab();
+                    Bundle bundle4 = new Bundle();
+                    bundle4.putString("userName", userName);
+                    requestsTab.setArguments(bundle4);
+                    return requestsTab;
+
+                default: return null;
+            }
+
+        }
+
+        @Override
+        public int getCount(){
+            return numOfTabs;
+        }
     }
 
 
