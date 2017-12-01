@@ -56,9 +56,6 @@ public class AllHabitViewActivity extends Fragment {
         return listView;
     }
 
-    public void AllHabitViewActivity() {
-
-    }
 
     /**
      * This method is called when AllHabitViewActivity is instantiated.

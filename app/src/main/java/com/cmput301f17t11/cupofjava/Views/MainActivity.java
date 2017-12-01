@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                                         startActivity(intent4);
                                     }
                                 })
-                                .setPositiveButton("New Habit \n   Event", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("New Habit Event", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(MainActivity.this, NewHabitEventActivity.class);

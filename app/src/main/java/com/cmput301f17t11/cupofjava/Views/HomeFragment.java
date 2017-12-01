@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment implements NearbyTab.OnFragmentIntera
                                         startActivity(intent4);
                                     }
                                 })
-                                .setPositiveButton("New Habit \n   Event", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("New Event", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent5 = new Intent(getActivity(), NewHabitEventActivity.class);
