@@ -153,6 +153,7 @@ public class HabitEventTimeLineActivity extends Fragment {
             for (int i = 0; i < habits.size(); i++){
                 getEventsTask.execute(habits.get(i).getHabitTitle());
                 he = getEventsTask.get();
+                Log.i("The habit events are", he.toString());
                 for (int j = 0; i < he.size(); j++){
                     events.add(he.get(j));
                 }

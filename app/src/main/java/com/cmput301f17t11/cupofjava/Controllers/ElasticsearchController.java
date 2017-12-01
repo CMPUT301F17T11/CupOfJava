@@ -291,10 +291,17 @@ public class ElasticsearchController {
             ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
 
             Log.i("getEventsTask: Search parameters", search_parameters[0]);
-            String query = "{\n" +
+            /*String query = "{\n" +
                     "  \"query\": {\n" +
                     "    \"term\" : { \"habitTitle\" : \"" + search_parameters[0] + "\" } \n" +
                     "  }\n" +
+                    "}";*/
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"match_phrase\" : {\n" +
+                    "            \"habitTitle\" : \"" + search_parameters[0] + "\"\n" +
+                    "        }\n" +
+                    "    }\n" +
                     "}";
             /*String query = "{\n" +
                     "    \"query\" : {\n" +
