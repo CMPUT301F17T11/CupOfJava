@@ -16,6 +16,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/tinytim">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+
             <ImageView
                 android:id="@+id/profile_pic"
                 android:layout_width="wrap_content"
@@ -24,7 +35,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="64dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/take_photo_v" />
+                android:background="@drawable/ic_profilepic" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,6 +47,10 @@
                 android:textSize="22sp"
                 android:fontFamily="monospace"
                 android:text="USERNAME"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         </LinearLayout>
 
