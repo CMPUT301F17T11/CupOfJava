@@ -2,6 +2,7 @@ package com.cmput301f17t11.cupofjava.Views;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -73,18 +74,27 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-
+                    // Left most choice
                     case R.id.action_timeline:
+                        // Bundles are passing package information
                         Bundle bundle = new Bundle();
                         //bundle.putSerializable("user", user);
                         //bundle.putSerializable("habitList", habits);
+                        // Put username in Bundle
                         bundle.putString("userName", userName);
+                        // HomeFragment is class of Fragments
                         HomeFragment fragment = new HomeFragment();
+                        // Give fragment packet of information
                         fragment.setArguments(bundle);
+                        // Get certain functionality from fragment to ?
                         FragmentManager fragmentManager = getSupportFragmentManager();
+                        // Do something
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        // Do transaction (
                         fragmentTransaction.replace(R.id.frame, fragment).addToBackStack(null);
                         fragmentTransaction.commit();
+
+
                         //intent2.putExtra("userIndex", userIndex);
                         return true;
                     case R.id.action_today:
