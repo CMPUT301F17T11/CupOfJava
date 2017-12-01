@@ -51,18 +51,16 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
         this.userName = intent.getStringExtra("userName");
         Log.i("MainActivity: username received:", userName);
 
-        //this.habits = user.getHabitListAsArray();
 
-        Bundle bundle = new Bundle();
-        //bundle.putSerializable("user", user);
-        bundle.putString("userName", userName);
-        TodayViewActivity fragment = new TodayViewActivity();
-        fragment.setArguments(bundle);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame, fragment).addToBackStack(null);
-        fragmentTransaction.commit();
 
+
+
+
+
+
+
+
+        /*
         //handle the bottom navigation bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_today);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -165,7 +163,8 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                         break;
                 }
                 return false;
-            }
-        });
+
+
+        });*/
     }
 }
