@@ -66,7 +66,7 @@ public class ViewHabitEventActivity extends Activity {
         habitDateBoxTextView = (TextView) findViewById(R.id.habitEventTextView3);
         habitCommentTextView = (TextView) findViewById(R.id.habitEventTextView4);
 
-        headingTextView.setText(("Here are the details of this habit event, "+this.userName+"."));
+        headingTextView.setText(("Here are the details of your habit event, "+this.userName+"."));
         habitTitleTextView.setText(("Habit Type: " + habitEvent.getHabit().getHabitTitle()));
         habitDateBoxTextView.setText(("Date:" + habitEvent.getDateAsString()));
         habitCommentTextView.setText(("Comment: " + habitEvent.getComment()));
