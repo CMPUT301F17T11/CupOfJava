@@ -142,7 +142,6 @@ public class HabitEventTimeLineActivity extends Fragment {
                 for (int j = 0; j < he.size(); j++){
                     Log.i("The habit event is", he.get(j).toString());
                     events.add(he.get(j));
-                    Log.i("Events", events.toString());
                 }
             }
 
@@ -188,18 +187,6 @@ public class HabitEventTimeLineActivity extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-    // PLEASE LEAVE THIS
-    /*@Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }*/
 
     @Override
     public void onDetach() {
