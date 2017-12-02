@@ -17,13 +17,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
+import com.google.android.gms.tasks.Task;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -137,14 +140,37 @@ public class ViewHabitEventActivity extends Activity {
         }
     }
 
-    /*public void deleteCurrentHabitEvent(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(HabitDetailViewActivity.this);
-        builder.setTitle("You Sure?")
+    public void deleteCurrentHabitEvent(View view) {
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ViewHabitEventActivity.this);
+        builder.setTitle("Delete Event")
                 .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        //TODO For Eshna to look at as to why it will not delete
+                        ElasticsearchController.DeleteEventTask deleteEventTask = new ElasticsearchController.DeleteEventTask();
+                        deleteEventTask.execute();
+
+
+                        //TODO need to delete habit events associated with the habit as well
+                        //finish();
+                        //SaveFileController saveFileController = new SaveFileController();
+                        //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
+                        Intent intent3 = new Intent(ViewHabitEventActivity.this, MainActivity.class);
+                        intent3.putExtra("userName", userName);
+                        //intent3.putExtra("userIndex", userIndex);
+                        startActivity(intent3);
                     }
                 })
-    }*/
+                .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+
+        android.support.v7.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }
