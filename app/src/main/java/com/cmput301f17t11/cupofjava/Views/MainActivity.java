@@ -96,7 +96,9 @@ public class MainActivity extends AppCompatActivity{
 
         this.userName = getIntent().getStringExtra("userName");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.menu);
+        navigation.setSelectedItemId(R.id.navigation_today);
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+        BottomNavigationViewHelper.disableShiftMode(navigation);
     }
 
     @Override
