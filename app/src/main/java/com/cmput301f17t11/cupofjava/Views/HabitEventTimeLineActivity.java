@@ -42,6 +42,7 @@ public class HabitEventTimeLineActivity extends Fragment {
     private String userName;
     private ListView listView;
     private TextView textView;
+
     ArrayList<HabitEvent> events = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
