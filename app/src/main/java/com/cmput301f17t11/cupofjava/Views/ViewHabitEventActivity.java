@@ -10,12 +10,23 @@
 package com.cmput301f17t11.cupofjava.Views;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -37,9 +48,13 @@ public class ViewHabitEventActivity extends Activity {
     private TextView habitTitleTextView;
     private TextView habitDateBoxTextView;
     private TextView habitCommentTextView;
+    private ImageView habitEventDetailPhoto;
     private String userName;
     private ArrayList<HabitEvent> allEvents = new ArrayList<>();
     private int habitEventIndex;
+
+    private static final int CAMERA_REQUEST = 1888;
+    private static final int RESULT_LOAD_IMG = 1;
 
     /**
      * Launches Interface displaying the habit events and their basic details.
@@ -60,23 +75,76 @@ public class ViewHabitEventActivity extends Activity {
         }
 
         HabitEvent habitEvent = allEvents.get(this.habitEventIndex);
-        headingTextView = (TextView) findViewById(R.id.habit_event_detail_username);
         habitTitleTextView = (TextView) findViewById(R.id.habit_event_detail_name);
         habitDateBoxTextView = (TextView) findViewById(R.id.habit_event_detail_date);
         habitCommentTextView = (TextView) findViewById(R.id.habit_event_detail_comment);
 
-        headingTextView.setText((this.userName));
         habitTitleTextView.setText((habitEvent.getHabit().getHabitTitle()));
         habitDateBoxTextView.setText((habitEvent.getDateAsString()));
         habitCommentTextView.setText((habitEvent.getComment()));
 
+        habitEventDetailPhoto = (ImageView) findViewById(R.id.habit_event_detail_photo);
+
+        habitEventDetailPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog
+                        .Builder(ViewHabitEventActivity.this);
+                builder.setTitle("Add Photo")
+                        .setNegativeButton("Open Camera", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                            }
+                        })
+                        .setPositiveButton("Open Gallery", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                                photoPickerIntent.setType("image/*");
+                                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+                            }
+                        });
+                android.support.v7.app.AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            habitEventDetailPhoto.setImageBitmap(photo);
+        }
+        else if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                habitEventDetailPhoto.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(ViewHabitEventActivity.this, "Something went wrong", Toast.LENGTH_LONG)
+                        .show();
+            }
+
+        }else {
+            Toast.makeText(ViewHabitEventActivity.this, "You haven't picked Image",Toast.LENGTH_LONG)
+                    .show();
+        }
+    }
+
+    /*public void deleteCurrentHabitEvent(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(HabitDetailViewActivity.this);
+        builder.setTitle("You Sure?")
+                .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+    }*/
 }
-
-
-
-
-
-
-    //public void deleteEventButton(View view){}
