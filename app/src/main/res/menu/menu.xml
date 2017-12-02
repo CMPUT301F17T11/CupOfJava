@@ -7,29 +7,29 @@
         android:id="@+id/navigation_timeline"
         android:enabled="true"
         android:icon="@drawable/timeline_v"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:title="Today"
         android:id="@+id/navigation_today"
         android:enabled="true"
         android:icon="@drawable/today_v"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:title="Add"
         android:id="@+id/navigation_add"
         android:enabled="true"
         android:icon="@drawable/add_v"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:title="Social"
         android:id="@+id/navigation_social"
         android:enabled="true"
         android:icon="@drawable/friends_v"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
     <item
         android:title="AllHabit"
         android:id="@+id/navigation_allhabit"
         android:enabled="true"
         android:icon="@drawable/list_all_v"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 </menu>

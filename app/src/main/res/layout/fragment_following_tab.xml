@@ -6,13 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.cmput301f17t11.cupofjava.Views.FollowingTab">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textSize="30sp"
-        android:text="FOLLOWING"/>
+        android:background="@color/colorAccentL"
+        android:fontFamily="sans-serif-medium"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="FOLLOWING"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
 
 </RelativeLayout>
