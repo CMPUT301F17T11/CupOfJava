@@ -131,7 +131,6 @@ public class HabitEventTimeLineActivity extends Fragment {
     public void onResume(){
         super.onResume();
 
-        //ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
         ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
         getEventsTask.execute(this.userName);
         try {
@@ -148,22 +147,6 @@ public class HabitEventTimeLineActivity extends Fragment {
             Log.i("HabitEventTimeline", "Failed to get the Habit Events from the async object");
 
         }
-        /*getHabitsTask.execute(this.userName);
-        try {
-            ArrayList<Habit> habits = getHabitsTask.get();
-            ArrayList<HabitEvent> he;
-            for (int i = 0; i < habits.size(); i++){
-                getEventsTask.execute(habits.get(i).getHabitTitle());
-                he = getEventsTask.get();
-                for (int j = 0; j < he.size(); j++){
-                    Log.i("The habit event is", he.get(j).toString());
-                    events.add(he.get(j));
-                }
-            }
-
-        } catch (Exception e) {
-            Log.i("Error", "Failed to get the Habit Events from the async object");
-        }*/
 
         updateTextView(events.size());
         updateListView(events);

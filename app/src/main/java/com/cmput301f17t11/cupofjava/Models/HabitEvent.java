@@ -28,11 +28,18 @@ public class HabitEvent implements Serializable {
     private String userName;
     private Habit habit;
     private String habitId;
+
+
     private String habitTitle;
 
     public String getHabitId() {
         return habitId;
     }
+
+    public String getHabitTitle() {
+        return habitTitle;
+    }
+
 
     public void setHabitId(String habitId) {
         this.habitId = habitId;
