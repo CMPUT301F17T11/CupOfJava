@@ -14,7 +14,8 @@ import java.io.ByteArrayOutputStream;
 public class BitmapImage {
     private String userName;
     private String HabitTitle;
-    //TODO HOW TO ASSOCIATE THE IMAGE WITH THE HABIT EVENT?
+    private String id;
+    //TODO ENSURE IMAGE CORRECTLY ASSOCIATED WITH THEIR CORRESPONDING IMAGES
     private Bitmap bitmap;
     private String imageString;
     private int imageSize;
@@ -69,5 +70,13 @@ public class BitmapImage {
         byte[] bytes = Base64.decode(this.imageString, Base64.DEFAULT);
         Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         return bm;
+    }
+
+    public void setId(String id){
+        this.id = id;
+    }
+
+    public String getId(){
+        return this.id;
     }
 }
