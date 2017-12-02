@@ -45,16 +45,5 @@
                 android:divider="@color/offWhite"/>
 
         </LinearLayout>
-
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/bottom_navigation_today"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/white"
-            app:itemIconTint="@drawable/nav_color_select"
-            app:itemTextColor="@drawable/nav_color_select"
-            app:menu="@menu/menu" />
-
     </RelativeLayout>
 </FrameLayout>
