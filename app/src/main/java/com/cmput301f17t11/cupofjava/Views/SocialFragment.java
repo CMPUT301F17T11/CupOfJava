@@ -12,14 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.cmput301f17t11.cupofjava.R;
 
-public class SocialFragment extends Fragment implements FollowingTab.OnFragmentInteractionListener,
-FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionListener {
+public class SocialFragment extends Fragment implements ProfileTab.OnFragmentInteractionListener,
+        FollowingTab.OnFragmentInteractionListener, FollowersTab.OnFragmentInteractionListener,
+        RequestsTab.OnFragmentInteractionListener {
 
     private String userName;
 
     /**
-     * The system calls this when creating this fragment.
+     * The system calls this when it's time for the fragment to draw its user interface for the first time.
+     * @param inflater
+     * @param container
      * @param savedInstanceState
+     * @return
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
