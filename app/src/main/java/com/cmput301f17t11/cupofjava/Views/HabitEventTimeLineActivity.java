@@ -99,7 +99,7 @@ public class HabitEventTimeLineActivity extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             this.userName = bundle.getString("userName");
-            Log.i("AllHabitViewActivity: Username received: ", userName);
+            Log.i("HabitEventTimelineFragment: Username received: ", userName);
         }
 
 
@@ -130,8 +130,6 @@ public class HabitEventTimeLineActivity extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        //SaveFileController saveFileController = new SaveFileController();
-        //ArrayList<HabitEvent> events = saveFileController.getAllHabitEvents(getApplicationContext(), this.userIndex);
         ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
         ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
         getHabitsTask.execute(this.userName);
@@ -142,8 +140,8 @@ public class HabitEventTimeLineActivity extends Fragment {
             for (int i = 0; i < habits.size(); i++){
                 getEventsTask.execute(habits.get(i).getHabitTitle());
                 he = getEventsTask.get();
-                Log.i("The habit events are", he.toString());
-                for (int j = 0; i < he.size(); j++){
+                for (int j = 0; j < he.size(); j++){
+                    Log.i("The habit event is", he.get(j).toString());
                     events.add(he.get(j));
                 }
             }
@@ -156,11 +154,6 @@ public class HabitEventTimeLineActivity extends Fragment {
         } catch (Exception e) {
             Log.i("Error", "Failed to get the Habit Events from the async object");
         }
-
-
-        //updateTextView(events.size());
-        //updateListView(events);
-
     }
 
     /**
