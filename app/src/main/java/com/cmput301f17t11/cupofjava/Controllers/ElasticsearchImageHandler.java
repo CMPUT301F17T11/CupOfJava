@@ -39,7 +39,6 @@ public class ElasticsearchImageHandler {
                 catch (Exception e){
                     Log.i("Error", "Failed adding BitmapImage to ES");
                 }
-
             }
             return null;
         }
