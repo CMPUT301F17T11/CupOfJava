@@ -34,7 +34,10 @@ public class TimeLineFragment extends Fragment implements NearbyTab.OnFragmentIn
          HabitEventTimeLineActivity.OnFragmentInteractionListener{
     private String userName;
 
-
+    /**
+     * The system calls this when creating this fragment.
+     * @param savedInstanceState
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

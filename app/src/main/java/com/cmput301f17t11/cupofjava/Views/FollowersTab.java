@@ -53,6 +53,10 @@ public class FollowersTab extends Fragment {
         return fragment;
     }
 
+    /**
+     * The system calls this when creating this fragment.
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

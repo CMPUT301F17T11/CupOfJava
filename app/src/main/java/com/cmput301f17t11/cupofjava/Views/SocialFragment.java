@@ -17,6 +17,10 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
 
     private String userName;
 
+    /**
+     * The system calls this when creating this fragment.
+     * @param savedInstanceState
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

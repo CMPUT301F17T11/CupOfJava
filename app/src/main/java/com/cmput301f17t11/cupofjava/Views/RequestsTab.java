@@ -53,6 +53,10 @@ public class RequestsTab extends Fragment {
         return fragment;
     }
 
+    /**
+     * The system calls this when creating this fragment.
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
