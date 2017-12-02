@@ -10,14 +10,9 @@
 package com.cmput301f17t11.cupofjava.Views;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,21 +41,11 @@ import java.util.Calendar;
  * @version 1.0
  */
 public class TodayViewActivity extends Fragment {
-
-
-    // ListView to be populated
     private ListView listView;
-
-    private ArrayList<Habit> habitList = new ArrayList<Habit>();
+    private ArrayList<Habit> habitList = new ArrayList<>();
     private ArrayList<Habit> habits;
     private String userName = "";
-    private User user;
-    //private int userIndex;
     private TextView textView;
-
-    public ListView getListView(){
-        return listView;
-    }
 
     /**
      * This method is called when TodayViewActivity is instantiated.
@@ -88,21 +73,17 @@ public class TodayViewActivity extends Fragment {
 
         }
 
-        //this.userName = bundle.getString("userName");
-
-        //this.userIndex = intent.getIntExtra("userIndex", 0);
-
         //bottom navigation bar
         BottomNavigationView bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_navigation_today);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
 
 
         //set up the TextView and ListView
-        this.textView = (TextView) view.findViewById(R.id.SelfProfileHeadingTextView);
+        this.textView = (TextView) view.findViewById(R.id.TodaysHabitsHeadingTextView);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -217,5 +198,9 @@ public class TodayViewActivity extends Fragment {
         }
 
         return todaysHabits;
+    }
+
+    public ListView getListView(){
+        return listView;
     }
 }

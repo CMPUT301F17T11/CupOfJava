@@ -1,57 +1,29 @@
 package com.cmput301f17t11.cupofjava.Views;
 
-
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.cmput301f17t11.cupofjava.Models.BottomNavigationViewHelper;
-import com.cmput301f17t11.cupofjava.Models.Habit;
-import com.cmput301f17t11.cupofjava.Models.User;
 import com.cmput301f17t11.cupofjava.R;
-
-import java.util.ArrayList;
 
 public class SocialFragment extends Fragment implements FollowingTab.OnFragmentInteractionListener,
 FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionListener {
 
-    private String userName = "";
-    private User user;
-    private ArrayList<Habit> habitList;
-    //private TabItem followingTab;
-    //private TabItem followersTab;
-    //private TabItem requestsTab;
-
-    public void SocialFragment() {
-    }
+    private String userName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        //obtain extra info from intent
-        //final Intent intent = getActivity().getIntent();
         Bundle bundle = getArguments();
         if(bundle!=null){
             this.userName = bundle.getString("userName");
-
         }
-        //this.userName = intent.getStringExtra("userName");
-        //this.userIndex = intent.getIntExtra("userIndex", 0);
 
         View view = inflater.inflate(R.layout.activity_social, container, false);
 
@@ -61,11 +33,6 @@ FollowersTab.OnFragmentInteractionListener, RequestsTab.OnFragmentInteractionLis
         tabLayout.addTab(tabLayout.newTab().setText("Following"));
         tabLayout.addTab(tabLayout.newTab().setText("Followers"));
         tabLayout.addTab(tabLayout.newTab().setText("Requests"));
-
-        //followingTab = (TabItem) findViewById(R.id.following_tab_item);
-        //followersTab = (TabItem) findViewById(R.id.followers_tab_item);
-        //requestsTab = (TabItem) findViewById(R.id.requests_tab_item);
-
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.friends_view_pager);

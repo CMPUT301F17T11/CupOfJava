@@ -32,9 +32,6 @@ import java.util.ArrayList;
 
 public class TimeLineFragment extends Fragment implements NearbyTab.OnFragmentInteractionListener,
          HabitEventTimeLineActivity.OnFragmentInteractionListener{
-
-    private User user;
-    private ArrayList<Habit> habitList;
     private String userName;
 
 
