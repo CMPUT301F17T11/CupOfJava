@@ -94,12 +94,16 @@ public class User implements Serializable {
     }
 
     public void newFollowRequest(String id){
-        followRequests.add(id);
+        this.followRequests.add(id);
     }
 
     public void acceptFollowRequest(String username){
         this.followRequests.remove(username);
         this.followerList.add(username);
+    }
+
+    public void rejectFollowRequest(String username){
+        this.followRequests.remove(username);
     }
 
     public boolean isFollowing(String id){
