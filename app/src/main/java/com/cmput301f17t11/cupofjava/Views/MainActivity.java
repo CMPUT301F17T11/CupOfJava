@@ -16,49 +16,35 @@ import com.cmput301f17t11.cupofjava.Models.User;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnFragmentInteractionListener,
-        FollowingTab.OnFragmentInteractionListener, FollowersTab.OnFragmentInteractionListener*/{
+public class MainActivity extends AppCompatActivity{
 
     private String userName;
-    private User user;
-    private ArrayList<Habit> habits;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_timeline:
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putString("userName", userName);
+                    TimeLineFragment timeLineFragment = new TimeLineFragment();
+                    timeLineFragment.setArguments(bundle1);
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame, timeLineFragment, "TimeLine");
+                    fragmentTransaction.commit();
+                    return true;
 
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        this.userName = getIntent().getStringExtra("userName");
-
-        setContentView(R.layout.activity_main);
-
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.menu);
-
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_timeline:
-                        Bundle bundle = new Bundle();
-                        bundle.putString("userName", userName);
-
-                        TimeLineFragment timeLineFragment = new TimeLineFragment();
-                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.frame, timeLineFragment,"TimeLine" );
-                        fragmentTransaction.commit();
-                        return true;
-
-
-                    case R.id.navigation_today:
-                        Bundle bundle2 = new Bundle();
-                        bundle2.putString("userName", userName);
-
-                        TodayViewActivity TodayViewActivity = new TodayViewActivity();
-                        FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction2.replace(R.id.frame, TodayViewActivity,"Today" );
-                        fragmentTransaction2.commit();
-                        return true;
+                case R.id.navigation_today:
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putString("userName", userName);
+                    TodayViewActivity todayViewActivity = new TodayViewActivity();
+                    todayViewActivity.setArguments(bundle2);
+                    FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction2.replace(R.id.frame, todayViewActivity, "Today");
+                    fragmentTransaction2.commit();
+                    return true;
                     /*
                     case R.id.navigation_add:
                         FragmentThree fragment3 = new FragmentThree();
@@ -78,10 +64,29 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                         fragmentTransaction3.replace(R.id.fram, fragment3, "FragmentThree");  //create first framelayout with id fram in the activity where fragments will be displayed
                         fragmentTransaction3.commit();
                         return true;*/
-                    default:
-                        return false;
-                }
+                default:
+                    return false;
             }
-        });
+        }
+    };
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        this.userName = getIntent().getStringExtra("userName");
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.menu);
+        navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("userName", userName);
+        TodayViewActivity todayViewActivity = new TodayViewActivity();
+        todayViewActivity.setArguments(bundle);
+        FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction2.replace(R.id.frame, todayViewActivity, "Today");
+        fragmentTransaction2.commit();
+
     }
 }
