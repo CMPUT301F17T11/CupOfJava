@@ -132,7 +132,6 @@ public class HabitEventTimeLineActivity extends Fragment {
         ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
         ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
         getHabitsTask.execute(this.userName);
-        //getEventsTask.execute();
         try {
             ArrayList<Habit> habits = getHabitsTask.get();
             ArrayList<HabitEvent> he;
