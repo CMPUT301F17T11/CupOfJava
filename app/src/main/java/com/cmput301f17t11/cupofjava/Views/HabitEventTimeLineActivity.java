@@ -142,17 +142,16 @@ public class HabitEventTimeLineActivity extends Fragment {
                 for (int j = 0; j < he.size(); j++){
                     Log.i("The habit event is", he.get(j).toString());
                     events.add(he.get(j));
+                    Log.i("Events", events.toString());
                 }
             }
-
-            updateTextView(events.size());
-            updateListView(events);
-            Log.i("Events", events.toString());
-
 
         } catch (Exception e) {
             Log.i("Error", "Failed to get the Habit Events from the async object");
         }
+
+        updateTextView(events.size());
+        updateListView(events);
     }
 
     /**
