@@ -27,27 +27,9 @@ public class HabitEvent implements Serializable {
 
     private String userName;
     private Habit habit;
-    private String habitId;
-
-
-    private String habitTitle;
-
-    public String getHabitId() {
-        return habitId;
-    }
-
-    public String getHabitTitle() {
-        return habitTitle;
-    }
-
-
-    public void setHabitId(String habitId) {
-        this.habitId = habitId;
-    }
-
     private String comment;
     private Date habitEventDate;
-
+    private String habitTitle;
 
     @JestId
     String id; //for elasticsearch
@@ -122,6 +104,7 @@ public class HabitEvent implements Serializable {
         this.userName = userName;
     }
 
+
     /**
      * Gets habit reason
      *
@@ -173,6 +156,10 @@ public class HabitEvent implements Serializable {
         String dateString = new SimpleDateFormat("d MMM yyy")
                 .format(this.habitEventDate);
         return dateString;
+    }
+
+    public String getHabitTitle() {
+        return habitTitle;
     }
 
     public String getComment(){
