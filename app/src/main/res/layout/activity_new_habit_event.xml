@@ -13,14 +13,15 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="4dp"
             android:background="@color/colorAccentL"
-            android:text="NEW HABIT EVENT"
             android:fontFamily="monospace"
-            android:textStyle="bold"
-            android:textSize="22sp"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="NEW HABIT EVENT"
             android:textAlignment="center"
-            android:paddingBottom="4dp"/>
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/choose_habit_spinner"
@@ -30,8 +31,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="32dp"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown">
-        </android.support.v7.widget.AppCompatSpinner>
+            android:spinnerMode="dropdown"></android.support.v7.widget.AppCompatSpinner>
 
         <EditText
             android:id="@+id/edit_comment"
@@ -45,33 +45,33 @@
             android:hint="Comment" />
 
         <ImageView
-            android:layout_width="wrap_content"
             android:id="@+id/habit_event_photo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="24dp"
-            android:background="@drawable/take_photo"
-            android:layout_gravity="center"/>
+            android:background="@drawable/take_photo" />
 
         <ImageView
+            android:id="@+id/habit_event_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:layout_gravity="center"
-            android:id="@+id/habit_event_location"
-            android:background="@drawable/add_location"/>
+            android:layout_marginTop="24dp"
+            android:background="@drawable/add_location" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SAVE"
+            android:layout_gravity="center"
             android:layout_marginTop="24dp"
             android:background="@drawable/save_button"
-            android:layout_gravity="center"
+            android:fontFamily="monospace"
+            android:onClick="saveNewHabitEvent"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:fontFamily="monospace"
-            android:textSize="22sp"
-            android:onClick="saveNewHabitEvent"/>
+            android:text="SAVE"
+            android:textSize="22sp" />
     </LinearLayout>
 
 </ScrollView>

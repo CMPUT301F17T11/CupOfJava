@@ -13,7 +13,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
 
@@ -61,15 +60,15 @@ public class ViewHabitEventActivity extends Activity {
         }
 
         HabitEvent habitEvent = allEvents.get(this.habitEventIndex);
-        headingTextView = (TextView) findViewById(R.id.habitEventDetailHeadingTextView);
-        habitTitleTextView = (TextView) findViewById(R.id.HabitEventTextView2);
-        habitDateBoxTextView = (TextView) findViewById(R.id.habitEventTextView3);
-        habitCommentTextView = (TextView) findViewById(R.id.habitEventTextView4);
+        headingTextView = (TextView) findViewById(R.id.habit_event_detail_username);
+        habitTitleTextView = (TextView) findViewById(R.id.habit_event_detail_name);
+        habitDateBoxTextView = (TextView) findViewById(R.id.habit_event_detail_date);
+        habitCommentTextView = (TextView) findViewById(R.id.habit_event_detail_comment);
 
-        headingTextView.setText(("Here are the details of your habit event, "+this.userName+"."));
-        habitTitleTextView.setText(("Habit Type: " + habitEvent.getHabit().getHabitTitle()));
-        habitDateBoxTextView.setText(("Date:" + habitEvent.getDateAsString()));
-        habitCommentTextView.setText(("Comment: " + habitEvent.getComment()));
+        headingTextView.setText((this.userName));
+        habitTitleTextView.setText((habitEvent.getHabit().getHabitTitle()));
+        habitDateBoxTextView.setText((habitEvent.getDateAsString()));
+        habitCommentTextView.setText((habitEvent.getComment()));
 
     }
 
