@@ -63,6 +63,10 @@ public class FollowingTab extends Fragment {
         }
     }
 
+    /**
+     * The system calls this when creating this fragment.
+     * @param savedInstanceState
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
