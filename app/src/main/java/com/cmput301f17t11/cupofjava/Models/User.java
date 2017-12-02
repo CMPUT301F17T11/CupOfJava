@@ -21,9 +21,9 @@ public class User implements Serializable {
     @JestId
     private String id; //used for elasticsearch
 
-    private ArrayList<String> followingList;
-    private ArrayList<String> followerList;
-    private ArrayList<String> followRequestList;
+    private ArrayList<String> followingList = new ArrayList<>();
+    private ArrayList<String> followerList = new ArrayList<>();
+    private ArrayList<String> followRequests = new ArrayList<>();
 
     /**
      * Constructor
@@ -94,10 +94,13 @@ public class User implements Serializable {
     }
 
     public void newFollowRequest(String id){
-        followRequestList.add(id);
+        followRequests.add(id);
     }
 
-    public void acceptFollowRequest(String id){}
+    public void acceptFollowRequest(String username){
+        this.followRequests.remove(username);
+        this.followerList.add(username);
+    }
 
     public boolean isFollowing(String id){
         return followingList.contains(id);
@@ -107,8 +110,8 @@ public class User implements Serializable {
         return followerList.contains(id);
     }
 
-    public ArrayList<String> getFollowRequestList(){
-        return this.followRequestList;
+    public ArrayList<String> getFollowRequests(){
+        return this.followRequests;
     }
 
     public ArrayList<String> getFollowingList(){
@@ -117,5 +120,13 @@ public class User implements Serializable {
 
     public ArrayList<String> getFollowerList(){
         return this.followerList;
+    }
+
+    public void removeFollower(String username){
+        this.followerList.remove(username);
+    }
+
+    public void unFollow(String username){
+        this.followingList.remove(username);
     }
 }

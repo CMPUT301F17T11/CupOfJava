@@ -118,9 +118,6 @@ public class HabitEventTimeLineActivity extends Fragment {
                 bundle.putInt("eventIndex", position);
 
                 intent5.putExtras(bundle);
-                //intent5.putExtra("userName", userName);
-                //intent5.putExtra("userIndex", userIndex);
-                //intent5.putExtra("habitEventIndex", position);
                 startActivity(intent5);
             }
         });
