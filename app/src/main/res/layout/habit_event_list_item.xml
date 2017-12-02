@@ -3,8 +3,11 @@
     android:id="@+id/habit_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:fontFamily="monospace"
+    android:padding="8dp"
     android:textAlignment="center"
-    android:textAppearance="@style/TextAppearance.AppCompat.Medium">
+    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+    android:textColor="@color/black"
+    android:textSize="16sp">
 
 </TextView>

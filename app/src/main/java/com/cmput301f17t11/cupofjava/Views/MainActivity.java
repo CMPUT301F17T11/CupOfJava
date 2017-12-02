@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.cmput301f17t11.cupofjava.Models.BottomNavigationViewHelper;
 import com.cmput301f17t11.cupofjava.R;
 
 public class MainActivity extends AppCompatActivity{

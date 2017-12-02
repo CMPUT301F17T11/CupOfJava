@@ -10,6 +10,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:background="@color/colorAccentL"
+            android:text="NEW HABIT EVENT"
+            android:fontFamily="monospace"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:paddingBottom="4dp"/>
+
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/choose_habit_spinner"
             android:layout_width="match_parent"
@@ -28,7 +40,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="32dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="monospace"
             android:gravity="center_horizontal"
             android:hint="Comment" />
 
@@ -37,7 +49,6 @@
             android:id="@+id/habit_event_photo"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:onClick="addHabitEventPhoto"
             android:background="@drawable/take_photo"
             android:layout_gravity="center"/>
 
@@ -56,9 +67,10 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/save_button"
             android:layout_gravity="center"
-            android:paddingLeft="32dp"
-            android:paddingRight="32dp"
-            android:fontFamily="sans-serif-medium"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:fontFamily="monospace"
+            android:textSize="22sp"
             android:onClick="saveNewHabitEvent"/>
     </LinearLayout>
 

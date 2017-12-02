@@ -20,6 +20,9 @@ android {
     }
     productFlavors {
     }
+    lintOptions {
+        disable 'RestrictedApi'
+    }
 }
 
 dependencies {

@@ -74,7 +74,7 @@ public class TodayViewActivity extends Fragment {
         }
 
         //bottom navigation bar
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_navigation_today);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
