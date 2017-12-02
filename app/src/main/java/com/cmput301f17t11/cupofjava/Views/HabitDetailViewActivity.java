@@ -80,7 +80,7 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         TextView textView = new TextView(getApplicationContext());
 
         textView.setText(" Habit Events ");
-        listView.addHeaderView(textView);
+        listView.addHeaderView(textView, null, false);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -189,8 +189,6 @@ public class NewHabitEventActivity extends AppCompatActivity {
 
         HabitEvent newHabitEvent = new HabitEvent(habit, habitEventComment);
         newHabitEvent.setUserName(this.userName);
-        newHabitEvent.setHabitId(habit.getId());
-        Log.i("HabitEvent habitID", newHabitEvent.getHabitId());
 
         ElasticsearchController.AddEventTask addEventTask = new ElasticsearchController.AddEventTask();
         addEventTask.execute(newHabitEvent);
