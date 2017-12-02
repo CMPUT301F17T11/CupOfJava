@@ -1,23 +1,16 @@
 package com.cmput301f17t11.cupofjava.Views;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.R;
-import com.cmput301f17t11.cupofjava.Models.User;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 
