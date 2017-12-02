@@ -143,12 +143,6 @@ public class TodayViewActivity extends Fragment {
         } catch (Exception e) {
             Log.i("Error Getting Habits ", e.toString());
         }
-
-        //SaveFileController saveFileController = new SaveFileController();
-        //ArrayList<Habit> habits = saveFileController
-        //.getHabitList(getApplicationContext(), userIndex).getTodaysHabitList();
-        // updateTextView(habits.size());
-        //updateListView(habits);
     }
 
     /**
