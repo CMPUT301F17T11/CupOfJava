@@ -58,6 +58,7 @@ public class ViewHabitEventActivity extends Activity {
     private String comment;
     private ArrayList<HabitEvent> allEvents = new ArrayList<>();
     private int habitEventIndex;
+    private HabitEvent habitEvent;
 
     private static final int CAMERA_REQUEST = 1888;
     private static final int RESULT_LOAD_IMG = 1;
@@ -80,7 +81,7 @@ public class ViewHabitEventActivity extends Activity {
 
         }
 
-        final HabitEvent habitEvent = allEvents.get(this.habitEventIndex);
+        habitEvent = allEvents.get(this.habitEventIndex);
         habitTitleTextView = (TextView) findViewById(R.id.habit_event_detail_name);
         habitDateBoxTextView = (TextView) findViewById(R.id.habit_event_detail_date);
         habitCommentTextView = (TextView) findViewById(R.id.habit_event_detail_comment);
@@ -186,13 +187,9 @@ public class ViewHabitEventActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        //TODO For Eshna to look at as to why it will not delete
                         ElasticsearchController.DeleteEventTask deleteEventTask = new ElasticsearchController.DeleteEventTask();
-                        deleteEventTask.execute();
+                        deleteEventTask.execute(habitEvent);
 
-
-                        //TODO need to delete habit events associated with the habit as well
-                        //finish();
                         //SaveFileController saveFileController = new SaveFileController();
                         //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
                         Intent intent3 = new Intent(ViewHabitEventActivity.this, MainActivity.class);

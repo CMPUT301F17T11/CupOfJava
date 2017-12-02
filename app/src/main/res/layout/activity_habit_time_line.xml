@@ -97,7 +97,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="16dp"
                     android:backgroundTint="@color/black"
-                    android:prompt="BY HABIT"
+                    android:prompt="@id/Filter_by_habit"
                     android:layout_weight="1"
                     android:layout_marginRight="16dp"
                     android:paddingLeft="8dp"

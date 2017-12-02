@@ -296,22 +296,22 @@ public class ElasticsearchController {
                     "    \"term\" : { \"habitTitle\" : \"" + search_parameters[0] + "\" } \n" +
                     "  }\n" +
                     "}";*/
-            String query = "{\n" +
+            /*String query = "{\n" +
                     "    \"query\": {\n" +
                     "        \"match_phrase\" : {\n" +
                     "            \"habitTitle\" : \"" + search_parameters[0] + "\"\n" +
                     "        }\n" +
                     "    }\n" +
-                    "}";
-            /*String query = "{\n" +
+                    "}";*/
+            String query = "{\n" +
                     "    \"query\" : {\n" +
                     "       \"constant_score\" : {\n" +
                     "           \"filter\" : {\n" +
-                    "               \"term\" : {\"habitId\": \"" + search_parameters[0] + "\"}\n" +
+                    "               \"term\" : {\"userName\": \"" + search_parameters[0] + "\"}\n" +
                     "             }\n" +
                     "         }\n" +
                     "    }\n" +
-                    "}";*/
+                    "}";
 
             Search search = new Search.Builder(query)
                     .addIndex("cmput301f17t11_cupofjava")

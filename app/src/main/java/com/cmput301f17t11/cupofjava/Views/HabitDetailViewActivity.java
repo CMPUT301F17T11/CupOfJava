@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ import java.util.ArrayList;
 public class HabitDetailViewActivity extends AppCompatActivity {
 
     private String habitDateCalendar;
-    private ListView habitEventList;
+    private ListView listView;
     private String userName;
     private User user;
     private int userIndex;
@@ -72,6 +73,9 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         TextView habitTitleTextView = (TextView) findViewById(R.id.title_text_view);
         TextView habitReasonTextView = (TextView) findViewById(R.id.reason_text_view);
         TextView habitDateTextView = (TextView) findViewById(R.id.date_added_text_view);
+        this.listView = (ListView) findViewById(R.id.habit_event_item);
+
+
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
 
@@ -123,26 +127,13 @@ public class HabitDetailViewActivity extends AppCompatActivity {
                         ElasticsearchController.DeleteHabitsTask deleteHabitsTask = new ElasticsearchController.DeleteHabitsTask();
                         deleteHabitsTask.execute(habit);
 
-                        ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
-                        getEventsTask.execute(habit.getHabitTitle());
-
-                        try {
-                            ArrayList<HabitEvent> myHabitEvents = getEventsTask.get();
-                            if (!myHabitEvents.isEmpty()) {
-                                Log.i("HabitDetailView: habitEvents of habit: ", "found some");
-                                ElasticsearchController.DeleteEventsTask deleteEventsTask = new ElasticsearchController.DeleteEventsTask();
-                                deleteEventsTask.execute(myHabitEvents);
-
-                            } else {
-                                Log.i("HabitDetailView: habitEvents of habit: ", "found none");
-
-                            }
-                        } catch (Exception e) {
-                            Log.i("HabitDetailView: ", e.toString());
-
+                        ArrayList<HabitEvent> habitEvents = getHabitEventsOfHabit();
+                        if (!habitEvents.isEmpty()) {
+                            ElasticsearchController.DeleteEventsTask deleteEventsTask = new ElasticsearchController.DeleteEventsTask();
+                            deleteEventsTask.execute(habitEvents);
                         }
-                        //TODO need to delete habit events associated with the habit as well
-                        //finish();
+
+
                         //SaveFileController saveFileController = new SaveFileController();
                         //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
                         Intent intent3 = new Intent(HabitDetailViewActivity.this, MainActivity.class);
@@ -161,5 +152,57 @@ public class HabitDetailViewActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //updates the list view with Habit Events
+        updateListView(getHabitEventsOfHabit());
+    }
+
+    /**
+     * Updates list view.
+     *
+     * @param events Arraylist of type HabitEvent
+     */
+    private void updateListView(ArrayList<HabitEvent> events) {
+        ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(this,
+                R.layout.habit_event_list_item, events);
+        synchronized (listView) {
+            this.listView.setAdapter(arrayAdapter);
+            this.listView.notify();
+        }
+    }
+
+
+    public ArrayList<HabitEvent> getHabitEventsOfHabit() {
+        ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
+        getEventsTask.execute(userName);
+        ArrayList<HabitEvent> myHabitEvents = new ArrayList<>();
+
+        try {
+            //all habit events of the user
+            ArrayList<HabitEvent> allHabitEvents = getEventsTask.get();
+
+            if (!allHabitEvents.isEmpty()) {
+                //filter it for habit events specific to the habit
+                for (int i = 0; i < allHabitEvents.size(); i++) {
+                    if (allHabitEvents.get(i).getHabitId().equals(habit.getId())) {
+                        myHabitEvents.add(allHabitEvents.get(i));
+                    }
+                }
+                Log.i("HabitDetailView: habitEvents of habit: ", "found some" + myHabitEvents.toString());
+
+            } else {
+                Log.i("HabitDetailView: habitEvents of habit: ", "found none");
+
+            }
+        } catch (Exception e) {
+            Log.i("HabitDetailView: ", e.toString());
+
+        }
+        return myHabitEvents;
+
     }
 }

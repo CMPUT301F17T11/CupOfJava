@@ -130,9 +130,25 @@ public class HabitEventTimeLineActivity extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
+
+        //ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
         ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
-        getHabitsTask.execute(this.userName);
+        getEventsTask.execute(this.userName);
+        try {
+            ArrayList<HabitEvent> foundHabitEvents = getEventsTask.get();
+            if (!foundHabitEvents.isEmpty()) {
+
+                events.addAll(foundHabitEvents);
+                Log.i("HabitEventTimeline: found events :", events.toString());
+            } else {
+                Log.i("HabitEventTimeline", "Did Not find habit events" + events.toString());
+
+            }
+        } catch (Exception e) {
+            Log.i("HabitEventTimeline", "Failed to get the Habit Events from the async object");
+
+        }
+        /*getHabitsTask.execute(this.userName);
         try {
             ArrayList<Habit> habits = getHabitsTask.get();
             ArrayList<HabitEvent> he;
@@ -147,7 +163,7 @@ public class HabitEventTimeLineActivity extends Fragment {
 
         } catch (Exception e) {
             Log.i("Error", "Failed to get the Habit Events from the async object");
-        }
+        }*/
 
         updateTextView(events.size());
         updateListView(events);
