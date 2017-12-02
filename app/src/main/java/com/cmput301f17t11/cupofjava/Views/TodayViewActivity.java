@@ -73,14 +73,6 @@ public class TodayViewActivity extends Fragment {
 
         }
 
-        //bottom navigation bar
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_navigation_today);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-        Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(1);
-        menuItem.setChecked(true);
-
-
         //set up the TextView and ListView
         this.textView = (TextView) view.findViewById(R.id.TodaysHabitsHeadingTextView);
 

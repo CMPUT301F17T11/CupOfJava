@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.cmput301f17t11.cupofjava.Models.BottomNavigationViewHelper;
 import com.cmput301f17t11.cupofjava.R;
 
 public class MainActivity extends AppCompatActivity{
@@ -95,7 +96,9 @@ public class MainActivity extends AppCompatActivity{
 
         this.userName = getIntent().getStringExtra("userName");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.menu);
+        navigation.setSelectedItemId(R.id.navigation_today);
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+        BottomNavigationViewHelper.disableShiftMode(navigation);
     }
 
     @Override

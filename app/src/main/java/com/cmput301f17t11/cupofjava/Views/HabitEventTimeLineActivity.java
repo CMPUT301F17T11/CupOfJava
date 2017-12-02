@@ -29,6 +29,8 @@ import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.Models.User;
 import com.cmput301f17t11.cupofjava.R;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.ArrayList;
 
 /**
