@@ -19,7 +19,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +40,7 @@ import java.util.ArrayList;
  * User can see some details of the event such as the habit attached to it,
  * the reason for the attached habit, the start date of the associative habit,
  * the photo attached to the habit event, and progress stats.
- *
+ * <p>
  * User can top on the habit to swtich to any other habits associated with
  * the event.
  *
@@ -53,6 +55,7 @@ public class ViewHabitEventActivity extends Activity {
     private TextView habitCommentTextView;
     private ImageView habitEventDetailPhoto;
     private String userName;
+    private String comment;
     private ArrayList<HabitEvent> allEvents = new ArrayList<>();
     private int habitEventIndex;
 
@@ -77,7 +80,7 @@ public class ViewHabitEventActivity extends Activity {
 
         }
 
-        HabitEvent habitEvent = allEvents.get(this.habitEventIndex);
+        final HabitEvent habitEvent = allEvents.get(this.habitEventIndex);
         habitTitleTextView = (TextView) findViewById(R.id.habit_event_detail_name);
         habitDateBoxTextView = (TextView) findViewById(R.id.habit_event_detail_date);
         habitCommentTextView = (TextView) findViewById(R.id.habit_event_detail_comment);
@@ -89,6 +92,10 @@ public class ViewHabitEventActivity extends Activity {
         habitEventDetailPhoto = (ImageView) findViewById(R.id.habit_event_detail_photo);
 
         habitEventDetailPhoto.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v) {
 
@@ -115,14 +122,46 @@ public class ViewHabitEventActivity extends Activity {
             }
         });
 
+        habitCommentTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog
+                        .Builder(ViewHabitEventActivity.this);
+
+                final EditText input = new EditText(ViewHabitEventActivity.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                builder.setView(input);
+
+                builder.setTitle("Edit Comment")
+                        .setPositiveButton("DONE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO ELASTICSEARCH FOR ESHNA
+                                comment = input.getText().toString();
+                                habitCommentTextView.setText(comment);
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                android.support.v7.app.AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             habitEventDetailPhoto.setImageBitmap(photo);
-        }
-        else if (resultCode == RESULT_OK) {
+        } else if (resultCode == RESULT_OK) {
             try {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
@@ -134,8 +173,8 @@ public class ViewHabitEventActivity extends Activity {
                         .show();
             }
 
-        }else {
-            Toast.makeText(ViewHabitEventActivity.this, "You haven't picked Image",Toast.LENGTH_LONG)
+        } else {
+            Toast.makeText(ViewHabitEventActivity.this, "You haven't picked Image", Toast.LENGTH_LONG)
                     .show();
         }
     }

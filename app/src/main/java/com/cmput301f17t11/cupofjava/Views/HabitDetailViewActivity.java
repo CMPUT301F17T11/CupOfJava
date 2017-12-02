@@ -115,7 +115,7 @@ public class HabitDetailViewActivity extends AppCompatActivity {
     public void deleteCurrentHabitButton(View view) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(HabitDetailViewActivity.this);
-        builder.setTitle("Edit record")
+        builder.setTitle("Edit record").setMessage("HELLO")
                 .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
