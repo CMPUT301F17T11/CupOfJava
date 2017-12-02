@@ -28,7 +28,11 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.userName = getIntent().getStringExtra("userName");
+
         setContentView(R.layout.activity_main);
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.menu);
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -38,19 +42,24 @@ public class MainActivity extends AppCompatActivity /*implements RequestsTab.OnF
                     case R.id.navigation_timeline:
                         Bundle bundle = new Bundle();
                         bundle.putString("userName", userName);
-                        //TimeLineFragment fragment = new TimeLineFragment();
 
                         TimeLineFragment timeLineFragment = new TimeLineFragment();
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.frame, timeLineFragment,"TimeLine" );
                         fragmentTransaction.commit();
-                        return true;/*
+                        return true;
+
+
                     case R.id.navigation_today:
-                        FragmentTwo fragment2 = new FragmentTwo();
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putString("userName", userName);
+
+                        TodayViewActivity TodayViewActivity = new TodayViewActivity();
                         FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction2.replace(R.id.fram, fragment2, "FragmentTwo");  //create first framelayout with id fram in the activity where fragments will be displayed
+                        fragmentTransaction2.replace(R.id.frame, TodayViewActivity,"Today" );
                         fragmentTransaction2.commit();
                         return true;
+                    /*
                     case R.id.navigation_add:
                         FragmentThree fragment3 = new FragmentThree();
                         FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
