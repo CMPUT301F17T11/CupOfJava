@@ -44,7 +44,6 @@ public class UserLoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //final Context context = getApplicationContext();
 
         username_editText = (EditText) findViewById(R.id.username);
 
@@ -82,20 +81,6 @@ public class UserLoginActivity extends Activity {
                     }
 
                 }
-                /*else{
-                    SaveFileController saveFileController = new SaveFileController();
-                    int userIndex = saveFileController.getUserIndex(context, input);
-
-                    if (userIndex == -1){
-                        User newUser = new User(input);
-                        saveFileController.addNewUser(context, newUser);
-                    }
-
-                    Intent intent = new Intent(UserLoginActivity.this, TodayViewActivity.class);
-                    intent.putExtra("userName", input);
-                    intent.putExtra("userIndex", saveFileController.getUserIndex(context, input));
-                    startActivity(intent);
-                }*/
             }
         });
     }

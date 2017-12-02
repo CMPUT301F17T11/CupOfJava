@@ -38,8 +38,6 @@ import java.util.ArrayList;
  */
 public class HabitEventTimeLineActivity extends Fragment {
     private String userName;
-    private int userIndex;
-    private User user;
     private ListView listView;
     private TextView textView;
     ArrayList<HabitEvent> events = new ArrayList<>();
@@ -84,11 +82,6 @@ public class HabitEventTimeLineActivity extends Fragment {
         }
     }
 
-    //public HabitEventTimeLineActivity() {}
-
-    //private HabitEventAdapter habitEventAdapter;
-    //private ArrayList<HabitEvent> eventArrayList = new ArrayList<>();
-
     /**
      * This method is called when HabitEventTimeLineActivity is instantiated.
      * Implements bottom navigation menu to record which button is clicked on and
@@ -103,10 +96,6 @@ public class HabitEventTimeLineActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_habit_time_line, container, false);
-        //habitEventAdapter = new HabitEventAdapter(this, eventArrayList);
-        //listView.setAdapter(habitEventAdapter);
-
-        //obtain extra info from intent
         Bundle bundle = getArguments();
         if (bundle != null) {
             this.userName = bundle.getString("userName");

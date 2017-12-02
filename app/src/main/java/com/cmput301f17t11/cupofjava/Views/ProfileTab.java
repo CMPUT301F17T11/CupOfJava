@@ -33,7 +33,6 @@ public class ProfileTab extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public ProfileTab() {
-        // Required empty public constructor
     }
 
     /**
