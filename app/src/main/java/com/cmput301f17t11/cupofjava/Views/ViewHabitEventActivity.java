@@ -40,10 +40,7 @@ public class ViewHabitEventActivity extends Activity {
     private TextView habitCommentTextView;
     private String userName;
     private ArrayList<HabitEvent> allEvents = new ArrayList<>();
-    private int userIndex;
-    //private int habitIndex;
     private int habitEventIndex;
-    private Habit habit;
 
     /**
      * Launches Interface displaying the habit events and their basic details.
@@ -55,8 +52,6 @@ public class ViewHabitEventActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_habit_event);
 
-        //final Intent intent = getIntent();
-
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             this.userName = bundle.getString("userName");
@@ -65,23 +60,17 @@ public class ViewHabitEventActivity extends Activity {
 
         }
 
-        //this.userName = intent.getStringExtra("userName");
-        //this.userIndex = intent.getIntExtra("userIndex", 0);
-        //this.habitEventIndex = intent.getIntExtra("habitEventIndex", 0);
-
-
-        //SaveFileController saveFileController = new SaveFileController();
-        //ArrayList<HabitEvent> allEvents = saveFileController.getAllHabitEvents(getApplicationContext(),this.userIndex);
         HabitEvent habitEvent = allEvents.get(this.habitEventIndex);
         headingTextView = (TextView) findViewById(R.id.habitEventDetailHeadingTextView);
         habitTitleTextView = (TextView) findViewById(R.id.HabitEventTextView2);
         habitDateBoxTextView = (TextView) findViewById(R.id.habitEventTextView3);
         habitCommentTextView = (TextView) findViewById(R.id.habitEventTextView4);
 
-        headingTextView.setText(("Here are the details of this habit event. Soon, you will be able to do more here!"));
+        headingTextView.setText(("Here are the details of this habit event, "+this.userName+"."));
         habitTitleTextView.setText(("Habit Type: " + habitEvent.getHabit().getHabitTitle()));
         habitDateBoxTextView.setText(("Date:" + habitEvent.getDateAsString()));
         habitCommentTextView.setText(("Comment: " + habitEvent.getComment()));
+
     }
 
 }
