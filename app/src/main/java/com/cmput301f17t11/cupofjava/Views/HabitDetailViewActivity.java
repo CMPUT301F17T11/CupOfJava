@@ -16,8 +16,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
@@ -74,6 +76,25 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         TextView habitReasonTextView = (TextView) findViewById(R.id.reason_text_view);
         TextView habitDateTextView = (TextView) findViewById(R.id.date_added_text_view);
         this.listView = (ListView) findViewById(R.id.habit_event_item);
+
+        TextView textView = new TextView(getApplicationContext());
+
+        textView.setText(" Habit Events ");
+        listView.addHeaderView(textView);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent5 = new Intent(HabitDetailViewActivity.this, ViewHabitEventActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("userName", userName);
+                bundle.putSerializable("eventClicked", getHabitEventsOfHabit()); //sending habitEventlist
+                bundle.putInt("eventIndex", position - 1);
+
+                intent5.putExtras(bundle);
+                startActivity(intent5);
+            }
+        });
 
 
 
@@ -170,6 +191,7 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(this,
                 R.layout.habit_event_list_item, events);
         synchronized (listView) {
+
             this.listView.setAdapter(arrayAdapter);
             this.listView.notify();
         }
@@ -188,7 +210,7 @@ public class HabitDetailViewActivity extends AppCompatActivity {
             if (!allHabitEvents.isEmpty()) {
                 //filter it for habit events specific to the habit
                 for (int i = 0; i < allHabitEvents.size(); i++) {
-                    if (allHabitEvents.get(i).getHabitId().equals(habit.getId())) {
+                    if (allHabitEvents.get(i).getHabitTitle().equals(habit.getHabitTitle())) {
                         myHabitEvents.add(allHabitEvents.get(i));
                     }
                 }
