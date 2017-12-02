@@ -2,11 +2,14 @@ package com.cmput301f17t11.cupofjava.Views;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -34,8 +37,6 @@ public class MainActivity extends AppCompatActivity{
                     fragmentTransaction.replace(R.id.frame, timeLineFragment, "TimeLine");
                     fragmentTransaction.commit();
                     return true;
-
-
                 case R.id.navigation_today:
                     Bundle bundle2 = new Bundle();
                     bundle2.putString("userName", userName);
@@ -45,25 +46,48 @@ public class MainActivity extends AppCompatActivity{
                     fragmentTransaction2.replace(R.id.frame, todayViewActivity, "Today");
                     fragmentTransaction2.commit();
                     return true;
-                    /*
-                    case R.id.navigation_add:
-                        FragmentThree fragment3 = new FragmentThree();
-                        FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction3.replace(R.id.fram, fragment3, "FragmentThree");  //create first framelayout with id fram in the activity where fragments will be displayed
-                        fragmentTransaction3.commit();
-                        return true;
-                    case R.id.navigation_social:
-                        FragmentThree fragment3 = new FragmentThree();
-                        FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction3.replace(R.id.fram, fragment3, "FragmentThree");  //create first framelayout with id fram in the activity where fragments will be displayed
-                        fragmentTransaction3.commit();
-                        return true;
-                    case R.id.navigation_allhabit:
-                        FragmentThree fragment3 = new FragmentThree();
-                        FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction3.replace(R.id.fram, fragment3, "FragmentThree");  //create first framelayout with id fram in the activity where fragments will be displayed
-                        fragmentTransaction3.commit();
-                        return true;*/
+                case R.id.navigation_add:
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Add New")
+                            .setNegativeButton("New Habit", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(MainActivity.this, NewHabitActivity.class);
+                                    intent.putExtra("userName", userName);
+                                    startActivity(intent);
+                                }
+                            })
+                            .setPositiveButton("New Habit Event", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(MainActivity.this, NewHabitEventActivity.class);
+                                    intent.putExtra("userName", userName);
+                                    startActivity(intent);
+                                }
+                            });
+
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    return true;
+                case R.id.navigation_social:
+                    Bundle bundle4 = new Bundle();
+                    bundle4.putString("userName", userName);
+                    SocialFragment socialFragment = new SocialFragment();
+                    socialFragment.setArguments(bundle4);
+                    FragmentTransaction fragmentTransaction4 = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction4.replace(R.id.frame, socialFragment, "Today");
+                    fragmentTransaction4.commit();
+                    return true;
+                case R.id.navigation_allhabit:
+                    Bundle bundle5 = new Bundle();
+                    bundle5.putString("userName", userName);
+                    AllHabitViewActivity allHabitViewActivity = new AllHabitViewActivity();
+                    allHabitViewActivity.setArguments(bundle5);
+                    FragmentTransaction fragmentTransaction5 = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction5.replace(R.id.frame, allHabitViewActivity, "Today");
+                    fragmentTransaction5.commit();
+                    return true;
                 default:
                     return false;
             }
@@ -79,6 +103,11 @@ public class MainActivity extends AppCompatActivity{
         this.userName = getIntent().getStringExtra("userName");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.menu);
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
 
         Bundle bundle = new Bundle();
         bundle.putString("userName", userName);
@@ -87,6 +116,5 @@ public class MainActivity extends AppCompatActivity{
         FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
         fragmentTransaction2.replace(R.id.frame, todayViewActivity, "Today");
         fragmentTransaction2.commit();
-
     }
 }
