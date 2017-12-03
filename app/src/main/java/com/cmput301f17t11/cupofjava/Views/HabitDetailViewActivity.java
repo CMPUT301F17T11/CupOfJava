@@ -133,16 +133,12 @@ public class HabitDetailViewActivity extends AppCompatActivity {
      * @see NewHabitEventActivity
      */
     public void addNewHabitEventButton(View view) {
-        //todo: new habit event
         Intent intent2 = new Intent(HabitDetailViewActivity.this, NewHabitEventActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("userName", userName);
         bundle.putSerializable("habitList", habitList);
         bundle.putSerializable("user", user);
         bundle.putInt("habitIndex", habitIndex);
-        //intent2.putExtra("userName", userName);
-        //intent2.putExtra("userIndex", userIndex);
-        //intent2.putExtra("habitIndex", habitIndex);
         intent2.putExtras(bundle);
         startActivity(intent2);
     }

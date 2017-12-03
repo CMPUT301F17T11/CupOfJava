@@ -40,7 +40,7 @@ public class HabitEvent implements Serializable {
     @JestId
     String id; //for elasticsearch
     private Location location;
-    private String imageString;
+    private String imageString = "";
 
     /** TODO: prj5
 
@@ -179,6 +179,7 @@ public class HabitEvent implements Serializable {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
       
     public void setImage(Bitmap bitmap){
         this.imageString = ImageHelper.getStringFromImage(bitmap);

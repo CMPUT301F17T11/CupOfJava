@@ -55,7 +55,36 @@ public class FollowingTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_following_tab, container, false);
+        View v = inflater.inflate(R.layout.fragment_following_tab, container, false);
+
+        Button addButton = (Button)v.findViewById(R.id.add_to_following_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Find User").setMessage("HELLO")
+                        .setPositiveButton("Search", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Intent intent3 = new Intent(getContext(), MainActivity.class);
+                                intent3.putExtra("userName", userName);
+                                startActivity(intent3);
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -76,5 +105,12 @@ public class FollowingTab extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void addUserButton(View view){}
+    public void addUserButton(View view){
+        Intent intent = getActivity().getIntent();
+        Bundle bundle = new Bundle();
+        bundle.putString("userName", userName);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
+    }
 }
