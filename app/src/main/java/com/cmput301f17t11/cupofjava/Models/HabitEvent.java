@@ -30,6 +30,7 @@ public class HabitEvent implements Serializable {
     private String comment;
     private Date habitEventDate;
     private String habitTitle;
+    private String imageString;
 
     @JestId
     String id; //for elasticsearch
