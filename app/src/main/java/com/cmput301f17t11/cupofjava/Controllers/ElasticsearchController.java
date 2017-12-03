@@ -222,24 +222,6 @@ public class ElasticsearchController {
         }
     }
 
-    public static class UpdateHabitTask extends AsyncTask<Habit, Void, Void> {
-        @Override
-        protected Void doInBackground(Habit... habits) {
-            verifySettings();
-            for (Habit habit : habits) {
-                Index index = new Index.Builder(habit).index("cmput301f17t11_cupofjava").type("habit").id(habit.getId()).build();
-
-                try {
-                    DocumentResult result = client.execute(index);
-                } catch (Exception e) {
-                    Log.i("Error", "The application failed to build");
-                }
-
-            }
-            return null;
-        }
-    }
-
     public static class DeleteHabitsTask extends AsyncTask<Habit, Void, Void> {
         @Override
         protected Void doInBackground(Habit... habits) {
@@ -281,58 +263,6 @@ public class ElasticsearchController {
 
             }
             return null;
-        }
-    }
-    public static class GetEventTask extends AsyncTask<String, Void, HabitEvent> {
-        @Override
-        protected HabitEvent doInBackground(String... search_parameters) {
-            verifySettings();
-            HabitEvent myEvent = null;
-
-            Log.i("getEventTask: Search parameters", search_parameters[0]);
-            /*String query = "{\n" +
-                    "  \"query\": {\n" +
-                    "    \"term\" : { \"habitTitle\" : \"" + search_parameters[0] + "\" } \n" +
-                    "  }\n" +
-                    "}";*/
-            String query = "{\n" +
-                    "    \"query\": {\n" +
-                    "        \"match_phrase\" : {\n" +
-                    "            \"id\" : \"" + search_parameters[0] + "\"\n" +
-                    "        }\n" +
-                    "    }\n" +
-                    "}";
-           /* String query = "{\n" +
-                    "    \"query\" : {\n" +
-                    "       \"constant_score\" : {\n" +
-                    "           \"filter\" : {\n" +
-                    "               \"term\" : {\"id\": \"" + search_parameters[0] + "\"}\n" +
-                    "             }\n" +
-                    "         }\n" +
-                    "    }\n" +
-                    "}";*/
-
-            Search search = new Search.Builder(query)
-                    .addIndex("cmput301f17t11_cupofjava")
-                    .addType("event")
-                    .build();
-
-
-            try {
-                // get results of the query
-                SearchResult result = client.execute(search);
-                if (result.isSucceeded()) {
-                    myEvent = result.getFirstHit(HabitEvent.class).source;
-                    Log.i("Success", myEvent.toString());
-
-                } else {
-                    Log.i("Error", "The search query failed to find any HabitEvents that matched");
-                }
-            } catch (Exception e) {
-                Log.i("Error", e.toString());
-            }
-
-            return myEvent;
         }
     }
 
@@ -451,23 +381,6 @@ public class ElasticsearchController {
         }
     }
 
-    public static class UpdateEventTask extends AsyncTask<HabitEvent, Void, Void> {
-        @Override
-        protected Void doInBackground(HabitEvent... events) {
-            verifySettings();
-            for (HabitEvent habitEvent : events) {
-                Index index = new Index.Builder(habitEvent).index("cmput301f17t11_cupofjava").type("event").id(habitEvent.getId()).build();
-
-                try {
-                    DocumentResult result = client.execute(index);
-                } catch (Exception e) {
-                    Log.i("Error", "The Update Event application failed to build");
-                }
-
-            }
-            return null;
-        }
-    }
 
     /**
      * Sets up the server.
