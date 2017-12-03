@@ -46,10 +46,9 @@ import java.util.ArrayList;
  *
  * @version 1.0
  */
-//TODO: get the habit list in spinner dropdown
+
 public class ViewHabitEventActivity extends Activity {
 
-    private TextView headingTextView;
     private TextView habitTitleTextView;
     private TextView habitDateBoxTextView;
     private TextView habitCommentTextView;

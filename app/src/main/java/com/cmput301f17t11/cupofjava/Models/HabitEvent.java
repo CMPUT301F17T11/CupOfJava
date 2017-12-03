@@ -38,7 +38,7 @@ public class HabitEvent implements Serializable {
     private String imageString;
 
     @JestId
-    String id; //for elasticsearch
+    String id;
 
 
     /** TODO: prj5
