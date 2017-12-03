@@ -90,7 +90,11 @@ public class ViewHabitEventActivity extends Activity {
         habitDateBoxTextView.setText((habitEvent.getDateAsString()));
         habitCommentTextView.setText((habitEvent.getComment()));
 
+        //photo handling
         habitEventDetailPhoto = (ImageView) findViewById(R.id.habit_event_detail_photo);
+        if (habitEvent.hasImage()){
+            habitEventDetailPhoto.setImageBitmap(habitEvent.getImage());
+        }
 
         habitEventDetailPhoto.setOnClickListener(new View.OnClickListener() {
             /**

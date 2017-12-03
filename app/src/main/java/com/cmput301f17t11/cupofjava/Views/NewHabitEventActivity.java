@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -57,15 +58,13 @@ public class NewHabitEventActivity extends AppCompatActivity {
     private EditText comment;
     private Bitmap habitEventPhotoBitmap;
     private ImageView habitEventPhoto;
+    private boolean hasPhoto = false;
     private Time time;
     private Location location;
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
     private HabitAdapter habitAdapter;
     private String userName;
     private Spinner spinner;
-    private int userIndex;
-    private int habitIndex;
-    private User user;
 
     private Habit habit;
     private String habitEventComment;
@@ -128,6 +127,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
                 habitEventPhoto.setImageBitmap(photo);
+                setBitmap();
         }
         else if (resultCode == RESULT_OK) {
             try {
@@ -135,6 +135,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 habitEventPhoto.setImageBitmap(selectedImage);
+                setBitmap();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(NewHabitEventActivity.this, "Something went wrong", Toast.LENGTH_LONG)
@@ -153,10 +154,6 @@ public class NewHabitEventActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //SaveFileController saveFileController = new SaveFileController();
-        //ArrayList<Habit> habits = saveFileController.getHabitList(getApplicationContext(), userIndex).getTodaysHabitList();
-        //retrieving all habits of the user from elasticsearch
-
         ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
         getHabitsTask.execute(userName);
         try {
@@ -189,14 +186,14 @@ public class NewHabitEventActivity extends AppCompatActivity {
 
         HabitEvent newHabitEvent = new HabitEvent(habit, habitEventComment);
         newHabitEvent.setUserName(this.userName);
+        if (this.hasPhoto){
+            newHabitEvent.setImage(habitEventPhotoBitmap);
+        }
 
         ElasticsearchController.AddEventTask addEventTask = new ElasticsearchController.AddEventTask();
         addEventTask.execute(newHabitEvent);
-        //SaveFileController saveFileController = new SaveFileController();
-        //saveFileController.addHabitEvent(getApplicationContext(), this.userIndex, this.habitIndex, newHabitEvent);
         Intent intent = new Intent(NewHabitEventActivity.this, MainActivity.class);
         intent.putExtra("userName", userName);
-        //intent.putExtra("userIndex", userIndex);
         startActivity(intent);
     }
 
@@ -242,5 +239,11 @@ public class NewHabitEventActivity extends AppCompatActivity {
         }
 
         return todaysHabits;
+    }
+
+    private void setBitmap(){
+        BitmapDrawable drawable = (BitmapDrawable) this.habitEventPhoto.getDrawable();
+        this.habitEventPhotoBitmap = drawable.getBitmap();
+        this.hasPhoto = true;
     }
 }

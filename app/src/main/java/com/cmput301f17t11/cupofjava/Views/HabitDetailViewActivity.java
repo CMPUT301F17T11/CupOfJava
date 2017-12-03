@@ -68,7 +68,6 @@ public class HabitDetailViewActivity extends AppCompatActivity {
             this.userName = bundle.getString("userName");
 
             this.habitList = (ArrayList<Habit>) bundle.getSerializable("habitClicked");
-            //this.userIndex = intent.getIntExtra("userIndex", 0);
             this.habitIndex = bundle.getInt("habitIndex");
         }
 
@@ -154,12 +153,8 @@ public class HabitDetailViewActivity extends AppCompatActivity {
                             deleteEventsTask.execute(habitEvents);
                         }
 
-
-                        //SaveFileController saveFileController = new SaveFileController();
-                        //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
                         Intent intent3 = new Intent(HabitDetailViewActivity.this, MainActivity.class);
                         intent3.putExtra("userName", userName);
-                        //intent3.putExtra("userIndex", userIndex);
                         startActivity(intent3);
                     }
                 })

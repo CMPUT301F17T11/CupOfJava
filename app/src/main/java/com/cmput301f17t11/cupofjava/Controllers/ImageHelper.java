@@ -34,7 +34,7 @@ public class ImageHelper {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.WEBP, 50, byteArrayOutputStream);
         byte[] bitmapBytes = byteArrayOutputStream.toByteArray();
-        Log.i("Image size", String.valueOf(bitmapBytes.length)); //TODO confirm image size right
+        Log.i("Image size", String.valueOf(bitmapBytes.length));
         str = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
         return str;
     }
