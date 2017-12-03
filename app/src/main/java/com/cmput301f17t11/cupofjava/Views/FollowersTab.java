@@ -6,8 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.cmput301f17t11.cupofjava.Controllers.SocialRequestHandler;
+import com.cmput301f17t11.cupofjava.Models.User;
 import com.cmput301f17t11.cupofjava.R;
+
+import java.util.ArrayList;
 
 
 /**
@@ -19,21 +25,12 @@ import com.cmput301f17t11.cupofjava.R;
  * create an instance of this fragment.
  */
 public class FollowersTab extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private String userName;
 
     private OnFragmentInteractionListener mListener;
 
-    public FollowersTab() {
-        // Required empty public constructor
-    }
+    public FollowersTab() {}
 
     /**
      * Use this factory method to create a new instance of
@@ -47,8 +44,6 @@ public class FollowersTab extends Fragment {
     public static FollowersTab newInstance(String param1, String param2) {
         FollowersTab fragment = new FollowersTab();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,8 +56,6 @@ public class FollowersTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
             this.userName = getArguments().getString("userName");
         }
     }
@@ -78,28 +71,24 @@ public class FollowersTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_followers_tab, container, false);
+        View v = inflater.inflate(R.layout.fragment_followers_tab, container, false);
+
+
+        ListView listView = (ListView)v.findViewById(R.id.followers_list_view);
+
+        User user = SocialRequestHandler.getUser(userName);
+        ArrayList<String> followerList =  user.getFollowerList();
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
+                R.layout.habit_list_item, followerList);
+        listView.setAdapter(arrayAdapter);
+
+
+        //TODO alert dialog opening up on click to give option to remove follower
+
+        return v;
 
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    // PLEASE LEAVE THIS
-    /*@Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }*/
 
     @Override
     public void onDetach() {

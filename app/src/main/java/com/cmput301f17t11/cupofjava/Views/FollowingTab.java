@@ -9,13 +9,17 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Controllers.SocialRequestHandler;
+import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
+import com.cmput301f17t11.cupofjava.Models.User;
 import com.cmput301f17t11.cupofjava.R;
 
 import java.util.ArrayList;
@@ -29,7 +33,6 @@ import java.util.ArrayList;
  */
 public class FollowingTab extends Fragment {
     private String userName;
-    //Button addButton;
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,7 +59,7 @@ public class FollowingTab extends Fragment {
      * @return
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_following_tab, container, false);
 
@@ -65,7 +68,7 @@ public class FollowingTab extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Find User").setMessage("Enter Username to Search For");
+                builder.setTitle("Find User").setMessage("Enter Name of User to Follow");
 
                 final EditText input = new EditText(getContext());
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -77,9 +80,9 @@ public class FollowingTab extends Fragment {
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
                                 SocialRequestHandler.sendFollowRequest(userName,
                                         input.getText().toString());
-
 
                                 Intent intent = new Intent(getContext(), MainActivity.class);
                                 intent.putExtra("userName", userName);
@@ -98,14 +101,18 @@ public class FollowingTab extends Fragment {
                 dialog.show();
             }
         });
-        return v;
-    }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        ListView listView = (ListView)v.findViewById(R.id.following_list_view);
+        //TODO alert dialog opening up on click to give option to unfollow
+
+        User user = SocialRequestHandler.getUser(userName);
+        ArrayList<String> followingList =  user.getFollowingList();
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
+                R.layout.habit_list_item, followingList);
+        listView.setAdapter(arrayAdapter);
+
+        return v;
     }
 
     @Override
@@ -117,14 +124,5 @@ public class FollowingTab extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    public void addUserButton(View view){
-        Intent intent = getActivity().getIntent();
-        Bundle bundle = new Bundle();
-        bundle.putString("userName", userName);
-        intent.putExtras(bundle);
-        startActivity(intent);
-
     }
 }
