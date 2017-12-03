@@ -9,6 +9,7 @@
 
 package com.cmput301f17t11.cupofjava.Models;
 
+import android.location.Location;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 
@@ -35,14 +36,14 @@ public class HabitEvent implements Serializable {
     private String comment;
     private Date habitEventDate;
     private String habitTitle;
+    private Boolean isLocationSet;
+    @JestId
+    String id; //for elasticsearch
+    private Location location;
     private String imageString;
 
-    @JestId
-    String id;
-
-
     /** TODO: prj5
-     private Geolocation location;
+
      private boolean locationSet = false;
      private Bitmap photo;
      public HabitEvent(Habit habit){
@@ -172,6 +173,13 @@ public class HabitEvent implements Serializable {
         return this.comment;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+      
     public void setImage(Bitmap bitmap){
         this.imageString = ImageHelper.getStringFromImage(bitmap);
     }
@@ -203,5 +211,12 @@ public class HabitEvent implements Serializable {
     public String toString(){ //this gets called by array adapter
         return ("What: " + this.habitTitle + "\n"
                 + "When: " + getDateAsString());
+    }
+public Boolean getIsLocationSet(){
+        return this.isLocationSet;
+}
+
+    public void setIsLocationSet(Boolean isLocationSet) {
+        this.isLocationSet = isLocationSet;
     }
 }

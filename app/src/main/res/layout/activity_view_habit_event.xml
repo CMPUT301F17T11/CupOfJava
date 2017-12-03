@@ -85,6 +85,21 @@
             android:background="@color/colorAccentL"
             android:padding="8dp"
             android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/habit_event_detail_location"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:hint="Location: none"
+            android:fontFamily="monospace"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:textSize="22sp"
+            android:background="@color/colorAccentL"
+            android:padding="8dp"
+            android:textAlignment="center"/>
 
         <TextView
             android:layout_width="match_parent"

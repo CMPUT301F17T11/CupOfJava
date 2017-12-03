@@ -222,24 +222,6 @@ public class ElasticsearchController {
         }
     }
 
-    public static class UpdateHabitTask extends AsyncTask<Habit, Void, Void> {
-        @Override
-        protected Void doInBackground(Habit... habits) {
-            verifySettings();
-            for (Habit habit : habits) {
-                Index index = new Index.Builder(habit).index("cmput301f17t11_cupofjava").type("habit").id(habit.getId()).build();
-
-                try {
-                    DocumentResult result = client.execute(index);
-                } catch (Exception e) {
-                    Log.i("Error", "The application failed to build");
-                }
-
-            }
-            return null;
-        }
-    }
-
     public static class DeleteHabitsTask extends AsyncTask<Habit, Void, Void> {
         @Override
         protected Void doInBackground(Habit... habits) {
@@ -338,6 +320,24 @@ public class ElasticsearchController {
         }
     }
 
+    public static class DeleteEventTask2 extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... search_parameters) {
+            verifySettings();
+
+                Delete delete = new Delete.Builder(search_parameters[0]).index("cmput301f17t11_cupofjava").type("event").build();
+
+                try {
+                    DocumentResult result = client.execute(delete);
+                } catch (Exception e) {
+                    Log.i("Error", "The Delete Event Task application failed to build");
+                }
+
+
+            return null;
+        }
+    }
+
     public static class DeleteEventTask extends AsyncTask<HabitEvent, Void, Void> {
         @Override
         protected Void doInBackground(HabitEvent... events) {
@@ -381,23 +381,6 @@ public class ElasticsearchController {
         }
     }
 
-    public static class UpdateEventTask extends AsyncTask<HabitEvent, Void, Void> {
-        @Override
-        protected Void doInBackground(HabitEvent... events) {
-            verifySettings();
-            for (HabitEvent habitEvent : events) {
-                Index index = new Index.Builder(habitEvent).index("cmput301f17t11_cupofjava").type("event").id(habitEvent.getId()).build();
-
-                try {
-                    DocumentResult result = client.execute(index);
-                } catch (Exception e) {
-                    Log.i("Error", "The Update Event application failed to build");
-                }
-
-            }
-            return null;
-        }
-    }
 
     /**
      * Sets up the server.
