@@ -1,9 +1,5 @@
 package com.cmput301f17t11.cupofjava.Models;
 
-
-import com.cmput301f17t11.cupofjava.Models.Habit;
-import com.cmput301f17t11.cupofjava.Models.HabitList;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -18,12 +14,13 @@ public class User implements Serializable {
     private String username;
 
     private HabitList habitList;  //all the habits of the user
+
     @JestId
     private String id; //used for elasticsearch
 
-    private ArrayList<String> followingList = new ArrayList<>();
-    private ArrayList<String> followerList = new ArrayList<>();
-    private ArrayList<String> followRequests = new ArrayList<>();
+    private ArrayList<String> followingList;
+    private ArrayList<String> followerList;
+    private ArrayList<String> followRequests;
 
     /**
      * Constructor
@@ -32,6 +29,9 @@ public class User implements Serializable {
     public User(String name) {
         this.username = name;
         this.habitList = new HabitList();
+        this.followingList = new ArrayList<>();
+        this.followerList = new ArrayList<>();
+        this.followRequests = new ArrayList<>();
     }
 
     public void setHabitList(HabitList habitList) {
@@ -93,7 +93,7 @@ public class User implements Serializable {
         followingList.add(id);
     }
 
-    public void newFollowRequest(String id){
+    public void sendFollowRequest(String id){
         this.followRequests.add(id);
     }
 

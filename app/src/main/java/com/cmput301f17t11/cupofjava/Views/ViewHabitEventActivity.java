@@ -46,10 +46,9 @@ import java.util.ArrayList;
  *
  * @version 1.0
  */
-//TODO: get the habit list in spinner dropdown
+
 public class ViewHabitEventActivity extends Activity {
 
-    private TextView headingTextView;
     private TextView habitTitleTextView;
     private TextView habitDateBoxTextView;
     private TextView habitLocationTextView;
@@ -106,7 +105,11 @@ public class ViewHabitEventActivity extends Activity {
         //String format = " LAT: " + habitEvent.getLocation().getLatitude() +" LONG: "+ habitEvent.getLocation().getLongitude()
         habitLocationTextView.setText(eventLocation);
 
+        //photo handling
         habitEventDetailPhoto = (ImageView) findViewById(R.id.habit_event_detail_photo);
+        if (habitEvent.hasImage()){
+            habitEventDetailPhoto.setImageBitmap(habitEvent.getImage());
+        }
 
         habitEventDetailPhoto.setOnClickListener(new View.OnClickListener() {
             /**

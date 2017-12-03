@@ -108,14 +108,15 @@ public class TodayViewActivity extends Fragment {
         getHabitsTask.execute(userName);
         try {
             habits = getTodaysHabitList(getHabitsTask.get());
-            updateTextView(habits.size());
-            updateListView(habits);
             Log.i("TodayViewActivity: habit_list is : ", habits.toString());
 
 
         } catch (Exception e) {
             Log.i("Error Getting Habits ", e.toString());
         }
+
+        updateTextView(habits.size());
+        updateListView(habits);
     }
 
     /**
