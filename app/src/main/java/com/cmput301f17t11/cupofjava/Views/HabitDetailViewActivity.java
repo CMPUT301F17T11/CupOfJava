@@ -101,6 +101,10 @@ public class HabitDetailViewActivity extends AppCompatActivity {
                 } else {
                     bundle.putString("eventLocation", "Location not Set");
                 }
+                if (myEvent.hasImage()) {
+                    bundle.putParcelable("eventImage", myEvent.getImage());
+                }
+                bundle.putBoolean("hasImage", myEvent.hasImage());
 
 
                 bundle.putString("eventId", myEvent.getId());

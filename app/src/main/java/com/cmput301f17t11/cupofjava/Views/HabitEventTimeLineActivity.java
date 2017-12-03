@@ -167,8 +167,10 @@ public class HabitEventTimeLineActivity extends Fragment {
                         bundle.putString("eventLocation", "Location not Set");
                     }
 
-
-
+                    if (myEvent.hasImage()) {
+                        bundle.putParcelable("eventImage", myEvent.getImage());
+                    }
+                    bundle.putBoolean("hasImage", myEvent.hasImage());
                     bundle.putString("eventId", myEvent.getId());
                     //bundle.putSerializable("eventClicked", events); //sending habitEventlist
                     //bundle.putInt("eventIndex", position);

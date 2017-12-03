@@ -59,6 +59,7 @@ public class ViewHabitEventActivity extends Activity {
     private ArrayList<HabitEvent> allEvents = new ArrayList<>();
     private int habitEventIndex;
     private HabitEvent habitEvent;
+    private Bitmap image;
 
     private static final int CAMERA_REQUEST = 1888;
     private static final int RESULT_LOAD_IMG = 1;
@@ -67,6 +68,7 @@ public class ViewHabitEventActivity extends Activity {
     private String eventComment;
     private String eventLocation;
     private String eventId;
+    private boolean hasImage;
 
     /**
      * Launches Interface displaying the habit events and their basic details.
@@ -86,6 +88,10 @@ public class ViewHabitEventActivity extends Activity {
             this.eventComment = bundle.getString("eventComment");
             this.eventLocation = bundle.getString("eventLocation");
             this.eventId = bundle.getString("eventId");
+            this.hasImage = bundle.getBoolean("hasImage");
+            if (hasImage) {
+                this.image = bundle.getParcelable("eventImage");
+            }
             //this.allEvents = (ArrayList<HabitEvent>) bundle.getSerializable("eventClicked");
             //this.habitEventIndex = bundle.getInt("eventIndex");
 
@@ -107,8 +113,8 @@ public class ViewHabitEventActivity extends Activity {
 
         //photo handling
         habitEventDetailPhoto = (ImageView) findViewById(R.id.habit_event_detail_photo);
-        if (habitEvent.hasImage()){
-            habitEventDetailPhoto.setImageBitmap(habitEvent.getImage());
+        if (hasImage) {
+            habitEventDetailPhoto.setImageBitmap(this.image);
         }
 
         habitEventDetailPhoto.setOnClickListener(new View.OnClickListener() {
