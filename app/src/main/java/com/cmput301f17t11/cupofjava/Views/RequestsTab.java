@@ -1,12 +1,18 @@
 package com.cmput301f17t11.cupofjava.Views;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.cmput301f17t11.cupofjava.Controllers.SocialRequestHandler;
@@ -58,15 +64,35 @@ public class RequestsTab extends Fragment {
 
         ListView listView = (ListView)v.findViewById(R.id.requests_list_view);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Respond").setMessage("Accept request?")
+                        .setPositiveButton("ACCEPT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        intent.putExtra("userName", userName);
+                        startActivity(intent);
+                    }
+                })
+                        .setNegativeButton("DISMISS", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
         User user = SocialRequestHandler.getUser(userName);
         ArrayList<String> requestList =  user.getFollowRequests();
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.habit_list_item, requestList);
         listView.setAdapter(arrayAdapter);
-
-        //TODO alert dialog opening up to accept or reject follow request. use SocialRequestHandler class!!
-
 
         return v;
     }

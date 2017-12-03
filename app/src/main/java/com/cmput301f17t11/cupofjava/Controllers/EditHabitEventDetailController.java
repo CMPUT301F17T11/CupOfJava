@@ -8,6 +8,8 @@ import com.cmput301f17t11.cupofjava.Models.HabitEvent;
  * Created by naz_t on 12/1/2017.
  */
 
+//TODO supposed to update in ES
+
 public class EditHabitEventDetailController {
 
     public static HabitEvent modifyComment(HabitEvent habitEvent, String comment){
