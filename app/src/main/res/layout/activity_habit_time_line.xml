@@ -20,7 +20,7 @@
             <TextView
                 android:id="@+id/timelineHeadingTextView"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginBottom="8dp"
                 android:background="@color/colorAccentL"
@@ -107,11 +107,23 @@
             <ListView
                 android:id="@+id/timeLineListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="400dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/white" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="MAP"
+                android:layout_gravity="center"
+                android:id="@+id/viewMapButton"/>
 
         </LinearLayout>
     </RelativeLayout>

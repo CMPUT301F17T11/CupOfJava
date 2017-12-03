@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ public class HabitEventTimeLineActivity extends Fragment {
     private String userName;
     private ListView listView;
     private TextView textView;
+    private Button viewMap;
 
     ArrayList<HabitEvent> events = new ArrayList<>();
 
@@ -110,6 +112,7 @@ public class HabitEventTimeLineActivity extends Fragment {
         //set up the TextView and ListView
         this.textView = (TextView) view.findViewById(R.id.timelineHeadingTextView);
         this.listView = (ListView) view.findViewById(R.id.timeLineListView);
+        this.viewMap = (Button) view.findViewById(R.id.viewMapButton);
 
         return view;
     }
@@ -137,6 +140,14 @@ public class HabitEventTimeLineActivity extends Fragment {
 
         updateTextView(events.size());
         updateListView(events);
+
+        viewMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
