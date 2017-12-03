@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
@@ -40,6 +41,7 @@ import java.io.InputStream;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * This activity allows user to add a new habit event, and
@@ -60,6 +62,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
     private Bitmap habitEventPhotoBitmap;
     private ImageView habitEventPhoto;
     private ImageView habitEventLocation;
+
     private boolean hasPhoto = false;
     private Time time;
     private Geolocation location;
@@ -94,6 +97,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
 
         habitEventCommentEditText = (EditText) findViewById(R.id.edit_comment);
 
+
         this.habitEventLocation = (ImageView) findViewById(R.id.habit_event_location);
         location = new Geolocation(this, this);
         isLocationSet = false;
@@ -109,6 +113,14 @@ public class NewHabitEventActivity extends AppCompatActivity {
                             addLocation = location.getLocation();
                             Log.i("location is", addLocation.toString());
                             isLocationSet= true;
+                                String lat = String.format("%.2f", addLocation.getLatitude());
+                                String longitude = String.format("%.2f", addLocation.getLongitude());
+                                String format = " LAT: " + lat + " LONG: " + longitude;
+                                TextView habitEventLocationTextView = (TextView) findViewById(R.id.habit_event_location_textView);
+                                habitEventLocationTextView.setText(format);
+
+
+
 
                             }
                         })
@@ -123,6 +135,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
 
             }
         });
+
 
         this.habitEventPhoto = (ImageView) findViewById(R.id.habit_event_photo);
 
@@ -227,6 +240,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
 
             Log.i("In here", isLocationSet.toString());
             if(isLocationSet) {
+
                 newHabitEvent.setLocation(addLocation);
                 newHabitEvent.setIsLocationSet(true);
             }
