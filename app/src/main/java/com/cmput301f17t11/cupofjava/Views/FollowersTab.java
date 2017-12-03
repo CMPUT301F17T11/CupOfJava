@@ -1,11 +1,15 @@
 package com.cmput301f17t11.cupofjava.Views;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -77,13 +81,37 @@ public class FollowersTab extends Fragment {
         ListView listView = (ListView)v.findViewById(R.id.followers_list_view);
 
         User user = SocialRequestHandler.getUser(userName);
-        ArrayList<String> followerList =  user.getFollowerList();
+        final ArrayList<String> followerList =  user.getFollowerList();
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
                 R.layout.habit_list_item, followerList);
         listView.setAdapter(arrayAdapter);
 
-        //listView.setOnItemClickListener();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(followerList.get(position)).setMessage("Remove this follower?")
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setPositiveButton("REMOVE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SocialRequestHandler
+                                        .removeFollower(userName, followerList.get(position));
+                                Intent intent = new Intent(getContext(), MainActivity.class);
+                                intent.putExtra("userName", userName);
+                                startActivity(intent);
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         return v;
 
