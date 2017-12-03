@@ -64,14 +64,24 @@ public class RequestsTab extends Fragment {
 
         ListView listView = (ListView)v.findViewById(R.id.requests_list_view);
 
+        User user = SocialRequestHandler.getUser(userName);
+        final ArrayList<String> requestList =  user.getFollowRequests();
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
+                R.layout.habit_list_item, requestList);
+        listView.setAdapter(arrayAdapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Respond").setMessage("Accept request?")
                         .setPositiveButton("ACCEPT", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        SocialRequestHandler
+                                .acceptRequest(userName, requestList.get(position));
+
                         Intent intent = new Intent(getContext(), MainActivity.class);
                         intent.putExtra("userName", userName);
                         startActivity(intent);
@@ -87,12 +97,6 @@ public class RequestsTab extends Fragment {
                 dialog.show();
             }
         });
-        User user = SocialRequestHandler.getUser(userName);
-        ArrayList<String> requestList =  user.getFollowRequests();
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.habit_list_item, requestList);
-        listView.setAdapter(arrayAdapter);
 
         return v;
     }

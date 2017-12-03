@@ -77,7 +77,7 @@ public class FollowingTab extends Fragment {
                 input.setLayoutParams(layoutParams);
                 builder.setView(input);
 
-                builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
