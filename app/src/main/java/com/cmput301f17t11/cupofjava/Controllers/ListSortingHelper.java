@@ -1,8 +1,11 @@
 package com.cmput301f17t11.cupofjava.Controllers;
 
 /**
- * Created by naz_t on 12/3/2017.
+ * This helper class has static methods that accepts arraylists, and returns
+ * the array list sorted in different ways. An example is a reverse chronological
+ * ordering of HabitEvents
  */
 
 public class ListSortingHelper {
+    //TODO
 }

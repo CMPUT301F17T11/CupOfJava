@@ -48,9 +48,6 @@ public class AllHabitViewActivity extends Fragment {
     private TextView textView;
     private String userName;
     private ArrayList<Habit> habits;
-    private ArrayList<Habit> habitList;
-    private User user;
-    private int userIndex;
 
     public ListView getListView(){
         return listView;
@@ -72,9 +69,6 @@ public class AllHabitViewActivity extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_all_habit_view, container, false);
 
-        //obtain extra info from intent
-        final Intent intent = getActivity().getIntent();
-        //this.userName = intent.getStringExtra("userName");
         Bundle bundle = getArguments();
         if (bundle != null) {
             this.userName = bundle.getString("userName");
@@ -90,13 +84,11 @@ public class AllHabitViewActivity extends Fragment {
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*SaveFileController saveFileController = new SaveFileController();
-                saveFileController.getHabit(getApplicationContext(), userIndex, position);*/
 
                 Intent intent5 = new Intent(getActivity(), HabitDetailViewActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("userName", userName);
-                bundle.putSerializable("habitClicked", habits); //sending all habits list
+                bundle.putSerializable("habitClicked", habits);
                 bundle.putInt("habitIndex", position);
                 intent5.putExtras(bundle);
                 startActivity(intent5);
@@ -127,11 +119,6 @@ public class AllHabitViewActivity extends Fragment {
         } catch (Exception e) {
             Log.i("Error Getting Habits ", e.toString());
         }
-        /*SaveFileController saveFileController = new SaveFileController();
-        ArrayList<Habit> habitList = saveFileController
-                .getHabitListAsArray(getApplicationContext(), this.userIndex);*/
-        //updateTextView(habitList.size());
-        //updateListView(habitList);
     }
 
     /**
