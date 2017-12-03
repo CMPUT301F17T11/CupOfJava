@@ -283,6 +283,58 @@ public class ElasticsearchController {
             return null;
         }
     }
+    public static class GetEventTask extends AsyncTask<String, Void, HabitEvent> {
+        @Override
+        protected HabitEvent doInBackground(String... search_parameters) {
+            verifySettings();
+            HabitEvent myEvent = null;
+
+            Log.i("getEventTask: Search parameters", search_parameters[0]);
+            /*String query = "{\n" +
+                    "  \"query\": {\n" +
+                    "    \"term\" : { \"habitTitle\" : \"" + search_parameters[0] + "\" } \n" +
+                    "  }\n" +
+                    "}";*/
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"match_phrase\" : {\n" +
+                    "            \"id\" : \"" + search_parameters[0] + "\"\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+           /* String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "       \"constant_score\" : {\n" +
+                    "           \"filter\" : {\n" +
+                    "               \"term\" : {\"id\": \"" + search_parameters[0] + "\"}\n" +
+                    "             }\n" +
+                    "         }\n" +
+                    "    }\n" +
+                    "}";*/
+
+            Search search = new Search.Builder(query)
+                    .addIndex("cmput301f17t11_cupofjava")
+                    .addType("event")
+                    .build();
+
+
+            try {
+                // get results of the query
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    myEvent = result.getFirstHit(HabitEvent.class).source;
+                    Log.i("Success", myEvent.toString());
+
+                } else {
+                    Log.i("Error", "The search query failed to find any HabitEvents that matched");
+                }
+            } catch (Exception e) {
+                Log.i("Error", e.toString());
+            }
+
+            return myEvent;
+        }
+    }
 
     public static class GetEventsTask extends AsyncTask<String, Void, ArrayList<HabitEvent>> {
         @Override
@@ -335,6 +387,24 @@ public class ElasticsearchController {
             }
 
             return events;
+        }
+    }
+
+    public static class DeleteEventTask2 extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... search_parameters) {
+            verifySettings();
+
+                Delete delete = new Delete.Builder(search_parameters[0]).index("cmput301f17t11_cupofjava").type("event").build();
+
+                try {
+                    DocumentResult result = client.execute(delete);
+                } catch (Exception e) {
+                    Log.i("Error", "The Delete Event Task application failed to build");
+                }
+
+
+            return null;
         }
     }
 

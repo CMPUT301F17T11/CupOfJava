@@ -9,6 +9,8 @@
 
 package com.cmput301f17t11.cupofjava.Models;
 
+import android.location.Location;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,13 +32,14 @@ public class HabitEvent implements Serializable {
     private String comment;
     private Date habitEventDate;
     private String habitTitle;
+    private Boolean isLocationSet;
 
     @JestId
     String id; //for elasticsearch
-
+    private Location location;
 
     /** TODO: prj5
-     private Geolocation location;
+
      private boolean locationSet = false;
      private Bitmap photo;
      public HabitEvent(Habit habit){
@@ -166,9 +169,24 @@ public class HabitEvent implements Serializable {
         return this.comment;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Override
     public String toString(){ //this gets called by array adapter
         return ("What: " + this.habitTitle + "\n"
                 + "When: " + getDateAsString());
+    }
+public Boolean getIsLocationSet(){
+        return this.isLocationSet;
+}
+
+    public void setIsLocationSet(Boolean isLocationSet) {
+        this.isLocationSet = isLocationSet;
     }
 }
