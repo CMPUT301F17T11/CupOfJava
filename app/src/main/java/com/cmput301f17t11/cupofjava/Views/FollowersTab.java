@@ -83,8 +83,7 @@ public class FollowersTab extends Fragment {
                 R.layout.habit_list_item, followerList);
         listView.setAdapter(arrayAdapter);
 
-
-        //TODO alert dialog opening up on click to give option to remove follower
+        listView.setOnItemClickListener();
 
         return v;
 
