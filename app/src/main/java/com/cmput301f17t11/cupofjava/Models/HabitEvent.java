@@ -9,6 +9,11 @@
 
 package com.cmput301f17t11.cupofjava.Models;
 
+import android.graphics.Bitmap;
+import android.graphics.ImageFormat;
+
+import com.cmput301f17t11.cupofjava.Controllers.ImageHelper;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -165,6 +170,33 @@ public class HabitEvent implements Serializable {
 
     public String getComment(){
         return this.comment;
+    }
+
+    public void setImage(Bitmap bitmap){
+        this.imageString = ImageHelper.getStringFromImage(bitmap);
+    }
+
+    public void setImage(String path){
+        this.imageString = ImageHelper.getStringFromImage(path);
+    }
+
+    public boolean hasImage(){
+        if (this.imageString == null){
+            return false;
+        }
+        else if (this.imageString.length() == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public Bitmap getImage(){
+        if (hasImage()){
+            return ImageHelper.getImageFromString(this.imageString);
+        }
+        return null;
     }
 
     @Override
