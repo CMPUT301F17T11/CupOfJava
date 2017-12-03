@@ -103,10 +103,12 @@ public class ViewHabitEventActivity extends Activity {
         habitCommentTextView = (TextView) findViewById(R.id.habit_event_detail_comment);
         habitLocationTextView = (TextView) findViewById(R.id.habit_event_detail_location);
 
-
-        habitTitleTextView.setText(habitTitle);
-        habitDateBoxTextView.setText(eventDate);
-        habitCommentTextView.setText(eventComment);
+        String title = "HABIT TITLE: " + habitTitle;
+        String date = "EVENT DATE: " + eventDate;
+        String thisComment = "COMMENT: " + eventComment;
+        habitTitleTextView.setText(title);
+        habitDateBoxTextView.setText(date);
+        habitCommentTextView.setText(thisComment);
 
         //String format = " LAT: " + habitEvent.getLocation().getLatitude() +" LONG: "+ habitEvent.getLocation().getLongitude()
         habitLocationTextView.setText(eventLocation);
