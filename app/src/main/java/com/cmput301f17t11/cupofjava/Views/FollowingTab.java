@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,6 +64,41 @@ public class FollowingTab extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_following_tab, container, false);
 
+        ListView listView = (ListView)v.findViewById(R.id.following_list_view);
+
+        User user = SocialRequestHandler.getUser(userName);
+        final ArrayList<String> followingList =  user.getFollowingList();
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
+                R.layout.habit_list_item, followingList);
+        listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(followingList.get(position)).setMessage("See profile or unfollow")
+                        .setPositiveButton("PROFILE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO launch followingProfileView activity
+                            }
+                        })
+                        .setNegativeButton("UNFOLLOW", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SocialRequestHandler
+                                        .unFollow(userName, followingList.remove(position));
+                                Intent intent = new Intent(getContext(), MainActivity.class);
+                                intent.putExtra("userName", userName);
+                                startActivity(intent);
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
         Button addButton = (Button)v.findViewById(R.id.add_to_following_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,16 +137,6 @@ public class FollowingTab extends Fragment {
                 dialog.show();
             }
         });
-
-        ListView listView = (ListView)v.findViewById(R.id.following_list_view);
-        //TODO alert dialog opening up on click to give option to unfollow
-
-        User user = SocialRequestHandler.getUser(userName);
-        ArrayList<String> followingList =  user.getFollowingList();
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.habit_list_item, followingList);
-        listView.setAdapter(arrayAdapter);
 
         return v;
     }

@@ -75,6 +75,7 @@ public class RequestsTab extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                //TODO reject request option
                 builder.setTitle("Respond").setMessage("Accept request?")
                         .setPositiveButton("ACCEPT", new DialogInterface.OnClickListener() {
                     @Override
