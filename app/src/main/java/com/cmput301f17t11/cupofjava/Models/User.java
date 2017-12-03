@@ -93,7 +93,7 @@ public class User implements Serializable {
         followingList.add(id);
     }
 
-    public void newFollowRequest(String id){
+    public void sendFollowRequest(String id){
         this.followRequests.add(id);
     }
 
