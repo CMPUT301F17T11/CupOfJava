@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Controllers.SocialRequestHandler;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
 
@@ -62,14 +65,25 @@ public class FollowingTab extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Find User").setMessage("HELLO")
-                        .setPositiveButton("Search", new DialogInterface.OnClickListener() {
+                builder.setTitle("Find User").setMessage("Enter Username to Search For");
+
+                final EditText input = new EditText(getContext());
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(layoutParams);
+                builder.setView(input);
+
+                builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                SocialRequestHandler.sendFollowRequest(userName,
+                                        input.getText().toString());
 
-                                Intent intent3 = new Intent(getContext(), MainActivity.class);
-                                intent3.putExtra("userName", userName);
-                                startActivity(intent3);
+
+                                Intent intent = new Intent(getContext(), MainActivity.class);
+                                intent.putExtra("userName", userName);
+                                startActivity(intent);
                             }
                         })
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
