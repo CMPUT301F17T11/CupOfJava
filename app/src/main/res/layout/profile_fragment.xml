@@ -42,6 +42,25 @@
 
         </LinearLayout>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/offWhite">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:text="@string/habitHelp1"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@color/white"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                />
+
+        </ScrollView>
+
     </LinearLayout>
 
 </RelativeLayout>
