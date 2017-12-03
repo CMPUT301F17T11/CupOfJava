@@ -56,7 +56,7 @@ public class FollowingTab extends Fragment {
      * @return
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_following_tab, container, false);
 
@@ -77,9 +77,9 @@ public class FollowingTab extends Fragment {
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
                                 SocialRequestHandler.sendFollowRequest(userName,
                                         input.getText().toString());
-
 
                                 Intent intent = new Intent(getContext(), MainActivity.class);
                                 intent.putExtra("userName", userName);
