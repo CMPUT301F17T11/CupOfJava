@@ -6,8 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.cmput301f17t11.cupofjava.Controllers.SocialRequestHandler;
+import com.cmput301f17t11.cupofjava.Models.User;
 import com.cmput301f17t11.cupofjava.R;
+
+import java.util.ArrayList;
 
 
 /**
@@ -15,44 +21,16 @@ import com.cmput301f17t11.cupofjava.R;
  * Activities that contain this fragment must implement the
  * {@link RequestsTab.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link RequestsTab#newInstance} factory method to
+ * Use the  factory method to
  * create an instance of this fragment.
  */
 public class RequestsTab extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private String userName;
 
     private OnFragmentInteractionListener mListener;
 
-    public RequestsTab() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RequestsTab.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RequestsTab newInstance(String param1, String param2) {
-        RequestsTab fragment = new RequestsTab();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    public RequestsTab(){}
     /**
      * The system calls this when creating this fragment.
      * @param savedInstanceState
@@ -61,8 +39,6 @@ public class RequestsTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
             this.userName = getArguments().getString("userName");
         }
     }
@@ -77,28 +53,23 @@ public class RequestsTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_requests_tab, container, false);
-    }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+        View v = inflater.inflate(R.layout.fragment_requests_tab, container, false);
 
-    // PLEASE LEAVE THIS
-    /*@Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }*/
+        ListView listView = (ListView)v.findViewById(R.id.requests_list_view);
+
+        User user = SocialRequestHandler.getUser(userName);
+        ArrayList<String> requestList =  user.getFollowRequests();
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
+                R.layout.habit_list_item, requestList);
+        listView.setAdapter(arrayAdapter);
+
+        //TODO alert dialog opening up to accept or reject follow request. use SocialRequestHandler class!!
+
+
+        return v;
+    }
 
     @Override
     public void onDetach() {
