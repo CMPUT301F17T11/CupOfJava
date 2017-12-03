@@ -83,7 +83,7 @@ public class FollowersTab extends Fragment {
                 R.layout.habit_list_item, followerList);
         listView.setAdapter(arrayAdapter);
 
-        listView.setOnItemClickListener();
+        //listView.setOnItemClickListener();
 
         return v;
 
