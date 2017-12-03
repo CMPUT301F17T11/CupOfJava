@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="24dp"
-            android:background="@drawable/take_photo" />
+            android:background="@drawable/take_photo_v" />
 
         <TextView
             android:id="@+id/habit_event_location_textView"
@@ -75,7 +75,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="24dp"
-            android:background="@drawable/add_location" />
+            android:background="@drawable/add_location_v" />
 
         <Button
             android:layout_width="wrap_content"

@@ -37,7 +37,7 @@
                 android:id="@+id/habit_event_detail_photo"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:background="@drawable/take_photo" />
+                android:background="@drawable/take_photo_v" />
 
         </LinearLayout>
 
