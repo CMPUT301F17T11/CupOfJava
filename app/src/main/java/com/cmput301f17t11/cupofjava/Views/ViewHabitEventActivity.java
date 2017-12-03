@@ -51,6 +51,7 @@ public class ViewHabitEventActivity extends Activity {
 
     private TextView habitTitleTextView;
     private TextView habitDateBoxTextView;
+    private TextView habitLocationTextView;
     private TextView habitCommentTextView;
     private ImageView habitEventDetailPhoto;
     private String userName;
@@ -61,6 +62,11 @@ public class ViewHabitEventActivity extends Activity {
 
     private static final int CAMERA_REQUEST = 1888;
     private static final int RESULT_LOAD_IMG = 1;
+    private String habitTitle;
+    private String eventDate;
+    private String eventComment;
+    private String eventLocation;
+    private String eventId;
 
     /**
      * Launches Interface displaying the habit events and their basic details.
@@ -75,19 +81,29 @@ public class ViewHabitEventActivity extends Activity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             this.userName = bundle.getString("userName");
-            this.allEvents = (ArrayList<HabitEvent>) bundle.getSerializable("eventClicked");
-            this.habitEventIndex = bundle.getInt("eventIndex");
+            this.habitTitle = bundle.getString("habitTitle");
+            this.eventDate = bundle.getString("eventDate");
+            this.eventComment = bundle.getString("eventComment");
+            this.eventLocation = bundle.getString("eventLocation");
+            this.eventId = bundle.getString("eventId");
+            //this.allEvents = (ArrayList<HabitEvent>) bundle.getSerializable("eventClicked");
+            //this.habitEventIndex = bundle.getInt("eventIndex");
 
         }
 
-        habitEvent = allEvents.get(this.habitEventIndex);
+        //habitEvent = allEvents.get(this.habitEventIndex);
         habitTitleTextView = (TextView) findViewById(R.id.habit_event_detail_name);
         habitDateBoxTextView = (TextView) findViewById(R.id.habit_event_detail_date);
         habitCommentTextView = (TextView) findViewById(R.id.habit_event_detail_comment);
+        habitLocationTextView = (TextView) findViewById(R.id.habit_event_detail_location);
 
-        habitTitleTextView.setText((habitEvent.getHabit().getHabitTitle()));
-        habitDateBoxTextView.setText((habitEvent.getDateAsString()));
-        habitCommentTextView.setText((habitEvent.getComment()));
+
+        habitTitleTextView.setText(habitTitle);
+        habitDateBoxTextView.setText(eventDate);
+        habitCommentTextView.setText(eventComment);
+
+        //String format = " LAT: " + habitEvent.getLocation().getLatitude() +" LONG: "+ habitEvent.getLocation().getLongitude()
+        habitLocationTextView.setText(eventLocation);
 
         //photo handling
         habitEventDetailPhoto = (ImageView) findViewById(R.id.habit_event_detail_photo);
@@ -190,8 +206,12 @@ public class ViewHabitEventActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        ElasticsearchController.DeleteEventTask deleteEventTask = new ElasticsearchController.DeleteEventTask();
-                        deleteEventTask.execute(habitEvent);
+
+
+                                ElasticsearchController.DeleteEventTask2 deleteEventTask = new ElasticsearchController.DeleteEventTask2();
+                                deleteEventTask.execute(eventId);
+
+
 
                         //SaveFileController saveFileController = new SaveFileController();
                         //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);

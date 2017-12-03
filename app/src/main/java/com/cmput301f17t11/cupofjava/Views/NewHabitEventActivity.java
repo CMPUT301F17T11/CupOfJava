@@ -28,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Models.Geolocation;
 import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.Models.HabitAdapter;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
@@ -58,9 +59,12 @@ public class NewHabitEventActivity extends AppCompatActivity {
     private EditText comment;
     private Bitmap habitEventPhotoBitmap;
     private ImageView habitEventPhoto;
+    private ImageView habitEventLocation;
     private boolean hasPhoto = false;
     private Time time;
-    private Location location;
+    private Geolocation location;
+    private Location addLocation;
+    private Boolean isLocationSet;
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
     private HabitAdapter habitAdapter;
     private String userName;
@@ -68,6 +72,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
 
     private Habit habit;
     private String habitEventComment;
+
 
     private EditText habitEventCommentEditText;
 
@@ -88,6 +93,36 @@ public class NewHabitEventActivity extends AppCompatActivity {
         this.userName = intent.getStringExtra("userName");
 
         habitEventCommentEditText = (EditText) findViewById(R.id.edit_comment);
+
+        this.habitEventLocation = (ImageView) findViewById(R.id.habit_event_location);
+        location = new Geolocation(this, this);
+        isLocationSet = false;
+        habitEventLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog
+                        .Builder(NewHabitEventActivity.this);
+                builder.setTitle("Add Location")
+                        .setNegativeButton("ADD", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            addLocation = location.getLocation();
+                            Log.i("location is", addLocation.toString());
+                            isLocationSet= true;
+
+                            }
+                        })
+                        .setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                               dialog.dismiss();
+                            }
+                        });
+                android.support.v7.app.AlertDialog dialog = builder.create();
+                dialog.show();
+
+            }
+        });
 
         this.habitEventPhoto = (ImageView) findViewById(R.id.habit_event_photo);
 
@@ -189,6 +224,15 @@ public class NewHabitEventActivity extends AppCompatActivity {
         if (this.hasPhoto){
             newHabitEvent.setImage(habitEventPhotoBitmap);
         }
+
+            Log.i("In here", isLocationSet.toString());
+            if(isLocationSet) {
+                newHabitEvent.setLocation(addLocation);
+                newHabitEvent.setIsLocationSet(true);
+            }
+            else{
+                newHabitEvent.setIsLocationSet(isLocationSet); //it is false
+            }
 
         ElasticsearchController.AddEventTask addEventTask = new ElasticsearchController.AddEventTask();
         addEventTask.execute(newHabitEvent);

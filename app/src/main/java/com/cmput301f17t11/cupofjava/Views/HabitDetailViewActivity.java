@@ -85,10 +85,27 @@ public class HabitDetailViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent5 = new Intent(HabitDetailViewActivity.this, ViewHabitEventActivity.class);
+
+                ArrayList<HabitEvent> events = getHabitEventsOfHabit();
+                HabitEvent myEvent = events.get(position - 1); //position -1 because of list header
                 Bundle bundle = new Bundle();
                 bundle.putString("userName", userName);
-                bundle.putSerializable("eventClicked", getHabitEventsOfHabit()); //sending habitEventlist
-                bundle.putInt("eventIndex", position - 1);
+                bundle.putString("habitTitle", myEvent.getHabitTitle());
+                bundle.putString("eventDate", myEvent.getDateAsString());
+                bundle.putString("eventComment", myEvent.getComment());
+                if (myEvent.getIsLocationSet()) {
+                    String lat = String.format("%.2f", myEvent.getLocation().getLatitude());
+                    String longitude = String.format("%.2f", myEvent.getLocation().getLongitude());
+                    String format = " LAT: " + lat + " LONG: " + longitude;
+                    bundle.putString("eventLocation", format);
+                } else {
+                    bundle.putString("eventLocation", "Location not Set");
+                }
+
+
+                bundle.putString("eventId", myEvent.getId());
+                //bundle.putSerializable("eventClicked", getHabitEventsOfHabit()); //sending habitEventlist
+                //bundle.putInt("eventIndex", position - 1);
 
                 intent5.putExtras(bundle);
                 startActivity(intent5);

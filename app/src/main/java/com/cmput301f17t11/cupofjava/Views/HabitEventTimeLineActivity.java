@@ -110,20 +110,7 @@ public class HabitEventTimeLineActivity extends Fragment {
         //set up the TextView and ListView
         this.textView = (TextView) view.findViewById(R.id.timelineHeadingTextView);
         this.listView = (ListView) view.findViewById(R.id.timeLineListView);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent5 = new Intent(getActivity(),
-                        ViewHabitEventActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("userName", userName);
-                bundle.putSerializable("eventClicked", events); //sending habitEventlist
-                bundle.putInt("eventIndex", position);
 
-                intent5.putExtras(bundle);
-                startActivity(intent5);
-            }
-        });
         return view;
     }
 
@@ -150,6 +137,47 @@ public class HabitEventTimeLineActivity extends Fragment {
 
         updateTextView(events.size());
         updateListView(events);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent5 = new Intent(getActivity(),
+                        ViewHabitEventActivity.class);
+                String a = events.size()+" "+ position ;
+                    //HabitEvent myEvent = events.get(0);
+
+                Log.i("HABitEventList", a);
+                if(!events.isEmpty()) {
+                    Log.i ("in here", "whats wrong?");
+                    HabitEvent myEvent = events.get(position);
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userName", userName);
+                    bundle.putString("habitTitle", myEvent.getHabitTitle());
+                    bundle.putString("eventDate", myEvent.getDateAsString());
+                    bundle.putString("eventComment", myEvent.getComment());
+                    if(myEvent.getIsLocationSet()){
+                        String lat = String.format("%.2f", myEvent.getLocation().getLatitude());
+                        String longitude = String.format("%.2f",myEvent.getLocation().getLongitude());
+                        String format = " LAT: " + lat+ " LONG: " + longitude;
+                        bundle.putString("eventLocation", format);
+                    }
+                    else {
+                        bundle.putString("eventLocation", "Location not Set");
+                    }
+
+
+
+                    bundle.putString("eventId", myEvent.getId());
+                    //bundle.putSerializable("eventClicked", events); //sending habitEventlist
+                    //bundle.putInt("eventIndex", position);
+
+                    intent5.putExtras(bundle);
+                    startActivity(intent5);
+                }
+            }
+        });
     }
 
     /**
