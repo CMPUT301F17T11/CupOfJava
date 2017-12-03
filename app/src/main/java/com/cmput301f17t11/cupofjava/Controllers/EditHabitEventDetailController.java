@@ -1,5 +1,7 @@
 package com.cmput301f17t11.cupofjava.Controllers;
 
+import android.location.Location;
+
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 
 /**
@@ -13,13 +15,13 @@ public class EditHabitEventDetailController {
         return habitEvent;
     }
 
-    public static HabitEvent modifyLocation(HabitEvent habitEvent){
-        //TODO
+    public static HabitEvent modifyLocation(HabitEvent habitEvent, Location location){
+        habitEvent.setLocation(location);
         return habitEvent;
     }
 
-    public static HabitEvent modifyPicture(HabitEvent habitEvent){
-        //TODO
+    public static HabitEvent modifyPicture(HabitEvent habitEvent, String path){
+        habitEvent.setImage(path);
         return habitEvent;
     }
 
