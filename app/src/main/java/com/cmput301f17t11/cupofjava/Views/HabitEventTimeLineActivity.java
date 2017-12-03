@@ -11,6 +11,7 @@
 package com.cmput301f17t11.cupofjava.Views;
 
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -44,6 +45,8 @@ public class HabitEventTimeLineActivity extends Fragment {
     private ListView listView;
     private TextView textView;
     private Button viewMap;
+
+    ArrayList<Location> eventLoc = new ArrayList<>();
 
     ArrayList<HabitEvent> events = new ArrayList<>();
 
@@ -145,6 +148,20 @@ public class HabitEventTimeLineActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
+                Bundle bundle = new Bundle();
+                Log.i("List of event Loc", events.get(0).getLocation().toString());
+
+                /*for (int i = 0; i < events.size(); i++)
+                {
+                    if(events.get(i).getIsLocationSet())
+                    {
+
+                        eventLoc.add(events.get(i).getLocation());
+                    }
+                }
+                bundle.putParcelableArrayList("eventLoc", eventLoc);*/
+                bundle.putParcelable("eventLoc", events.get(0).getLocation());
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
