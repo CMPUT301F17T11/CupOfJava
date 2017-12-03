@@ -13,9 +13,16 @@
         <ListView
             android:id="@+id/following_list_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="472dp"
             android:layout_margin="4dp"
-            android:background="@color/white" />
+            android:background="@color/white"/>
+
+        <Button
+            android:id="@+id/add_to_following_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="addUserButton"
+            android:text="Add"/>
     </LinearLayout>
 
 
