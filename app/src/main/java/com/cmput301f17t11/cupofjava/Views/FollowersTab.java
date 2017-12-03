@@ -84,6 +84,8 @@ public class FollowersTab extends Fragment {
         listView.setAdapter(arrayAdapter);
 
 
+        //TODO alert dialog opening up on click to give option to remove follower
+
         return v;
 
     }

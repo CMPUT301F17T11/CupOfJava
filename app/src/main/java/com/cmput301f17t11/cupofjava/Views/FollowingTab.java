@@ -33,7 +33,6 @@ import java.util.ArrayList;
  */
 public class FollowingTab extends Fragment {
     private String userName;
-    //Button addButton;
 
     private OnFragmentInteractionListener mListener;
 
@@ -104,7 +103,7 @@ public class FollowingTab extends Fragment {
         });
 
         ListView listView = (ListView)v.findViewById(R.id.following_list_view);
-        //TODO on item click listener
+        //TODO alert dialog opening up on click to give option to unfollow
 
         User user = SocialRequestHandler.getUser(userName);
         ArrayList<String> followingList =  user.getFollowingList();
@@ -114,12 +113,6 @@ public class FollowingTab extends Fragment {
         listView.setAdapter(arrayAdapter);
 
         return v;
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
