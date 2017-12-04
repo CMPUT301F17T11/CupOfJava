@@ -57,9 +57,6 @@ public class HabitEventTimeLineActivity extends Fragment {
 
     ArrayList<HabitEvent> events = new ArrayList<>();
 
-    ArrayList<HabitEvent> filteredEvents = new ArrayList<>();
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     private HabitEventTimeLineActivity.OnFragmentInteractionListener mListener;
 
@@ -98,14 +95,38 @@ public class HabitEventTimeLineActivity extends Fragment {
 
         }
 
-
-
         //set up the TextView and ListView
         this.textView = (TextView) view.findViewById(R.id.timelineHeadingTextView);
         this.listView = (ListView) view.findViewById(R.id.timeLineListView);
         this.viewMap = (Button) view.findViewById(R.id.viewMapButton);
 
-        Button commentButton = (Button) view.findViewById(R.id.filter_by_comment);
+        Button reverseChronoButton = (Button) view.findViewById(R.id.reverse_chronological_button);
+        reverseChronoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                events = new ArrayList<>();
+                ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
+                getEventsTask.execute(userName);
+                try {
+                    ArrayList<HabitEvent> foundHabitEvents = getEventsTask.get();
+                    if (!foundHabitEvents.isEmpty()) {
+
+                        events.addAll(foundHabitEvents);
+                        Log.i("HabitEventTimeline: found events :", events.toString());
+                    } else {
+                        Log.i("HabitEventTimeline", "Did Not find habit events" + events.toString());
+
+                    }
+                } catch (Exception e) {
+                    Log.i("HabitEventTimeline", "Failed to get the Habit Events from the async object");
+
+                }
+                updateTextView(events.size());
+                updateListView(events);
+            }
+        });
+
+                Button commentButton = (Button) view.findViewById(R.id.filter_by_comment);
 
 
         commentButton.setOnClickListener(new View.OnClickListener() {
