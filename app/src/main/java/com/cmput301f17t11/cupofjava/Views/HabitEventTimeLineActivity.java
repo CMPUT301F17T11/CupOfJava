@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -109,6 +110,15 @@ public class HabitEventTimeLineActivity extends Fragment {
         this.textView = (TextView) view.findViewById(R.id.timelineHeadingTextView);
         this.listView = (ListView) view.findViewById(R.id.timeLineListView);
 
+        Button chronoButton = (Button) view.findViewById(R.id.chronological_button);
+        chronoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                events = filterByTime(events);
+                updateListView(events);
+            }
+        });
+
         return view;
     }
 
@@ -123,11 +133,7 @@ public class HabitEventTimeLineActivity extends Fragment {
             if (!foundHabitEvents.isEmpty()) {
 
                 events.addAll(foundHabitEvents);
-                Collections.sort(events, new Comparator<HabitEvent>() {
-                    public int compare(HabitEvent o1, HabitEvent o2) {
-                        return o1.getHabitEventTime().compareTo(o2.getHabitEventTime());
-                    }
-                });
+                events = filterByTime(events);
                 Log.i("HabitEventTimeline: found events :", events.toString());
             } else {
                 Log.i("HabitEventTimeline", "Did Not find habit events" + events.toString());
@@ -239,5 +245,14 @@ public class HabitEventTimeLineActivity extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public ArrayList<HabitEvent> filterByTime(ArrayList<HabitEvent> events) {
+        Collections.sort(events, new Comparator<HabitEvent>() {
+            public int compare(HabitEvent o1, HabitEvent o2) {
+                return o1.getHabitEventTime().compareTo(o2.getHabitEventTime());
+            }
+        });
+        return events;
     }
 }
