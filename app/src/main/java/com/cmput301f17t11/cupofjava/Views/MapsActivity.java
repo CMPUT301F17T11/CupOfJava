@@ -69,8 +69,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     //do nothing
                 }
                 else{
-                    latitudes[i] = 0;
-                    longitudes[i] = 0;
+                    latitudes[i] = 0.0;
+                    longitudes[i] = 0.0;
                 }
             }
 
