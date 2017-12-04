@@ -56,8 +56,8 @@ public class HabitEventTimeLineActivity extends Fragment {
     private ListView listView;
     private TextView textView;
     private Button viewMap;
-    private double currentLat; //latitude of current loc
-    private double currentLon; //Longitude of current loc
+    //private double currentLat; //latitude of current loc
+    //private double currentLon; //Longitude of current loc
 
 
     ArrayList<HabitEvent> events = new ArrayList<>();
@@ -91,12 +91,12 @@ public class HabitEventTimeLineActivity extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             this.userName = bundle.getString("userName");
-            this.currentLat = bundle.getDouble("currentLat");
-            this.currentLon = bundle.getDouble("currentLon");
+            //this.currentLat = bundle.getDouble("currentLat");
+            //this.currentLon = bundle.getDouble("currentLon");
 
             Log.i("HabitEventTimelineFragment: Username received: ", userName);
-            Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLat+"");
-            Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLon+"");
+            //Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLat+"");
+            //Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLon+"");
 
         }
 
@@ -409,8 +409,8 @@ public class HabitEventTimeLineActivity extends Fragment {
         bundle.putDoubleArray("lat", latititudes);
         bundle.putDoubleArray("lon", longitudes);
         bundle.putInt("type", type );
-        bundle.putDouble("currentLat", currentLat);
-        bundle.putDouble("currentLon", currentLon);
+        //bundle.putDouble("currentLat", currentLat);
+        //bundle.putDouble("currentLon", currentLon);
 
         intent.putExtras(bundle);
         startActivity(intent);

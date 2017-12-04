@@ -35,8 +35,8 @@ public class UserLoginActivity extends Activity {
     private User newUser;
     private User user;
 
-    double currentLat;
-    double currentLong;
+    //double currentLat;
+    //double currentLong;
     Geolocation location;
 
     /**
@@ -60,11 +60,11 @@ public class UserLoginActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Log.i("Location is ", location.getLocation().toString());
-                currentLat = location.getLocation().getLatitude();
-                currentLong = location.getLocation().getLongitude();
-                Log.i("Latitude ", "" + currentLat + "");
-                Log.i("Latitude ", "" + currentLong + "");
+                //Log.i("Location is ", location.getLocation().toString());
+                //currentLat = location.getLocation().getLatitude();
+                //currentLong = location.getLocation().getLongitude();
+                //Log.i("Latitude ", "" + currentLat + "");
+                //Log.i("Latitude ", "" + currentLong + "");
 
 
                 String input = username_editText.getText().toString();
@@ -88,8 +88,8 @@ public class UserLoginActivity extends Activity {
                         //sending the user info to main activity
                         Intent intent = new Intent(UserLoginActivity.this, MainActivity.class);
                         intent.putExtra("userName", newUser.getUsername());
-                        intent.putExtra("currentLat", currentLat);
-                        intent.putExtra("currentLon", currentLong);
+                        //intent.putExtra("currentLat", currentLat);
+                        //intent.putExtra("currentLon", currentLong);
 
                         startActivity(intent);
 
