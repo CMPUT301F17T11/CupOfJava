@@ -382,7 +382,6 @@ public class ElasticsearchController {
         }
     }
 
-
     /**
      * Sets up the server.
      */
