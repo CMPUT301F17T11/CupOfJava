@@ -53,6 +53,7 @@ public class UserLoginActivity extends Activity {
 
 
         username_editText = (EditText) findViewById(R.id.username);
+        //getting the current location of the user
         location = new Geolocation(this, this);
         signIn = (Button) findViewById(R.id.username_sign_in_button);
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +65,8 @@ public class UserLoginActivity extends Activity {
                 currentLong = location.getLocation().getLongitude();
                 Log.i("Latitude ", "" + currentLat + "");
                 Log.i("Latitude ", "" + currentLong + "");
+
+
                 String input = username_editText.getText().toString();
                 if (input.isEmpty()){
                     username_editText.setError("Field cannot be left empty");
@@ -85,6 +88,9 @@ public class UserLoginActivity extends Activity {
                         //sending the user info to main activity
                         Intent intent = new Intent(UserLoginActivity.this, MainActivity.class);
                         intent.putExtra("userName", newUser.getUsername());
+                        intent.putExtra("currentLat", currentLat);
+                        intent.putExtra("currentLon", currentLong);
+
                         startActivity(intent);
 
 

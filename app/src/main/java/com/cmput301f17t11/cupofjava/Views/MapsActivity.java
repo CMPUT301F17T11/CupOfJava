@@ -31,7 +31,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleMap mGoogleMap;
 
     double currentLat;
-    double currentLong;
+    double currentLon;
     double [] latitudes;
     double [] longitudes;
     Geolocation location;
@@ -47,17 +47,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             setContentView(R.layout.maps_activity);
             initMap();
         }
-        getLocation = (Button)findViewById(R.id.getLocationButton);
-        showLocation = (EditText)findViewById(R.id.showLocation);
-
-        getLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                }
-
-        });
 
 
         Bundle bundle = getIntent().getExtras();
@@ -66,6 +55,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             longitudes = bundle.getDoubleArray("lon");
             type = bundle.getInt("type");
 
+            currentLat = bundle.getDouble("currentLat");
+            currentLon = bundle.getDouble("currentLon");
 
         }
         if(type == 1){  //within 5km
@@ -74,7 +65,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             {
                     double lat2= latitudes[i];
                     double lng2= longitudes[i];
-                    if(within5(currentLat, currentLong, lat2, lng2) <= 5.0){
+                    if(within5(currentLat, currentLon, lat2, lng2) <= 5.0){
                         //do nothing
                     }
                     else{
