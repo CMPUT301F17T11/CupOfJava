@@ -20,18 +20,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
-import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
-import com.cmput301f17t11.cupofjava.Models.User;
 import com.cmput301f17t11.cupofjava.R;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Opens the activity which shows the timeline of habit events.
@@ -110,6 +109,15 @@ public class HabitEventTimeLineActivity extends Fragment {
         //set up the TextView and ListView
         this.textView = (TextView) view.findViewById(R.id.timelineHeadingTextView);
         this.listView = (ListView) view.findViewById(R.id.timeLineListView);
+
+        Button chronoButton = (Button) view.findViewById(R.id.chronological_button);
+        chronoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                events = filterByTime(events);
+                updateListView(events);
+            }
+        });
 
         return view;
     }
@@ -236,5 +244,14 @@ public class HabitEventTimeLineActivity extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public ArrayList<HabitEvent> filterByTime(ArrayList<HabitEvent> events) {
+        Collections.sort(events, new Comparator<HabitEvent>() {
+            public int compare(HabitEvent o1, HabitEvent o2) {
+                return o1.getHabitEventTime().compareTo(o2.getHabitEventTime());
+            }
+        });
+        return events;
     }
 }
