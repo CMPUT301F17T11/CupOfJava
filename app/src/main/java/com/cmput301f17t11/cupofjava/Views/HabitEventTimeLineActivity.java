@@ -10,10 +10,12 @@
 
 package com.cmput301f17t11.cupofjava.Views;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,7 +47,7 @@ public class HabitEventTimeLineActivity extends Fragment {
     private TextView textView;
 
     ArrayList<HabitEvent> events = new ArrayList<>();
-
+    ArrayList<HabitEvent> filteredEvents = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -111,13 +115,52 @@ public class HabitEventTimeLineActivity extends Fragment {
         this.listView = (ListView) view.findViewById(R.id.timeLineListView);
 
         Button chronoButton = (Button) view.findViewById(R.id.chronological_button);
+        Button commentButton = (Button) view.findViewById(R.id.filter_by_comment);
+
         chronoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                events = filterByTime(events);
+                events = reverseFilterByTime(events);
                 updateListView(events);
             }
         });
+
+        commentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Filter Events by Comment").setMessage("Enter Comment to search");
+
+                final EditText input = new EditText(getContext());
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(layoutParams);
+                builder.setView(input);
+
+                builder.setPositiveButton("Search", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        String comment = input.getText().toString();
+
+                        //filteredEvents = filterByComment(events, comment);
+                        //updateListView(filteredEvents);
+                    }
+                })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
 
         return view;
     }
@@ -254,4 +297,28 @@ public class HabitEventTimeLineActivity extends Fragment {
         });
         return events;
     }
+
+    public ArrayList<HabitEvent> reverseFilterByTime(ArrayList<HabitEvent> events) {
+        ArrayList<HabitEvent> reversedEvents = new ArrayList<HabitEvent>();
+        for (int i = events.size()-1; i >= 0; i--) {
+            final HabitEvent event = events.get(i);
+            reversedEvents.add(event);
+        }
+        return reversedEvents;
+    }
+
+    /* Not Working
+    public ArrayList<HabitEvent> filterByComment(ArrayList<HabitEvent> events, String comment) {
+        ArrayList<HabitEvent> finalEvents = new ArrayList<>();
+
+        for (int i=0; i < events.size(); i++) {
+            HabitEvent event = events.get(i);
+            String checkComment = event.getComment();
+            if (checkComment.contains(comment)) {
+                finalEvents.add(event);
+            }
+        }
+        return finalEvents;
+    }
+    */
 }
