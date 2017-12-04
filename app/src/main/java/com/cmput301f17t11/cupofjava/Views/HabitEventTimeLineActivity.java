@@ -187,6 +187,7 @@ public class HabitEventTimeLineActivity extends Fragment {
         }
 
         updateTextView(events.size());
+        events = reverseFilterByTime(events);
         updateListView(events);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
