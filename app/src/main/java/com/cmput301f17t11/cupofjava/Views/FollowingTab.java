@@ -81,7 +81,11 @@ public class FollowingTab extends Fragment {
                         .setPositiveButton("PROFILE", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //TODO launch followingProfileView activity
+                                Intent intent = new Intent(getContext(),
+                                        ViewFollowingProfileActivity.class);
+                                intent.putExtra("userName", userName);
+                                intent.putExtra("followingName", followingList.get(position));
+                                startActivity(intent);
                             }
                         })
                         .setNegativeButton("UNFOLLOW", new DialogInterface.OnClickListener() {

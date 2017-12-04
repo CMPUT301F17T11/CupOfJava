@@ -8,7 +8,7 @@
 
     <uses-permission android:name="your.package.name.permission.MAPS_RECEIVE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
@@ -76,6 +76,12 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
 
+        <activity
+            android:name=".Views.followingProfileActivity"
+            android:label="@string/title_activity_following_profile"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".Views.ViewFollowingProfileActivity">
+        </activity>
     </application>
 
 </manifest>
