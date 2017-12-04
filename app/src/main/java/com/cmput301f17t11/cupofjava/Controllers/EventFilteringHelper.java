@@ -1,5 +1,6 @@
 package com.cmput301f17t11.cupofjava.Controllers;
 
+import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 
 import java.util.ArrayList;
@@ -29,5 +30,27 @@ public class EventFilteringHelper {
             }
         });
         return events;
+    }
+
+    public static ArrayList<HabitEvent> filterByComment(ArrayList<HabitEvent> events, String str){
+        ArrayList<HabitEvent> filteredEvents = new ArrayList<>();
+        for(int i = 0; i < events.size(); i++){
+            if (events.get(i).getComment().contains(str)){
+                filteredEvents.add(events.get(i));
+            }
+        }
+        return filteredEvents;
+    }
+
+    public static ArrayList<HabitEvent> filterByType(ArrayList<HabitEvent> events, String habitTitle){
+        ArrayList<HabitEvent> filteredEvents = new ArrayList<>();
+
+        for (int i = 0; i < events.size(); i++){
+            if (events.get(i).getHabitTitle().equals(habitTitle)){
+                filteredEvents.add(events.get(i));
+            }
+        }
+
+        return filteredEvents;
     }
 }

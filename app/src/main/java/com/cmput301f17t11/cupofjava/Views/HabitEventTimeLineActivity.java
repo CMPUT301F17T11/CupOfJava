@@ -10,6 +10,7 @@
 
 package com.cmput301f17t11.cupofjava.Views;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -133,7 +134,7 @@ public class HabitEventTimeLineActivity extends Fragment {
             @Override
             public void onClick(final View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Filter Events by Comment").setMessage("Enter Comment to search");
+                builder.setTitle("Search events by comment").setMessage("Enter comment:");
 
                 final EditText input = new EditText(getContext());
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -147,6 +148,20 @@ public class HabitEventTimeLineActivity extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
 
                         String comment = input.getText().toString();
+                        if (comment.length() == 0){
+                            String text = "Error: Cannot search for empty string!";
+                            int length = Toast.LENGTH_SHORT;
+                            Context context = getContext();
+                            Toast toast = Toast.makeText(context,text, length);
+                            toast.show();
+                            dialog.dismiss();
+                        }
+
+                        events = EventFilteringHelper.filterByComment(events, comment);
+                        events = EventFilteringHelper.reverseChronological(events);
+                        updateTextView(events.size());
+                        updateListView(events);
+
                     }
                 })
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -367,20 +382,4 @@ public class HabitEventTimeLineActivity extends Fragment {
         });
         return events;
     }
-
-
-    /* Not Working
-    public ArrayList<HabitEvent> filterByComment(ArrayList<HabitEvent> events, String comment) {
-        ArrayList<HabitEvent> finalEvents = new ArrayList<>();
-
-        for (int i=0; i < events.size(); i++) {
-            HabitEvent event = events.get(i);
-            String checkComment = event.getComment();
-            if (checkComment.contains(comment)) {
-                finalEvents.add(event);
-            }
-        }
-        return finalEvents;
-    }
-    */
 }
