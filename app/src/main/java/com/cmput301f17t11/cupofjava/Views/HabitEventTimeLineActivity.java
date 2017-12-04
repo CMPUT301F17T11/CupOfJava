@@ -10,6 +10,7 @@
 
 package com.cmput301f17t11.cupofjava.Views;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -28,16 +29,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Controllers.EventFilteringHelper;
 
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitAdapter;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -51,15 +56,12 @@ public class HabitEventTimeLineActivity extends Fragment {
     private ListView listView;
     private TextView textView;
     private Button viewMap;
-    private double currentLat; //latitude of current loc
-    private double currentLon; //Longitude of current loc
+    //private double currentLat; //latitude of current loc
+    //private double currentLon; //Longitude of current loc
 
 
     ArrayList<HabitEvent> events = new ArrayList<>();
 
-    ArrayList<HabitEvent> filteredEvents = new ArrayList<>();
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     private HabitEventTimeLineActivity.OnFragmentInteractionListener mListener;
 
@@ -89,30 +91,54 @@ public class HabitEventTimeLineActivity extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             this.userName = bundle.getString("userName");
-            this.currentLat = bundle.getDouble("currentLat");
-            this.currentLon = bundle.getDouble("currentLon");
+            //this.currentLat = bundle.getDouble("currentLat");
+            //this.currentLon = bundle.getDouble("currentLon");
 
             Log.i("HabitEventTimelineFragment: Username received: ", userName);
-            Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLat+"");
-            Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLon+"");
+            //Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLat+"");
+            //Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLon+"");
 
         }
-
-
 
         //set up the TextView and ListView
         this.textView = (TextView) view.findViewById(R.id.timelineHeadingTextView);
         this.listView = (ListView) view.findViewById(R.id.timeLineListView);
         this.viewMap = (Button) view.findViewById(R.id.viewMapButton);
 
-        Button commentButton = (Button) view.findViewById(R.id.filter_by_comment);
+        Button reverseChronoButton = (Button) view.findViewById(R.id.reverse_chronological_button);
+        reverseChronoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                events = new ArrayList<>();
+                ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
+                getEventsTask.execute(userName);
+                try {
+                    ArrayList<HabitEvent> foundHabitEvents = getEventsTask.get();
+                    if (!foundHabitEvents.isEmpty()) {
+
+                        events.addAll(foundHabitEvents);
+                        Log.i("HabitEventTimeline: found events :", events.toString());
+                    } else {
+                        Log.i("HabitEventTimeline", "Did Not find habit events" + events.toString());
+
+                    }
+                } catch (Exception e) {
+                    Log.i("HabitEventTimeline", "Failed to get the Habit Events from the async object");
+
+                }
+                updateTextView(events.size());
+                updateListView(events);
+            }
+        });
+
+                Button commentButton = (Button) view.findViewById(R.id.filter_by_comment);
 
 
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Filter Events by Comment").setMessage("Enter Comment to search");
+                builder.setTitle("Search events by comment").setMessage("Enter comment:");
 
                 final EditText input = new EditText(getContext());
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -126,6 +152,20 @@ public class HabitEventTimeLineActivity extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
 
                         String comment = input.getText().toString();
+                        if (comment.length() == 0){
+                            String text = "Error: Cannot search for empty string!";
+                            int length = Toast.LENGTH_SHORT;
+                            Context context = getContext();
+                            Toast toast = Toast.makeText(context,text, length);
+                            toast.show();
+                            dialog.dismiss();
+                        }
+
+                        events = EventFilteringHelper.filterByComment(events, comment);
+                        events = EventFilteringHelper.reverseChronological(events);
+                        updateTextView(events.size());
+                        updateListView(events);
+
                     }
                 })
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -138,6 +178,62 @@ public class HabitEventTimeLineActivity extends Fragment {
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        });
+        ArrayList<Habit> habits;
+        ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
+        getHabitsTask.execute(userName);
+        try {
+            habits = getHabitsTask.get();
+        } catch (Exception e) {
+            Log.i("Error Getting Habits ", e.toString());
+            habits = new ArrayList<>();
+        }
+        final Spinner spinner = (Spinner) view.findViewById(R.id.filter_by_habit);
+        ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<Habit>(getActivity(),
+                R.layout.string_only_list_item);
+
+        final Habit emptyHabit = new Habit("Select", "to filter by habit");
+        arrayAdapter.add(emptyHabit);
+        arrayAdapter.addAll(habits);
+        spinner.setAdapter(arrayAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Habit selectedHabit = (Habit) spinner.getSelectedItem();
+                if (selectedHabit.getHabitTitle().equals(emptyHabit.getHabitTitle())){
+                    return;
+                }
+                String habitTitle = selectedHabit.getHabitTitle();
+                events = new ArrayList<>();
+                ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
+                getEventsTask.execute(userName);
+                try {
+                    ArrayList<HabitEvent> foundHabitEvents = getEventsTask.get();
+                    if (!foundHabitEvents.isEmpty()) {
+
+                        events.addAll(foundHabitEvents);
+                        Log.i("HabitEventTimeline: found events :", events.toString());
+                    } else {
+                        Log.i("HabitEventTimeline", "Did Not find habit events" + events.toString());
+
+                    }
+                } catch (Exception e) {
+                    Log.i("HabitEventTimeline", "Failed to get the Habit Events from the async object");
+
+                }
+
+                events = EventFilteringHelper.filterByType(events, habitTitle);
+                events = EventFilteringHelper.reverseChronological(events);
+                updateTextView(events.size());
+                updateListView(events);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -243,8 +339,6 @@ public class HabitEventTimeLineActivity extends Fragment {
                     }
                     bundle.putBoolean("hasImage", myEvent.hasImage());
                     bundle.putString("eventId", myEvent.getId());
-                    //bundle.putSerializable("eventClicked", events); //sending habitEventlist
-                    //bundle.putInt("eventIndex", position);
 
                     intent5.putExtras(bundle);
                     startActivity(intent5);
@@ -290,7 +384,6 @@ public class HabitEventTimeLineActivity extends Fragment {
 
 
     public void mapsAll(int type ){
-//        Log.i("List of event Loc", events.get(0).getLocation().toString());
         Intent intent = new Intent(getActivity(), MapsActivity.class);
         Bundle bundle = new Bundle();
 
@@ -316,8 +409,8 @@ public class HabitEventTimeLineActivity extends Fragment {
         bundle.putDoubleArray("lat", latititudes);
         bundle.putDoubleArray("lon", longitudes);
         bundle.putInt("type", type );
-        bundle.putDouble("currentLat", currentLat);
-        bundle.putDouble("currentLon", currentLon);
+        //bundle.putDouble("currentLat", currentLat);
+        //bundle.putDouble("currentLon", currentLon);
 
         intent.putExtras(bundle);
         startActivity(intent);
@@ -337,29 +430,4 @@ public class HabitEventTimeLineActivity extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-    public ArrayList<HabitEvent> filterByTime(ArrayList<HabitEvent> events) {
-        Collections.sort(events, new Comparator<HabitEvent>() {
-            public int compare(HabitEvent o1, HabitEvent o2) {
-                return o1.getHabitEventTime().compareTo(o2.getHabitEventTime());
-            }
-        });
-        return events;
-    }
-
-
-    /* Not Working
-    public ArrayList<HabitEvent> filterByComment(ArrayList<HabitEvent> events, String comment) {
-        ArrayList<HabitEvent> finalEvents = new ArrayList<>();
-
-        for (int i=0; i < events.size(); i++) {
-            HabitEvent event = events.get(i);
-            String checkComment = event.getComment();
-            if (checkComment.contains(comment)) {
-                finalEvents.add(event);
-            }
-        }
-        return finalEvents;
-    }
-    */
 }

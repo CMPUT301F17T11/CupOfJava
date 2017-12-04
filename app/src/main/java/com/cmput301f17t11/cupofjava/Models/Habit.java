@@ -91,6 +91,16 @@ public class Habit implements Serializable {
     public Habit(){}
 
     /**
+     * for creating dummy habit for spinner
+     * @param title
+     * @param reason
+     */
+    public Habit(String title, String reason){
+        this.habitTitle = title;
+        this.habitReason = reason;
+    }
+
+    /**
      * Gets the habit title.
      *
      * @return the title of the habit
@@ -249,7 +259,7 @@ public class Habit implements Serializable {
 
     @Override
     public String toString(){ //this gets called by array adapter
-        return ("What: " + this.habitTitle + "\n"
-                + "Why: " + this.habitReason);
+        return (this.habitTitle + "\n"
+                + this.habitReason);
     }
 }

@@ -17,8 +17,8 @@ import com.cmput301f17t11.cupofjava.R;
 public class MainActivity extends AppCompatActivity{
 
     private String userName;
-    private double currentLat;
-    private double currentLon;
+    //private double currentLat;
+    //private double currentLon;
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity{
                 case R.id.navigation_timeline:
                     Bundle bundle1 = new Bundle();
                     bundle1.putString("userName", userName);
-                    bundle1.putDouble("currentLat", currentLat);
-                    bundle1.putDouble("currentLon", currentLon);
+                    //bundle1.putDouble("currentLat", currentLat);
+                    //bundle1.putDouble("currentLon", currentLon);
                     TimeLineFragment timeLineFragment = new TimeLineFragment();
                     timeLineFragment.setArguments(bundle1);
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         this.userName = getIntent().getStringExtra("userName");
-        this.currentLat = getIntent().getDoubleExtra("currentLat",0.0);
-        this.currentLon = getIntent().getDoubleExtra("currentLon", 0.0);
+        //this.currentLat = getIntent().getDoubleExtra("currentLat",0.0);
+        //this.currentLon = getIntent().getDoubleExtra("currentLon", 0.0);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.menu);
         navigation.setSelectedItemId(R.id.navigation_social);
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
