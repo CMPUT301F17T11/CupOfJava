@@ -13,6 +13,8 @@ public class OfflineData {
 
     private ArrayList<Habit> habitDeleteQueue;
     private ArrayList<HabitEvent> eventDeleteQueue;
+    private ArrayList<Habit> habitAddQueue;
+    private ArrayList<HabitEvent> eventAddQueue;
 
     public OfflineData(){}
 

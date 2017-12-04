@@ -1,5 +1,6 @@
 package com.cmput301f17t11.cupofjava.Views;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -88,8 +89,9 @@ public class ProfileTab extends Fragment {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getContext(), UserLoginActivity.class);
                 Toast.makeText(getActivity(), "Logged Out", Toast.LENGTH_LONG).show();
-                getActivity().finish();
+                startActivity(intent);
         }
         });
 
