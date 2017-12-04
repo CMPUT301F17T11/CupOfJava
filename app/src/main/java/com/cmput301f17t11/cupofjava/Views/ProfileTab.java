@@ -6,7 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Random;
 
 import com.cmput301f17t11.cupofjava.R;
 
@@ -16,7 +20,7 @@ import com.cmput301f17t11.cupofjava.R;
  * Activities that contain this fragment must implement the
  * {@link FollowingTab.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FollowingTab#newInstance} factory method to
+ * Use the {@link FollowingTab #newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ProfileTab extends Fragment {
@@ -29,6 +33,7 @@ public class ProfileTab extends Fragment {
     private String mParam1;
     private String mParam2;
     private String userName;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,6 +70,9 @@ public class ProfileTab extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
             this.userName = getArguments().getString("userName");
         }
+
+
+
     }
 
     /**
@@ -81,6 +89,31 @@ public class ProfileTab extends Fragment {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
         TextView userNameText = (TextView) view.findViewById(R.id.username);
         userNameText.setText(userName);
+
+
+        TextView habitTipTitle = (TextView) view.findViewById(R.id.habit_tip_title);
+        TextView habitTipBody = (TextView) view.findViewById(R.id.habit_tip_body);
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(8) + 1;
+
+        String[] habitArrayTitle = getContext().getResources().getStringArray(R.array.habitHelpTitle);
+        String[] habitArrayBody = getContext().getResources().getStringArray(R.array.habitHelpBody);
+        String habitTitleString = habitArrayTitle[randomNumber];
+        String habitBodyString = habitArrayBody[randomNumber];
+
+        habitTipTitle.setText(habitTitleString);
+        habitTipBody.setText(habitBodyString);
+
+        Button logoutButton = (Button) view.findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Logged Out", Toast.LENGTH_LONG).show();
+                getActivity().finish();
+        }
+        });
+
+
         return view;
     }
 
