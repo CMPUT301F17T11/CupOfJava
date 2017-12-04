@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="habitHelpBody">
+        <item>Habit Tips will appear here!</item>
+        <item>Larger goals are good guidelines but try building goals that can be accomplishable in a single day or week. Micro-habits make large goals approachable.</item>
+        <item>Habits that fit into your daily routine, are easier to accomplish and remember. </item>
+        <item>Instead of “Keep the House Clean” start a habit that is triggered by a routine event. “When I come home, I’ll change my clothes and clean the kitchen” is a much more successful method.</item>
+        <item>Try “If then” The next time you decide to eat healthier, instead try “If this is lunch time, then I will only eat meat + vegetables”</item>
+        <item>According to research on self-control, limit the decisions you have to make to complete your habit. Instead of “workout” routinize your exercise into: Do Swim-Set #1 or Run Route #2.</item>
+        <item>Instead of creating a habit such as “Stop Snacking” find the source. An “if-then” habit such as: ‘If I go shopping I will not buy snacks’ is preventative and saves your willpower for later.</item>
+        <item>A variety of research shoes us the excessive fantasizing about results can be detrimental to the stickiness of a habit. Try to visualize yourself doing the habit rather than reaping rewards.</item>
+        <item>Instead of giving up, examine your habit and find exactly where things start to break down. Prepare your “gym-clothes” the night before to eliminate excess morning work beyond getting out of bed.</item>
+        <item>Most people can’t even make it through the first week let alone 30 days. Give yourself a hard-line for 30 days to see if this is a realizable habit for you.</item>
+    </string-array>
+
+   <string-array name="habitHelpTitle">
+        <item>Having trouble building a habit? Habit Tips will appear here!</item>
+        <item>Having trouble building a habit? Try building “micro-habits”</item>
+        <item>Having trouble building a habit? Try building “routine analysis”</item>
+        <item>Having trouble finishing your habits? Try building “behaviour chains”</item>
+        <item>Having trouble finishing your habits? Try building “behaviour chains”</item>
+        <item>Having trouble finishing your habits? Eliminate Excessive options.</item>
+        <item>Having trouble finishing your habits? Find the source.</item>
+        <item>Having trouble finishing your habits? Don’t pretend you’ve done it.</item>
+        <item>Having trouble finishing your habits? Don’t “ah-screw-it”</item>
+        <item>Having trouble building a habit? Do the ’30-day trial’</item>
+   </string-array>
+
+</resources>
