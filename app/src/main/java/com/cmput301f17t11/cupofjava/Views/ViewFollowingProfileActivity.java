@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Models.Habit;
@@ -51,6 +52,9 @@ public class ViewFollowingProfileActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.i("Error Getting Habits ", e.toString());
         }
+
+        TextView textView = (TextView) findViewById(R.id.following_profile_textView);
+        textView.setText(followingName);
 
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<Habit>(getApplicationContext(),
                 R.layout.habit_list_item, habits);

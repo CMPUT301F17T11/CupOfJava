@@ -32,7 +32,7 @@
             android:background="@mipmap/ic_launcher"/>
 
         <TextView
-            android:id="@+id/followingUser"
+            android:id="@+id/following_profile_textView"
             android:layout_width="247dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
