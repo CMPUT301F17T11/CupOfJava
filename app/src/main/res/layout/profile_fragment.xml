@@ -42,24 +42,45 @@
 
         </LinearLayout>
 
-        <ScrollView
+        <TextView
+            android:id="@+id/habit_tip_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/offWhite">
+            android:layout_height="wrap_content"
+            android:text="@string/habitHelp01"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@color/white"
+            android:paddingTop="10dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:text="@string/habitHelp1"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:background="@color/white"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                />
+        <TextView
+            android:id="@+id/habit_tip_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/habitHelp01"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@color/white"
+            android:paddingBottom="10dp"
+            android:textAlignment="center"
+            />
 
-        </ScrollView>
+        <Button
+            android:id="@+id/logout_button"
+            style="?android:textAppearanceSmall"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorAccentL"
+            android:text="@string/action_sign_out"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
