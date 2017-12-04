@@ -9,15 +9,15 @@
 
 package com.cmput301f17t11.cupofjava.Models;
 
-import android.location.Location;
 import android.graphics.Bitmap;
-import android.graphics.ImageFormat;
+import android.location.Location;
 
 
 import com.cmput301f17t11.cupofjava.Controllers.ImageHelper;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import io.searchbox.annotations.JestId;
@@ -36,6 +36,7 @@ public class HabitEvent implements Serializable {
     private Habit habit;
     private String comment;
     private Date habitEventDate;
+    private Date habitEventTime;
     private String habitTitle;
     private Boolean isLocationSet;
     @JestId
@@ -63,6 +64,7 @@ public class HabitEvent implements Serializable {
     public HabitEvent(String comment){
         this.comment = comment;
         this.habitEventDate = new Date();
+        this.habitEventTime = Calendar.getInstance().getTime();
     }
 
     /**
@@ -78,6 +80,7 @@ public class HabitEvent implements Serializable {
         this.habitEventDate = new Date();
         this.habit = habit;
         this.habitTitle = habit.getHabitTitle();
+        this.habitEventTime = Calendar.getInstance().getTime();
     }
 
     /**
@@ -88,6 +91,7 @@ public class HabitEvent implements Serializable {
         this.habitTitle = habit.getHabitTitle();
         this.comment = "";
         this.habit = habit;
+        this.habitEventTime = Calendar.getInstance().getTime();
     }
 
 
@@ -130,6 +134,10 @@ public class HabitEvent implements Serializable {
      */
     public Date getHabitEventDate(){
         return this.habitEventDate;
+    }
+
+    public Date getHabitEventTime() {
+        return this.habitEventTime;
     }
 
     /**

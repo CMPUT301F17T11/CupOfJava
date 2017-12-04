@@ -46,6 +46,7 @@ public class TodayViewActivity extends Fragment {
     private ArrayList<Habit> habits;
     private String userName = "";
     private TextView textView;
+    private todayViewAdapter habitAdapter;
 
     /**
      * This method is called when TodayViewActivity is instantiated.
@@ -103,6 +104,7 @@ public class TodayViewActivity extends Fragment {
     public void onResume(){
         super.onResume();
 
+
         //retrieving all habits of the user from elasticsearch
         ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
         getHabitsTask.execute(userName);
@@ -141,10 +143,11 @@ public class TodayViewActivity extends Fragment {
      * @see Habit
      */
     private void updateListView(ArrayList<Habit> habits){
-        ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.habit_list_item, habits);
+        habitAdapter = new todayViewAdapter(getActivity(), habits);
+        //ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(getActivity(),R.layout.habit_list_item, habits);
+
         synchronized (listView) {
-            this.listView.setAdapter(arrayAdapter);
+            this.listView.setAdapter(habitAdapter);
             this.listView.notify();
         }
     }

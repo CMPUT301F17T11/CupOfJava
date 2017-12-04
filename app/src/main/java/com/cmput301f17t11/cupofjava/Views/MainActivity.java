@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity{
         this.currentLat = getIntent().getDoubleExtra("currentLat",0.0);
         this.currentLon = getIntent().getDoubleExtra("currentLon", 0.0);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.menu);
-        navigation.setSelectedItemId(R.id.navigation_today);
+        navigation.setSelectedItemId(R.id.navigation_social);
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
         BottomNavigationViewHelper.disableShiftMode(navigation);
     }
@@ -114,10 +114,10 @@ public class MainActivity extends AppCompatActivity{
 
         Bundle bundle = new Bundle();
         bundle.putString("userName", userName);
-        TodayViewActivity todayViewActivity = new TodayViewActivity();
-        todayViewActivity.setArguments(bundle);
+        SocialFragment socialFragment = new SocialFragment();
+        socialFragment.setArguments(bundle);
         FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction2.replace(R.id.frame, todayViewActivity, "Today");
+        fragmentTransaction2.replace(R.id.frame, socialFragment, "Today");
         fragmentTransaction2.commit();
     }
 }
