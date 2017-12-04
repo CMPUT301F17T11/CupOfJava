@@ -88,6 +88,21 @@ public class SocialRequestHandler {
 
         ElasticsearchController.AddUserTask addUserTask = new ElasticsearchController.AddUserTask();
         addUserTask.execute(user);
+
+        User user1 = getUser(requestTo);
+        if (user1 == null){
+            return;
+        }
+
+        ElasticsearchController.DeleteUsersTask deleteUsersTask1
+                = new ElasticsearchController.DeleteUsersTask();
+        deleteUsersTask1.execute(user1);
+
+        user1.removeFollower(requestFrom);
+
+        ElasticsearchController.AddUserTask addUserTask1
+                = new ElasticsearchController.AddUserTask();
+        addUserTask1.execute(user1);
     }
 
 
@@ -118,7 +133,7 @@ public class SocialRequestHandler {
         user2.addFollowing(thisUser);
 
         ElasticsearchController.AddUserTask addUserTask2 = new ElasticsearchController.AddUserTask();
-        addUserTask2.execute(user);
+        addUserTask2.execute(user2);
 
 
 
@@ -157,7 +172,7 @@ public class SocialRequestHandler {
         addUserTask.execute(user);
 
 
-        User user2 = getUser(thisUser);
+        User user2 = getUser(userToRemove);
         if (user2 == null){
             return;
         }

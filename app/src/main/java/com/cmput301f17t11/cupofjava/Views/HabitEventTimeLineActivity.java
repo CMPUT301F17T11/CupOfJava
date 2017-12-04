@@ -46,9 +46,11 @@ public class HabitEventTimeLineActivity extends Fragment {
     private TextView textView;
     private Button viewMap;
 
+
     ArrayList<Location> eventLoc = new ArrayList<>();
 
     ArrayList<HabitEvent> events = new ArrayList<>();
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -144,23 +146,41 @@ public class HabitEventTimeLineActivity extends Fragment {
         updateTextView(events.size());
         updateListView(events);
 
+
         viewMap.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                Log.i("List of event Loc", events.get(0).getLocation().toString());
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
                 Bundle bundle = new Bundle();
-                Log.i("List of event Loc", events.get(0).getLocation().toString());
 
-                /*for (int i = 0; i < events.size(); i++)
+                double [] latititudes = new double [events.size()];
+                double [] longitudes = new double [events.size()];
+                for (int i = 0; i < events.size(); i++)
                 {
-                    if(events.get(i).getIsLocationSet())
-                    {
+                    if(events.get(i).getIsLocationSet()) {
+                        latititudes[i] = events.get(i).getLocation().getLatitude();
+                        longitudes[i] = events.get(i).getLocation().getLongitude();
+                    }
+                    else{
 
-                        eventLoc.add(events.get(i).getLocation());
+                    }
+
+                }
+                int size = 0;
+                for(int i = 0; i< events.size(); i++)
+                {
+                    if(latititudes[i]!= 0.0 && longitudes[i]!= 0.0){
+                        size++;
                     }
                 }
-                bundle.putParcelableArrayList("eventLoc", eventLoc);*/
-                bundle.putParcelable("eventLoc", events.get(0).getLocation());
+
+
+                bundle.putDoubleArray("lat", latititudes);
+                bundle.putDoubleArray("lon", longitudes);
+                //bundle.putInt("size", size);
+
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

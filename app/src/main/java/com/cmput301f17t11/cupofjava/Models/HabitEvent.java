@@ -12,6 +12,7 @@ package com.cmput301f17t11.cupofjava.Models;
 import android.location.Location;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
+import com.
 
 import com.cmput301f17t11.cupofjava.Controllers.ImageHelper;
 
@@ -39,7 +40,8 @@ public class HabitEvent implements Serializable {
     private Boolean isLocationSet;
     @JestId
     String id; //for elasticsearch
-    private Location location;
+    private  Location location;
+
     private String imageString = "";
 
     /** TODO: prj5

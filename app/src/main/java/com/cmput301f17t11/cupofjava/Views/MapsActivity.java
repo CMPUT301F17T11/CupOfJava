@@ -24,7 +24,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     GoogleMap mGoogleMap;
     ArrayList<Location> eventLoc = new ArrayList<>();
-    Location loc;
+    double lat = 0;
+    double lon = 0;
+    double [] latitudes;
+    double [] longitudes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Bundle bundle = getIntent().getExtras();
         if(bundle!= null){
             //eventLoc = bundle.getParcelableArrayList("eventLoc");
-            loc = bundle.getParcelable("eventLoc");
+            latitudes = bundle.getDoubleArray("lat");
+            longitudes = bundle.getDoubleArray("lon");
+
 
         }
 
@@ -67,9 +72,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        double lat = loc.getLatitude();
-        double lon = loc.getLongitude();
-        goToLocationZoomed(lat,lon, 15);
+        for(int i = 0; i < (latitudes).length; i++){
+            if(latitudes[i]!= 0 && longitudes[i]!= 0)
+            goToLocationZoomed(latitudes[i],longitudes[i], 15);
+
+        }
     }
 
     private void goToLocationZoomed(double lat, double lng, float zoom) {
