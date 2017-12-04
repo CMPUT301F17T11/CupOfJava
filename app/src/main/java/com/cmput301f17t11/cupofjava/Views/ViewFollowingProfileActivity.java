@@ -57,7 +57,7 @@ public class ViewFollowingProfileActivity extends AppCompatActivity {
         textView.setText(followingName);
 
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<Habit>(getApplicationContext(),
-                R.layout.habit_list_item, habits);
+                R.layout.string_only_list_item, habits);
         listView.setAdapter(arrayAdapter);
     }
 }

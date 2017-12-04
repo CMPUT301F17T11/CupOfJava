@@ -32,8 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
-import com.cmput301f17t11.cupofjava.Models.Geolocation;
-import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Controllers.EventFilteringHelper;
 
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
@@ -96,8 +95,6 @@ public class HabitEventTimeLineActivity extends Fragment {
             Log.i("HabitEventTimelineFragment: Username received: ", userName);
             Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLat+"");
             Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLon+"");
-
-
 
         }
 
@@ -170,7 +167,7 @@ public class HabitEventTimeLineActivity extends Fragment {
         }
 
         updateTextView(events.size());
-        events = reverseFilterByTime(events);
+        events = EventFilteringHelper.reverseChronological(events);
         updateListView(events);
 
 
@@ -350,14 +347,6 @@ public class HabitEventTimeLineActivity extends Fragment {
         return events;
     }
 
-    public ArrayList<HabitEvent> reverseFilterByTime(ArrayList<HabitEvent> events) {
-        ArrayList<HabitEvent> reversedEvents = new ArrayList<HabitEvent>();
-        for (int i = events.size()-1; i >= 0; i--) {
-            final HabitEvent event = events.get(i);
-            reversedEvents.add(event);
-        }
-        return reversedEvents;
-    }
 
     /* Not Working
     public ArrayList<HabitEvent> filterByComment(ArrayList<HabitEvent> events, String comment) {

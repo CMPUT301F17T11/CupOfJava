@@ -45,7 +45,7 @@ public class HabitEvent implements Serializable {
 
     private String imageString = "";
 
-    /** TODO: prj5
+    /**
 
      private boolean locationSet = false;
      private Bitmap photo;
