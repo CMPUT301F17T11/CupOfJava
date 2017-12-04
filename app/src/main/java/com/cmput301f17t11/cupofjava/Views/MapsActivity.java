@@ -66,6 +66,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 double lat2= latitudes[i];
                 double lng2= longitudes[i];
                 if ((within5(currentLat, currentLon, lat2, lng2) <= 5.0) == false){
+                    //do nothing
+                }
+                else{
                     latitudes[i] = 0;
                     longitudes[i] = 0;
                 }
