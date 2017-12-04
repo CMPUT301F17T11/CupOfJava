@@ -133,7 +133,6 @@ public class HabitEventTimeLineActivity extends Fragment {
             if (!foundHabitEvents.isEmpty()) {
 
                 events.addAll(foundHabitEvents);
-                events = filterByTime(events);
                 Log.i("HabitEventTimeline: found events :", events.toString());
             } else {
                 Log.i("HabitEventTimeline", "Did Not find habit events" + events.toString());
