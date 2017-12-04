@@ -24,14 +24,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
-import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
-import com.cmput301f17t11.cupofjava.Models.User;
 import com.cmput301f17t11.cupofjava.R;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Opens the activity which shows the timeline of habit events.
@@ -125,6 +123,11 @@ public class HabitEventTimeLineActivity extends Fragment {
             if (!foundHabitEvents.isEmpty()) {
 
                 events.addAll(foundHabitEvents);
+                Collections.sort(events, new Comparator<HabitEvent>() {
+                    public int compare(HabitEvent o1, HabitEvent o2) {
+                        return o1.getHabitEventTime().compareTo(o2.getHabitEventTime());
+                    }
+                });
                 Log.i("HabitEventTimeline: found events :", events.toString());
             } else {
                 Log.i("HabitEventTimeline", "Did Not find habit events" + events.toString());
