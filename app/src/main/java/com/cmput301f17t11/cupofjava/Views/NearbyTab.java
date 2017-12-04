@@ -112,11 +112,11 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback, GoogleApi
                 //googleMap.setMyLocationEnabled(true);
 
                 // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+                LatLng uOfA = new LatLng(53.526830, -113.527208);
+                googleMap.addMarker(new MarkerOptions().position(uOfA).title("Marker Title").snippet("Marker Description"));
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(uOfA).zoom(15).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 
@@ -260,5 +260,3 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback, GoogleApi
         this.googleMap.moveCamera(update);
     }
 }
-
-

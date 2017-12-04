@@ -12,6 +12,7 @@ package com.cmput301f17t11.cupofjava.Views;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,12 +24,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Models.Geolocation;
+import com.cmput301f17t11.cupofjava.Models.Habit;
+
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
 
@@ -45,8 +50,13 @@ public class HabitEventTimeLineActivity extends Fragment {
     private String userName;
     private ListView listView;
     private TextView textView;
+    private Button viewMap;
+    private double currentLat; //latitude of current loc
+    private double currentLon; //Longitude of current loc
+
 
     ArrayList<HabitEvent> events = new ArrayList<>();
+
     ArrayList<HabitEvent> filteredEvents = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -105,7 +115,15 @@ public class HabitEventTimeLineActivity extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             this.userName = bundle.getString("userName");
+            this.currentLat = bundle.getDouble("currentLat");
+            this.currentLon = bundle.getDouble("currentLon");
+
             Log.i("HabitEventTimelineFragment: Username received: ", userName);
+            Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLat+"");
+            Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLon+"");
+
+
+
         }
 
 
@@ -113,6 +131,7 @@ public class HabitEventTimeLineActivity extends Fragment {
         //set up the TextView and ListView
         this.textView = (TextView) view.findViewById(R.id.timelineHeadingTextView);
         this.listView = (ListView) view.findViewById(R.id.timeLineListView);
+        this.viewMap = (Button) view.findViewById(R.id.viewMapButton);
 
         Button chronoButton = (Button) view.findViewById(R.id.chronological_button);
         Button commentButton = (Button) view.findViewById(R.id.filter_by_comment);
@@ -189,6 +208,44 @@ public class HabitEventTimeLineActivity extends Fragment {
         updateTextView(events.size());
         events = reverseFilterByTime(events);
         updateListView(events);
+
+
+
+
+        viewMap.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog
+                        .Builder(getActivity());
+
+                builder.setTitle("View Habits Map For:")
+                        .setPositiveButton("ALL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mapsAll(0);
+                            }
+                        })
+                        .setNegativeButton("5K RADIUS", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                mapsAll(1);
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNeutralButton("Recent Friends", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                android.support.v7.app.AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -273,6 +330,42 @@ public class HabitEventTimeLineActivity extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+
+
+    public void mapsAll(int type ){
+//        Log.i("List of event Loc", events.get(0).getLocation().toString());
+        Intent intent = new Intent(getActivity(), MapsActivity.class);
+        Bundle bundle = new Bundle();
+
+        double [] latititudes = new double [events.size()];
+        double [] longitudes = new double [events.size()];
+        for (int i = 0; i < events.size(); i++)
+        {
+            if(events.get(i).getIsLocationSet()) {
+                latititudes[i] = events.get(i).getLocation().getLatitude();
+                longitudes[i] = events.get(i).getLocation().getLongitude();
+            }
+
+        }
+        int size = 0;
+        for(int i = 0; i< events.size(); i++)
+        {
+            if(latititudes[i]!= 0.0 && longitudes[i]!= 0.0){
+                size++;
+            }
+        }
+
+
+        bundle.putDoubleArray("lat", latititudes);
+        bundle.putDoubleArray("lon", longitudes);
+        bundle.putInt("type", type );
+        bundle.putDouble("currentLat", currentLat);
+        bundle.putDouble("currentLon", currentLon);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     /**
