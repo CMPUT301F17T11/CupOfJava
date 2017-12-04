@@ -10,14 +10,12 @@
 package com.cmput301f17t11.cupofjava.Views;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,7 +26,6 @@ import android.widget.Toast;
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
-import com.google.android.gms.tasks.Task;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -167,7 +164,6 @@ public class ViewHabitEventActivity extends Activity {
                         .setPositiveButton("DONE", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //TODO ELASTICSEARCH FOR ESHNA
                                 comment = input.getText().toString();
                                 habitCommentTextView.setText(comment);
                             }
