@@ -75,9 +75,6 @@ public class AllHabitViewActivity extends Fragment {
             Log.i("AllHabitViewActivity: Username received: ", userName);
         }
 
-
-
-
         //set up TextView and ListView
         this.textView = (TextView) view.findViewById(R.id.allHabitHeadingTextView);
         this.listView = (ListView) view.findViewById(R.id.allHabitListView);
@@ -142,10 +139,9 @@ public class AllHabitViewActivity extends Fragment {
      * @see Habit
      */
     private void updateListView(ArrayList<Habit> habits){
-        ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.string_only_list_item, habits);
+        todayViewAdapter adapter = new todayViewAdapter(getActivity(), habits);
         synchronized (listView){
-            this.listView.setAdapter(arrayAdapter);
+            this.listView.setAdapter(adapter);
             this.listView.notify();
         }
 

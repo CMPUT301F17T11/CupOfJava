@@ -11,7 +11,7 @@
         android:layout_marginLeft="60dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/ic_addlocation"
+        android:background="@drawable/ic_launcher"
         />
 
     <TextView
