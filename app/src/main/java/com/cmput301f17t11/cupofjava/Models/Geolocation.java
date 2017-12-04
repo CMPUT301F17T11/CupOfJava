@@ -105,9 +105,11 @@ public class Geolocation implements Serializable{
         }
         if(my_location == null){
             my_location = new Location(provider);
-            my_location.setLatitude(0);
-            my_location.setLongitude(0);
-            my_location.setAltitude(0);
+            my_location.setLatitude(my_location.getLatitude());
+            my_location.setLatitude(my_location.getLatitude());
+            //my_location.setLatitude(0);
+            //my_location.setLongitude(0);
+            //my_location.setAltitude(0);
         }
         return this.my_location;
     }
