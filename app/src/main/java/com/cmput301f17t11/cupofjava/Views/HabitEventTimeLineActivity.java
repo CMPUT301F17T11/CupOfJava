@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Models.Geolocation;
@@ -180,29 +181,30 @@ public class HabitEventTimeLineActivity extends Fragment {
             @Override
             public void onClick(View v) {
 
+                final CharSequence mapsOptions[] = new CharSequence[] {"ALL", "5K RADIUS",
+                        "Recent Friends Events", "Filtered Map"};
+
                 android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog
                         .Builder(getActivity());
 
-                builder.setTitle("View Habits Map For:")
-                        .setPositiveButton("ALL", new DialogInterface.OnClickListener() {
+                builder.setTitle("View Events Map For:")
+                        .setItems(mapsOptions, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mapsAll(0);
-                            }
-                        })
-                        .setNegativeButton("5K RADIUS", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                mapsAll(1);
-                                dialog.dismiss();
-                            }
-                        })
-                        .setNeutralButton("Recent Friends", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                                switch (which) {
+                                    case 0:
+                                        mapsAll(0);
+                                        break;
+                                    case 1:
+                                        mapsAll(1);
+                                        break;
+                                    case 2:
+                                        dialog.dismiss();
+                                        break;
+                                    case 3:
+                                        dialog.dismiss();
+                                        break;
+                                }
                             }
                         });
                 android.support.v7.app.AlertDialog dialog = builder.create();
@@ -279,13 +281,6 @@ public class HabitEventTimeLineActivity extends Fragment {
         synchronized (listView){
             this.listView.setAdapter(arrayAdapter);
             this.listView.notify();
-        }
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
         }
     }
 

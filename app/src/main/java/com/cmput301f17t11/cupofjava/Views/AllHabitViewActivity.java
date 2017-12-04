@@ -143,7 +143,7 @@ public class AllHabitViewActivity extends Fragment {
      */
     private void updateListView(ArrayList<Habit> habits){
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.habit_list_item, habits);
+                R.layout.string_only_list_item, habits);
         synchronized (listView){
             this.listView.setAdapter(arrayAdapter);
             this.listView.notify();
