@@ -56,9 +56,6 @@ public class HabitEventTimeLineActivity extends Fragment {
     private ListView listView;
     private TextView textView;
     private Button viewMap;
-    //private double currentLat; //latitude of current loc
-    //private double currentLon; //Longitude of current loc
-
 
     ArrayList<HabitEvent> events = new ArrayList<>();
 
@@ -91,16 +88,11 @@ public class HabitEventTimeLineActivity extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             this.userName = bundle.getString("userName");
-            //this.currentLat = bundle.getDouble("currentLat");
-            //this.currentLon = bundle.getDouble("currentLon");
 
             Log.i("HabitEventTimelineFragment: Username received: ", userName);
-            //Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLat+"");
-            //Log.i("HabitEventTimelineFragment: Latitude received: ", ""+currentLon+"");
 
         }
 
-        //set up the TextView and ListView
         this.textView = (TextView) view.findViewById(R.id.timelineHeadingTextView);
         this.listView = (ListView) view.findViewById(R.id.timeLineListView);
         this.viewMap = (Button) view.findViewById(R.id.viewMapButton);
@@ -311,7 +303,6 @@ public class HabitEventTimeLineActivity extends Fragment {
                 Intent intent5 = new Intent(getActivity(),
                         ViewHabitEventActivity.class);
                 String a = events.size()+" "+ position ;
-                    //HabitEvent myEvent = events.get(0);
 
                 Log.i("HABitEventList", a);
                 if(!events.isEmpty()) {
@@ -367,8 +358,6 @@ public class HabitEventTimeLineActivity extends Fragment {
      * @param events Arraylist of type HabitEvent
      */
     private void updateListView(ArrayList<HabitEvent> events){
-        //ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(getActivity(),
-        //        R.layout.habit_event_list_item, events);
         EventListAdapter adapter = new EventListAdapter(getActivity(), events);
         synchronized (listView){
             this.listView.setAdapter(adapter);
@@ -410,8 +399,6 @@ public class HabitEventTimeLineActivity extends Fragment {
         bundle.putDoubleArray("lat", latititudes);
         bundle.putDoubleArray("lon", longitudes);
         bundle.putInt("type", type );
-        //bundle.putDouble("currentLat", currentLat);
-        //bundle.putDouble("currentLon", currentLon);
 
         intent.putExtras(bundle);
         startActivity(intent);
