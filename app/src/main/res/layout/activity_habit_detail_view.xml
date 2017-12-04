@@ -57,16 +57,42 @@
         android:textColor="#000000"
         android:textSize="20sp" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:id="@+id/habit_event_item"
-            android:layout_height="300dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/check_box_dimens"
-            android:layout_marginLeft="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
 
-        </ListView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROGRESS:"
+            android:fontFamily="monospace"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"/>
+
+        <ProgressBar
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:id="@+id/progress_bar"
+            android:layout_marginLeft="8dp"
+            android:progress="0"
+            android:progressBackgroundTint="@color/colorAccentL"
+            android:backgroundTint="@color/colorAccentL"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/habit_event_item"
+        android:layout_height="300dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/check_box_dimens"
+        android:layout_marginLeft="16dp">
+
+    </ListView>
 
 
     <Button

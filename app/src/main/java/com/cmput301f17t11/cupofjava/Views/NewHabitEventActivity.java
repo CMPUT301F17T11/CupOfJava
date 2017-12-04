@@ -234,6 +234,10 @@ public class NewHabitEventActivity extends AppCompatActivity {
 
         HabitEvent newHabitEvent = new HabitEvent(habit, habitEventComment);
         newHabitEvent.setUserName(this.userName);
+
+        int progress = habit.getProgressBar() + 20;
+        habit.setProgressBar(progress);
+
         if (this.hasPhoto){
             newHabitEvent.setImage(habitEventPhotoBitmap);
         }

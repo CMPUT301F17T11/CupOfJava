@@ -29,6 +29,7 @@ public class Habit implements Serializable {
     private String habitTitle;
     private String habitReason;
     private Calendar habitDate;
+    private int progressBar;
     private ArrayList<Integer> repeatingDays; //0 = Sun, 1 = Mon... 6 = Sat
     private int habitStatus = 0; //how closely the habit is being followed on a scale of 1 to 10.
                                 //for each day followed, +1 and missing days would result in -1
@@ -196,6 +197,12 @@ public class Habit implements Serializable {
 
     public void deleteHabitEvent(HabitEvent habitEvent){
         this.habitEvents.getHabitEvents().remove(habitEvent);
+    }
+
+    public int getProgressBar() { return progressBar; }
+
+    public void setProgressBar(int progressBar) {
+        this.progressBar = progressBar;
     }
 
     /**

@@ -41,20 +41,6 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/chronological_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/colorAccentL"
-                    android:gravity="center"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="16dp"
-                    android:text="Chronological" />
-
-                <Button
                     android:id="@+id/reverse_chronological_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,7 +52,7 @@
                     android:background="@color/colorAccentL"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:text="REVERSE" />
+                    android:text="REVERSE CHRONOLOGICAL" />
 
             </LinearLayout>
 
@@ -89,14 +75,15 @@
                     android:layout_marginLeft="16dp"
                     android:text="BY COMMENT" />
 
-                <android.support.v7.widget.AppCompatSpinner
+                <Button
                     android:id="@+id/Filter_by_habit"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="16dp"
-                    android:backgroundTint="@color/black"
+                    android:text="BY HABIT"
+                    android:background="@color/colorAccentL"
                     android:prompt="@id/Filter_by_habit"
                     android:layout_weight="1"
                     android:layout_marginRight="16dp"
