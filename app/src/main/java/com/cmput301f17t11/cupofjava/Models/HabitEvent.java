@@ -12,7 +12,6 @@ package com.cmput301f17t11.cupofjava.Models;
 import android.location.Location;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
-import com.
 
 import com.cmput301f17t11.cupofjava.Controllers.ImageHelper;
 

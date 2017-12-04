@@ -10,6 +10,7 @@
 
 package com.cmput301f17t11.cupofjava.Views;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
@@ -151,38 +152,31 @@ public class HabitEventTimeLineActivity extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Log.i("List of event Loc", events.get(0).getLocation().toString());
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
-                Bundle bundle = new Bundle();
 
-                double [] latititudes = new double [events.size()];
-                double [] longitudes = new double [events.size()];
-                for (int i = 0; i < events.size(); i++)
-                {
-                    if(events.get(i).getIsLocationSet()) {
-                        latititudes[i] = events.get(i).getLocation().getLatitude();
-                        longitudes[i] = events.get(i).getLocation().getLongitude();
-                    }
-                    else{
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog
+                        .Builder(getActivity());
 
-                    }
-
-                }
-                int size = 0;
-                for(int i = 0; i< events.size(); i++)
-                {
-                    if(latititudes[i]!= 0.0 && longitudes[i]!= 0.0){
-                        size++;
-                    }
-                }
-
-
-                bundle.putDoubleArray("lat", latititudes);
-                bundle.putDoubleArray("lon", longitudes);
-                //bundle.putInt("size", size);
-
-                intent.putExtras(bundle);
-                startActivity(intent);
+                builder.setTitle("View Habits Map For:")
+                        .setPositiveButton("ALL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mapsAll();
+                            }
+                        })
+                        .setNegativeButton("5K RADIUS", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNeutralButton("Recent Friends", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                android.support.v7.app.AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 
@@ -269,6 +263,41 @@ public class HabitEventTimeLineActivity extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void mapsAll(){
+        Log.i("List of event Loc", events.get(0).getLocation().toString());
+        Intent intent = new Intent(getActivity(), MapsActivity.class);
+        Bundle bundle = new Bundle();
+
+        double [] latititudes = new double [events.size()];
+        double [] longitudes = new double [events.size()];
+        for (int i = 0; i < events.size(); i++)
+        {
+            if(events.get(i).getIsLocationSet()) {
+                latititudes[i] = events.get(i).getLocation().getLatitude();
+                longitudes[i] = events.get(i).getLocation().getLongitude();
+            }
+            else{
+
+            }
+
+        }
+        int size = 0;
+        for(int i = 0; i< events.size(); i++)
+        {
+            if(latititudes[i]!= 0.0 && longitudes[i]!= 0.0){
+                size++;
+            }
+        }
+
+
+        bundle.putDoubleArray("lat", latititudes);
+        bundle.putDoubleArray("lon", longitudes);
+        //bundle.putInt("size", size);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     /**
