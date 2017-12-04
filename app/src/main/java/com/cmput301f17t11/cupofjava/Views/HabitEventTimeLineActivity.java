@@ -367,10 +367,11 @@ public class HabitEventTimeLineActivity extends Fragment {
      * @param events Arraylist of type HabitEvent
      */
     private void updateListView(ArrayList<HabitEvent> events){
-        ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.habit_event_list_item, events);
+        //ArrayAdapter<HabitEvent> arrayAdapter = new ArrayAdapter<>(getActivity(),
+        //        R.layout.habit_event_list_item, events);
+        EventListAdapter adapter = new EventListAdapter(getActivity(), events);
         synchronized (listView){
-            this.listView.setAdapter(arrayAdapter);
+            this.listView.setAdapter(adapter);
             this.listView.notify();
         }
     }

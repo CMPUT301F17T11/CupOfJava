@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/fancy_event_list_item"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+    >
+
+<ImageView
+    android:id="@+id/event_list_image_view"
+    android:layout_centerVertical="true"
+    android:layout_alignParentLeft="true"
+    android:layout_marginLeft="10dp"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:background="@drawable/ic_launcher"
+    />
+
+    <TextView
+        android:id="@+id/event_list_which_habit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:paddingTop="20dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold">
+    </TextView>
+
+    <TextView
+        android:id="@+id/event_list_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_list_which_habit"
+        android:fontFamily="sans-serif"
+        android:paddingBottom="20dp"
+        android:textAlignment="textEnd"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        >
+    </TextView>
+
+    <TextView
+        android:id="@+id/event_list_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/event_list_date"
+        android:fontFamily="sans-serif"
+        android:paddingBottom="20dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textSize="16sp">
+    </TextView>
+
+</RelativeLayout>

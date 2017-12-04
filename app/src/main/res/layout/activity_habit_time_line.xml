@@ -104,11 +104,11 @@
             <ListView
                 android:id="@+id/timeLineListView"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="366dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/white" />
+                android:background="@color/white"/>
 
         </LinearLayout>
     </RelativeLayout>
