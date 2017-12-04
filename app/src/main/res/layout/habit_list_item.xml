@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/habit_list_item"
-    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fontFamily="monospace"
-    android:padding="8dp"
-    android:textAlignment="center"
-    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    android:textColor="@color/black"
-    android:textSize="16sp">
+    android:layout_width="match_parent">
 
-</TextView>
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="60dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_addlocation"
+        />
+
+    <TextView
+        android:id="@+id/habit_what"
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        >
+    </TextView>
+
+    <TextView
+        android:id="@+id/habit_why"
+        android:layout_below="@id/habit_what"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:paddingBottom="20dp"
+        >
+    </TextView>
+
+</RelativeLayout>

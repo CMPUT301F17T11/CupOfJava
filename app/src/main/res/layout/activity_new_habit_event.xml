@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="24dp"
-            android:background="@drawable/take_photo_v" />
+            android:background="@drawable/ic_addphoto" />
 
         <TextView
             android:id="@+id/habit_event_location_textView"
@@ -59,7 +59,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="monospace"
             android:hint="Location"
             android:textAlignment="center"
@@ -71,11 +71,11 @@
 
         <ImageView
             android:id="@+id/habit_event_location"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/add_location_v" />
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_addlocation" />
 
         <Button
             android:layout_width="wrap_content"
