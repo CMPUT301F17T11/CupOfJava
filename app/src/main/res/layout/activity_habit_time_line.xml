@@ -48,18 +48,11 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="16dp"
                     android:layout_weight="1"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginRight="8dp"
                     android:background="@color/colorAccentL"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:text="REVERSE CHRONOLOGICAL" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/filter_by_comment"
@@ -67,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginRight="16dp"
                     android:background="@color/colorAccentL"
                     android:gravity="center"
                     android:paddingLeft="8dp"
@@ -74,6 +68,13 @@
                     android:layout_weight="1"
                     android:layout_marginLeft="16dp"
                     android:text="BY COMMENT" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/Filter_by_habit"
@@ -89,6 +90,19 @@
                     android:layout_marginRight="16dp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:text="MAP"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/viewMapButton"/>
             </LinearLayout>
 
             <ListView
@@ -99,18 +113,6 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/white" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                android:text="MAP"
-                android:layout_gravity="center"
-                android:id="@+id/viewMapButton"/>
 
         </LinearLayout>
     </RelativeLayout>
