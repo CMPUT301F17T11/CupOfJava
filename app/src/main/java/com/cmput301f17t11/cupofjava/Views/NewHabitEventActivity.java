@@ -89,7 +89,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_habit_event);
 
-        ArrayAdapter<Habit> adapter = new ArrayAdapter<Habit>(this, R.layout.habit_list_item, habitList);
+        ArrayAdapter<Habit> adapter = new ArrayAdapter<Habit>(this, R.layout.string_only_list_item, habitList);
 
         //obtain extra info from intent
         Intent intent = getIntent();
@@ -217,7 +217,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
     }
     private void updateSpinner(ArrayList<Habit> habits){
         ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(NewHabitEventActivity.this,
-                R.layout.habit_list_item, habits);
+                R.layout.string_only_list_item, habits);
         this.spinner.setAdapter(arrayAdapter);
     }
 
@@ -249,7 +249,7 @@ public class NewHabitEventActivity extends AppCompatActivity {
                 newHabitEvent.setIsLocationSet(true);
             }
             else{
-                newHabitEvent.setIsLocationSet(isLocationSet); //it is false
+                newHabitEvent.setIsLocationSet(isLocationSet);
             }
 
         ElasticsearchController.AddEventTask addEventTask = new ElasticsearchController.AddEventTask();
