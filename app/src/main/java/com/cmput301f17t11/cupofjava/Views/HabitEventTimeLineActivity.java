@@ -29,16 +29,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Controllers.EventFilteringHelper;
 
+import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitAdapter;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -176,6 +180,62 @@ public class HabitEventTimeLineActivity extends Fragment {
                 dialog.show();
             }
         });
+        ArrayList<Habit> habits;
+        ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
+        getHabitsTask.execute(userName);
+        try {
+            habits = getHabitsTask.get();
+        } catch (Exception e) {
+            Log.i("Error Getting Habits ", e.toString());
+            habits = new ArrayList<>();
+        }
+        final Spinner spinner = (Spinner) view.findViewById(R.id.filter_by_habit);
+        ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<Habit>(getActivity(),
+                R.layout.string_only_list_item);
+
+        final Habit emptyHabit = new Habit("Select", "to filter by habit");
+        arrayAdapter.add(emptyHabit);
+        arrayAdapter.addAll(habits);
+        spinner.setAdapter(arrayAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Habit selectedHabit = (Habit) spinner.getSelectedItem();
+                if (selectedHabit.getHabitTitle().equals(emptyHabit.getHabitTitle())){
+                    return;
+                }
+                String habitTitle = selectedHabit.getHabitTitle();
+                events = new ArrayList<>();
+                ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
+                getEventsTask.execute(userName);
+                try {
+                    ArrayList<HabitEvent> foundHabitEvents = getEventsTask.get();
+                    if (!foundHabitEvents.isEmpty()) {
+
+                        events.addAll(foundHabitEvents);
+                        Log.i("HabitEventTimeline: found events :", events.toString());
+                    } else {
+                        Log.i("HabitEventTimeline", "Did Not find habit events" + events.toString());
+
+                    }
+                } catch (Exception e) {
+                    Log.i("HabitEventTimeline", "Failed to get the Habit Events from the async object");
+
+                }
+
+                events = EventFilteringHelper.filterByType(events, habitTitle);
+                events = EventFilteringHelper.reverseChronological(events);
+                updateTextView(events.size());
+                updateListView(events);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         return view;
@@ -279,8 +339,6 @@ public class HabitEventTimeLineActivity extends Fragment {
                     }
                     bundle.putBoolean("hasImage", myEvent.hasImage());
                     bundle.putString("eventId", myEvent.getId());
-                    //bundle.putSerializable("eventClicked", events); //sending habitEventlist
-                    //bundle.putInt("eventIndex", position);
 
                     intent5.putExtras(bundle);
                     startActivity(intent5);
@@ -326,7 +384,6 @@ public class HabitEventTimeLineActivity extends Fragment {
 
 
     public void mapsAll(int type ){
-//        Log.i("List of event Loc", events.get(0).getLocation().toString());
         Intent intent = new Intent(getActivity(), MapsActivity.class);
         Bundle bundle = new Bundle();
 
@@ -372,14 +429,5 @@ public class HabitEventTimeLineActivity extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    public ArrayList<HabitEvent> filterByTime(ArrayList<HabitEvent> events) {
-        Collections.sort(events, new Comparator<HabitEvent>() {
-            public int compare(HabitEvent o1, HabitEvent o2) {
-                return o1.getHabitEventTime().compareTo(o2.getHabitEventTime());
-            }
-        });
-        return events;
     }
 }

@@ -77,22 +77,16 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/Filter_by_habit"
+                    android:id="@+id/filter_by_habit"
                     style="@android:style/Widget.Holo.Light.Spinner"
-                    android:layout_width="251dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="8dp"
+                    android:layout_width="253dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_weight="1"
+                    android:layout_marginTop="32dp"
                     android:backgroundTint="@color/colorAccentL"
-                    android:contentDescription="Select Habit"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:popupBackground="@drawable/common_google_signin_btn_icon_light"
-                    android:prompt="@id/Filter_by_habit"
-                    android:text="BY HABIT"/>
+                    android:spinnerMode="dropdown">
+                </android.support.v7.widget.AppCompatSpinner>
 
                 <Button
                     android:id="@+id/viewMapButton"
@@ -104,7 +98,7 @@
                     android:layout_marginBottom="4dp"
                     android:layout_marginRight="4dp"
                     android:layout_marginTop="8dp"
-                    android:text="MAP" />
+                    android:text="MAP"/>
             </LinearLayout>
 
             <ListView
