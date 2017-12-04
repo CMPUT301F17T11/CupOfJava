@@ -112,6 +112,7 @@ public class ElasticsearchController {
             return thisUser;
         }
     }
+
     public static class DeleteUsersTask extends AsyncTask<User, Void, Void> {
         @Override
         protected Void doInBackground(User... users) {

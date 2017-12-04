@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Controllers.SocialRequestHandler;
@@ -67,82 +68,88 @@ public class FollowingTab extends Fragment {
         ListView listView = (ListView)v.findViewById(R.id.following_list_view);
 
         User user = SocialRequestHandler.getUser(userName);
-        final ArrayList<String> followingList =  user.getFollowingList();
+        try{
+            final ArrayList<String> followingList =  user.getFollowingList();
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
+                    R.layout.habit_list_item, followingList);
+            listView.setAdapter(arrayAdapter);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.habit_list_item, followingList);
-        listView.setAdapter(arrayAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle(followingList.get(position)).setMessage("See profile or unfollow")
+                            .setPositiveButton("PROFILE", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(getContext(),
+                                            ViewFollowingProfileActivity.class);
+                                    intent.putExtra("userName", userName);
+                                    intent.putExtra("followingName", followingList.get(position));
+                                    startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton("UNFOLLOW", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    SocialRequestHandler
+                                            .unFollow(userName, followingList.remove(position));
+                                    Intent intent = new Intent(getContext(), MainActivity.class);
+                                    intent.putExtra("userName", userName);
+                                    startActivity(intent);
+                                }
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            });
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle(followingList.get(position)).setMessage("See profile or unfollow")
-                        .setPositiveButton("PROFILE", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getContext(),
-                                        ViewFollowingProfileActivity.class);
-                                intent.putExtra("userName", userName);
-                                intent.putExtra("followingName", followingList.get(position));
-                                startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("UNFOLLOW", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                SocialRequestHandler
-                                        .unFollow(userName, followingList.remove(position));
-                                Intent intent = new Intent(getContext(), MainActivity.class);
-                                intent.putExtra("userName", userName);
-                                startActivity(intent);
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
+            Button addButton = (Button)v.findViewById(R.id.add_to_following_button);
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Find User").setMessage("Enter Name of User to Follow");
 
-        Button addButton = (Button)v.findViewById(R.id.add_to_following_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Find User").setMessage("Enter Name of User to Follow");
+                    final EditText input = new EditText(getContext());
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT);
+                    input.setLayoutParams(layoutParams);
+                    builder.setView(input);
 
-                final EditText input = new EditText(getContext());
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT);
-                input.setLayoutParams(layoutParams);
-                builder.setView(input);
+                    builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            SocialRequestHandler.sendFollowRequest(userName,
+                                    input.getText().toString());
 
-                                SocialRequestHandler.sendFollowRequest(userName,
-                                        input.getText().toString());
-
-                                Intent intent = new Intent(getContext(), MainActivity.class);
-                                intent.putExtra("userName", userName);
-                                startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            intent.putExtra("userName", userName);
+                            startActivity(intent);
+                        }
+                    })
+                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
 
 
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            });
+        }
+        catch (NullPointerException e){
+            Intent intent = new Intent(getContext(), UserLoginActivity.class);
+            Toast.makeText(getActivity(), "Failed to connect", Toast.LENGTH_LONG).show();
+            startActivity(intent);
+        }
         return v;
+
     }
 
     @Override

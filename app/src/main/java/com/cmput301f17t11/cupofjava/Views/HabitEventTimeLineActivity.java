@@ -162,9 +162,6 @@ public class HabitEventTimeLineActivity extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
 
                         String comment = input.getText().toString();
-
-                        //filteredEvents = filterByComment(events, comment);
-                        //updateListView(filteredEvents);
                     }
                 })
                         .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

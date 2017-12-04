@@ -114,7 +114,6 @@ public class FollowersTab extends Fragment {
         });
 
         return v;
-
     }
 
     @Override
