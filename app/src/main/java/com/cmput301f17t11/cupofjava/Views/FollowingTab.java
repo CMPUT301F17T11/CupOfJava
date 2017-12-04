@@ -83,7 +83,8 @@ public class FollowingTab extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(getContext(),
                                         ViewFollowingProfileActivity.class);
-                                intent.putExtra("userName", followingList.get(position));
+                                intent.putExtra("userName", userName);
+                                intent.putExtra("followingName", followingList.get(position));
                                 startActivity(intent);
                             }
                         })

@@ -48,7 +48,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/following_list_view"
+        android:id="@+id/following_profile_list_view"
         android:layout_width="0dp"
         android:layout_height="328dp"
         android:layout_marginEnd="8dp"
