@@ -41,20 +41,6 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/chronological_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/colorAccentL"
-                    android:gravity="center"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="16dp"
-                    android:text="Chronological" />
-
-                <Button
                     android:id="@+id/reverse_chronological_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,11 +48,26 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="16dp"
                     android:layout_weight="1"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginRight="8dp"
                     android:background="@color/colorAccentL"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:text="REVERSE" />
+                    android:text="REVERSE CHRONOLOGICAL" />
+
+                <Button
+                    android:id="@+id/filter_by_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/colorAccentL"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:text="BY COMMENT" />
 
             </LinearLayout>
 
@@ -76,32 +77,32 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/filter_by_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/colorAccentL"
-                    android:gravity="center"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="16dp"
-                    android:text="BY COMMENT" />
-
-                <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/Filter_by_habit"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="16dp"
-                    android:backgroundTint="@color/black"
+                    android:text="BY HABIT"
+                    android:background="@color/colorAccentL"
                     android:prompt="@id/Filter_by_habit"
                     android:layout_weight="1"
                     android:layout_marginRight="16dp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:text="MAP"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/viewMapButton"/>
             </LinearLayout>
 
             <ListView
@@ -112,18 +113,6 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/white" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                android:text="MAP"
-                android:layout_gravity="center"
-                android:id="@+id/viewMapButton"/>
 
         </LinearLayout>
     </RelativeLayout>

@@ -133,16 +133,8 @@ public class HabitEventTimeLineActivity extends Fragment {
         this.listView = (ListView) view.findViewById(R.id.timeLineListView);
         this.viewMap = (Button) view.findViewById(R.id.viewMapButton);
 
-        Button chronoButton = (Button) view.findViewById(R.id.chronological_button);
         Button commentButton = (Button) view.findViewById(R.id.filter_by_comment);
 
-        chronoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                events = reverseFilterByTime(events);
-                updateListView(events);
-            }
-        });
 
         commentButton.setOnClickListener(new View.OnClickListener() {
             @Override

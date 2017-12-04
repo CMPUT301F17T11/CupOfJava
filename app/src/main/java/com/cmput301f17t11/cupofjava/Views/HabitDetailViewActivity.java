@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -49,6 +50,8 @@ public class HabitDetailViewActivity extends AppCompatActivity {
     private int habitIndex;
     private ArrayList<Habit> habitList = new ArrayList<>();
     private Habit habit;
+    private ProgressBar progressBar;
+    private int progress = 0;
 
     /**
      * This method is called when HabitDetailViewActivity is instantiated.
@@ -71,6 +74,7 @@ public class HabitDetailViewActivity extends AppCompatActivity {
             this.habitIndex = bundle.getInt("habitIndex");
         }
 
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         TextView habitTitleTextView = (TextView) findViewById(R.id.title_text_view);
         TextView habitReasonTextView = (TextView) findViewById(R.id.reason_text_view);
         TextView habitDateTextView = (TextView) findViewById(R.id.date_added_text_view);
@@ -126,6 +130,9 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         habitTitleTextView.setText(("What: "+ habit.getHabitTitle()));
         habitReasonTextView.setText(("Why: "+ habit.getHabitReason()));
         habitDateTextView.setText(("Start date: " + sdf.format(habit.getHabitStartDate().getTime())));
+
+        progress = habit.getProgressBar();
+        progressBar.setProgress(progress);
 
     }
 
