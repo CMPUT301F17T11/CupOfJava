@@ -172,7 +172,7 @@ public class SocialRequestHandler {
         addUserTask.execute(user);
 
 
-        User user2 = getUser(thisUser);
+        User user2 = getUser(userToRemove);
         if (user2 == null){
             return;
         }
