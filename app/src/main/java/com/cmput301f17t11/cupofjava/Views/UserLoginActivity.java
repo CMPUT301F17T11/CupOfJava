@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Models.Geolocation;
 import com.cmput301f17t11.cupofjava.Models.User;
 import com.cmput301f17t11.cupofjava.R;
 
@@ -34,6 +35,10 @@ public class UserLoginActivity extends Activity {
     private User newUser;
     private User user;
 
+    double currentLat;
+    double currentLong;
+    Geolocation location;
+
     /**
      * Launches the screen to enter username and optional password.
      *
@@ -45,12 +50,20 @@ public class UserLoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
 
-        username_editText = (EditText) findViewById(R.id.username);
 
+
+        username_editText = (EditText) findViewById(R.id.username);
+        location = new Geolocation(this, this);
         signIn = (Button) findViewById(R.id.username_sign_in_button);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Log.i("Location is ", location.getLocation().toString());
+                currentLat = location.getLocation().getLatitude();
+                currentLong = location.getLocation().getLongitude();
+                Log.i("Latitude ", "" + currentLat + "");
+                Log.i("Latitude ", "" + currentLong + "");
                 String input = username_editText.getText().toString();
                 if (input.isEmpty()){
                     username_editText.setError("Field cannot be left empty");

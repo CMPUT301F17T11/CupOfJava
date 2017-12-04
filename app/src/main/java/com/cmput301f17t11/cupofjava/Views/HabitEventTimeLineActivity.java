@@ -10,6 +10,7 @@
 
 package com.cmput301f17t11.cupofjava.Views;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
@@ -148,26 +149,6 @@ public class HabitEventTimeLineActivity extends Fragment {
         updateTextView(events.size());
         updateListView(events);
 
-        location = new Geolocation(getContext(),getActivity());
-
-        currentLat = location.getLocation().getLatitude();
-        currentLong = location.getLocation().getLongitude();
-
-        /* if the user has selected within 5 then do this:
-        Intent intent = new Intent(getActivity(), MapsActivity.class);
-        Bundle bundle = new Bundle();
-        double[] latitudes = new double[events.size()];
-        double [] longitudes = new double [events.size()];
-
-        for (int i = 0; i < events.size(); i++)
-        {
-            if(events.get(i).getIsLocationSet()) {
-                latitudes[i] = events.get(i).getLocation().getLatitude();
-                longitudes[i] = events.get(i).getLocation().getLongitude();
-                if()
-            }
-
-        }*/
 
 
 
@@ -175,38 +156,34 @@ public class HabitEventTimeLineActivity extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Log.i("List of event Loc", events.get(0).getLocation().toString());
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
-                Bundle bundle = new Bundle();
 
-                double [] latititudes = new double [events.size()];
-                double [] longitudes = new double [events.size()];
-                for (int i = 0; i < events.size(); i++)
-                {
-                    if(events.get(i).getIsLocationSet()) {
-                        latititudes[i] = events.get(i).getLocation().getLatitude();
-                        longitudes[i] = events.get(i).getLocation().getLongitude();
-                    }
-                    else{
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog
+                        .Builder(getActivity());
 
-                    }
+                builder.setTitle("View Habits Map For:")
+                        .setPositiveButton("ALL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mapsAll(0);
+                            }
+                        })
+                        .setNegativeButton("5K RADIUS", new DialogInterface.OnClickListener() {
 
-                }
-                int size = 0;
-                for(int i = 0; i< events.size(); i++)
-                {
-                    if(latititudes[i]!= 0.0 && longitudes[i]!= 0.0){
-                        size++;
-                    }
-                }
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-
-                bundle.putDoubleArray("lat", latititudes);
-                bundle.putDoubleArray("lon", longitudes);
-                //bundle.putInt("size", size);
-
-                intent.putExtras(bundle);
-                startActivity(intent);
+                                mapsAll(1);
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNeutralButton("Recent Friends", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                android.support.v7.app.AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 
@@ -289,32 +266,44 @@ public class HabitEventTimeLineActivity extends Fragment {
         }
     }
 
-    /**
-     *
-     * @param lat1
-     * @param lng1
-     * @param lat2
-     * @param lng2
-     * @return dist distance in km within the two points
-     */
-    public static double within5(double lat1, double lng1, double lat2, double lng2) {
-        double earthRadius = 6371.0; // miles (or 6371.0 kilometers)
-        double dLat = Math.toRadians(lat2-lat1);
-        double dLng = Math.toRadians(lng2-lng1);
-        double sindLat = Math.sin(dLat / 2);
-        double sindLng = Math.sin(dLng / 2);
-        double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
-                * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double dist = earthRadius * c;
-
-        return dist;
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+
+
+    public void mapsAll(int type ){
+        Log.i("List of event Loc", events.get(0).getLocation().toString());
+        Intent intent = new Intent(getActivity(), MapsActivity.class);
+        Bundle bundle = new Bundle();
+
+        double [] latititudes = new double [events.size()];
+        double [] longitudes = new double [events.size()];
+        for (int i = 0; i < events.size(); i++)
+        {
+            if(events.get(i).getIsLocationSet()) {
+                latititudes[i] = events.get(i).getLocation().getLatitude();
+                longitudes[i] = events.get(i).getLocation().getLongitude();
+            }
+
+        }
+        int size = 0;
+        for(int i = 0; i< events.size(); i++)
+        {
+            if(latititudes[i]!= 0.0 && longitudes[i]!= 0.0){
+                size++;
+            }
+        }
+
+
+        bundle.putDoubleArray("lat", latititudes);
+        bundle.putDoubleArray("lon", longitudes);
+        bundle.putInt("type", type );
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     /**

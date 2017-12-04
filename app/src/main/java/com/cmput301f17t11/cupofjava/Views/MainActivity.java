@@ -8,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.cmput301f17t11.cupofjava.Models.BottomNavigationViewHelper;
@@ -16,6 +17,7 @@ import com.cmput301f17t11.cupofjava.R;
 public class MainActivity extends AppCompatActivity{
 
     private String userName;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

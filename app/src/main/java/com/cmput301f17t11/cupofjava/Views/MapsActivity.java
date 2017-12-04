@@ -1,11 +1,17 @@
 package com.cmput301f17t11.cupofjava.Views;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.cmput301f17t11.cupofjava.Models.Geolocation;
 import com.cmput301f17t11.cupofjava.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -23,28 +29,59 @@ import java.util.ArrayList;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
-    ArrayList<Location> eventLoc = new ArrayList<>();
-    double lat = 0;
-    double lon = 0;
+
+    double currentLat;
+    double currentLong;
     double [] latitudes;
     double [] longitudes;
-
+    Geolocation location;
+    int type;
+    EditText showLocation;
+    Button getLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         if (googleServicesAvailable()) {
             Toast.makeText(this, "Google Play Services Works", Toast.LENGTH_LONG).show();
             setContentView(R.layout.maps_activity);
             initMap();
         }
+        getLocation = (Button)findViewById(R.id.getLocationButton);
+        showLocation = (EditText)findViewById(R.id.showLocation);
+
+        getLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                }
+
+        });
+
+
         Bundle bundle = getIntent().getExtras();
         if(bundle!= null){
-            //eventLoc = bundle.getParcelableArrayList("eventLoc");
             latitudes = bundle.getDoubleArray("lat");
             longitudes = bundle.getDoubleArray("lon");
+            type = bundle.getInt("type");
 
+
+        }
+        if(type == 1){  //within 5km
+
+            for (int i = 0; i < latitudes.length; i++)
+            {
+                    double lat2= latitudes[i];
+                    double lng2= longitudes[i];
+                    if(within5(currentLat, currentLong, lat2, lng2) <= 5.0){
+                        //do nothing
+                    }
+                    else{
+                        latitudes[i] = 0;
+                        longitudes[i] = 0;
+                    }
+                }
 
         }
 
@@ -73,8 +110,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
         for(int i = 0; i < (latitudes).length; i++){
-            if(latitudes[i]!= 0 && longitudes[i]!= 0)
-            goToLocationZoomed(latitudes[i],longitudes[i], 15);
+            if(latitudes[i]!= 0.0 && longitudes[i]!= 0.0 ) {
+                goToLocationZoomed(latitudes[i], longitudes[i], 15);
+            }
 
         }
     }
@@ -95,4 +133,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }*/
 
     }
-}
+
+    /**
+     *
+     * @param lat1
+     * @param lng1
+     * @param lat2
+     * @param lng2
+     * @return dist distance in km within the two points
+     */
+    public static double within5(double lat1, double lng1, double lat2, double lng2) {
+        double earthRadius = 6371.0; // km (or 6371.0 kilometers)
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLng = Math.toRadians(lng2-lng1);
+        double sindLat = Math.sin(dLat / 2);
+        double sindLng = Math.sin(dLng / 2);
+        double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
+                * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double dist = earthRadius * c;
+
+        return dist;
+    }
+
+
+    }
