@@ -68,7 +68,7 @@ public class RequestsTab extends Fragment {
         final ArrayList<String> requestList =  user.getFollowRequests();
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.habit_list_item, requestList);
+                R.layout.string_only_list_item, requestList);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

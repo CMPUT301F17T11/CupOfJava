@@ -32,8 +32,6 @@ import android.widget.TextView;
 
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
 import com.cmput301f17t11.cupofjava.Controllers.EventFilteringHelper;
-import com.cmput301f17t11.cupofjava.Models.Geolocation;
-import com.cmput301f17t11.cupofjava.Models.Habit;
 
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
