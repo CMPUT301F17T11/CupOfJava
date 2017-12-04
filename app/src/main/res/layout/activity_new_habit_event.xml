@@ -25,13 +25,15 @@
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/choose_habit_spinner"
+            style="@android:style/Widget.Holo.Light.Spinner"
+            android:backgroundTint="@color/colorAccentL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="32dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"></android.support.v7.widget.AppCompatSpinner>
+            android:spinnerMode="dropdown">
+        </android.support.v7.widget.AppCompatSpinner>
 
         <EditText
             android:id="@+id/edit_comment"

@@ -155,6 +155,18 @@ public class HabitDetailViewActivity extends AppCompatActivity {
     }
 
     /**
+     * Returns user to MainActivity so user can
+     * do something else.
+     *
+     * @param view
+     */
+    public void exitToMain(View view) {
+        Intent intent = new Intent(HabitDetailViewActivity.this, MainActivity.class);
+        intent.putExtra("userName", userName);
+        startActivity(intent);
+    }
+
+    /**
      * Button implementation to delete current habit.
      *
      * @param view instance of View
