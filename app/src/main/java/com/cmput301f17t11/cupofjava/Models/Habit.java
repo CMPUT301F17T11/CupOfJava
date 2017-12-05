@@ -9,8 +9,6 @@
 
 package com.cmput301f17t11.cupofjava.Models;
 
-import com.cmput301f17t11.cupofjava.Controllers.ProgressUpdate;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;

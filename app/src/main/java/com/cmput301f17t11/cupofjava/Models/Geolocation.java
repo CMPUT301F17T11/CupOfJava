@@ -26,7 +26,7 @@ import java.io.Serializable;
 
 
 /**
- * TODO for ProjectPart 5
+ *
  *
  * Handles all location based settings that
  * allow the user to properly add a location to their

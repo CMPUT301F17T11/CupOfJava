@@ -1,3 +1,11 @@
+/* EditHabitEventDetailController
+ *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
+ */
 package com.cmput301f17t11.cupofjava.Controllers;
 
 import android.location.Location;
