@@ -30,10 +30,11 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
      * Test if User can follow other user
      */
     public void testFollowing(){
-        User testToFollow = new User("Bob");
-        User testFollowing = new User("Joe");
-        testFollowing.addFollower("Bob");
-        assertSame(testFollowing.getFollowingList().get(0), testToFollow);
+        User testFollowed = new User("Bob");
+        User testFollower = new User("Joe");
+        testFollower.addFollowing("Bob");
+        testFollowed.addFollower("Joe");
+        assertTrue(testFollower.isFollowing("Bob"));
     }
 
     /**
@@ -42,22 +43,10 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     public void testFollower(){
         User testFollowed = new User("Bob");
         User testFollower = new User("Joe");
+        testFollower.addFollowing("Bob");
         testFollowed.addFollower("Joe");
-        assertSame(testFollowed.getFollowerList().get(0), testFollower);
+        assertEquals(testFollowed.getFollowerList().get(0), "Joe");
     }
-
-    /**
-     * Test if user can remove followers
-     */
-    public void testRemoveFollower() {
-        User testFollowed = new User("Bob");
-        User testFollower = new User("Joe");
-        testFollowed.addFollower("Joe");
-        testFollowed.removeFollower("Joe");
-        assertSame(testFollowed.getFollowerList().get(0), testFollower);
-    }
-
-
-
+    
 }
 
