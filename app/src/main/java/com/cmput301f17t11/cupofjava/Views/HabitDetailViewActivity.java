@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.cmput301f17t11.cupofjava.Controllers.EditHabitDetailController;
 import com.cmput301f17t11.cupofjava.Controllers.EditHabitEventDetailController;
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Controllers.ProgressUpdate;
 import com.cmput301f17t11.cupofjava.Controllers.SocialRequestHandler;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.Models.HabitList;
@@ -143,7 +144,7 @@ public class HabitDetailViewActivity extends Activity {
         habitReasonTextView.setText(("Why: "+ habit.getHabitReason()));
         habitDateTextView.setText(("Start date: " + sdf.format(habit.getHabitStartDate().getTime())));
 
-        progress = habit.getProgressBar();
+        progress = ProgressUpdate.getProgress(habit, getHabitEventsOfHabit());
         progressBar.setProgress(progress);
 
         habitReasonTextView.setOnClickListener(new View.OnClickListener() {

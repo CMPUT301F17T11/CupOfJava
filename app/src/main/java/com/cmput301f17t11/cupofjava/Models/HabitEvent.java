@@ -44,6 +44,7 @@ public class HabitEvent implements Serializable {
     private  Location location;
 
     private String imageString = "";
+    private Calendar calendar;
 
     /**
 

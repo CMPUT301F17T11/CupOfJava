@@ -9,6 +9,8 @@
 
 package com.cmput301f17t11.cupofjava.Models;
 
+import com.cmput301f17t11.cupofjava.Controllers.ProgressUpdate;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -255,6 +257,10 @@ public class Habit implements Serializable {
      */
     public int getHabitStatus(){
         return habitStatus;
+    }
+
+    public ArrayList<Integer> getRepeatingDays(){
+        return this.repeatingDays;
     }
 
     @Override
