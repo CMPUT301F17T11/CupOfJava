@@ -110,18 +110,19 @@
             android:background="@color/black"/>
 
         <Button
+            android:id="@+id/delete_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/delete_button"
+            android:fontFamily="monospace"
             android:onClick="deleteCurrentHabitEvent"
             android:paddingLeft="64dp"
             android:paddingRight="64dp"
             android:text="DELETE"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="monospace"
-            android:textSize="22sp"
-            android:background="@drawable/delete_button"/>
+            android:textSize="22sp" />
     </LinearLayout>
 
 </ScrollView>

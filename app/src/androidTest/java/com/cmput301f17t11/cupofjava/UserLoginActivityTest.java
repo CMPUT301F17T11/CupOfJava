@@ -42,9 +42,11 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
     }
 
     public void testLogin(){
+        solo.assertCurrentActivity("Wrong Activity", com.cmput301f17t11.cupofjava.Views.UserLoginActivity.class);
+        solo.enterText((EditText)solo.getView(R.id.username), "test");
+        solo.clickOnButton("Sign in | Register");
 
-
-        /****solo.assertCurrentActivity("new activity", com.cmput301f17t11.cupofjava.Views.MainActivity.class);
+        solo.assertCurrentActivity("new activity", com.cmput301f17t11.cupofjava.Views.MainActivity.class);
         solo.clickOnView((solo.getView(R.id.navigation_add)));
         solo.clickOnText("New Habit");
         solo.assertCurrentActivity("new activity",com.cmput301f17t11.cupofjava.Views.NewHabitActivity.class);
@@ -64,15 +66,13 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
         solo.clickOnView(solo.getView(R.id.checkbox_fri));
         solo.clickOnView(solo.getView(R.id.checkbox_sat));
 
-        solo.clickOnButton("SAVE");***/
-        solo.assertCurrentActivity("Wrong Activity", com.cmput301f17t11.cupofjava.Views.UserLoginActivity.class);
-        solo.enterText((EditText)solo.getView(R.id.username), "test");
-        solo.clickOnButton("Sign in | Register");
+        solo.clickOnButton("SAVE");
+
         solo.sleep(500);
         solo.assertCurrentActivity("Parent Activity",com.cmput301f17t11.cupofjava.Views.MainActivity.class);
         solo.clickOnView(solo.getView(R.id.navigation_today));
         ListView listView = (ListView)solo.getView(R.id.selfProfileHabitListView);
-        View view= listView.getChildAt(0);
+        View view= listView.getChildAt(1);
         solo.clickOnView(view);
         solo.assertCurrentActivity("new activity",com.cmput301f17t11.cupofjava.Views.HabitDetailViewActivity.class);
         solo.clickOnView(solo.getView(R.id.new_habit_event));
@@ -91,95 +91,32 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
         View view1 = listView1.getChildAt(0);
         solo.clickOnView(view1);
         solo.assertCurrentActivity("new activity",com.cmput301f17t11.cupofjava.Views.HabitDetailViewActivity.class);
+        ListView listView2 = (ListView)solo.getView(R.id.habit_event_item);
+        View view2 = listView2.getChildAt(1);
+        solo.clickOnView(view2);
+
+        solo.sleep(500);
+        solo.assertCurrentActivity("Parent Activity",com.cmput301f17t11.cupofjava.Views.ViewHabitEventActivity.class);
+        solo.clickOnView(solo.getView(R.id.delete_event));
+
+        solo.clickOnText("CANCEL");
+        //solo.waitForDialogToClose();
+        solo.goBack();
+        solo.assertCurrentActivity("new activity",com.cmput301f17t11.cupofjava.Views.HabitDetailViewActivity.class);
         solo.clickOnText("EXIT");
         solo.assertCurrentActivity("Parent Activity",com.cmput301f17t11.cupofjava.Views.MainActivity.class);
         solo.clickOnView(solo.getView(R.id.navigation_social));
         solo.assertCurrentActivity("Parent Activity",com.cmput301f17t11.cupofjava.Views.MainActivity.class);
 
-        solo.clickOnText("Profile");
+
         solo.clickOnText("Following");
         solo.clickOnText("Followers");
         solo.clickOnText("Requests");
+        solo.clickOnText("Profile");
 
         solo.assertCurrentActivity("Parent Activity", com.cmput301f17t11.cupofjava.Views.MainActivity.class);
-        solo.clickOnView(solo.getView(R.id.navigation_timeline));
-        //solo.assertCurrentActivity("Parent Activity", com.cmput301f17t11.cupofjava.Views.HabitEventTimeLineActivity.class);
 
 
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-
-    //testTodayHabitsButton
-        solo.assertCurrentActivity("Parent Activity",TodayViewActivity.class);
-        solo.clickOnView(solo.getView(R.id.action_today));
-        solo.assertCurrentActivity("Parent Activity",TodayViewActivity.class);
-    //testClickTodayHabitList
-        TodayViewActivity activity = (TodayViewActivity) solo.getCurrentActivity();
-
-        //solo.assertCurrentActivity("parent activity", TodayViewActivity.class);
-
-
-        final ListView habitList = activity.getListView();
-
-        Habit habit = (Habit) habitList.getItemAtPosition(habitList.getCount()-1);
-        assertEquals("Disciplining Kids", habit.getHabitTitle());
-        assertEquals("Good Nanny",habit.getHabitReason());
-
-        solo.clickInList(habitList.getCount()-1);
-        solo.assertCurrentActivity("wrong activity", HabitDetailViewActivity.class);
-        assertTrue(solo.waitForText("Disciplining Kids", 1, 1000));
-        assertTrue(solo.waitForText("Good Nanny", 1, 1000));
-        assertTrue(solo.waitForText("11 / 13 / 2017", 1, 1000));
-        solo.goBack();
-
-
-    //testALlHabitsButton(){
-        solo.assertCurrentActivity("Parent Activity",TodayViewActivity.class);
-        solo.clickOnView(solo.getView(R.id.action_all_habits));
-        solo.assertCurrentActivity("child activity", AllHabitViewActivity.class);
-        //click on habit in All Habits View
-        solo.sleep(5000);
-        AllHabitViewActivity activity2 = (AllHabitViewActivity)solo.getCurrentActivity();
-
-
-
-        final ListView habitList2 = activity2.getListView();
-
-        Habit myhabit = (Habit) habitList.getItemAtPosition(habitList.getCount()-1);
-        assertEquals("Disciplining Kids", myhabit.getHabitTitle());
-        assertEquals("Good Nanny",myhabit.getHabitReason());
-
-        solo.clickInList(habitList.getCount()-1);
-        solo.assertCurrentActivity("wrong activity", HabitDetailViewActivity.class);
-        assertTrue(solo.waitForText("Disciplining Kids", 1, 1000));
-        assertTrue(solo.waitForText("Good Nanny", 1, 1000));
-        assertTrue(solo.waitForText("11 / 13 / 2017", 1, 1000));
-        solo.clickOnButton("Delete");
-        solo.clickOnText("DELETE");
-
-        solo.sleep(2000);
-        //test timeline button
-        solo.assertCurrentActivity("parent activity", TodayViewActivity.class);
-        solo.clickOnView(solo.getView(R.id.action_timeline));
-        solo.assertCurrentActivity("child activity", HabitEventTimeLineActivity.class);
-
-        solo.sleep(2000);
-
-        solo.goBack();
-
-*/
     }
 
 }
