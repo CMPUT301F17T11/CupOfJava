@@ -7,27 +7,34 @@ import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 /**
  * Created by naz_t on 12/1/2017.
  */
-
-//TODO supposed to update in ES
-
 public class EditHabitEventDetailController {
+    private static void deleteEventFromES(String id){
+        ElasticsearchController.DeleteEventTask2 deleteEventTask
+                = new ElasticsearchController.DeleteEventTask2();
+        deleteEventTask.execute(id);
+    }
 
-    public static HabitEvent modifyComment(HabitEvent habitEvent, String comment){
+    private static void addEventToES(HabitEvent event){
+        ElasticsearchController.AddEventTask addEventTask
+                = new ElasticsearchController.AddEventTask();
+
+        addEventTask.execute(event);
+    }
+
+    public static void modifyComment(HabitEvent habitEvent, String comment){
+        deleteEventFromES(habitEvent.getId());
         habitEvent.setComment(comment);
-        return habitEvent;
+        addEventToES(habitEvent);
     }
 
-    public static HabitEvent modifyLocation(HabitEvent habitEvent, Location location){
+    public static void modifyLocation(HabitEvent habitEvent, Location location){
+        deleteEventFromES(habitEvent.getId());
         habitEvent.setLocation(location);
-        return habitEvent;
+
     }
 
-    public static HabitEvent modifyPicture(HabitEvent habitEvent, String path){
+    public static void modifyPicture(HabitEvent habitEvent, String path){
         habitEvent.setImage(path);
-        return habitEvent;
-    }
 
-    public static void deleteHabitEvent(HabitEvent habitEvent){
-        //TODO
     }
 }

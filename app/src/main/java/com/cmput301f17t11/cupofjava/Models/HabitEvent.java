@@ -38,7 +38,7 @@ public class HabitEvent implements Serializable {
     private Date habitEventDate;
     private Date habitEventTime;
     private String habitTitle;
-    private Boolean isLocationSet;
+    private Boolean isLocationSet = false;
     @JestId
     String id; //for elasticsearch
     private  Location location;

@@ -209,19 +209,10 @@ public class ViewHabitEventActivity extends Activity {
                 .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-
-
-                                ElasticsearchController.DeleteEventTask2 deleteEventTask = new ElasticsearchController.DeleteEventTask2();
-                                deleteEventTask.execute(eventId);
-
-
-
-                        //SaveFileController saveFileController = new SaveFileController();
-                        //saveFileController.deleteHabit(getApplicationContext(), userIndex, habitIndex);
+                        ElasticsearchController.DeleteEventTask2 deleteEventTask = new ElasticsearchController.DeleteEventTask2();
+                        deleteEventTask.execute(eventId);
                         Intent intent3 = new Intent(ViewHabitEventActivity.this, MainActivity.class);
                         intent3.putExtra("userName", userName);
-                        //intent3.putExtra("userIndex", userIndex);
                         startActivity(intent3);
                     }
                 })
