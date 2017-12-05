@@ -8,9 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.cmput301f17t11.cupofjava.Controllers.EventFilteringHelper;
+import com.cmput301f17t11.cupofjava.Controllers.ProgressUpdate;
 import com.cmput301f17t11.cupofjava.Models.Habit;
+import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -58,8 +62,14 @@ public class todayViewAdapter extends BaseAdapter {
         // Cast Textviews
         TextView textViewHabitWhat = (TextView) itemView.findViewById(R.id.habit_what);
         TextView textViewHabitReason = (TextView) itemView.findViewById(R.id.habit_why);
+        ProgressBar progressBar = (ProgressBar) itemView.findViewById(R.id.habit_list_progress_bar);
 
         Habit selectedHabit = habits.get(position);
+        ArrayList<HabitEvent> events = EventFilteringHelper.getHabitEventsOfHabit(selectedHabit.getUsername(),
+                selectedHabit);
+
+        progressBar.setProgress(ProgressUpdate.getProgress(selectedHabit, events));
+
 
         textViewHabitWhat.setText(selectedHabit.getHabitTitle());
         textViewHabitReason.setText(selectedHabit.getHabitReason());

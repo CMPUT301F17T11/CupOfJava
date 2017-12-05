@@ -9,41 +9,41 @@
 
 package com.cmput301f17t11.cupofjava.Views;
 
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.app.Activity;
+        import android.app.DatePickerDialog;
+        import android.content.DialogInterface;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.support.v7.app.AlertDialog;
+        import android.support.v7.app.AppCompatActivity;
+        import android.util.Log;
+        import android.view.View;
+        import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
+        import android.widget.DatePicker;
+        import android.widget.EditText;
+        import android.widget.LinearLayout;
+        import android.widget.ListView;
+        import android.widget.ProgressBar;
+        import android.widget.RelativeLayout;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import com.cmput301f17t11.cupofjava.Controllers.EditHabitDetailController;
-import com.cmput301f17t11.cupofjava.Controllers.EditHabitEventDetailController;
-import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
-import com.cmput301f17t11.cupofjava.Controllers.ProgressUpdate;
-import com.cmput301f17t11.cupofjava.Controllers.SocialRequestHandler;
-import com.cmput301f17t11.cupofjava.Models.HabitEvent;
-import com.cmput301f17t11.cupofjava.Models.HabitList;
-import com.cmput301f17t11.cupofjava.Models.Habit;
-import com.cmput301f17t11.cupofjava.R;
-import com.cmput301f17t11.cupofjava.Controllers.SaveFileController;
-import com.cmput301f17t11.cupofjava.Models.User;
+        import com.cmput301f17t11.cupofjava.Controllers.EditHabitDetailController;
+        import com.cmput301f17t11.cupofjava.Controllers.EditHabitEventDetailController;
+        import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+        import com.cmput301f17t11.cupofjava.Controllers.ProgressUpdate;
+        import com.cmput301f17t11.cupofjava.Controllers.SocialRequestHandler;
+        import com.cmput301f17t11.cupofjava.Models.HabitEvent;
+        import com.cmput301f17t11.cupofjava.Models.HabitList;
+        import com.cmput301f17t11.cupofjava.Models.Habit;
+        import com.cmput301f17t11.cupofjava.R;
+        import com.cmput301f17t11.cupofjava.Controllers.SaveFileController;
+        import com.cmput301f17t11.cupofjava.Models.User;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
+        import java.text.SimpleDateFormat;
+        import java.util.ArrayList;
+        import java.util.Calendar;
 
 /**
  * Opens activity which lets user view the details of a certain habit.

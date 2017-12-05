@@ -1,5 +1,7 @@
 package com.cmput301f17t11.cupofjava.Controllers;
 
+import android.util.Log;
+
 import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 
@@ -52,5 +54,35 @@ public class EventFilteringHelper {
         }
 
         return filteredEvents;
+    }
+
+    public static ArrayList<HabitEvent> getHabitEventsOfHabit(String userName, Habit habit) {
+        ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
+        getEventsTask.execute(userName);
+        ArrayList<HabitEvent> myHabitEvents = new ArrayList<>();
+
+        try {
+            //all habit events of the user
+            ArrayList<HabitEvent> allHabitEvents = getEventsTask.get();
+
+            if (!allHabitEvents.isEmpty()) {
+                //filter it for habit events specific to the habit
+                for (int i = 0; i < allHabitEvents.size(); i++) {
+                    if (allHabitEvents.get(i).getHabitTitle().equals(habit.getHabitTitle())) {
+                        myHabitEvents.add(allHabitEvents.get(i));
+                    }
+                }
+                Log.i("HabitDetailView: habitEvents of habit: ", "found some" + myHabitEvents.toString());
+
+            } else {
+                Log.i("HabitDetailView: habitEvents of habit: ", "found none");
+
+            }
+        } catch (Exception e) {
+            Log.i("HabitDetailView: ", e.toString());
+
+        }
+        return myHabitEvents;
+
     }
 }

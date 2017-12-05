@@ -185,7 +185,9 @@ public class TodayViewActivity extends Fragment {
 
         for (int i = 0; i < habits.size(); i++) {
             currentHabit = habits.get(i);
-            if (currentHabit.onDay(currentDay)) {
+            if (currentHabit.onDay(currentDay) &&
+                    (currentHabit.getHabitStartDate().getTime().getTime() <
+                            calendar.getTime().getTime())) {
                 todaysHabits.add(currentHabit);
             }
         }
