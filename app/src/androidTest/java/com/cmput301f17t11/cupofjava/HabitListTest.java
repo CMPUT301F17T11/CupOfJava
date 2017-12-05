@@ -25,7 +25,7 @@ public class HabitListTest extends ActivityInstrumentationTestCase2 {
         HabitList list = new HabitList();
         Habit habit = new Habit("test","for test",Calendar.getInstance());
         list.addHabit(habit);
-        list.deleteHabit(0);
+        list.deleteHabit(habit);
         assertFalse(list.habitExists(habit));
     }
 
