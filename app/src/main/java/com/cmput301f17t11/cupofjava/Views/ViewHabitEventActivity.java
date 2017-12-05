@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,7 +45,7 @@ import java.util.ArrayList;
  * @version 1.0
  */
 
-public class ViewHabitEventActivity extends Activity {
+public class ViewHabitEventActivity extends AppCompatActivity{
 
     private TextView habitTitleTextView;
     private TextView habitDateBoxTextView;
