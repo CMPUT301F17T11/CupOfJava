@@ -49,10 +49,6 @@ public class TimeLineFragment extends Fragment implements NearbyTab.OnFragmentIn
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         Bundle bundle = getArguments();
         this.userName = bundle.getString("userName");
-        this.currentLat = bundle.getDouble("currentLat",0.0);
-        this.currentLon = bundle.getDouble("currentLon",0.0);
-
-
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tablayout2);
 
@@ -107,8 +103,6 @@ public class TimeLineFragment extends Fragment implements NearbyTab.OnFragmentIn
                     HabitEventTimeLineActivity habitEventTimeLineActivity = new HabitEventTimeLineActivity();
                     Bundle bundle = new Bundle();
                     bundle.putString("userName", userName);
-                    bundle.putDouble("currentLat", currentLat);
-                    bundle.putDouble("currentLon", currentLon);
                     habitEventTimeLineActivity.setArguments(bundle);
                     return habitEventTimeLineActivity;
                 case 1:

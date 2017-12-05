@@ -1,8 +1,10 @@
 package com.cmput301f17t11.cupofjava.Views;
 
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.Intent;
 import android.location.Location;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,18 +28,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
 
-    double currentLat;
-    double currentLon;
-    double [] latitudes;
-    double [] longitudes;
+    double currentLat = 53.525049;
+    double currentLon = -113.524605;
+    //double [] latitudes;
+    //double [] longitudes;
+    ArrayList<Double> latitudes;
+    ArrayList<Double> longitudes;
+    ArrayList<String> markerTitles;
     Geolocation location;
     int type;
-    EditText showLocation;
-    Button getLocation;
+    MapFragment mapFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,37 +50,36 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Toast.makeText(this, "Google Play Services Works", Toast.LENGTH_LONG).show();
             setContentView(R.layout.maps_activity);
             initMap();
-        }
+            Intent intent = getIntent();
+            latitudes = (ArrayList<Double>) intent.getSerializableExtra("lat");
+            longitudes = (ArrayList<Double>) intent.getSerializableExtra("lon");
+            markerTitles = intent.getStringArrayListExtra("markerTitles");
+            type = intent.getIntExtra("type", type);
+            if (type == 1) {  //within 5km
 
+                for (int i = 0; i < latitudes.size(); i++) {
+                    double lat2 = latitudes.get(i);
+                    double lng2 = longitudes.get(i);
+                    if ((within5(currentLat, currentLon, lat2, lng2) <= 5.0) == false) {
+                        //do nothing
+                    } else {
+                        latitudes.remove(i);
+                        longitudes.remove(i);
+                        markerTitles.remove(i);
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle!= null){
-            latitudes = bundle.getDoubleArray("lat");
-            longitudes = bundle.getDoubleArray("lon");
-            type = bundle.getInt("type");
-
-            currentLat = bundle.getDouble("currentLat");
-            currentLon = bundle.getDouble("currentLon");
-
-        }
-        if(type == 1){  //within 5km
-
-            for (int i = 0; i < latitudes.length; i++)
-            {
-                double lat2= latitudes[i];
-                double lng2= longitudes[i];
-                if ((within5(currentLat, currentLon, lat2, lng2) <= 5.0) == false){
-                    //do nothing
+                    }
                 }
-                else{
-                    latitudes[i] = 0.0;
-                    longitudes[i] = 0.0;
-                }
+
             }
 
-        }
 
+        }
     }
+
+
+
+
+
 
     public boolean googleServicesAvailable() {
         GoogleApiAvailability api = GoogleApiAvailability.getInstance();
@@ -93,37 +96,38 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void initMap() {
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapfragment);
+        if(mapFragment!= null)
+        {
+            getFragmentManager().beginTransaction().remove(mapFragment).commit();
+        }
+        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapfragment);
         mapFragment.getMapAsync(this);
+
+
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        for(int i = 0; i < (latitudes).length; i++){
-            if(latitudes[i]!= 0.0 && longitudes[i]!= 0.0 ) {
-                goToLocationZoomed(latitudes[i], longitudes[i], 15);
-            }
+        for(int i = 0; i < latitudes.size(); i++){
+                goToLocationZoomed(latitudes.get(i), longitudes.get(i), 10, markerTitles.get(i));
+
 
         }
     }
 
-    private void goToLocationZoomed(double lat, double lng, float zoom) {
+
+    private void goToLocationZoomed(double lat, double lng, float zoom, String markerTitle) {
         LatLng latLng = new LatLng(lat, lng);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, zoom);
         mGoogleMap.moveCamera(cameraUpdate);
         MarkerOptions markerOptions = new MarkerOptions()
-                .title("U of A").position(new LatLng(lat, lng));
+                .title(markerTitle).position(new LatLng(lat, lng));
         mGoogleMap.addMarker(markerOptions);
-        /*for(int i = 0; i < eventLoc.size(); i ++){
-            double latitude = eventLoc.get(i).getLatitude();
-            double longitude = eventLoc.get(i).getLongitude();
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .title("U of A").position(new LatLng(latitude, longitude));
-            mGoogleMap.addMarker(markerOptions);
-        }*/
+
 
     }
+
 
     /**
      *
