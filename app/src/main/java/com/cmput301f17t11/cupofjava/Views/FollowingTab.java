@@ -71,7 +71,7 @@ public class FollowingTab extends Fragment {
         try{
             final ArrayList<String> followingList =  user.getFollowingList();
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),
-                    R.layout.habit_list_item, followingList);
+                    R.layout.string_only_list_item, followingList);
             listView.setAdapter(arrayAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

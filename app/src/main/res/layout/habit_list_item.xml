@@ -45,7 +45,7 @@
     <ProgressBar
         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:id="@+id/progress_bar"
+        android:id="@+id/habit_list_progress_bar"
         android:layout_marginLeft="8dp"
         android:progress="0"
         android:progressBackgroundTint="@color/colorAccentL"

@@ -1,5 +1,6 @@
 package com.cmput301f17t11.cupofjava.Views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,8 +57,8 @@ public class ViewFollowingProfileActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.following_profile_textView);
         textView.setText(followingName);
 
-        ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<Habit>(getApplicationContext(),
-                R.layout.string_only_list_item, habits);
-        listView.setAdapter(arrayAdapter);
+        todayViewAdapter todayViewAdapter = new todayViewAdapter(ViewFollowingProfileActivity.this,
+                habits);
+        listView.setAdapter(todayViewAdapter);
     }
 }
