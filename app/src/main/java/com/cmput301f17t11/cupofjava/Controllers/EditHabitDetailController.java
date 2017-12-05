@@ -1,7 +1,10 @@
-/*
- * Copyright CMPUT301F17T11. You may use, redistribute, or modify this code, as long as you do not
- * violate the Code of Student Behavior at the University of Alberta
+/* EditHabitDetailController
  *
+ * Version 1.0
+ *
+ * November 13, 2017
+ *
+ * Copyright (c) 2017 Cup Of Java. All rights reserved.
  */
 
 package com.cmput301f17t11.cupofjava.Controllers;
