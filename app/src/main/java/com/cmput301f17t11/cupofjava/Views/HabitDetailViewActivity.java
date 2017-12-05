@@ -248,12 +248,7 @@ public class HabitDetailViewActivity extends Activity {
      */
     public void addNewHabitEventButton(View view) {
         Intent intent2 = new Intent(HabitDetailViewActivity.this, NewHabitEventActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("userName", userName);
-        bundle.putSerializable("habitList", habitList);
-        bundle.putSerializable("user", user);
-        bundle.putInt("habitIndex", habitIndex);
-        intent2.putExtras(bundle);
+        intent2.putExtra("userName", userName);
         startActivity(intent2);
     }
 

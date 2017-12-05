@@ -1,12 +1,10 @@
 package com.cmput301f17t11.cupofjava.Controllers;
 
-import android.content.Intent;
 
 import com.cmput301f17t11.cupofjava.Models.Habit;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
