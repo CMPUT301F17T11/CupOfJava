@@ -10,23 +10,21 @@ import java.util.Calendar;
 
 public class EditHabitDetailController {
 
-    public static Habit modifyDate(Habit habit, Calendar date) {
-        habit.setHabitStartDate(date);
-        return habit;
+    public static void modifyDate(Habit habit, Calendar newDate){
+        ElasticsearchController.DeleteHabitsTask deleteHabitsTask = new ElasticsearchController.DeleteHabitsTask();
+        deleteHabitsTask.execute(habit);
+        habit.setHabitStartDate(newDate);
+
+        ElasticsearchController.AddHabitTask addHabitTask = new ElasticsearchController.AddHabitTask();
+        addHabitTask.execute(habit);
     }
 
-    public static Habit modifyHabitTitle(Habit habit, String title) {
-        habit.setHabitTitle(title);
-        return habit;
-    }
+    public static void modifyHabitReason(Habit habit, String newReason) {
+        ElasticsearchController.DeleteHabitsTask deleteHabitsTask = new ElasticsearchController.DeleteHabitsTask();
+        deleteHabitsTask.execute(habit);
+        habit.setHabitReason(newReason);
 
-    public static Habit modifyHabitReason(Habit habit, String reason) {
-        habit.setHabitReason(reason);
-        return habit;
+        ElasticsearchController.AddHabitTask addHabitTask = new ElasticsearchController.AddHabitTask();
+        addHabitTask.execute(habit);
     }
-
-    public static void deleteHabit(Habit habit) {
-        // TODO
-    }
-
 }
