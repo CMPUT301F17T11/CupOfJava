@@ -70,7 +70,7 @@ public class UserLoginActivityTest extends ActivityInstrumentationTestCase2<User
 
 
     //testTodayHabitsButton
-        solo.assertCurrentActivity("Parent Activity",TodayViewActivity.class);
+        solo.startFragment("Parent Activity",TodayViewActivity.class);
         solo.clickOnView(solo.getView(R.id.action_today));
         solo.assertCurrentActivity("Parent Activity",TodayViewActivity.class);
     //testClickTodayHabitList
