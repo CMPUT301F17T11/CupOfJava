@@ -6,11 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Controllers.EventFilteringHelper;
+import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -26,11 +30,14 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 public class NearbyTab extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     MapView mMapView;
     private GoogleMap googleMap;
     GoogleApiClient mGoogleApiClient;
+    ArrayList<HabitEvent> events = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,7 +47,7 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback, GoogleApi
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private String userName;
+    String userName;
 
     private NearbyTab.OnFragmentInteractionListener mListener;
 
@@ -76,7 +83,7 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback, GoogleApi
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            this.userName = getArguments().getString("userName");
+            userName = getArguments().getString("userName");
         }
     }
 
@@ -103,6 +110,11 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback, GoogleApi
             e.printStackTrace();
         }
 
+        /******************************/
+
+
+
+/*****************************/
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -113,11 +125,39 @@ public class NearbyTab extends Fragment implements OnMapReadyCallback, GoogleApi
 
                 // For dropping a marker at a point on the Map
                 LatLng uOfA = new LatLng(53.526830, -113.527208);
-                googleMap.addMarker(new MarkerOptions().position(uOfA).title("Marker Title").snippet("Marker Description"));
+
+                ElasticsearchController.GetEventsTask getEventsTask = new ElasticsearchController.GetEventsTask();
+                getEventsTask.execute(userName);
+                try {
+                    ArrayList<HabitEvent> foundHabitEvents = getEventsTask.get();
+                    if (!foundHabitEvents.isEmpty()) {
+
+                        events.addAll(foundHabitEvents);
+                        Log.i("HabitEventTimeline: found events :", events.toString());
+                    } else {
+                        Log.i("HabitEventTimeline", "Did Not find habit events" + events.toString());
+
+                    }
+                } catch (Exception e) {
+                    Log.i("HabitEventTimeline", "Failed to get the Habit Events from the async object");
+
+                }
+                events = EventFilteringHelper.reverseChronological(events);
+                //events2 = EventFilteringHelper.filterByComment()
+
+                for(int i = 0; i< events.size(); i++){
+                    if(events.get(i).getIsLocationSet()) {
+
+                        LatLng pos = new LatLng(events.get(i).getLocation().getLatitude(), events.get(i).getLocation().getLongitude());
+                        googleMap.addMarker(new MarkerOptions().position(pos).title(events.get(i).getHabitTitle()).snippet(events.get(i).getDateAsString()));
+                        CameraPosition cameraPosition = new CameraPosition.Builder().target(uOfA).zoom(10).build();
+                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                    }
+                }
+                //googleMap.addMarker(new MarkerOptions().position(uOfA).title("Marker Title").snippet("Marker Description"));
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(uOfA).zoom(15).build();
-                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
 
 
 

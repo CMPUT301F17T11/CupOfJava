@@ -266,8 +266,7 @@ public class HabitEventTimeLineActivity extends Fragment {
             @Override
             public void onClick(View v) {
 
-                final CharSequence mapsOptions[] = new CharSequence[] {"ALL", "5K RADIUS",
-                        "Recent Friends Events", "Filtered Map"};
+                final CharSequence mapsOptions[] = new CharSequence[] {"ALL"};
 
                 android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog
                         .Builder(getActivity());
@@ -280,7 +279,7 @@ public class HabitEventTimeLineActivity extends Fragment {
                                     case 0:
                                         mapsAll(0);
                                         break;
-                                    case 1:
+                                    /*case 1:
                                         mapsAll(1);
                                         break;
                                     case 2:
@@ -288,7 +287,7 @@ public class HabitEventTimeLineActivity extends Fragment {
                                         break;
                                     case 3:
                                         dialog.dismiss();
-                                        break;
+                                        break;*/
                                 }
                             }
                         });
@@ -374,34 +373,46 @@ public class HabitEventTimeLineActivity extends Fragment {
 
 
     public void mapsAll(int type ){
-        Intent intent = new Intent(getActivity(), MapsActivity.class);
-        Bundle bundle = new Bundle();
 
-        double [] latititudes = new double [events.size()];
-        double [] longitudes = new double [events.size()];
-        for (int i = 0; i < events.size(); i++)
-        {
-            if(events.get(i).getIsLocationSet()) {
-                latititudes[i] = events.get(i).getLocation().getLatitude();
-                longitudes[i] = events.get(i).getLocation().getLongitude();
+        if(events.isEmpty()){
+            Toast.makeText(getContext(), "No Events to view", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Intent intent = new Intent(getActivity(), MapsActivity.class);
+            //Bundle bundle = new Bundle();
+
+            //double [] latititudes = new double [events.size()];
+            //double [] longitudes = new double [events.size()];
+            ArrayList<Double> latititudes = new ArrayList<>();
+            ArrayList<Double> longitudes = new ArrayList<>();
+            ArrayList<String> markerTitles = new ArrayList<>();
+            for (int i = 0; i < events.size(); i++) {
+                if (events.get(i).getIsLocationSet()) {
+                    latititudes.add(events.get(i).getLocation().getLatitude());
+                    longitudes.add(events.get(i).getLocation().getLongitude());
+                    markerTitles.add(events.get(i).getHabitTitle());
+                }
+
             }
 
+
+
+            //intent.putExtras(bundle);
+
+            intent.putExtra("lat", latititudes);
+            intent.putExtra("lon", longitudes);
+            intent.putExtra("markerTitles", markerTitles);
+            intent.putExtra("type", type);
+            startActivity(intent);
+
+            NearbyTab nearbyTab = new NearbyTab();
+            Bundle bundle2 = new Bundle();
+            bundle2.putSerializable("lat", latititudes);
+            bundle2.putSerializable("lon", longitudes);
+            bundle2.putInt("type", type );
+            bundle2.putStringArrayList("markerTitles", markerTitles);
+            nearbyTab.setArguments(bundle2);
         }
-        int size = 0;
-        for(int i = 0; i< events.size(); i++)
-        {
-            if(latititudes[i]!= 0.0 && longitudes[i]!= 0.0){
-                size++;
-            }
-        }
-
-
-        bundle.putDoubleArray("lat", latititudes);
-        bundle.putDoubleArray("lon", longitudes);
-        bundle.putInt("type", type );
-
-        intent.putExtras(bundle);
-        startActivity(intent);
     }
 
     /**
