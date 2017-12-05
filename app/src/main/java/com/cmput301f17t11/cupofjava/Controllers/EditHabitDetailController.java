@@ -1,3 +1,9 @@
+/*
+ * Copyright CMPUT301F17T11. You may use, redistribute, or modify this code, as long as you do not
+ * violate the Code of Student Behavior at the University of Alberta
+ *
+ */
+
 package com.cmput301f17t11.cupofjava.Controllers;
 
 import com.cmput301f17t11.cupofjava.Models.Habit;
