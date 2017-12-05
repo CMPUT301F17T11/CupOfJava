@@ -74,7 +74,6 @@ public class TodayViewActivity extends Fragment {
 
         }
 
-        //set up the TextView and ListView
         this.textView = (TextView) view.findViewById(R.id.TodaysHabitsHeadingTextView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,7 +102,6 @@ public class TodayViewActivity extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-
 
         //retrieving all habits of the user from elasticsearch
         ElasticsearchController.GetHabitsTask getHabitsTask = new ElasticsearchController.GetHabitsTask();
@@ -144,7 +142,6 @@ public class TodayViewActivity extends Fragment {
      */
     private void updateListView(ArrayList<Habit> habits){
         habitAdapter = new todayViewAdapter(getActivity(), habits);
-        //ArrayAdapter<Habit> arrayAdapter = new ArrayAdapter<>(getActivity(),R.layout.habit_list_item, habits);
 
         synchronized (listView) {
             this.listView.setAdapter(habitAdapter);

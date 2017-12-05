@@ -119,8 +119,7 @@ public class NewHabitActivity extends Activity {
      * @param view instance of View
      */
     public void onCheckboxClicked(View view) {
-        //TODO: prj5 what about when the user unchecks the checkbox?
-        // Is the view now checked?
+
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked

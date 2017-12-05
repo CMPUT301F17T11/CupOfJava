@@ -9,6 +9,8 @@
 
 package com.cmput301f17t11.cupofjava.Views;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,12 +20,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.cmput301f17t11.cupofjava.Controllers.EditHabitDetailController;
+import com.cmput301f17t11.cupofjava.Controllers.EditHabitEventDetailController;
 import com.cmput301f17t11.cupofjava.Controllers.ElasticsearchController;
+import com.cmput301f17t11.cupofjava.Controllers.SocialRequestHandler;
 import com.cmput301f17t11.cupofjava.Models.HabitEvent;
 import com.cmput301f17t11.cupofjava.Models.HabitList;
 import com.cmput301f17t11.cupofjava.Models.Habit;
@@ -33,6 +42,7 @@ import com.cmput301f17t11.cupofjava.Models.User;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Opens activity which lets user view the details of a certain habit.
@@ -40,7 +50,7 @@ import java.util.ArrayList;
  * @see Habit
  * @version 1.0
  */
-public class HabitDetailViewActivity extends AppCompatActivity {
+public class HabitDetailViewActivity extends Activity {
 
     private String habitDateCalendar;
     private ListView listView;
@@ -52,6 +62,8 @@ public class HabitDetailViewActivity extends AppCompatActivity {
     private Habit habit;
     private ProgressBar progressBar;
     private int progress = 0;
+    private Calendar newDate;
+    private TextView habitDateTextView;
 
     /**
      * This method is called when HabitDetailViewActivity is instantiated.
@@ -76,8 +88,8 @@ public class HabitDetailViewActivity extends AppCompatActivity {
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         TextView habitTitleTextView = (TextView) findViewById(R.id.title_text_view);
-        TextView habitReasonTextView = (TextView) findViewById(R.id.reason_text_view);
-        TextView habitDateTextView = (TextView) findViewById(R.id.date_added_text_view);
+        final TextView habitReasonTextView = (TextView) findViewById(R.id.reason_text_view);
+        habitDateTextView = (TextView) findViewById(R.id.date_added_text_view);
         this.listView = (ListView) findViewById(R.id.habit_event_item);
 
         TextView textView = new TextView(getApplicationContext());
@@ -134,7 +146,97 @@ public class HabitDetailViewActivity extends AppCompatActivity {
         progress = habit.getProgressBar();
         progressBar.setProgress(progress);
 
+        habitReasonTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(HabitDetailViewActivity.this);
+                builder.setTitle("Edit Reason").setMessage("Enter a new reason");
+
+                final EditText input = new EditText(HabitDetailViewActivity.this);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(layoutParams);
+                builder.setView(input);
+
+                builder.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (input.getText().toString().length() == 0){
+                            Toast toast = Toast.makeText(HabitDetailViewActivity.this, "You cannot set the" +
+                                    " reason as empty!", Toast.LENGTH_SHORT);
+                            toast.show();
+                            dialog.dismiss();
+                        }
+                        else if(input.getText().toString().length() > 30){
+                            Toast toast = Toast.makeText(HabitDetailViewActivity.this,
+                                    "Reason too long!", Toast.LENGTH_SHORT);
+                            toast.show();
+                            dialog.dismiss();
+                        }
+                        else {
+                            habitReasonTextView.setText(input.getText().toString());
+                            EditHabitDetailController.modifyHabitReason(habit,
+                                    input.getText().toString());
+                            Toast toast = Toast.makeText(HabitDetailViewActivity.this,
+                                    "Reason modified!", Toast.LENGTH_SHORT);
+                            toast.show();
+                            dialog.dismiss();
+                        }
+                    }
+                })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+
+        habitDateTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newDate = Calendar.getInstance();
+                new DatePickerDialog(HabitDetailViewActivity.this, onDateSetListener,
+                        newDate.get(java.util.Calendar.YEAR),
+                        newDate.get(java.util.Calendar.MONTH),
+                        newDate.get(java.util.Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
+
+    DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+        /**
+         *
+         * @param view
+         * @param year
+         * @param month
+         * @param day
+         *
+         * Implements the date widget when user is selecting date.
+         */
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            newDate.set(java.util.Calendar.YEAR, year);
+            newDate.set(java.util.Calendar.MONTH, month);
+            newDate.set(java.util.Calendar.DAY_OF_MONTH, day);
+            habitDateTextView.setText(((month + 1) + " / " + day + " / " + year));
+
+            EditHabitDetailController.modifyDate(habit, newDate);
+
+            Toast toast = Toast.makeText(HabitDetailViewActivity.this,
+                    "Start date modified!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+    };
 
     /**
      * Opens the new habit event activity page so that the user
@@ -209,7 +311,6 @@ public class HabitDetailViewActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        //updates the list view with Habit Events
         updateListView(getHabitEventsOfHabit());
     }
 
