@@ -1,6 +1,7 @@
 package com.cmput301f17t11.cupofjava.Views;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -84,6 +85,12 @@ public class ViewFollowingProfileActivity extends AppCompatActivity {
                             .get(0);
 
                     textView1.setText(latestHabit.toString());
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
                     dialog.show();
                 }
                 catch (Exception e){
