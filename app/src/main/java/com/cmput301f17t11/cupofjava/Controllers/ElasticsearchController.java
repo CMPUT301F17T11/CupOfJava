@@ -387,7 +387,9 @@ public class ElasticsearchController {
      */
     public static void verifySettings() {
         if (client == null) {
-            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080/");
+            //DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080/");
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder("https://c200f49a0c7dd5cd76f9c516969bcbb6.us-west-2.aws.found.io:9243/");
+            builder.defaultCredentials("elastic", "zO98xLkJVz02pfmjmUwQat1V");
             DroidClientConfig config = builder.build();
 
             JestClientFactory factory = new JestClientFactory();

@@ -261,7 +261,7 @@ public class HabitEventTimeLineActivity extends Fragment {
 
 
 
-        viewMap.setOnClickListener(new View.OnClickListener() {
+        /*viewMap.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -287,14 +287,14 @@ public class HabitEventTimeLineActivity extends Fragment {
                                         break;
                                     case 3:
                                         dialog.dismiss();
-                                        break;*/
+                                        break;
                                 }
                             }
                         });
                 android.support.v7.app.AlertDialog dialog = builder.create();
                 dialog.show();
             }
-        });
+        });*/
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -405,13 +405,13 @@ public class HabitEventTimeLineActivity extends Fragment {
             intent.putExtra("type", type);
             startActivity(intent);
 
-            NearbyTab nearbyTab = new NearbyTab();
+           /* NearbyTab nearbyTab = new NearbyTab();
             Bundle bundle2 = new Bundle();
             bundle2.putSerializable("lat", latititudes);
             bundle2.putSerializable("lon", longitudes);
             bundle2.putInt("type", type );
             bundle2.putStringArrayList("markerTitles", markerTitles);
-            nearbyTab.setArguments(bundle2);
+            nearbyTab.setArguments(bundle2);*/
         }
     }
 
